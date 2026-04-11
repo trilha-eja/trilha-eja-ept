@@ -1,4 +1,4 @@
-import { Briefcase, Zap, BookOpen, Map, GraduationCap, Sparkles } from "lucide-react";
+import { Briefcase, Zap, BookOpen, Map, GraduationCap, Sparkles, BookMarked } from "lucide-react";
 import ModuleCard from "../components/ModuleCard";
 
 const modules = [
@@ -36,6 +36,13 @@ const modules = [
     title: "Caminhos de Estudo",
     description: "ENEM, SISU, PROUNI e mais",
     color: "bg-chart-2",
+  },
+  {
+    to: "/glossario",
+    icon: BookMarked,
+    title: "Glossário do Eletricista",
+    description: "Termos técnicos em linguagem simples",
+    color: "bg-chart-3",
   },
 ];
 

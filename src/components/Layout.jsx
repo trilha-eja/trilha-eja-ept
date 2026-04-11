@@ -1,5 +1,5 @@
 import { Outlet, Link, useLocation } from "react-router-dom";
-import { Home, Briefcase, Zap, BookOpen, Map, GraduationCap } from "lucide-react";
+import { Home, Briefcase, Zap, BookOpen, Map, GraduationCap, BookMarked } from "lucide-react";
 
 const navItems = [
   { path: "/", icon: Home, label: "Início" },
@@ -8,6 +8,7 @@ const navItems = [
   { path: "/microlearning", icon: BookOpen, label: "Aprenda" },
   { path: "/mapa-da-vida", icon: Map, label: "Mapa" },
   { path: "/caminhos", icon: GraduationCap, label: "Estudo" },
+  { path: "/glossario", icon: BookMarked, label: "Glossário" },
 ];
 
 export default function Layout() {

@@ -12,6 +12,7 @@ import GuiaPratico from './pages/GuiaPratico';
 import Microlearning from './pages/Microlearning';
 import MapaDaVida from './pages/MapaDaVida';
 import CaminhosEstudo from './pages/CaminhosEstudo';
+import Glossario from './pages/Glossario';
 
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
@@ -46,6 +47,7 @@ const AuthenticatedApp = () => {
         <Route path="/microlearning" element={<Microlearning />} />
         <Route path="/mapa-da-vida" element={<MapaDaVida />} />
         <Route path="/caminhos" element={<CaminhosEstudo />} />
+        <Route path="/glossario" element={<Glossario />} />
         <Route path="*" element={<PageNotFound />} />
       </Route>
     </Routes>
