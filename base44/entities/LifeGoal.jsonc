@@ -1,0 +1,31 @@
+{
+  "name": "LifeGoal",
+  "type": "object",
+  "properties": {
+    "goal_1_year": {
+      "type": "string",
+      "title": "Meta para 1 ano"
+    },
+    "goal_5_years": {
+      "type": "string",
+      "title": "Meta para 5 anos"
+    },
+    "goal_10_years": {
+      "type": "string",
+      "title": "Meta para 10 anos"
+    },
+    "reflection_strength": {
+      "type": "string",
+      "title": "Minha maior for\u00e7a"
+    },
+    "reflection_dream": {
+      "type": "string",
+      "title": "Meu maior sonho"
+    },
+    "reflection_next_step": {
+      "type": "string",
+      "title": "Meu pr\u00f3ximo passo"
+    }
+  },
+  "required": []
+}

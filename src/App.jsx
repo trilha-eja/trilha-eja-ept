@@ -5,7 +5,13 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import PageNotFound from './lib/PageNotFound';
 import { AuthProvider, useAuth } from '@/lib/AuthContext';
 import UserNotRegisteredError from '@/components/UserNotRegisteredError';
-// Add page imports here
+import Layout from './components/Layout';
+import Home from './pages/Home';
+import Empregabilidade from './pages/Empregabilidade';
+import GuiaPratico from './pages/GuiaPratico';
+import Microlearning from './pages/Microlearning';
+import MapaDaVida from './pages/MapaDaVida';
+import CaminhosEstudo from './pages/CaminhosEstudo';
 
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
@@ -33,8 +39,15 @@ const AuthenticatedApp = () => {
   // Render the main app
   return (
     <Routes>
-      {/* Add your page Route elements here */}
-      <Route path="*" element={<PageNotFound />} />
+      <Route element={<Layout />}>
+        <Route path="/" element={<Home />} />
+        <Route path="/empregabilidade" element={<Empregabilidade />} />
+        <Route path="/guia-pratico" element={<GuiaPratico />} />
+        <Route path="/microlearning" element={<Microlearning />} />
+        <Route path="/mapa-da-vida" element={<MapaDaVida />} />
+        <Route path="/caminhos" element={<CaminhosEstudo />} />
+        <Route path="*" element={<PageNotFound />} />
+      </Route>
     </Routes>
   );
 };
