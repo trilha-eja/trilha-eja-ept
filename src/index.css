@@ -84,5 +84,14 @@
   }
   body {
     @apply bg-background text-foreground font-nunito;
+    overscroll-behavior-y: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+@layer utilities {
+  .select-none {
+    user-select: none;
+    -webkit-user-select: none;
   }
 }

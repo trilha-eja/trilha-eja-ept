@@ -1,4 +1,5 @@
-import { Briefcase, Zap, BookOpen, Map, GraduationCap, Sparkles, BookMarked } from "lucide-react";
+import { Briefcase, Zap, BookOpen, Map, GraduationCap, Sparkles, BookMarked, Settings } from "lucide-react";
+import { Link } from "react-router-dom";
 import ModuleCard from "../components/ModuleCard";
 
 const modules = [
@@ -81,9 +82,15 @@ export default function Home() {
       </div>
 
       {/* Footer info */}
-      <div className="mt-8 text-center text-xs text-muted-foreground pb-4">
+      <div className="mt-8 text-center text-xs text-muted-foreground pb-4 flex flex-col items-center gap-3">
         <p>Curso Eletricista Industrial — EJA-EPT</p>
-        <p className="mt-1">Feito com ❤️ para estudantes trabalhadores</p>
+        <p>Feito com ❤️ para estudantes trabalhadores</p>
+        <Link
+          to="/settings"
+          className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors"
+        >
+          <Settings className="w-3.5 h-3.5" /> Configurações
+        </Link>
       </div>
     </div>
   );

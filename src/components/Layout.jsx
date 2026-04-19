@@ -1,4 +1,4 @@
-import { Outlet, Link, useLocation } from "react-router-dom";
+import { Outlet, Link, useLocation, useNavigate } from "react-router-dom";
 import { Home, Briefcase, Zap, BookOpen, Map, GraduationCap, BookMarked } from "lucide-react";
 
 const navItems = [
@@ -13,23 +13,30 @@ const navItems = [
 
 export default function Layout() {
   const location = useLocation();
+  const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen flex flex-col bg-background">
-      <main className="flex-1 pb-24 overflow-y-auto">
+    <div
+      className="min-h-dvh flex flex-col bg-background"
+      style={{ paddingTop: 'env(safe-area-inset-top)' }}
+    >
+      <main className="flex-1 overflow-y-auto" style={{ paddingBottom: 'calc(5rem + env(safe-area-inset-bottom))' }}>
         <Outlet />
       </main>
 
-      <nav className="fixed bottom-0 left-0 right-0 bg-card border-t border-border shadow-lg z-50">
+      <nav
+        className="fixed bottom-0 left-0 right-0 bg-card border-t border-border shadow-lg z-50 select-none"
+        style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}
+      >
         <div className="max-w-lg mx-auto flex justify-around items-center py-2 px-1">
           {navItems.map((item) => {
             const isActive = location.pathname === item.path;
             const Icon = item.icon;
             return (
-              <Link
+              <button
                 key={item.path}
-                to={item.path}
-                className={`flex flex-col items-center gap-0.5 px-2 py-1.5 rounded-xl transition-all min-w-0 ${
+                onClick={() => navigate(item.path, { replace: isActive })}
+                className={`flex flex-col items-center gap-0.5 px-2 py-1.5 rounded-xl transition-all min-w-0 select-none ${
                   isActive
                     ? "text-primary scale-105"
                     : "text-muted-foreground hover:text-foreground"
@@ -39,7 +46,7 @@ export default function Layout() {
                 <span className="text-[10px] font-semibold leading-tight truncate">
                   {item.label}
                 </span>
-              </Link>
+              </button>
             );
           })}
         </div>
