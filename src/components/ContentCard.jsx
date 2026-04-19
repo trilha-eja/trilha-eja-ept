@@ -4,7 +4,8 @@ export default function ContentCard({ icon: Icon, title, description, onClick, c
   return (
     <button
       onClick={onClick}
-      className="w-full flex items-center gap-4 p-4 rounded-2xl bg-card border border-border shadow-sm hover:shadow-md transition-all active:scale-[0.98] text-left"
+      style={{ minHeight: 64 }}
+      className="w-full flex items-center gap-4 p-4 rounded-2xl bg-card border border-border shadow-sm hover:shadow-md transition-all active:scale-[0.98] text-left select-none"
     >
       {Icon && (
         <div className={`w-12 h-12 rounded-xl flex items-center justify-center shrink-0 ${color}`}>
