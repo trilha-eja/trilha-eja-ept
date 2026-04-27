@@ -61,7 +61,7 @@ export default function Layout() {
         className="fixed bottom-0 left-0 right-0 bg-card border-t border-border shadow-lg z-50 select-none"
         style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}
       >
-        <div className="max-w-lg mx-auto flex justify-around items-center py-1 px-1">
+        <div className="flex items-center py-1 px-1 overflow-x-auto gap-1 scrollbar-none" style={{ scrollbarWidth: 'none' }}>
           {navItems.map((item) => {
             const isActive = location.pathname === item.path;
             const Icon = item.icon;
@@ -69,8 +69,8 @@ export default function Layout() {
               <button
                 key={item.path}
                 onClick={() => navigate(item.path, { replace: isActive })}
-                style={{ minHeight: 44 }}
-                className={`flex flex-col items-center justify-center gap-0.5 px-2 rounded-xl transition-all min-w-0 select-none ${
+                style={{ minHeight: 44, minWidth: 56 }}
+                className={`flex flex-col items-center justify-center gap-0.5 px-2 rounded-xl transition-all shrink-0 select-none ${
                   isActive
                     ? "text-primary scale-105"
                     : "text-muted-foreground hover:text-foreground"
