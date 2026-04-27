@@ -30,7 +30,7 @@ export default function Layout() {
 
   return (
     <div
-      className="min-h-dvh flex flex-col bg-background"
+      className="h-dvh flex flex-col bg-background"
       style={{ paddingTop: 'env(safe-area-inset-top)' }}
     >
       {/* Pull-to-refresh indicator */}

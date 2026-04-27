@@ -34,7 +34,7 @@ function AnimatedRoutes() {
         animate="animate"
         exit="exit"
         transition={{ duration: 0.22, ease: 'easeInOut' }}
-        style={{ position: 'absolute', width: '100%', top: 0, left: 0 }}
+        style={{ position: 'absolute', width: '100%', top: 0, left: 0, minHeight: '100dvh' }}
       >
         <Routes location={location}>
           <Route element={<Layout />}>
@@ -75,7 +75,7 @@ const AuthenticatedApp = () => {
   }
 
   return (
-    <div style={{ position: 'relative', overflow: 'hidden', minHeight: '100dvh' }}>
+    <div style={{ position: 'relative', minHeight: '100dvh' }}>
       <AnimatedRoutes />
     </div>
   );
