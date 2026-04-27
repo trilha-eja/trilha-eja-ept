@@ -47,7 +47,7 @@ export default function Layout() {
 
       <main
         ref={scrollRef}
-        className="flex-1 overflow-y-auto overscroll-y-none"
+        className="flex-1 overflow-y-scroll overscroll-y-none"
         style={{
           paddingBottom: 'calc(5rem + env(safe-area-inset-bottom))',
           transform: pulling ? `translateY(${pullY}px)` : undefined,
