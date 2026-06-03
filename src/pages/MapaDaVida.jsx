@@ -9,6 +9,8 @@ import MapaVisual from "../components/mapa/MapaVisual";
 const STORAGE_KEY = "mapa_vida_rascunho";
 const NOME_KEY = "mapa_vida_nome";
 
+const NOME_MAX = 40;
+
 const ETAPAS = [
   {
     emoji: "🌱",
@@ -16,21 +18,9 @@ const ETAPAS = [
     subtitulo: "Antes de olhar para frente, reconheça o que você já construiu.",
     perguntas: [
       // campo de nome é tratado separadamente no render
-      {
-        field: "partida_forca",
-        label: "Qual é a sua maior força hoje?",
-        placeholder: "Pode ser coragem, paciência, persistência, cuidado com os outros...",
-      },
-      {
-        field: "partida_orgulho",
-        label: "O que você já conquistou na vida que te enche de orgulho?",
-        placeholder: "Criar seus filhos, chegar até aqui, aprender uma habilidade — tudo isso é conquista real.",
-      },
-      {
-        field: "partida_motivacao",
-        label: "O que te trouxe até este curso?",
-        placeholder: "O que te motivou a voltar a estudar?",
-      },
+      { field: "partida_forca",     maxLength: 80,  label: "Qual é a sua maior força hoje?",                                      placeholder: "Pode ser coragem, paciência, persistência, cuidado com os outros..." },
+      { field: "partida_orgulho",   maxLength: 120, label: "O que você já conquistou na vida que te enche de orgulho?",           placeholder: "Criar seus filhos, chegar até aqui, aprender uma habilidade — tudo isso é conquista real." },
+      { field: "partida_motivacao", maxLength: 120, label: "O que te trouxe até este curso?",                                     placeholder: "O que te motivou a voltar a estudar?" },
     ],
   },
   {
@@ -38,10 +28,10 @@ const ETAPAS = [
     titulo: "Trabalho e Profissão",
     subtitulo: "Onde você quer chegar como profissional?",
     perguntas: [
-      { field: "trabalho_semana", label: "Esta semana, qual pequeno passo posso dar na minha vida profissional?", placeholder: "Ex: Atualizar meu currículo, pesquisar uma vaga..." },
-      { field: "trabalho_1ano", label: "Em 1 ano, onde quero estar profissionalmente?", placeholder: "Ex: Trabalhando como eletricista com carteira assinada..." },
-      { field: "trabalho_5anos", label: "Em 5 anos, como imagino minha vida no trabalho?", placeholder: "Ex: Ter minha própria empresa, ser técnico sênior..." },
-      { field: "trabalho_10anos", label: "Em 10 anos, qual é meu maior sonho profissional?", placeholder: "Ex: Ter estabilidade, ser referência na minha área..." },
+      { field: "trabalho_semana",  maxLength: 80,  label: "Esta semana, qual pequeno passo posso dar na minha vida profissional?", placeholder: "Ex: Atualizar meu currículo, pesquisar uma vaga..." },
+      { field: "trabalho_1ano",   maxLength: 100, label: "Em 1 ano, onde quero estar profissionalmente?",                         placeholder: "Ex: Trabalhando como eletricista com carteira assinada..." },
+      { field: "trabalho_5anos",  maxLength: 100, label: "Em 5 anos, como imagino minha vida no trabalho?",                      placeholder: "Ex: Ter minha própria empresa, ser técnico sênior..." },
+      { field: "trabalho_10anos", maxLength: 100, label: "Em 10 anos, qual é meu maior sonho profissional?",                     placeholder: "Ex: Ter estabilidade, ser referência na minha área..." },
     ],
   },
   {
@@ -49,10 +39,10 @@ const ETAPAS = [
     titulo: "Estudos e Aprendizado",
     subtitulo: "O conhecimento que você quer buscar para si mesmo.",
     perguntas: [
-      { field: "estudos_semana", label: "Esta semana, o que posso fazer pelos meus estudos?", placeholder: "Ex: Revisar o conteúdo da aula, pesquisar sobre o ENEM..." },
-      { field: "estudos_1ano", label: "Em 1 ano, o que quero ter aprendido ou conquistado nos estudos?", placeholder: "Ex: Concluir o curso técnico, me inscrever no ENEM..." },
-      { field: "estudos_5anos", label: "Em 5 anos, como imagino minha formação?", placeholder: "Ex: Estar cursando engenharia elétrica..." },
-      { field: "estudos_10anos", label: "Em 10 anos, qual é meu maior sonho nos estudos?", placeholder: "Ex: Ter uma graduação, fazer uma especialização..." },
+      { field: "estudos_semana",  maxLength: 80,  label: "Esta semana, o que posso fazer pelos meus estudos?",                   placeholder: "Ex: Revisar o conteúdo da aula, pesquisar sobre o ENEM..." },
+      { field: "estudos_1ano",   maxLength: 100, label: "Em 1 ano, o que quero ter aprendido ou conquistado nos estudos?",       placeholder: "Ex: Concluir o curso técnico, me inscrever no ENEM..." },
+      { field: "estudos_5anos",  maxLength: 100, label: "Em 5 anos, como imagino minha formação?",                              placeholder: "Ex: Estar cursando engenharia elétrica..." },
+      { field: "estudos_10anos", maxLength: 100, label: "Em 10 anos, qual é meu maior sonho nos estudos?",                      placeholder: "Ex: Ter uma graduação, fazer uma especialização..." },
     ],
   },
   {
@@ -60,10 +50,10 @@ const ETAPAS = [
     titulo: "Família e Relações",
     subtitulo: "As pessoas que você ama e quer construir junto.",
     perguntas: [
-      { field: "familia_semana", label: "Esta semana, o que posso fazer pela minha família?", placeholder: "Ex: Passar mais tempo com meus filhos, ligar para alguém que não falo há tempo..." },
-      { field: "familia_1ano", label: "Em 1 ano, como quero que seja minha vida familiar?", placeholder: "Ex: Ter mais tempo de qualidade com minha família..." },
-      { field: "familia_5anos", label: "Em 5 anos, o que quero ter construído com quem amo?", placeholder: "Ex: Uma vida mais estável para meus filhos..." },
-      { field: "familia_10anos", label: "Em 10 anos, qual é meu maior sonho para minha família?", placeholder: "Ex: Ver meus filhos realizados, ter uma família unida..." },
+      { field: "familia_semana",  maxLength: 80,  label: "Esta semana, o que posso fazer pela minha família?",                   placeholder: "Ex: Passar mais tempo com meus filhos, ligar para alguém que não falo há tempo..." },
+      { field: "familia_1ano",   maxLength: 100, label: "Em 1 ano, como quero que seja minha vida familiar?",                   placeholder: "Ex: Ter mais tempo de qualidade com minha família..." },
+      { field: "familia_5anos",  maxLength: 100, label: "Em 5 anos, o que quero ter construído com quem amo?",                  placeholder: "Ex: Uma vida mais estável para meus filhos..." },
+      { field: "familia_10anos", maxLength: 100, label: "Em 10 anos, qual é meu maior sonho para minha família?",               placeholder: "Ex: Ver meus filhos realizados, ter uma família unida..." },
     ],
   },
   {
@@ -71,10 +61,10 @@ const ETAPAS = [
     titulo: "Eu Mesmo",
     subtitulo: "Seu crescimento pessoal, sua saúde, seu bem-estar.",
     perguntas: [
-      { field: "eu_semana", label: "Esta semana, o que posso fazer por mim mesmo?", placeholder: "Ex: Dormir melhor, reservar um momento só meu..." },
-      { field: "eu_1ano", label: "Em 1 ano, que versão de mim quero ser?", placeholder: "Ex: Mais confiante, mais saudável, mais tranquilo..." },
-      { field: "eu_5anos", label: "Em 5 anos, o que quero ter superado ou conquistado para mim mesmo?", placeholder: "Ex: Superar o medo de falar em público, cuidar melhor da minha saúde..." },
-      { field: "eu_10anos", label: "Em 10 anos, como quero me sentir sobre a minha trajetória?", placeholder: "Ex: Orgulhoso do caminho que percorri..." },
+      { field: "eu_semana",  maxLength: 80,  label: "Esta semana, o que posso fazer por mim mesmo?",                            placeholder: "Ex: Dormir melhor, reservar um momento só meu..." },
+      { field: "eu_1ano",   maxLength: 100, label: "Em 1 ano, que versão de mim quero ser?",                                   placeholder: "Ex: Mais confiante, mais saudável, mais tranquilo..." },
+      { field: "eu_5anos",  maxLength: 100, label: "Em 5 anos, o que quero ter superado ou conquistado para mim mesmo?",       placeholder: "Ex: Superar o medo de falar em público, cuidar melhor da minha saúde..." },
+      { field: "eu_10anos", maxLength: 100, label: "Em 10 anos, como quero me sentir sobre a minha trajetória?",               placeholder: "Ex: Orgulhoso do caminho que percorri..." },
     ],
   },
   {
@@ -82,10 +72,10 @@ const ETAPAS = [
     titulo: "Vida Material",
     subtitulo: "Estabilidade, moradia e conquistas concretas.",
     perguntas: [
-      { field: "material_semana", label: "Esta semana, o que posso fazer pela minha estabilidade financeira?", placeholder: "Ex: Organizar minhas contas, pesquisar uma renda extra..." },
-      { field: "material_1ano", label: "Em 1 ano, o que quero ter conquistado materialmente?", placeholder: "Ex: Sair do aluguel, ter uma reserva financeira..." },
-      { field: "material_5anos", label: "Em 5 anos, como imagino minha vida material?", placeholder: "Ex: Casa própria, carro, mais estabilidade..." },
-      { field: "material_10anos", label: "Em 10 anos, qual é meu maior sonho de conquista material?", placeholder: "Ex: Uma vida confortável para minha família, independência financeira..." },
+      { field: "material_semana",  maxLength: 80,  label: "Esta semana, o que posso fazer pela minha estabilidade financeira?", placeholder: "Ex: Organizar minhas contas, pesquisar uma renda extra..." },
+      { field: "material_1ano",   maxLength: 100, label: "Em 1 ano, o que quero ter conquistado materialmente?",               placeholder: "Ex: Sair do aluguel, ter uma reserva financeira..." },
+      { field: "material_5anos",  maxLength: 100, label: "Em 5 anos, como imagino minha vida material?",                      placeholder: "Ex: Casa própria, carro, mais estabilidade..." },
+      { field: "material_10anos", maxLength: 100, label: "Em 10 anos, qual é meu maior sonho de conquista material?",          placeholder: "Ex: Uma vida confortável para minha família, independência financeira..." },
     ],
   },
   {
@@ -93,10 +83,10 @@ const ETAPAS = [
     titulo: "Comunidade",
     subtitulo: "Como você quer contribuir com as pessoas ao seu redor.",
     perguntas: [
-      { field: "comunidade_semana", label: "Esta semana, o que posso fazer por alguém além de mim?", placeholder: "Ex: Ajudar um colega de curso, participar de algo no meu bairro..." },
-      { field: "comunidade_1ano", label: "Em 1 ano, como quero contribuir com minha comunidade?", placeholder: "Ex: Ser referência para alguém mais novo..." },
-      { field: "comunidade_5anos", label: "Em 5 anos, que impacto quero ter causado ao meu redor?", placeholder: "Ex: Ter ajudado alguém a voltar a estudar..." },
-      { field: "comunidade_10anos", label: "Em 10 anos, como quero ser lembrado pelas pessoas ao meu redor?", placeholder: "Ex: Como alguém que fez diferença, que ajudou, que inspirou..." },
+      { field: "comunidade_semana",  maxLength: 80,  label: "Esta semana, o que posso fazer por alguém além de mim?",          placeholder: "Ex: Ajudar um colega de curso, participar de algo no meu bairro..." },
+      { field: "comunidade_1ano",   maxLength: 100, label: "Em 1 ano, como quero contribuir com minha comunidade?",            placeholder: "Ex: Ser referência para alguém mais novo..." },
+      { field: "comunidade_5anos",  maxLength: 100, label: "Em 5 anos, que impacto quero ter causado ao meu redor?",           placeholder: "Ex: Ter ajudado alguém a voltar a estudar..." },
+      { field: "comunidade_10anos", maxLength: 100, label: "Em 10 anos, como quero ser lembrado pelas pessoas ao meu redor?",  placeholder: "Ex: Como alguém que fez diferença, que ajudou, que inspirou..." },
     ],
   },
 ];
@@ -130,6 +120,18 @@ function formatDate(iso) {
   return new Date(iso).toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit", year: "numeric" });
 }
 
+// ─── Contador de caracteres ─────────────────────────────────────────────────
+function CharCounter({ current, max }) {
+  const remaining = max - current;
+  const pct = current / max;
+  const color = pct >= 1 ? "#dc2626" : pct >= 0.8 ? "#f97316" : "#888888";
+  return (
+    <p className="text-xs text-right" style={{ color }}>
+      {current}/{max} caracteres
+    </p>
+  );
+}
+
 // ─── Tela de entrada ────────────────────────────────────────────────────────
 function TelaEntrada({ onStart, onContinue, hasDraft, draftDate }) {
   return (
@@ -141,6 +143,9 @@ function TelaEntrada({ onStart, onContinue, hasDraft, draftDate }) {
           <h2 className="text-2xl font-extrabold leading-tight">Mapa da Vida</h2>
           <p className="text-muted-foreground leading-relaxed text-sm">
             Sua história não começa aqui — ela já vem de longe. Este mapa é para você enxergar onde está e para onde quer caminhar.
+          </p>
+          <p className="text-xs italic" style={{ color: "#888888" }}>
+            💡 Dica: escreva de forma objetiva — frases curtas e diretas ficam mais bonitas no seu mapa.
           </p>
         </div>
         <div className="w-full space-y-3 pt-2">
@@ -323,28 +328,35 @@ export default function MapaDaVida() {
 
         {/* Campo de nome — apenas na Etapa 0 */}
         {etapa === 0 && (
-          <div className="space-y-2">
+          <div className="space-y-1">
             <label className="text-sm font-bold leading-snug block">Como você quer ser chamado?</label>
             <Input
               value={nome}
-              onChange={(e) => handleNome(e.target.value)}
+              onChange={(e) => handleNome(e.target.value.slice(0, NOME_MAX))}
               placeholder="Ex: Maria, João, seu apelido..."
               className="rounded-xl text-sm h-10"
+              maxLength={NOME_MAX}
             />
+            <CharCounter current={nome.length} max={NOME_MAX} />
           </div>
         )}
 
-        {etapaAtual.perguntas.map((p) => (
-          <div key={p.field} className="space-y-2">
-            <label className="text-sm font-bold leading-snug block">{p.label}</label>
-            <Textarea
-              value={data[p.field] || ""}
-              onChange={(e) => handleField(p.field, e.target.value)}
-              placeholder={p.placeholder}
-              className="rounded-xl text-sm min-h-[80px] resize-none"
-            />
-          </div>
-        ))}
+        {etapaAtual.perguntas.map((p) => {
+          const val = data[p.field] || "";
+          return (
+            <div key={p.field} className="space-y-1">
+              <label className="text-sm font-bold leading-snug block">{p.label}</label>
+              <Textarea
+                value={val}
+                onChange={(e) => handleField(p.field, e.target.value.slice(0, p.maxLength))}
+                placeholder={p.placeholder}
+                className="rounded-xl text-sm min-h-[80px] resize-none"
+                maxLength={p.maxLength}
+              />
+              <CharCounter current={val.length} max={p.maxLength} />
+            </div>
+          );
+        })}
 
         <div className="flex gap-3 pt-2 pb-6">
           <Button variant="outline" onClick={handlePrev} className="flex-1 h-12 rounded-xl gap-2">
