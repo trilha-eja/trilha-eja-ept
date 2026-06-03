@@ -4,7 +4,7 @@ import { ArrowLeft, Download, Printer, Edit } from "lucide-react";
 
 const W = 1200;
 const H = 900;
-const TRILHA_Y = 430;
+const TRILHA_Y = 500;
 const TRILHA_H = 40;
 const TRAIL_START_X = 80;
 const TRAIL_END_X = 1120;
@@ -265,25 +265,19 @@ export default function MapaVisual({ data, nome, onEdit }) {
             {/* Background */}
             <rect width={W} height={H} fill="#FFF8F0" />
 
-            {/* Title */}
-            <text x={W / 2} y={48} textAnchor="middle" fontSize="28" fontWeight="bold" fill="#E86826">
+            {/* Área 1 — Título (topo centralizado, altura reservada 90px) */}
+            <text x={W / 2} y={38} textAnchor="middle" fontSize="28" fontWeight="bold" fill="#E86826">
               {nomeDisplay ? `Mapa da Vida de ${nomeDisplay}` : "Mapa da Vida"}
             </text>
-            <text x={W / 2} y={76} textAnchor="middle" fontSize="14" fill="#888888">
+            <text x={W / 2} y={64} textAnchor="middle" fontSize="14" fill="#888888">
               Gerado em {mes}
             </text>
 
-            {/* Legend acima */}
-            {EIXOS_ACIMA.map((e, i) => (
+            {/* Área 2 — Legenda (abaixo do título, margem top 90px) */}
+            {[...EIXOS_ACIMA, ...EIXOS_ABAIXO].map((e, i) => (
               <g key={e.key}>
-                <circle cx={30} cy={120 + i * 22} r={8} fill={e.cor} />
-                <text x={44} y={120 + i * 22 + 1} dominantBaseline="middle" fontSize="11" fontWeight="bold" fill="#444">{e.emoji} {e.label}</text>
-              </g>
-            ))}
-            {EIXOS_ABAIXO.map((e, i) => (
-              <g key={e.key}>
-                <circle cx={30} cy={120 + (EIXOS_ACIMA.length + i) * 22} r={8} fill={e.cor} />
-                <text x={44} y={120 + (EIXOS_ACIMA.length + i) * 22 + 1} dominantBaseline="middle" fontSize="11" fontWeight="bold" fill="#444">{e.emoji} {e.label}</text>
+                <circle cx={24} cy={96 + i * 22} r={7} fill={e.cor} />
+                <text x={36} y={96 + i * 22 + 1} dominantBaseline="middle" fontSize="11" fontWeight="bold" fill="#444">{e.emoji} {e.label}</text>
               </g>
             ))}
 
