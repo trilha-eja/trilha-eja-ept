@@ -45,6 +45,13 @@ const modules = [
     description: "Termos técnicos em linguagem simples",
     color: "bg-chart-3",
   },
+  {
+    to: "/vozes",
+    icon: Sparkles,
+    title: "Vozes da Trilha",
+    description: "Histórias reais de quem trilhou esse caminho",
+    color: "bg-chart-5",
+  },
 ];
 
 export default function Home() {
