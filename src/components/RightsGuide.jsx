@@ -23,6 +23,7 @@ const rights = [
     emoji: "🎄",
     title: "13º Salário",
     text: "Pago em duas parcelas: a primeira até novembro e a segunda até dezembro.",
+    legal: "CLT, Art. 1º da Lei nº 4.090/1962 e Lei nº 4.749/1965",
   },
   {
     emoji: "⏰",
@@ -34,11 +35,13 @@ const rights = [
     emoji: "🛡️",
     title: "FGTS",
     text: "O patrão deposita 8% do seu salário todo mês. Você pode sacar na demissão sem justa causa.",
+    legal: "Lei nº 8.036/1990, Art. 15 — depósito obrigatório de 8% sobre a remuneração",
   },
   {
     emoji: "🏥",
     title: "Seguro Desemprego",
     text: "Se for demitido sem justa causa, pode receber de 3 a 5 parcelas do seguro desemprego.",
+    legal: "Lei nº 7.998/1990 e CF/88, Art. 7º, inciso II",
   },
   {
     emoji: "⚡🛡️",
@@ -50,6 +53,7 @@ const rights = [
     emoji: "⚠️",
     title: "Trabalho informal: conhecer para se proteger",
     text: "Trabalhar sem registro é comum na área elétrica, mas tem riscos sérios: sem FGTS acumulado, sem seguro-desemprego se dispensado, sem cobertura em caso de acidente de trabalho. Se isso acontecer com você, procure o CRAS ou o sindicato da categoria.",
+    legal: "CLT, Art. 47 — multa ao empregador por não registro | Lei nº 8.213/1991 — cobertura previdenciária vinculada ao registro formal",
   },
 ];
 
