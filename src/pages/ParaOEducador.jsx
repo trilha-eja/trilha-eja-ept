@@ -1,3 +1,4 @@
+import { useRef, useState } from "react";
 import { BookOpen, Download } from "lucide-react";
 import PageHeader from "../components/PageHeader";
 import EducatorCard from "../components/educator/EducatorCard";
@@ -58,133 +59,60 @@ O Mapa da Vida é um ato político de esperança coletiva, não um plano de carr
   },
 ];
 
-function generatePDF() {
+async function generatePDF(containerRef) {
   const { jsPDF } = window.jspdf;
-  if (!jsPDF) { alert("PDF nao disponivel. Tente novamente."); return; }
+  const html2canvas = window.html2canvas;
+  if (!jsPDF || !html2canvas) { alert("PDF não disponível. Tente novamente."); return; }
 
-  const doc = new jsPDF({ unit: "mm", format: "a4" });
-  const ML = 20; // margin left
-  const MR = 20; // margin right
-  const MT = 20; // margin top
-  const pageW = 210;
-  const contentW = pageW - ML - MR; // 170mm
-  let y = MT;
+  const el = containerRef.current;
+  el.style.display = "block";
 
-  const FOOTER_TEXT = "Trilha EJA-EPT | Produto Educacional — ProfEPT | IFC";
-  const GRAY = [120, 120, 120];
-  const BLACK = [30, 30, 30];
+  const A4_W_PX = 794; // ~210mm at 96dpi
+  const A4_H_PX = 1123; // ~297mm at 96dpi
 
-  const addFooter = () => {
-    const totalPages = doc.internal.getNumberOfPages();
-    for (let i = 1; i <= totalPages; i++) {
-      doc.setPage(i);
-      doc.setFontSize(9);
-      doc.setFont("helvetica", "normal");
-      doc.setTextColor(...GRAY);
-      doc.text(FOOTER_TEXT, pageW / 2, 287, { align: "center" });
-    }
-  };
-
-  const checkPage = (needed = 20) => {
-    if (y + needed > 278) {
-      doc.addPage();
-      y = MT;
-    }
-  };
-
-  const writeLine = (text, size, style, color, align) => {
-    doc.setFontSize(size);
-    doc.setFont("helvetica", style || "normal");
-    doc.setTextColor(...(color || BLACK));
-    const x = align === "center" ? pageW / 2 : ML;
-    const lines = doc.splitTextToSize(text, contentW);
-    checkPage(lines.length * size * 0.45 + 2);
-    doc.text(lines, x, y, align === "center" ? { align: "center" } : {});
-    y += lines.length * size * 0.45 + 2;
-  };
-
-  const gap = (mm = 4) => { y += mm; };
-
-  // ── CABECALHO ──────────────────────────────────────────────
-  writeLine("Guia do Educador — Trilha EJA-EPT", 18, "bold", [30, 30, 30], "center");
-  gap(2);
-  writeLine("Orientacoes pedagogicas para uso em sala", 12, "normal", GRAY, "center");
-  gap(3);
-  doc.setDrawColor(180, 180, 180);
-  doc.line(ML, y, pageW - MR, y);
-  gap(6);
-
-  // ── SECAO 1 ────────────────────────────────────────────────
-  writeLine("1. Quem e o estudante da EJA-EPT?", 14, "bold", BLACK);
-  gap(2);
-  writeLine(
-    "O estudante da EJA-EPT e um trabalhador-estudante adulto que carrega saberes construidos na vida, no trabalho e nas lutas cotidianas. Como disse Miguel Arroyo, ele e um passageiro da noite — nao por falta de esforco, mas porque as condicoes estruturais da sociedade o afastaram da escola. Ao usar este aplicativo, lembre-se: voce nao esta ensinando alguem que nao sabe. Voce esta reconhecendo quem ja sabe muito.",
-    11, "normal", BLACK
-  );
-  gap(2);
-  writeLine("Referencia: ARROYO, M. G. Passageiros da noite. Petropolis: Vozes, 2012.", 10, "italic", GRAY);
-  gap(6);
-
-  // ── SECAO 2 ────────────────────────────────────────────────
-  writeLine("2. Mundo do Trabalho x Mercado de Trabalho", 14, "bold", BLACK);
-  gap(2);
-  writeLine(
-    "Este aplicativo usa intencionalmente Mundo do Trabalho, nao mercado de trabalho. A diferenca e politica: formar para o mercado adapta o estudante as necessidades do capital. Formar para o mundo do trabalho instrumentaliza o cidadao a compreender, questionar e transformar as relacoes de producao. Use essa distincao em suas aulas.",
-    11, "normal", BLACK
-  );
-  gap(2);
-  writeLine("Referencia: FRIGOTTO, G.; CIAVATTA, M.; RAMOS, M. (Orgs.). Ensino Medio Integrado. Sao Paulo: Cortez, 2005.", 10, "italic", GRAY);
-
-  // ── PAGINA 2 ───────────────────────────────────────────────
-  doc.addPage();
-  y = MT;
-
-  // ── SECAO 3 ────────────────────────────────────────────────
-  writeLine("3. Como usar o Mapa da Vida sem cair na meritocracia", 14, "bold", BLACK);
-  gap(3);
-
-  writeLine("FACA:", 11, "bold", [40, 120, 40]);
-  gap(1);
-  writeLine("- Pergunte a turma quais barreiras estruturais (falta de transporte, cansaco, cuidado de filhos) dificultam seus projetos e debata solucoes coletivas.", 11, "normal", BLACK);
-  gap(1);
-  writeLine("- Conecte as metas individuais a direitos coletivos (moradia, educacao, saude).", 11, "normal", BLACK);
-  gap(3);
-
-  writeLine("EVITE:", 11, "bold", [180, 40, 40]);
-  gap(1);
-  writeLine("- Frases como basta querer ou quem se esforca chega la.", 11, "normal", BLACK);
-  gap(1);
-  writeLine("- Tratar o projeto de vida como plano individual de ascensao.", 11, "normal", BLACK);
-  gap(3);
-
-  writeLine("O Mapa da Vida e um ato politico de esperanca coletiva, nao um plano de carreira.", 11, "italic", BLACK);
-  gap(2);
-  writeLine("Referencia: FREIRE, P. Pedagogia da Esperanca. Rio de Janeiro: Paz e Terra, 1992.", 10, "italic", GRAY);
-  gap(7);
-
-  // ── SECAO 4 ────────────────────────────────────────────────
-  writeLine("4. Roteiro Sugerido de 4 Encontros", 14, "bold", BLACK);
-  gap(3);
-
-  const encontros = [
-    { label: "Encontro 1 — Mundo do Trabalho + Direitos", detail: "Modulos de direitos trabalhistas + NR-10" },
-    { label: "Encontro 2 — Empregabilidade Critica", detail: "Gerador de curriculo em grupo + Valorize sua Experiencia" },
-    { label: "Encontro 3 — Mapa da Vida", detail: "Em roda de conversa, com relatos de egressos — Vozes da Trilha" },
-    { label: "Encontro 4 — Caminhos de Estudo", detail: "ENEM/SISU/PROUNI + sonhos coletivos" },
-  ];
-
-  encontros.forEach((enc) => {
-    checkPage(16);
-    writeLine(enc.label, 11, "bold", BLACK);
-    writeLine(enc.detail, 11, "normal", [80, 80, 80]);
-    gap(3);
+  const canvas = await html2canvas(el, {
+    scale: 2,
+    useCORS: true,
+    backgroundColor: "#ffffff",
+    width: A4_W_PX,
+    windowWidth: A4_W_PX,
   });
 
-  addFooter();
+  el.style.display = "none";
+
+  const imgData = canvas.toDataURL("image/png");
+  const doc = new jsPDF({ unit: "mm", format: "a4", orientation: "portrait" });
+
+  const pageW = 210;
+  const pageH = 297;
+  const imgW = pageW;
+  const imgH = (canvas.height * pageW) / canvas.width;
+
+  let position = 0;
+  let remaining = imgH;
+
+  while (remaining > 0) {
+    doc.addImage(imgData, "PNG", 0, position, imgW, imgH);
+    remaining -= pageH;
+    if (remaining > 0) {
+      doc.addPage();
+      position -= pageH;
+    }
+  }
+
   doc.save("guia-do-educador-trilha-eja-ept.pdf");
 }
 
 export default function ParaOEducador() {
+  const pdfRef = useRef(null);
+  const [loading, setLoading] = useState(false);
+
+  const handleDownload = async () => {
+    setLoading(true);
+    await generatePDF(pdfRef);
+    setLoading(false);
+  };
+
   return (
     <div>
       <PageHeader title="Área do Educador" subtitle="Orientações pedagógicas para uso do Trilha EJA-EPT em sala" backTo="/" />
@@ -209,11 +137,104 @@ export default function ParaOEducador() {
         {/* Download button */}
         <div className="pb-6 pt-2">
           <button
-            onClick={generatePDF}
-            className="w-full py-4 rounded-2xl bg-chart-4 text-white font-bold text-base flex items-center justify-center gap-2 active:scale-95 transition-all"
+            onClick={handleDownload}
+            disabled={loading}
+            className="w-full py-4 rounded-2xl bg-chart-4 text-white font-bold text-base flex items-center justify-center gap-2 active:scale-95 transition-all disabled:opacity-70"
           >
-            <Download className="w-5 h-5" /> Baixar Guia do Educador em PDF
+            <Download className="w-5 h-5" />
+            {loading ? "Gerando PDF…" : "Baixar Guia do Educador em PDF"}
           </button>
+        </div>
+      </div>
+
+      {/* Hidden PDF template */}
+      <div ref={pdfRef} style={{ display: "none", position: "fixed", left: "-9999px", top: 0, zIndex: -1 }}>
+        <div style={{
+          width: "794px",
+          backgroundColor: "#ffffff",
+          color: "#000000",
+          fontFamily: "Arial, sans-serif",
+          padding: "75px 76px",
+          boxSizing: "border-box",
+        }}>
+          {/* Header */}
+          <h1 style={{ fontSize: "22px", fontWeight: "bold", textAlign: "center", margin: "0 0 8px 0" }}>
+            Guia do Educador — Trilha EJA-EPT
+          </h1>
+          <p style={{ fontSize: "13px", color: "#666", textAlign: "center", margin: "0 0 16px 0" }}>
+            Orientações pedagógicas para uso em sala
+          </p>
+          <hr style={{ border: "none", borderTop: "1px solid #ccc", marginBottom: "28px" }} />
+
+          {/* Seção 1 */}
+          <h2 style={{ fontSize: "16px", fontWeight: "bold", margin: "0 0 8px 0" }}>
+            1. Quem é o estudante da EJA-EPT?
+          </h2>
+          <p style={{ fontSize: "12px", lineHeight: "1.7", margin: "0 0 8px 0" }}>
+            O estudante da EJA-EPT é um trabalhador-estudante adulto que carrega saberes construídos na vida, no trabalho e nas lutas cotidianas. Como disse Miguel Arroyo, ele é um passageiro da noite — não por falta de esforço, mas porque as condições estruturais da sociedade o afastaram da escola. Ao usar este aplicativo, lembre-se: você não está ensinando alguém que não sabe. Você está reconhecendo quem já sabe muito.
+          </p>
+          <p style={{ fontSize: "11px", fontStyle: "italic", color: "#555", margin: "0 0 32px 0" }}>
+            Referência: ARROYO, M. G. Passageiros da noite. Petrópolis: Vozes, 2012.
+          </p>
+
+          {/* Seção 2 */}
+          <h2 style={{ fontSize: "16px", fontWeight: "bold", margin: "0 0 8px 0" }}>
+            2. Mundo do Trabalho x Mercado de Trabalho
+          </h2>
+          <p style={{ fontSize: "12px", lineHeight: "1.7", margin: "0 0 8px 0" }}>
+            Este aplicativo usa intencionalmente Mundo do Trabalho, não mercado de trabalho. A diferença é política: formar para o mercado adapta o estudante às necessidades do capital. Formar para o mundo do trabalho instrumentaliza o cidadão a compreender, questionar e transformar as relações de produção. Use essa distinção em suas aulas.
+          </p>
+          <p style={{ fontSize: "11px", fontStyle: "italic", color: "#555", margin: "0 0 32px 0" }}>
+            Referência: FRIGOTTO, G.; CIAVATTA, M.; RAMOS, M. (Orgs.). Ensino Médio Integrado. São Paulo: Cortez, 2005.
+          </p>
+
+          {/* Seção 3 */}
+          <h2 style={{ fontSize: "16px", fontWeight: "bold", margin: "0 0 12px 0" }}>
+            3. Como usar o Mapa da Vida sem cair na meritocracia
+          </h2>
+          <p style={{ fontSize: "12px", fontWeight: "bold", color: "#2a7a2a", margin: "0 0 4px 0" }}>FAÇA:</p>
+          <p style={{ fontSize: "12px", lineHeight: "1.7", margin: "0 0 4px 8px" }}>
+            — Pergunte à turma quais barreiras estruturais (falta de transporte, cansaço, cuidado de filhos) dificultam seus projetos e debata soluções coletivas.
+          </p>
+          <p style={{ fontSize: "12px", lineHeight: "1.7", margin: "0 0 14px 8px" }}>
+            — Conecte as metas individuais a direitos coletivos (moradia, educação, saúde).
+          </p>
+          <p style={{ fontSize: "12px", fontWeight: "bold", color: "#b02020", margin: "0 0 4px 0" }}>EVITE:</p>
+          <p style={{ fontSize: "12px", lineHeight: "1.7", margin: "0 0 4px 8px" }}>
+            — Frases como "basta querer" ou "quem se esforça chega lá".
+          </p>
+          <p style={{ fontSize: "12px", lineHeight: "1.7", margin: "0 0 14px 8px" }}>
+            — Tratar o projeto de vida como plano individual de ascensão.
+          </p>
+          <p style={{ fontSize: "12px", fontStyle: "italic", lineHeight: "1.7", margin: "0 0 8px 0" }}>
+            O Mapa da Vida é um ato político de esperança coletiva, não um plano de carreira.
+          </p>
+          <p style={{ fontSize: "11px", fontStyle: "italic", color: "#555", margin: "0 0 32px 0" }}>
+            Referência: FREIRE, P. Pedagogia da Esperança. Rio de Janeiro: Paz e Terra, 1992.
+          </p>
+
+          {/* Seção 4 */}
+          <h2 style={{ fontSize: "16px", fontWeight: "bold", margin: "0 0 12px 0" }}>
+            4. Roteiro Sugerido de 4 Encontros
+          </h2>
+          {[
+            { label: "Encontro 1 — Mundo do Trabalho + Direitos", detail: "Módulos de direitos trabalhistas + NR-10" },
+            { label: "Encontro 2 — Empregabilidade Crítica", detail: "Gerador de currículo em grupo + Valorize sua Experiência" },
+            { label: "Encontro 3 — Mapa da Vida", detail: "Em roda de conversa, com relatos de egressos — Vozes da Trilha" },
+            { label: "Encontro 4 — Caminhos de Estudo", detail: "ENEM/SISU/PROUNI + sonhos coletivos" },
+          ].map((enc, i) => (
+            <div key={i} style={{ marginBottom: "14px" }}>
+              <p style={{ fontSize: "12px", fontWeight: "bold", margin: "0 0 2px 0" }}>{enc.label}</p>
+              <p style={{ fontSize: "12px", color: "#444", margin: 0 }}>{enc.detail}</p>
+            </div>
+          ))}
+
+          {/* Rodapé */}
+          <div style={{ marginTop: "40px", borderTop: "1px solid #ccc", paddingTop: "12px", textAlign: "center" }}>
+            <p style={{ fontSize: "10px", color: "#888", margin: 0 }}>
+              Trilha EJA-EPT | Produto Educacional — ProfEPT | IFC
+            </p>
+          </div>
         </div>
       </div>
     </div>
