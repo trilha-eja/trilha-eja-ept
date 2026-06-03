@@ -1,9 +1,8 @@
-import { useState, useEffect } from "react";
-import { ArrowLeft, Eye, Save, Info } from "lucide-react";
+import { useState, useRef, useEffect, useCallback } from "react";
+import { ArrowLeft, Eye, Save, Info, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import ResumePreviewModal from "./ResumePreviewModal";
+import ResumePreviewModal, { generateResumePDF } from "./ResumePreviewModal";
 
 const STORAGE_KEY = "trilha_curriculo_rascunho";
 
@@ -44,6 +43,29 @@ const fields = [
     placeholder: "Ex: Trabalho em equipe\nNR-10\nPontualidade\nOrganização",
   },
 ];
+
+function AutoTextarea({ value, onChange, placeholder, className }) {
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    el.style.height = "auto";
+    el.style.height = Math.min(el.scrollHeight, 200) + "px";
+  }, [value]);
+
+  return (
+    <textarea
+      ref={ref}
+      value={value}
+      onChange={onChange}
+      placeholder={placeholder}
+      rows={3}
+      style={{ minHeight: 100, maxHeight: 200, overflowY: "auto", resize: "none" }}
+      className={className}
+    />
+  );
+}
 
 function calcProgress(data) {
   const filled = Object.values(data).filter((v) => v && v.trim()).length;
@@ -151,11 +173,11 @@ export default function ResumeBuilder({ onBack }) {
             )}
 
             {type === "textarea" ? (
-              <Textarea
+              <AutoTextarea
                 value={data[field]}
                 onChange={(e) => handleChange(field, e.target.value)}
                 placeholder={placeholder}
-                className="text-base rounded-xl min-h-[96px] resize-none"
+                className="w-full text-base rounded-xl border border-input bg-background px-3 py-2 focus:outline-none focus:ring-2 focus:ring-ring"
               />
             ) : (
               <Input
@@ -177,6 +199,13 @@ export default function ResumeBuilder({ onBack }) {
             disabled={!data.full_name.trim()}
           >
             <Eye className="w-5 h-5" /> Pré-visualizar Currículo
+          </Button>
+          <Button
+            onClick={() => generateResumePDF(data)}
+            variant="outline"
+            className="w-full h-12 rounded-xl text-base font-semibold gap-2"
+          >
+            <Download className="w-4 h-4" /> Baixar em PDF
           </Button>
           <Button
             onClick={handleSave}
