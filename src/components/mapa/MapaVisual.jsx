@@ -2,22 +2,42 @@ import { useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Download, Printer, Edit } from "lucide-react";
 
+// ── Dimensões globais ──────────────────────────────────────────────────────
 const W = 1200;
 const H = 900;
-const TRILHA_Y = 500;
+
+// ── Zonas fixas (y início / y fim) ────────────────────────────────────────
+const ZONA1_TOP = 0;    // Cabeçalho
+const ZONA1_BOT = 100;
+const ZONA2_TOP = 100;  // Legenda
+const ZONA2_BOT = 180;
+const ZONA3_TOP = 180;  // Mapa principal
+const ZONA3_BOT = 780;
+// ZONA 4: 780–820 margem de segurança (vazia)
+const ZONA5_TOP = 820;  // Rodapé
+const ZONA5_BOT = 900;
+
+// ── Trilha (centralizada na Zona 3) ───────────────────────────────────────
+const TRILHA_Y = Math.round((ZONA3_TOP + ZONA3_BOT) / 2); // 480
 const TRILHA_H = 40;
 const TRAIL_START_X = 80;
 const TRAIL_END_X = 1120;
 
+// ── Ramificações: gap calculado para caber na Zona 3 ──────────────────────
+// Acima: de (TRILHA_Y - TRILHA_H/2) até ZONA3_TOP, com 3 ramos
+// Espaço disponível = (TRILHA_Y - TRILHA_H/2) - ZONA3_TOP = 460 - 180 = 280
+// 3 ramos × gap + raio_circulo(16) + label ≈ precisamos de ≤ 280 / 3 ≈ 85px
+const BRANCH_GAP = 80;
+
 const EIXOS_ACIMA = [
-  { key: "trabalho", emoji: "🔧", label: "Trabalho", cor: "#E86826", fields: ["trabalho_1ano", "trabalho_5anos", "trabalho_10anos"] },
-  { key: "estudos",  emoji: "📚", label: "Estudos",  cor: "#4A90D9", fields: ["estudos_1ano",  "estudos_5anos",  "estudos_10anos"]  },
-  { key: "familia",  emoji: "👨‍👩‍👧", label: "Família",  cor: "#5BAD6F", fields: ["familia_1ano",  "familia_5anos",  "familia_10anos"]  },
+  { key: "trabalho", emoji: "🔧", label: "Trabalho",  cor: "#E86826", fields: ["trabalho_1ano", "trabalho_5anos", "trabalho_10anos"] },
+  { key: "estudos",  emoji: "📚", label: "Estudos",   cor: "#4A90D9", fields: ["estudos_1ano",  "estudos_5anos",  "estudos_10anos"]  },
+  { key: "familia",  emoji: "👨‍👩‍👧", label: "Família",   cor: "#5BAD6F", fields: ["familia_1ano",  "familia_5anos",  "familia_10anos"]  },
 ];
 const EIXOS_ABAIXO = [
-  { key: "eu",        emoji: "🌟", label: "Eu Mesmo",       cor: "#9B59B6", fields: ["eu_1ano",        "eu_5anos",        "eu_10anos"]        },
-  { key: "material",  emoji: "🏠", label: "Vida Material",  cor: "#F0A500", fields: ["material_1ano",  "material_5anos",  "material_10anos"]  },
-  { key: "comunidade",emoji: "🤝", label: "Comunidade",     cor: "#E74C6C", fields: ["comunidade_1ano","comunidade_5anos","comunidade_10anos"] },
+  { key: "eu",         emoji: "🌟", label: "Eu Mesmo",      cor: "#9B59B6", fields: ["eu_1ano",         "eu_5anos",         "eu_10anos"]        },
+  { key: "material",   emoji: "🏠", label: "Vida Material", cor: "#F0A500", fields: ["material_1ano",   "material_5anos",   "material_10anos"]  },
+  { key: "comunidade", emoji: "🤝", label: "Comunidade",    cor: "#E74C6C", fields: ["comunidade_1ano", "comunidade_5anos", "comunidade_10anos"] },
 ];
 
 const MARCOS = [
@@ -26,12 +46,8 @@ const MARCOS = [
   { label: "10 anos", x: Math.round(TRAIL_START_X + (TRAIL_END_X - TRAIL_START_X) * 0.85), idx: 2 },
 ];
 
-// Approx chars per line for a 140px wide box at given fontSize (Arial ~6px per char at 9px)
-const CHARS_PER_LINE_9 = 22;
-const CHARS_PER_LINE_8 = 25;
+// ── Wrapping de texto ──────────────────────────────────────────────────────
 const MAX_LABEL_W = 140;
-const LINE_H_9 = 12.6; // 9 * 1.4
-const LINE_H_8 = 11.2; // 8 * 1.4
 const PAD_X = 4;
 const PAD_Y = 3;
 
@@ -53,89 +69,77 @@ function wrapToLines(text, charsPerLine) {
   return lines;
 }
 
-// Returns { lines, fontSize, lineH }
+// Com BRANCH_GAP=80: espaço para label acima do círculo ≈ 80-16-20 = 44px → ~3 linhas de 12px
+// Limitar a 3 linhas máximo para não ultrapassar zona
 function computeLabel(text) {
-  if (!text) return { lines: [], fontSize: 9, lineH: LINE_H_9 };
-  let lines = wrapToLines(text, CHARS_PER_LINE_9);
-  if (lines.length <= 6) return { lines, fontSize: 9, lineH: LINE_H_9 };
-  // reduce font size
-  lines = wrapToLines(text, CHARS_PER_LINE_8);
-  return { lines, fontSize: 8, lineH: LINE_H_8 };
+  if (!text) return { lines: [], fontSize: 9, lineH: 12.6 };
+  let lines = wrapToLines(text, 22);
+  if (lines.length <= 3) return { lines, fontSize: 9, lineH: 12.6 };
+  // Reduce font to fit more chars per line
+  lines = wrapToLines(text, 26);
+  // Hard cap at 3 lines to respect zone boundaries
+  if (lines.length > 3) lines = [...lines.slice(0, 2), lines.slice(2).join(" ").substring(0, 22) + "…"];
+  return { lines, fontSize: 8, lineH: 11.2 };
 }
 
-// SVG label with white background — above the circle
 function LabelAbove({ cx, cy, text }) {
   const { lines, fontSize, lineH } = computeLabel(text);
+  const bw = MAX_LABEL_W + PAD_X * 2;
+
   if (!lines.length) {
-    const bw = 60 + PAD_X * 2;
     const bh = lineH + PAD_Y * 2;
     const bx = cx - bw / 2;
     const by = cy - 20 - bh;
     return (
       <g>
-        <rect x={bx} y={by} width={bw} height={bh} rx={4} fill="rgba(255,255,255,0.92)" />
+        <rect x={bx} y={by} width={bw} height={bh} rx={4} fill="rgba(255,255,255,0.95)" />
         <text x={cx} y={by + PAD_Y + lineH * 0.8} textAnchor="middle" fontSize={9} fill="#aaa" fontStyle="italic">A definir...</text>
       </g>
     );
   }
-  const bw = MAX_LABEL_W + PAD_X * 2;
   const bh = lines.length * lineH + PAD_Y * 2;
   const bx = cx - bw / 2;
-  const by = cy - 20 - bh; // 20px gap above circle edge
+  const by = cy - 20 - bh;
   return (
     <g>
-      <rect x={bx} y={by} width={bw} height={bh} rx={4} fill="rgba(255,255,255,0.92)" />
+      <rect x={bx} y={by} width={bw} height={bh} rx={4} fill="rgba(255,255,255,0.95)" />
       {lines.map((line, i) => (
-        <text
-          key={i}
-          x={cx}
-          y={by + PAD_Y + (i + 0.8) * lineH}
-          textAnchor="middle"
-          fontSize={fontSize}
-          fill="#333333"
-        >{line}</text>
+        <text key={i} x={cx} y={by + PAD_Y + (i + 0.8) * lineH}
+          textAnchor="middle" fontSize={fontSize} fill="#333333">{line}</text>
       ))}
     </g>
   );
 }
 
-// SVG label with white background — below the circle
 function LabelBelow({ cx, cy, text }) {
   const { lines, fontSize, lineH } = computeLabel(text);
+  const bw = MAX_LABEL_W + PAD_X * 2;
+
   if (!lines.length) {
-    const bw = 60 + PAD_X * 2;
     const bh = lineH + PAD_Y * 2;
     const bx = cx - bw / 2;
     const by = cy + 20;
     return (
       <g>
-        <rect x={bx} y={by} width={bw} height={bh} rx={4} fill="rgba(255,255,255,0.92)" />
+        <rect x={bx} y={by} width={bw} height={bh} rx={4} fill="rgba(255,255,255,0.95)" />
         <text x={cx} y={by + PAD_Y + lineH * 0.8} textAnchor="middle" fontSize={9} fill="#aaa" fontStyle="italic">A definir...</text>
       </g>
     );
   }
-  const bw = MAX_LABEL_W + PAD_X * 2;
   const bh = lines.length * lineH + PAD_Y * 2;
   const bx = cx - bw / 2;
-  const by = cy + 20; // 20px gap below circle edge
+  const by = cy + 20;
   return (
     <g>
-      <rect x={bx} y={by} width={bw} height={bh} rx={4} fill="rgba(255,255,255,0.92)" />
+      <rect x={bx} y={by} width={bw} height={bh} rx={4} fill="rgba(255,255,255,0.95)" />
       {lines.map((line, i) => (
-        <text
-          key={i}
-          x={cx}
-          y={by + PAD_Y + (i + 0.8) * lineH}
-          textAnchor="middle"
-          fontSize={fontSize}
-          fill="#333333"
-        >{line}</text>
+        <text key={i} x={cx} y={by + PAD_Y + (i + 0.8) * lineH}
+          textAnchor="middle" fontSize={fontSize} fill="#333333">{line}</text>
       ))}
     </g>
   );
 }
 
-// wrapText kept for other uses (ponto de partida)
 function wrapText(text, maxChars) {
   if (!text) return [];
   const words = text.split(" ");
@@ -161,21 +165,16 @@ function truncate(text, maxWords) {
   return words.slice(0, maxWords).join(" ") + "…";
 }
 
-// Gap between branches — larger to avoid label overlap with long texts
-const BRANCH_GAP = 100;
-
 function BranchAbove({ marcoX, eixoIdx, cor, data, fields, emoji }) {
   const baseY = TRILHA_Y - TRILHA_H / 2;
   const targetY = baseY - (eixoIdx + 1) * BRANCH_GAP;
-  const targetX = marcoX;
   const fieldIdx = MARCOS.findIndex(m => m.x === marcoX);
   const text = data[fields[fieldIdx]] || "";
-
   return (
     <g>
-      <LabelAbove cx={targetX} cy={targetY} text={text} />
-      <circle cx={targetX} cy={targetY} r={16} fill={cor} />
-      <text x={targetX} y={targetY + 1} textAnchor="middle" dominantBaseline="middle" fontSize="12" fill="white">{emoji}</text>
+      <LabelAbove cx={marcoX} cy={targetY} text={text} />
+      <circle cx={marcoX} cy={targetY} r={16} fill={cor} />
+      <text x={marcoX} y={targetY + 1} textAnchor="middle" dominantBaseline="middle" fontSize="12" fill="white">{emoji}</text>
     </g>
   );
 }
@@ -183,15 +182,13 @@ function BranchAbove({ marcoX, eixoIdx, cor, data, fields, emoji }) {
 function BranchBelow({ marcoX, eixoIdx, cor, data, fields, emoji }) {
   const baseY = TRILHA_Y + TRILHA_H / 2;
   const targetY = baseY + (eixoIdx + 1) * BRANCH_GAP;
-  const targetX = marcoX;
   const fieldIdx = MARCOS.findIndex(m => m.x === marcoX);
   const text = data[fields[fieldIdx]] || "";
-
   return (
     <g>
-      <LabelBelow cx={targetX} cy={targetY} text={text} />
-      <circle cx={targetX} cy={targetY} r={16} fill={cor} />
-      <text x={targetX} y={targetY + 1} textAnchor="middle" dominantBaseline="middle" fontSize="12" fill="white">{emoji}</text>
+      <LabelBelow cx={marcoX} cy={targetY} text={text} />
+      <circle cx={marcoX} cy={targetY} r={16} fill={cor} />
+      <text x={marcoX} y={targetY + 1} textAnchor="middle" dominantBaseline="middle" fontSize="12" fill="white">{emoji}</text>
     </g>
   );
 }
@@ -216,7 +213,10 @@ export default function MapaVisual({ data, nome, onEdit }) {
       useCORS: true,
       backgroundColor: "#FFF8F0",
       width: W,
+      height: H,
       windowWidth: W,
+      windowHeight: H,
+      scrollY: 0,
     });
     const imgData = canvas.toDataURL("image/png");
     const doc = new jsPDF({ unit: "mm", format: "a4", orientation: "landscape" });
@@ -224,8 +224,8 @@ export default function MapaVisual({ data, nome, onEdit }) {
     const pageH = 210;
     const imgW = pageW;
     const imgH = (canvas.height * pageW) / canvas.width;
-    const y = Math.max(0, (pageH - imgH) / 2);
-    doc.addImage(imgData, "PNG", 0, y, imgW, imgH);
+    const yOff = Math.max(0, (pageH - imgH) / 2);
+    doc.addImage(imgData, "PNG", 0, yOff, imgW, imgH);
     doc.save(`mapa-da-vida-${ano}.pdf`);
     setLoadingPdf(false);
   }
@@ -247,7 +247,7 @@ export default function MapaVisual({ data, nome, onEdit }) {
 
   return (
     <div className="flex flex-col min-h-screen bg-background">
-      {/* Header */}
+      {/* App header */}
       <div className="sticky top-0 bg-background/95 backdrop-blur-sm z-40 border-b border-border">
         <div className="max-w-5xl mx-auto px-4 py-3 flex items-center gap-3">
           <button onClick={onEdit} className="w-10 h-10 rounded-xl bg-muted flex items-center justify-center shrink-0">
@@ -262,56 +262,44 @@ export default function MapaVisual({ data, nome, onEdit }) {
         <div ref={svgRef} style={{ background: "#FFF8F0", width: W, minWidth: W, borderRadius: 16 }}>
           <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} xmlns="http://www.w3.org/2000/svg"
             style={{ fontFamily: "Arial, sans-serif", display: "block" }}>
+
             {/* Background */}
             <rect width={W} height={H} fill="#FFF8F0" />
 
-            {/* Área 1 — Título (topo centralizado, altura reservada 90px) */}
+            {/* ── ZONA 1: CABEÇALHO (y=0–100) ── */}
             <text x={W / 2} y={38} textAnchor="middle" fontSize="28" fontWeight="bold" fill="#E86826">
               {nomeDisplay ? `Mapa da Vida de ${nomeDisplay}` : "Mapa da Vida"}
             </text>
-            <text x={W / 2} y={64} textAnchor="middle" fontSize="14" fill="#888888">
+            <text x={W / 2} y={68} textAnchor="middle" fontSize="14" fill="#888888">
               Gerado em {mes}
             </text>
 
-            {/* Área 2 — Legenda (abaixo do título, margem top 90px) */}
+            {/* ── ZONA 2: LEGENDA (y=100–180) ── */}
             {[...EIXOS_ACIMA, ...EIXOS_ABAIXO].map((e, i) => (
               <g key={e.key}>
-                <circle cx={24} cy={96 + i * 22} r={7} fill={e.cor} />
-                <text x={36} y={96 + i * 22 + 1} dominantBaseline="middle" fontSize="11" fontWeight="bold" fill="#444">{e.emoji} {e.label}</text>
+                <circle cx={24} cy={108 + i * 22} r={7} fill={e.cor} />
+                <text x={36} y={108 + i * 22 + 1} dominantBaseline="middle" fontSize="11" fontWeight="bold" fill="#444">
+                  {e.emoji} {e.label}
+                </text>
               </g>
             ))}
 
-            {/* Trail road */}
-            <rect
-              x={TRAIL_START_X}
-              y={TRILHA_Y - TRILHA_H / 2}
-              width={TRAIL_END_X - TRAIL_START_X}
-              height={TRILHA_H}
-              rx={20}
-              fill="#C4956A"
-            />
-            {/* Dashed center line */}
-            <line
-              x1={TRAIL_START_X + 20}
-              y1={TRILHA_Y}
-              x2={TRAIL_END_X - 20}
-              y2={TRILHA_Y}
-              stroke="#FFF8F0"
-              strokeWidth="2"
-              strokeDasharray="12,8"
-            />
+            {/* ── ZONA 3: MAPA PRINCIPAL (y=180–780) ── */}
+
+            {/* Trilha (y=480) */}
+            <rect x={TRAIL_START_X} y={TRILHA_Y - TRILHA_H / 2}
+              width={TRAIL_END_X - TRAIL_START_X} height={TRILHA_H} rx={20} fill="#C4956A" />
+            <line x1={TRAIL_START_X + 20} y1={TRILHA_Y} x2={TRAIL_END_X - 20} y2={TRILHA_Y}
+              stroke="#FFF8F0" strokeWidth="2" strokeDasharray="12,8" />
 
             {/* Ponto de Partida */}
             <circle cx={TRAIL_START_X} cy={TRILHA_Y} r={32} fill="#E86826" />
             <text x={TRAIL_START_X} y={TRILHA_Y + 1} textAnchor="middle" dominantBaseline="middle" fontSize="20">🌱</text>
             <text x={TRAIL_START_X} y={TRILHA_Y + 44} textAnchor="middle" fontSize="12" fontWeight="bold" fill="#E86826">Hoje</text>
-            {forca && (
-              <>
-                {wrapText(forca, 14).map((line, i) => (
-                  <text key={i} x={TRAIL_START_X} y={TRILHA_Y + 60 + i * 13} textAnchor="middle" fontSize="9" fill="#888" fontStyle="italic">{line}</text>
-                ))}
-              </>
-            )}
+            {forca && wrapText(forca, 14).map((line, i) => (
+              <text key={i} x={TRAIL_START_X} y={TRILHA_Y + 60 + i * 13}
+                textAnchor="middle" fontSize="9" fill="#888" fontStyle="italic">{line}</text>
+            ))}
 
             {/* Estrela no final */}
             <text x={TRAIL_END_X} y={TRILHA_Y + 8} textAnchor="middle" dominantBaseline="middle" fontSize="32">⭐</text>
@@ -321,11 +309,12 @@ export default function MapaVisual({ data, nome, onEdit }) {
             {MARCOS.map((marco) => (
               <g key={marco.label}>
                 <circle cx={marco.x} cy={TRILHA_Y} r={20} fill="white" stroke="#E86826" strokeWidth="2.5" />
-                <text x={marco.x} y={TRILHA_Y + 1} textAnchor="middle" dominantBaseline="middle" fontSize="10" fontWeight="bold" fill="#E86826">{marco.label}</text>
+                <text x={marco.x} y={TRILHA_Y + 1} textAnchor="middle" dominantBaseline="middle"
+                  fontSize="10" fontWeight="bold" fill="#E86826">{marco.label}</text>
               </g>
             ))}
 
-            {/* Ramificações — linhas primeiro (camada de baixo) */}
+            {/* Ramificações — linhas (camada de baixo) */}
             {MARCOS.map((marco) => [
               ...EIXOS_ACIMA.map((eixo, ei) => {
                 const baseY = TRILHA_Y - TRILHA_H / 2;
@@ -333,7 +322,7 @@ export default function MapaVisual({ data, nome, onEdit }) {
                 const fi = MARCOS.findIndex(m => m.x === marco.x);
                 const txt = data[eixo.fields[fi]] || "";
                 const d = `M ${marco.x} ${baseY} C ${marco.x} ${baseY - 30}, ${marco.x} ${ty + 30}, ${marco.x} ${ty}`;
-                return <path key={`line-above-${marco.label}-${eixo.key}`} d={d} stroke={eixo.cor} strokeWidth="2" fill="none" strokeDasharray={txt ? "none" : "4,3"} />;
+                return <path key={`la-${marco.label}-${eixo.key}`} d={d} stroke={eixo.cor} strokeWidth="2" fill="none" strokeDasharray={txt ? "none" : "4,3"} />;
               }),
               ...EIXOS_ABAIXO.map((eixo, ei) => {
                 const baseY = TRILHA_Y + TRILHA_H / 2;
@@ -341,43 +330,35 @@ export default function MapaVisual({ data, nome, onEdit }) {
                 const fi = MARCOS.findIndex(m => m.x === marco.x);
                 const txt = data[eixo.fields[fi]] || "";
                 const d = `M ${marco.x} ${baseY} C ${marco.x} ${baseY + 30}, ${marco.x} ${ty - 30}, ${marco.x} ${ty}`;
-                return <path key={`line-below-${marco.label}-${eixo.key}`} d={d} stroke={eixo.cor} strokeWidth="2" fill="none" strokeDasharray={txt ? "none" : "4,3"} />;
+                return <path key={`lb-${marco.label}-${eixo.key}`} d={d} stroke={eixo.cor} strokeWidth="2" fill="none" strokeDasharray={txt ? "none" : "4,3"} />;
               }),
             ])}
 
-            {/* Ramificações — labels e círculos em cima */}
+            {/* Ramificações — labels e círculos (camada de cima) */}
             {MARCOS.map((marco) =>
               EIXOS_ACIMA.map((eixo, ei) => (
-                <BranchAbove
-                  key={`${marco.label}-${eixo.key}`}
-                  marcoX={marco.x}
-                  eixoIdx={ei}
-                  cor={eixo.cor}
-                  data={data}
-                  fields={eixo.fields}
-                  emoji={eixo.emoji}
-                />
+                <BranchAbove key={`${marco.label}-${eixo.key}`}
+                  marcoX={marco.x} eixoIdx={ei} cor={eixo.cor}
+                  data={data} fields={eixo.fields} emoji={eixo.emoji} />
               ))
             )}
             {MARCOS.map((marco) =>
               EIXOS_ABAIXO.map((eixo, ei) => (
-                <BranchBelow
-                  key={`${marco.label}-${eixo.key}`}
-                  marcoX={marco.x}
-                  eixoIdx={ei}
-                  cor={eixo.cor}
-                  data={data}
-                  fields={eixo.fields}
-                  emoji={eixo.emoji}
-                />
+                <BranchBelow key={`${marco.label}-${eixo.key}`}
+                  marcoX={marco.x} eixoIdx={ei} cor={eixo.cor}
+                  data={data} fields={eixo.fields} emoji={eixo.emoji} />
               ))
             )}
 
-            {/* Rodapé */}
-            <text x={W / 2} y={H - 28} textAnchor="middle" fontSize="12" fontStyle="italic" fill="#888">
+            {/* ── ZONA 4: MARGEM DE SEGURANÇA (y=780–820) — vazia ── */}
+
+            {/* ── ZONA 5: RODAPÉ (y=820–900) ── */}
+            {/* Fundo branco para garantir que o rodapé nunca seja sobreposto */}
+            <rect x={0} y={ZONA5_TOP} width={W} height={ZONA5_BOT - ZONA5_TOP} fill="#FFF8F0" />
+            <text x={W / 2} y={845} textAnchor="middle" fontSize="13" fontStyle="italic" fill="#888888">
               "Cada passo conta. Você já chegou até aqui."
             </text>
-            <text x={W / 2} y={H - 12} textAnchor="middle" fontSize="10" fill="#bbb">
+            <text x={W / 2} y={870} textAnchor="middle" fontSize="11" fill="#AAAAAA">
               Trilha EJA-EPT | Produto Educacional ProfEPT
             </text>
           </svg>
@@ -386,26 +367,14 @@ export default function MapaVisual({ data, nome, onEdit }) {
 
       {/* Botões */}
       <div className="max-w-lg mx-auto px-4 py-4 w-full space-y-3 pb-8">
-        <Button
-          onClick={handlePDF}
-          disabled={loadingPdf}
-          className="w-full h-12 rounded-2xl font-bold gap-2"
-        >
+        <Button onClick={handlePDF} disabled={loadingPdf} className="w-full h-12 rounded-2xl font-bold gap-2">
           <Download className="w-4 h-4" />
           {loadingPdf ? "Gerando PDF…" : "⬇️ Baixar meu Mapa em PDF"}
         </Button>
-        <Button
-          variant="outline"
-          onClick={handlePrint}
-          className="w-full h-12 rounded-2xl font-bold gap-2"
-        >
+        <Button variant="outline" onClick={handlePrint} className="w-full h-12 rounded-2xl font-bold gap-2">
           <Printer className="w-4 h-4" /> Imprimir meu Mapa
         </Button>
-        <Button
-          variant="ghost"
-          onClick={onEdit}
-          className="w-full h-12 rounded-2xl font-bold gap-2"
-        >
+        <Button variant="ghost" onClick={onEdit} className="w-full h-12 rounded-2xl font-bold gap-2">
           <Edit className="w-4 h-4" /> Editar meu Mapa
         </Button>
       </div>
