@@ -1,10 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { ArrowLeft, ArrowRight, Sparkles } from "lucide-react";
 import PageHeader from "../components/PageHeader";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { Input } from "@/components/ui/input";
+import MapaVisual from "../components/mapa/MapaVisual";
 
 const STORAGE_KEY = "mapa_vida_rascunho";
+const NOME_KEY = "mapa_vida_nome";
 
 const ETAPAS = [
   {
@@ -12,6 +15,7 @@ const ETAPAS = [
     titulo: "Seu ponto de partida",
     subtitulo: "Antes de olhar para frente, reconheça o que você já construiu.",
     perguntas: [
+      // campo de nome é tratado separadamente no render
       {
         field: "partida_forca",
         label: "Qual é a sua maior força hoje?",
@@ -34,26 +38,10 @@ const ETAPAS = [
     titulo: "Trabalho e Profissão",
     subtitulo: "Onde você quer chegar como profissional?",
     perguntas: [
-      {
-        field: "trabalho_semana",
-        label: "Esta semana, qual pequeno passo posso dar na minha vida profissional?",
-        placeholder: "Ex: Atualizar meu currículo, pesquisar uma vaga...",
-      },
-      {
-        field: "trabalho_1ano",
-        label: "Em 1 ano, onde quero estar profissionalmente?",
-        placeholder: "Ex: Trabalhando como eletricista com carteira assinada...",
-      },
-      {
-        field: "trabalho_5anos",
-        label: "Em 5 anos, como imagino minha vida no trabalho?",
-        placeholder: "Ex: Ter minha própria empresa, ser técnico sênior...",
-      },
-      {
-        field: "trabalho_10anos",
-        label: "Em 10 anos, qual é meu maior sonho profissional?",
-        placeholder: "Ex: Ter estabilidade, ser referência na minha área...",
-      },
+      { field: "trabalho_semana", label: "Esta semana, qual pequeno passo posso dar na minha vida profissional?", placeholder: "Ex: Atualizar meu currículo, pesquisar uma vaga..." },
+      { field: "trabalho_1ano", label: "Em 1 ano, onde quero estar profissionalmente?", placeholder: "Ex: Trabalhando como eletricista com carteira assinada..." },
+      { field: "trabalho_5anos", label: "Em 5 anos, como imagino minha vida no trabalho?", placeholder: "Ex: Ter minha própria empresa, ser técnico sênior..." },
+      { field: "trabalho_10anos", label: "Em 10 anos, qual é meu maior sonho profissional?", placeholder: "Ex: Ter estabilidade, ser referência na minha área..." },
     ],
   },
   {
@@ -61,26 +49,10 @@ const ETAPAS = [
     titulo: "Estudos e Aprendizado",
     subtitulo: "O conhecimento que você quer buscar para si mesmo.",
     perguntas: [
-      {
-        field: "estudos_semana",
-        label: "Esta semana, o que posso fazer pelos meus estudos?",
-        placeholder: "Ex: Revisar o conteúdo da aula, pesquisar sobre o ENEM...",
-      },
-      {
-        field: "estudos_1ano",
-        label: "Em 1 ano, o que quero ter aprendido ou conquistado nos estudos?",
-        placeholder: "Ex: Concluir o curso técnico, me inscrever no ENEM...",
-      },
-      {
-        field: "estudos_5anos",
-        label: "Em 5 anos, como imagino minha formação?",
-        placeholder: "Ex: Estar cursando engenharia elétrica...",
-      },
-      {
-        field: "estudos_10anos",
-        label: "Em 10 anos, qual é meu maior sonho nos estudos?",
-        placeholder: "Ex: Ter uma graduação, fazer uma especialização...",
-      },
+      { field: "estudos_semana", label: "Esta semana, o que posso fazer pelos meus estudos?", placeholder: "Ex: Revisar o conteúdo da aula, pesquisar sobre o ENEM..." },
+      { field: "estudos_1ano", label: "Em 1 ano, o que quero ter aprendido ou conquistado nos estudos?", placeholder: "Ex: Concluir o curso técnico, me inscrever no ENEM..." },
+      { field: "estudos_5anos", label: "Em 5 anos, como imagino minha formação?", placeholder: "Ex: Estar cursando engenharia elétrica..." },
+      { field: "estudos_10anos", label: "Em 10 anos, qual é meu maior sonho nos estudos?", placeholder: "Ex: Ter uma graduação, fazer uma especialização..." },
     ],
   },
   {
@@ -88,26 +60,10 @@ const ETAPAS = [
     titulo: "Família e Relações",
     subtitulo: "As pessoas que você ama e quer construir junto.",
     perguntas: [
-      {
-        field: "familia_semana",
-        label: "Esta semana, o que posso fazer pela minha família?",
-        placeholder: "Ex: Passar mais tempo com meus filhos, ligar para alguém que não falo há tempo...",
-      },
-      {
-        field: "familia_1ano",
-        label: "Em 1 ano, como quero que seja minha vida familiar?",
-        placeholder: "Ex: Ter mais tempo de qualidade com minha família...",
-      },
-      {
-        field: "familia_5anos",
-        label: "Em 5 anos, o que quero ter construído com quem amo?",
-        placeholder: "Ex: Uma vida mais estável para meus filhos...",
-      },
-      {
-        field: "familia_10anos",
-        label: "Em 10 anos, qual é meu maior sonho para minha família?",
-        placeholder: "Ex: Ver meus filhos realizados, ter uma família unida...",
-      },
+      { field: "familia_semana", label: "Esta semana, o que posso fazer pela minha família?", placeholder: "Ex: Passar mais tempo com meus filhos, ligar para alguém que não falo há tempo..." },
+      { field: "familia_1ano", label: "Em 1 ano, como quero que seja minha vida familiar?", placeholder: "Ex: Ter mais tempo de qualidade com minha família..." },
+      { field: "familia_5anos", label: "Em 5 anos, o que quero ter construído com quem amo?", placeholder: "Ex: Uma vida mais estável para meus filhos..." },
+      { field: "familia_10anos", label: "Em 10 anos, qual é meu maior sonho para minha família?", placeholder: "Ex: Ver meus filhos realizados, ter uma família unida..." },
     ],
   },
   {
@@ -115,26 +71,10 @@ const ETAPAS = [
     titulo: "Eu Mesmo",
     subtitulo: "Seu crescimento pessoal, sua saúde, seu bem-estar.",
     perguntas: [
-      {
-        field: "eu_semana",
-        label: "Esta semana, o que posso fazer por mim mesmo?",
-        placeholder: "Ex: Dormir melhor, reservar um momento só meu...",
-      },
-      {
-        field: "eu_1ano",
-        label: "Em 1 ano, que versão de mim quero ser?",
-        placeholder: "Ex: Mais confiante, mais saudável, mais tranquilo...",
-      },
-      {
-        field: "eu_5anos",
-        label: "Em 5 anos, o que quero ter superado ou conquistado para mim mesmo?",
-        placeholder: "Ex: Superar o medo de falar em público, cuidar melhor da minha saúde...",
-      },
-      {
-        field: "eu_10anos",
-        label: "Em 10 anos, como quero me sentir sobre a minha trajetória?",
-        placeholder: "Ex: Orgulhoso do caminho que percorri...",
-      },
+      { field: "eu_semana", label: "Esta semana, o que posso fazer por mim mesmo?", placeholder: "Ex: Dormir melhor, reservar um momento só meu..." },
+      { field: "eu_1ano", label: "Em 1 ano, que versão de mim quero ser?", placeholder: "Ex: Mais confiante, mais saudável, mais tranquilo..." },
+      { field: "eu_5anos", label: "Em 5 anos, o que quero ter superado ou conquistado para mim mesmo?", placeholder: "Ex: Superar o medo de falar em público, cuidar melhor da minha saúde..." },
+      { field: "eu_10anos", label: "Em 10 anos, como quero me sentir sobre a minha trajetória?", placeholder: "Ex: Orgulhoso do caminho que percorri..." },
     ],
   },
   {
@@ -142,26 +82,10 @@ const ETAPAS = [
     titulo: "Vida Material",
     subtitulo: "Estabilidade, moradia e conquistas concretas.",
     perguntas: [
-      {
-        field: "material_semana",
-        label: "Esta semana, o que posso fazer pela minha estabilidade financeira?",
-        placeholder: "Ex: Organizar minhas contas, pesquisar uma renda extra...",
-      },
-      {
-        field: "material_1ano",
-        label: "Em 1 ano, o que quero ter conquistado materialmente?",
-        placeholder: "Ex: Sair do aluguel, ter uma reserva financeira...",
-      },
-      {
-        field: "material_5anos",
-        label: "Em 5 anos, como imagino minha vida material?",
-        placeholder: "Ex: Casa própria, carro, mais estabilidade...",
-      },
-      {
-        field: "material_10anos",
-        label: "Em 10 anos, qual é meu maior sonho de conquista material?",
-        placeholder: "Ex: Uma vida confortável para minha família, independência financeira...",
-      },
+      { field: "material_semana", label: "Esta semana, o que posso fazer pela minha estabilidade financeira?", placeholder: "Ex: Organizar minhas contas, pesquisar uma renda extra..." },
+      { field: "material_1ano", label: "Em 1 ano, o que quero ter conquistado materialmente?", placeholder: "Ex: Sair do aluguel, ter uma reserva financeira..." },
+      { field: "material_5anos", label: "Em 5 anos, como imagino minha vida material?", placeholder: "Ex: Casa própria, carro, mais estabilidade..." },
+      { field: "material_10anos", label: "Em 10 anos, qual é meu maior sonho de conquista material?", placeholder: "Ex: Uma vida confortável para minha família, independência financeira..." },
     ],
   },
   {
@@ -169,55 +93,44 @@ const ETAPAS = [
     titulo: "Comunidade",
     subtitulo: "Como você quer contribuir com as pessoas ao seu redor.",
     perguntas: [
-      {
-        field: "comunidade_semana",
-        label: "Esta semana, o que posso fazer por alguém além de mim?",
-        placeholder: "Ex: Ajudar um colega de curso, participar de algo no meu bairro...",
-      },
-      {
-        field: "comunidade_1ano",
-        label: "Em 1 ano, como quero contribuir com minha comunidade?",
-        placeholder: "Ex: Ser referência para alguém mais novo...",
-      },
-      {
-        field: "comunidade_5anos",
-        label: "Em 5 anos, que impacto quero ter causado ao meu redor?",
-        placeholder: "Ex: Ter ajudado alguém a voltar a estudar...",
-      },
-      {
-        field: "comunidade_10anos",
-        label: "Em 10 anos, como quero ser lembrado pelas pessoas ao meu redor?",
-        placeholder: "Ex: Como alguém que fez diferença, que ajudou, que inspirou...",
-      },
+      { field: "comunidade_semana", label: "Esta semana, o que posso fazer por alguém além de mim?", placeholder: "Ex: Ajudar um colega de curso, participar de algo no meu bairro..." },
+      { field: "comunidade_1ano", label: "Em 1 ano, como quero contribuir com minha comunidade?", placeholder: "Ex: Ser referência para alguém mais novo..." },
+      { field: "comunidade_5anos", label: "Em 5 anos, que impacto quero ter causado ao meu redor?", placeholder: "Ex: Ter ajudado alguém a voltar a estudar..." },
+      { field: "comunidade_10anos", label: "Em 10 anos, como quero ser lembrado pelas pessoas ao meu redor?", placeholder: "Ex: Como alguém que fez diferença, que ajudou, que inspirou..." },
     ],
   },
 ];
 
+// ─── Helpers localStorage ───────────────────────────────────────────────────
 function loadDraft() {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    return raw ? JSON.parse(raw) : null;
-  } catch {
-    return null;
-  }
+  try { const r = localStorage.getItem(STORAGE_KEY); return r ? JSON.parse(r) : null; } catch { return null; }
 }
-
 function saveDraft(data) {
-  try {
-    localStorage.setItem(
-      STORAGE_KEY,
-      JSON.stringify({ ...data, _savedAt: new Date().toISOString() })
-    );
-  } catch {}
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify({ ...data, _savedAt: new Date().toISOString() })); } catch {}
 }
-
+function loadNome() {
+  try {
+    // 1. chave própria do mapa
+    const nome = localStorage.getItem(NOME_KEY);
+    if (nome) return nome;
+    // 2. curriculo_rascunho
+    const cur = localStorage.getItem("curriculo_rascunho");
+    if (cur) {
+      const parsed = JSON.parse(cur);
+      return parsed.full_name || parsed.nome || "";
+    }
+  } catch {}
+  return "";
+}
+function saveNome(nome) {
+  try { localStorage.setItem(NOME_KEY, nome); } catch {}
+}
 function formatDate(iso) {
   if (!iso) return "";
-  const d = new Date(iso);
-  return d.toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit", year: "numeric" });
+  return new Date(iso).toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit", year: "numeric" });
 }
 
-// ─── Tela de entrada ───────────────────────────────────────────────────────
+// ─── Tela de entrada ────────────────────────────────────────────────────────
 function TelaEntrada({ onStart, onContinue, hasDraft, draftDate }) {
   return (
     <div>
@@ -230,7 +143,6 @@ function TelaEntrada({ onStart, onContinue, hasDraft, draftDate }) {
             Sua história não começa aqui — ela já vem de longe. Este mapa é para você enxergar onde está e para onde quer caminhar.
           </p>
         </div>
-
         <div className="w-full space-y-3 pt-2">
           <Button onClick={onStart} className="w-full h-14 rounded-2xl text-base font-bold gap-2">
             🌱 Começar meu Mapa
@@ -241,11 +153,8 @@ function TelaEntrada({ onStart, onContinue, hasDraft, draftDate }) {
             </Button>
           )}
         </div>
-
         {hasDraft && draftDate && (
-          <p className="text-xs text-muted-foreground text-center">
-            Última edição em {draftDate}
-          </p>
+          <p className="text-xs text-muted-foreground text-center">Última edição em {draftDate}</p>
         )}
       </div>
     </div>
@@ -253,7 +162,7 @@ function TelaEntrada({ onStart, onContinue, hasDraft, draftDate }) {
 }
 
 // ─── Tela final ─────────────────────────────────────────────────────────────
-function TelaFinal({ onEdit }) {
+function TelaFinal({ onEdit, onGerar }) {
   return (
     <div>
       <PageHeader title="Mapa da Vida" backTo="/" />
@@ -261,9 +170,9 @@ function TelaFinal({ onEdit }) {
         <span className="text-6xl">🎉</span>
         <h2 className="text-2xl font-extrabold">Seu mapa está quase pronto!</h2>
         <p className="text-muted-foreground leading-relaxed text-sm">
-          Você preencheu todas as etapas. Na próxima etapa vamos transformar tudo isso em um mapa visual da sua vida.
+          Você preencheu todas as etapas. Agora vamos transformar tudo isso em um mapa visual da sua vida.
         </p>
-        <Button className="w-full h-14 rounded-2xl text-base font-bold gap-2 opacity-70 cursor-not-allowed" disabled>
+        <Button onClick={onGerar} className="w-full h-14 rounded-2xl text-base font-bold gap-2">
           <Sparkles className="w-5 h-5" /> Gerar meu Mapa da Vida
         </Button>
         <button
@@ -277,11 +186,12 @@ function TelaFinal({ onEdit }) {
   );
 }
 
-// ─── Componente principal ───────────────────────────────────────────────────
+// ─── Componente principal ────────────────────────────────────────────────────
 export default function MapaDaVida() {
-  const [screen, setScreen] = useState("entrada"); // "entrada" | "form" | "final"
+  const [screen, setScreen] = useState("entrada"); // "entrada" | "form" | "final" | "mapa"
   const [etapa, setEtapa] = useState(0);
   const [data, setData] = useState({});
+  const [nome, setNome] = useState(() => loadNome());
   const [toast, setToast] = useState(null);
 
   const draft = loadDraft();
@@ -297,6 +207,11 @@ export default function MapaDaVida() {
     saveDraft(next);
   }
 
+  function handleNome(value) {
+    setNome(value);
+    saveNome(value);
+  }
+
   function showToast(msg) {
     setToast(msg);
     setTimeout(() => setToast(null), 4000);
@@ -304,6 +219,7 @@ export default function MapaDaVida() {
 
   function handleStart() {
     setData({});
+    setNome(loadNome());
     setEtapa(0);
     setScreen("form");
   }
@@ -315,6 +231,7 @@ export default function MapaDaVida() {
       setData(fields);
       showToast(`📝 Mapa recuperado — última edição em ${formatDate(_savedAt)}. Continue de onde parou!`);
     }
+    setNome(loadNome());
     setEtapa(0);
     setScreen("form");
   }
@@ -329,6 +246,17 @@ export default function MapaDaVida() {
     else setScreen("entrada");
   }
 
+  // ── Tela do mapa visual ──
+  if (screen === "mapa") {
+    return (
+      <MapaVisual
+        data={data}
+        nome={nome}
+        onEdit={() => { setEtapa(0); setScreen("form"); }}
+      />
+    );
+  }
+
   if (screen === "entrada") {
     return (
       <TelaEntrada
@@ -341,9 +269,15 @@ export default function MapaDaVida() {
   }
 
   if (screen === "final") {
-    return <TelaFinal onEdit={() => { setEtapa(0); setScreen("form"); }} />;
+    return (
+      <TelaFinal
+        onEdit={() => { setEtapa(0); setScreen("form"); }}
+        onGerar={() => setScreen("mapa")}
+      />
+    );
   }
 
+  // ── Formulário ──
   return (
     <div>
       {/* Header com progresso */}
@@ -386,6 +320,19 @@ export default function MapaDaVida() {
           <h2 className="text-xl font-extrabold">{etapaAtual.titulo}</h2>
           <p className="text-sm text-muted-foreground leading-relaxed">{etapaAtual.subtitulo}</p>
         </div>
+
+        {/* Campo de nome — apenas na Etapa 0 */}
+        {etapa === 0 && (
+          <div className="space-y-2">
+            <label className="text-sm font-bold leading-snug block">Como você quer ser chamado?</label>
+            <Input
+              value={nome}
+              onChange={(e) => handleNome(e.target.value)}
+              placeholder="Ex: Maria, João, seu apelido..."
+              className="rounded-xl text-sm h-10"
+            />
+          </div>
+        )}
 
         {etapaAtual.perguntas.map((p) => (
           <div key={p.field} className="space-y-2">
