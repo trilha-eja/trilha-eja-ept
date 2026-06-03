@@ -221,7 +221,7 @@ export default function ParaOEducador() {
             { label: "Encontro 1 — Mundo do Trabalho + Direitos", detail: "Módulos de direitos trabalhistas + NR-10" },
             { label: "Encontro 2 — Empregabilidade Crítica", detail: "Gerador de currículo em grupo + Valorize sua Experiência" },
             { label: "Encontro 3 — Mapa da Vida", detail: "Em roda de conversa, com relatos de egressos — Vozes da Trilha" },
-            { label: "Encontro 4 — Caminhos de Estudo", detail: "ENEM/SISU/PROUNI + sonhos coletivos" },
+            { label: "Encontro 4 — Caminhos de Estudo", detail: "Use os módulos ENEM/SISU/PROUNI como ponto de partida para uma roda de conversa sobre os projetos de futuro da turma — individual e coletivamente." },
           ].map((enc, i) => (
             <div key={i} style={{ marginBottom: "14px" }}>
               <p style={{ fontSize: "12px", fontWeight: "bold", margin: "0 0 2px 0" }}>{enc.label}</p>
