@@ -52,6 +52,13 @@ const modules = [
     description: "Histórias reais de quem trilhou esse caminho",
     color: "bg-chart-5",
   },
+  {
+    to: "/educador",
+    icon: BookOpen,
+    title: "Para o Educador",
+    description: "Orientações pedagógicas para uso em sala",
+    color: "bg-chart-4",
+  },
 ];
 
 export default function Home() {

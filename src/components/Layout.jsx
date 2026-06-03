@@ -1,6 +1,6 @@
 import { useRef, useCallback } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
-import { Home, Briefcase, Zap, BookOpen, Map, GraduationCap, BookMarked, RefreshCw } from "lucide-react";
+import { Home, Briefcase, Zap, BookOpen, Map, GraduationCap, BookMarked, RefreshCw, BookOpenCheck } from "lucide-react";
 import { usePullToRefresh } from "../hooks/usePullToRefresh";
 import { useScrollRestore } from "../hooks/useScrollRestore";
 
@@ -12,6 +12,7 @@ const navItems = [
   { path: "/mapa-da-vida", icon: Map, label: "Mapa" },
   { path: "/caminhos", icon: GraduationCap, label: "Estudo" },
   { path: "/glossario", icon: BookMarked, label: "Glossário" },
+  { path: "/educador", icon: BookOpenCheck, label: "Educador" },
 ];
 
 export default function Layout() {

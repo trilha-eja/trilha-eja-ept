@@ -15,6 +15,7 @@ import CaminhosEstudo from './pages/CaminhosEstudo';
 import Glossario from './pages/Glossario';
 import Settings from './pages/Settings';
 import VozesDaTrilha from './pages/VozesDaTrilha';
+import ParaOEducador from './pages/ParaOEducador';
 import AdminVozes from './pages/AdminVozes';
 import { ThemeProvider } from 'next-themes';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -49,6 +50,7 @@ function AnimatedRoutes() {
             <Route path="/glossario" element={<Glossario />} />
             <Route path="/settings" element={<Settings />} />
             <Route path="/vozes" element={<VozesDaTrilha />} />
+            <Route path="/educador" element={<ParaOEducador />} />
             <Route path="/admin-vozes" element={<AdminVozes />} />
             <Route path="*" element={<PageNotFound />} />
           </Route>
