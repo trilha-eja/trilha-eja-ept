@@ -53,7 +53,7 @@ O Mapa da Vida é um ato político de esperança coletiva, não um plano de carr
       {
         label: "Encontro 4",
         desc: "Caminhos de Estudo",
-        detail: "ENEM/SISU/PROUNI + sonhos coletivos",
+        detail: "Use os módulos ENEM/SISU/PROUNI como ponto de partida para uma roda de conversa sobre os projetos de futuro da turma — individual e coletivamente.",
       },
     ],
   },
