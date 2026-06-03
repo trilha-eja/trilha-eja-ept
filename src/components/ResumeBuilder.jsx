@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import ResumePreviewModal, { generateResumePDF } from "./ResumePreviewModal";
 
-const STORAGE_KEY = "trilha_curriculo_rascunho";
+const STORAGE_KEY = "curriculo_rascunho";
 
 const emptyData = {
   full_name: "",
@@ -83,7 +83,17 @@ export default function ResumeBuilder({ onBack }) {
   });
   const [showPreview, setShowPreview] = useState(false);
   const [savedMsg, setSavedMsg] = useState(false);
+  const [restoredMsg, setRestoredMsg] = useState(() => {
+    try { return !!localStorage.getItem(STORAGE_KEY); } catch { return false; }
+  });
   const [showTooltip, setShowTooltip] = useState(false);
+
+  useEffect(() => {
+    if (restoredMsg) {
+      const t = setTimeout(() => setRestoredMsg(false), 4000);
+      return () => clearTimeout(t);
+    }
+  }, [restoredMsg]);
 
   const progress = calcProgress(data);
 
@@ -92,7 +102,7 @@ export default function ResumeBuilder({ onBack }) {
   const handleSave = () => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
     setSavedMsg(true);
-    setTimeout(() => setSavedMsg(false), 2500);
+    setTimeout(() => setSavedMsg(false), 3000);
   };
 
   return (
@@ -110,13 +120,6 @@ export default function ResumeBuilder({ onBack }) {
             <h1 className="font-extrabold text-lg leading-tight">Criar Currículo</h1>
             <p className="text-xs text-muted-foreground">{progress}% preenchido</p>
           </div>
-          <button
-            onClick={handleSave}
-            className="w-10 h-10 rounded-xl bg-muted flex items-center justify-center shrink-0"
-            title="Salvar rascunho"
-          >
-            <Save className="w-5 h-5" />
-          </button>
         </div>
 
         {/* Progress bar */}
@@ -138,10 +141,10 @@ export default function ResumeBuilder({ onBack }) {
           </p>
         </div>
 
-        {/* Saved message */}
-        {savedMsg && (
-          <div className="bg-accent/15 border border-accent/30 rounded-xl px-4 py-3 text-sm font-semibold text-accent text-center">
-            ✅ Rascunho salvo!
+        {/* Restored message */}
+        {restoredMsg && (
+          <div className="bg-blue-50 border border-blue-200 rounded-xl px-4 py-3 text-sm text-blue-700">
+            📝 Rascunho recuperado. Continue de onde parou!
           </div>
         )}
 
@@ -214,6 +217,11 @@ export default function ResumeBuilder({ onBack }) {
           >
             <Save className="w-4 h-4" /> Salvar rascunho
           </Button>
+          {savedMsg && (
+            <div className="bg-green-50 border border-green-200 rounded-xl px-4 py-3 text-sm font-semibold text-green-700 text-center">
+              ✓ Rascunho salvo! Seus dados estão guardados neste dispositivo.
+            </div>
+          )}
         </div>
       </div>
 
