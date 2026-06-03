@@ -6,8 +6,8 @@ const modules = [
   {
     to: "/empregabilidade",
     icon: Briefcase,
-    title: "Empregabilidade",
-    description: "Currículo, direitos e vagas de emprego",
+    title: "Mundo do Trabalho",
+    description: "Direitos, currículo e vagas de emprego",
     color: "bg-primary",
   },
   {

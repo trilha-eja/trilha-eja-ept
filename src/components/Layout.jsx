@@ -6,7 +6,7 @@ import { useScrollRestore } from "../hooks/useScrollRestore";
 
 const navItems = [
   { path: "/", icon: Home, label: "Início" },
-  { path: "/empregabilidade", icon: Briefcase, label: "Emprego" },
+  { path: "/empregabilidade", icon: Briefcase, label: "Trabalho" },
   { path: "/guia-pratico", icon: Zap, label: "Prática" },
   { path: "/microlearning", icon: BookOpen, label: "Aprenda" },
   { path: "/mapa-da-vida", icon: Map, label: "Mapa" },

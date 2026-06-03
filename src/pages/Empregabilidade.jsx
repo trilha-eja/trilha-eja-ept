@@ -24,9 +24,14 @@ export default function Empregabilidade() {
 
   return (
     <div>
-      <PageHeader title="Empregabilidade" subtitle="Prepare-se para o mercado" />
+      <PageHeader title="Mundo do Trabalho" subtitle="Conheça seus direitos no Mundo do Trabalho" />
       <div className="max-w-lg mx-auto px-4 py-5 space-y-3">
-        <div className="bg-primary/10 rounded-2xl p-4 mb-2">
+        <div className="bg-primary/10 border border-primary/20 rounded-2xl p-4 mb-1">
+          <p className="text-sm leading-relaxed text-foreground">
+            🌍 Aqui falamos de <strong>Mundo do Trabalho</strong> — não apenas de emprego. Você tem direitos, história e saberes que o mercado não pode apagar. Este módulo é para você conhecer esses direitos e se posicionar com dignidade.
+          </p>
+        </div>
+        <div className="bg-secondary/20 rounded-2xl p-4 mb-2">
           <p className="text-sm font-semibold text-center">
             🎯 Sua experiência de vida é seu maior trunfo!
           </p>
