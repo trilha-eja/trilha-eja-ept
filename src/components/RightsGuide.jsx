@@ -4,17 +4,20 @@ const rights = [
   {
     emoji: "📋",
     title: "Carteira Assinada (CLT)",
-    text: "O empregador deve assinar sua carteira em até 5 dias. Isso garante FGTS, férias e 13º salário.",
+    text: "O empregador deve assinar sua carteira em até 5 dias. Isso garante FGTS, férias e 13º salário. A empresa tem até 5 dias úteis após a contratação para registrar. Se não fizer, você pode denunciar ao Ministério do Trabalho (MTE).",
+    legal: "CLT, Art. 29 e Art. 47",
   },
   {
     emoji: "💰",
     title: "Salário Mínimo",
-    text: "Ninguém pode pagar menos que o salário mínimo. Se trabalhar menos horas, o valor é proporcional.",
+    text: "Ninguém pode pagar menos que o salário mínimo. Se trabalhar menos horas, o valor é proporcional. Nenhum contrato pode estabelecer valor inferior. É inconstitucional.",
+    legal: "CF/88, Art. 7º, inciso IV",
   },
   {
     emoji: "🏖️",
     title: "Férias",
-    text: "Após 1 ano de trabalho, você tem direito a 30 dias de férias com pagamento extra de 1/3.",
+    text: "Após 1 ano de trabalho, você tem direito a 30 dias de férias com pagamento extra de 1/3. As férias devem ser pagas com 1/3 a mais ANTES do início do período. Se atrasarem, você tem direito à dobra.",
+    legal: "CLT, Art. 129 e Art. 145",
   },
   {
     emoji: "🎄",
@@ -24,7 +27,8 @@ const rights = [
   {
     emoji: "⏰",
     title: "Jornada de Trabalho",
-    text: "Máximo de 8 horas por dia e 44 horas por semana. Hora extra paga pelo menos 50% a mais.",
+    text: "Máximo de 8 horas por dia e 44 horas por semana. Hora extra paga pelo menos 50% a mais. Hora extra acima de 2h por dia é proibida. Você pode recusar horas extras acima do limite legal.",
+    legal: "CLT, Art. 59 e CF/88, Art. 7º, inciso XIII",
   },
   {
     emoji: "🛡️",
@@ -37,9 +41,15 @@ const rights = [
     text: "Se for demitido sem justa causa, pode receber de 3 a 5 parcelas do seguro desemprego.",
   },
   {
+    emoji: "⚡🛡️",
+    title: "NR-10: Seu direito à segurança",
+    text: "Todo trabalhador que lida com instalações elétricas tem direito a:\n- Treinamento de 40h antes de iniciar o trabalho (ou 40h + 40h para Alta Tensão)\n- Receber EPIs gratuitamente (luvas, capacete, botina isolante, óculos)\n- Recusar serviço em condições inseguras SEM punição\n- Adicional de insalubridade ou periculosidade no salário",
+    legal: "NR-10 (Portaria MTE 598/2004), CLT Art. 193",
+  },
+  {
     emoji: "⚠️",
-    title: "NR-10 (Segurança Elétrica)",
-    text: "Toda empresa deve fornecer EPIs e treinamento de segurança. Nunca trabalhe sem proteção!",
+    title: "Trabalho informal: conhecer para se proteger",
+    text: "Trabalhar sem registro é comum na área elétrica, mas tem riscos sérios: sem FGTS acumulado, sem seguro-desemprego se dispensado, sem cobertura em caso de acidente de trabalho. Se isso acontecer com você, procure o CRAS ou o sindicato da categoria.",
   },
 ];
 
@@ -64,7 +74,12 @@ export default function RightsGuide({ onBack }) {
               <span className="text-xl">{r.emoji}</span>
               <h3 className="font-bold text-sm">{r.title}</h3>
             </div>
-            <p className="text-sm text-muted-foreground leading-relaxed">{r.text}</p>
+            <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">{r.text}</p>
+            {r.legal && (
+              <p className="text-xs text-muted-foreground/70 mt-2 border-t border-border pt-2">
+                📋 <span className="font-semibold">Base legal:</span> {r.legal}
+              </p>
+            )}
           </div>
         ))}
       </div>
