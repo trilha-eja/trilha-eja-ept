@@ -3,8 +3,8 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft, Download, Printer, Edit } from "lucide-react";
 
 const W = 1200;
-const H = 800;
-const TRILHA_Y = 400;
+const H = 900;
+const TRILHA_Y = 430;
 const TRILHA_H = 40;
 const TRAIL_START_X = 80;
 const TRAIL_END_X = 1120;
@@ -26,7 +26,116 @@ const MARCOS = [
   { label: "10 anos", x: Math.round(TRAIL_START_X + (TRAIL_END_X - TRAIL_START_X) * 0.85), idx: 2 },
 ];
 
-// wrap text into lines of maxChars
+// Approx chars per line for a 140px wide box at given fontSize (Arial ~6px per char at 9px)
+const CHARS_PER_LINE_9 = 22;
+const CHARS_PER_LINE_8 = 25;
+const MAX_LABEL_W = 140;
+const LINE_H_9 = 12.6; // 9 * 1.4
+const LINE_H_8 = 11.2; // 8 * 1.4
+const PAD_X = 4;
+const PAD_Y = 3;
+
+function wrapToLines(text, charsPerLine) {
+  if (!text) return [];
+  const words = text.split(" ");
+  const lines = [];
+  let cur = "";
+  for (const w of words) {
+    const candidate = cur ? cur + " " + w : w;
+    if (candidate.length > charsPerLine) {
+      if (cur) lines.push(cur);
+      cur = w;
+    } else {
+      cur = candidate;
+    }
+  }
+  if (cur) lines.push(cur);
+  return lines;
+}
+
+// Returns { lines, fontSize, lineH }
+function computeLabel(text) {
+  if (!text) return { lines: [], fontSize: 9, lineH: LINE_H_9 };
+  let lines = wrapToLines(text, CHARS_PER_LINE_9);
+  if (lines.length <= 6) return { lines, fontSize: 9, lineH: LINE_H_9 };
+  // reduce font size
+  lines = wrapToLines(text, CHARS_PER_LINE_8);
+  return { lines, fontSize: 8, lineH: LINE_H_8 };
+}
+
+// SVG label with white background — above the circle
+function LabelAbove({ cx, cy, text }) {
+  const { lines, fontSize, lineH } = computeLabel(text);
+  if (!lines.length) {
+    const bw = 60 + PAD_X * 2;
+    const bh = lineH + PAD_Y * 2;
+    const bx = cx - bw / 2;
+    const by = cy - 20 - bh;
+    return (
+      <g>
+        <rect x={bx} y={by} width={bw} height={bh} rx={4} fill="rgba(255,255,255,0.92)" />
+        <text x={cx} y={by + PAD_Y + lineH * 0.8} textAnchor="middle" fontSize={9} fill="#aaa" fontStyle="italic">A definir...</text>
+      </g>
+    );
+  }
+  const bw = MAX_LABEL_W + PAD_X * 2;
+  const bh = lines.length * lineH + PAD_Y * 2;
+  const bx = cx - bw / 2;
+  const by = cy - 20 - bh; // 20px gap above circle edge
+  return (
+    <g>
+      <rect x={bx} y={by} width={bw} height={bh} rx={4} fill="rgba(255,255,255,0.92)" />
+      {lines.map((line, i) => (
+        <text
+          key={i}
+          x={cx}
+          y={by + PAD_Y + (i + 0.8) * lineH}
+          textAnchor="middle"
+          fontSize={fontSize}
+          fill="#333333"
+        >{line}</text>
+      ))}
+    </g>
+  );
+}
+
+// SVG label with white background — below the circle
+function LabelBelow({ cx, cy, text }) {
+  const { lines, fontSize, lineH } = computeLabel(text);
+  if (!lines.length) {
+    const bw = 60 + PAD_X * 2;
+    const bh = lineH + PAD_Y * 2;
+    const bx = cx - bw / 2;
+    const by = cy + 20;
+    return (
+      <g>
+        <rect x={bx} y={by} width={bw} height={bh} rx={4} fill="rgba(255,255,255,0.92)" />
+        <text x={cx} y={by + PAD_Y + lineH * 0.8} textAnchor="middle" fontSize={9} fill="#aaa" fontStyle="italic">A definir...</text>
+      </g>
+    );
+  }
+  const bw = MAX_LABEL_W + PAD_X * 2;
+  const bh = lines.length * lineH + PAD_Y * 2;
+  const bx = cx - bw / 2;
+  const by = cy + 20; // 20px gap below circle edge
+  return (
+    <g>
+      <rect x={bx} y={by} width={bw} height={bh} rx={4} fill="rgba(255,255,255,0.92)" />
+      {lines.map((line, i) => (
+        <text
+          key={i}
+          x={cx}
+          y={by + PAD_Y + (i + 0.8) * lineH}
+          textAnchor="middle"
+          fontSize={fontSize}
+          fill="#333333"
+        >{line}</text>
+      ))}
+    </g>
+  );
+}
+
+// wrapText kept for other uses (ponto de partida)
 function wrapText(text, maxChars) {
   if (!text) return [];
   const words = text.split(" ");
@@ -52,59 +161,37 @@ function truncate(text, maxWords) {
   return words.slice(0, maxWords).join(" ") + "…";
 }
 
-// Draw a bezier branch above the trail
-function BranchAbove({ marcoX, eixoIdx, numEixos, cor, data, fields, emoji, label }) {
-  const gap = 80;
+// Gap between branches — larger to avoid label overlap with long texts
+const BRANCH_GAP = 100;
+
+function BranchAbove({ marcoX, eixoIdx, cor, data, fields, emoji }) {
   const baseY = TRILHA_Y - TRILHA_H / 2;
-  const targetY = baseY - (eixoIdx + 1) * gap;
+  const targetY = baseY - (eixoIdx + 1) * BRANCH_GAP;
   const targetX = marcoX;
-  const cp1x = marcoX;
-  const cp1y = baseY - 30;
-  const cp2x = targetX;
-  const cp2y = targetY + 30;
-  const d = `M ${marcoX} ${baseY} C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${targetX} ${targetY}`;
   const fieldIdx = MARCOS.findIndex(m => m.x === marcoX);
   const text = data[fields[fieldIdx]] || "";
-  const lines = wrapText(truncate(text, 20), 22);
 
   return (
     <g>
-      <path d={d} stroke={cor} strokeWidth="2" fill="none" strokeDasharray={text ? "none" : "4,3"} />
+      <LabelAbove cx={targetX} cy={targetY} text={text} />
       <circle cx={targetX} cy={targetY} r={16} fill={cor} />
       <text x={targetX} y={targetY + 1} textAnchor="middle" dominantBaseline="middle" fontSize="12" fill="white">{emoji}</text>
-      {!text ? (
-        <text x={targetX} y={targetY - 22} textAnchor="middle" fontSize="9" fill="#aaa" fontStyle="italic">A definir...</text>
-      ) : lines.map((line, i) => (
-        <text key={i} x={targetX} y={targetY - 22 + i * 12} textAnchor="middle" fontSize="9" fill="#555">{line}</text>
-      ))}
     </g>
   );
 }
 
-function BranchBelow({ marcoX, eixoIdx, cor, data, fields, emoji, label }) {
-  const gap = 80;
+function BranchBelow({ marcoX, eixoIdx, cor, data, fields, emoji }) {
   const baseY = TRILHA_Y + TRILHA_H / 2;
-  const targetY = baseY + (eixoIdx + 1) * gap;
+  const targetY = baseY + (eixoIdx + 1) * BRANCH_GAP;
   const targetX = marcoX;
-  const cp1x = marcoX;
-  const cp1y = baseY + 30;
-  const cp2x = targetX;
-  const cp2y = targetY - 30;
-  const d = `M ${marcoX} ${baseY} C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${targetX} ${targetY}`;
   const fieldIdx = MARCOS.findIndex(m => m.x === marcoX);
   const text = data[fields[fieldIdx]] || "";
-  const lines = wrapText(truncate(text, 20), 22);
 
   return (
     <g>
-      <path d={d} stroke={cor} strokeWidth="2" fill="none" strokeDasharray={text ? "none" : "4,3"} />
+      <LabelBelow cx={targetX} cy={targetY} text={text} />
       <circle cx={targetX} cy={targetY} r={16} fill={cor} />
       <text x={targetX} y={targetY + 1} textAnchor="middle" dominantBaseline="middle" fontSize="12" fill="white">{emoji}</text>
-      {!text ? (
-        <text x={targetX} y={targetY + 28} textAnchor="middle" fontSize="9" fill="#aaa" fontStyle="italic">A definir...</text>
-      ) : lines.map((line, i) => (
-        <text key={i} x={targetX} y={targetY + 28 + i * 12} textAnchor="middle" fontSize="9" fill="#555">{line}</text>
-      ))}
     </g>
   );
 }
@@ -190,13 +277,13 @@ export default function MapaVisual({ data, nome, onEdit }) {
             {EIXOS_ACIMA.map((e, i) => (
               <g key={e.key}>
                 <circle cx={30} cy={120 + i * 22} r={8} fill={e.cor} />
-                <text x={44} y={120 + i * 22 + 1} dominantBaseline="middle" fontSize="11" fill="#444">{e.emoji} {e.label}</text>
+                <text x={44} y={120 + i * 22 + 1} dominantBaseline="middle" fontSize="11" fontWeight="bold" fill="#444">{e.emoji} {e.label}</text>
               </g>
             ))}
             {EIXOS_ABAIXO.map((e, i) => (
               <g key={e.key}>
                 <circle cx={30} cy={120 + (EIXOS_ACIMA.length + i) * 22} r={8} fill={e.cor} />
-                <text x={44} y={120 + (EIXOS_ACIMA.length + i) * 22 + 1} dominantBaseline="middle" fontSize="11" fill="#444">{e.emoji} {e.label}</text>
+                <text x={44} y={120 + (EIXOS_ACIMA.length + i) * 22 + 1} dominantBaseline="middle" fontSize="11" fontWeight="bold" fill="#444">{e.emoji} {e.label}</text>
               </g>
             ))}
 
@@ -244,7 +331,27 @@ export default function MapaVisual({ data, nome, onEdit }) {
               </g>
             ))}
 
-            {/* Ramificações acima */}
+            {/* Ramificações — linhas primeiro (camada de baixo) */}
+            {MARCOS.map((marco) => [
+              ...EIXOS_ACIMA.map((eixo, ei) => {
+                const baseY = TRILHA_Y - TRILHA_H / 2;
+                const ty = baseY - (ei + 1) * BRANCH_GAP;
+                const fi = MARCOS.findIndex(m => m.x === marco.x);
+                const txt = data[eixo.fields[fi]] || "";
+                const d = `M ${marco.x} ${baseY} C ${marco.x} ${baseY - 30}, ${marco.x} ${ty + 30}, ${marco.x} ${ty}`;
+                return <path key={`line-above-${marco.label}-${eixo.key}`} d={d} stroke={eixo.cor} strokeWidth="2" fill="none" strokeDasharray={txt ? "none" : "4,3"} />;
+              }),
+              ...EIXOS_ABAIXO.map((eixo, ei) => {
+                const baseY = TRILHA_Y + TRILHA_H / 2;
+                const ty = baseY + (ei + 1) * BRANCH_GAP;
+                const fi = MARCOS.findIndex(m => m.x === marco.x);
+                const txt = data[eixo.fields[fi]] || "";
+                const d = `M ${marco.x} ${baseY} C ${marco.x} ${baseY + 30}, ${marco.x} ${ty - 30}, ${marco.x} ${ty}`;
+                return <path key={`line-below-${marco.label}-${eixo.key}`} d={d} stroke={eixo.cor} strokeWidth="2" fill="none" strokeDasharray={txt ? "none" : "4,3"} />;
+              }),
+            ])}
+
+            {/* Ramificações — labels e círculos em cima */}
             {MARCOS.map((marco) =>
               EIXOS_ACIMA.map((eixo, ei) => (
                 <BranchAbove
@@ -255,12 +362,9 @@ export default function MapaVisual({ data, nome, onEdit }) {
                   data={data}
                   fields={eixo.fields}
                   emoji={eixo.emoji}
-                  label={eixo.label}
                 />
               ))
             )}
-
-            {/* Ramificações abaixo */}
             {MARCOS.map((marco) =>
               EIXOS_ABAIXO.map((eixo, ei) => (
                 <BranchBelow
@@ -271,7 +375,6 @@ export default function MapaVisual({ data, nome, onEdit }) {
                   data={data}
                   fields={eixo.fields}
                   emoji={eixo.emoji}
-                  label={eixo.label}
                 />
               ))
             )}
