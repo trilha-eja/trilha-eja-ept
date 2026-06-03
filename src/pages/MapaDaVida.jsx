@@ -20,7 +20,7 @@ const ETAPAS = [
       {
         field: "partida_orgulho",
         label: "O que você já conquistou na vida que te enche de orgulho?",
-        placeholder: "Não precisa ser grande. Pode ser criar seus filhos, chegar até aqui, aprender uma habilidade...",
+        placeholder: "Criar seus filhos, chegar até aqui, aprender uma habilidade — tudo isso é conquista real.",
       },
       {
         field: "partida_motivacao",
