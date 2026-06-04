@@ -1,63 +1,76 @@
-import { ArrowLeft } from "lucide-react";
+import { useState } from "react";
+import { ArrowLeft, ChevronRight } from "lucide-react";
+import RightsSubPage from "./rights/RightsSubPage";
+import { cards as cardsContrato } from "./rights/dadosContratoRegistro";
+import { cards as cardsJornada } from "./rights/dadosJornadaRemuneracao";
+import { cards as cardsProtecao } from "./rights/dadosProtecaoSeguranca";
+import { cards as cardsPrevidencia } from "./rights/dadosPrevidenciaSocial";
+import { cards as cardsColetivos } from "./rights/dadosDireitosColetivos";
 
-const rights = [
+const subpaginas = [
   {
+    id: "contrato",
     emoji: "📋",
-    title: "Carteira Assinada (CLT)",
-    text: "O empregador deve assinar sua carteira em até 5 dias. Isso garante FGTS, férias e 13º salário. A empresa tem até 5 dias úteis após a contratação para registrar. Se não fizer, você pode denunciar ao Ministério do Trabalho (MTE).",
-    legal: "CLT, Art. 29 e Art. 47",
+    titulo: "Contrato e Registro",
+    descricao: "Carteira assinada, salário, vale-transporte e igualdade",
+    subtitulo: "Seus direitos desde o primeiro dia de trabalho",
+    cards: cardsContrato,
+    cor: "bg-orange-50 border-orange-200",
   },
   {
-    emoji: "💰",
-    title: "Salário Mínimo",
-    text: "Ninguém pode pagar menos que o salário mínimo. Se trabalhar menos horas, o valor é proporcional. Nenhum contrato pode estabelecer valor inferior. É inconstitucional.",
-    legal: "CF/88, Art. 7º, inciso IV",
-  },
-  {
-    emoji: "🏖️",
-    title: "Férias",
-    text: "Após 1 ano de trabalho, você tem direito a 30 dias de férias com pagamento extra de 1/3. As férias devem ser pagas com 1/3 a mais ANTES do início do período. Se atrasarem, você tem direito à dobra.",
-    legal: "CLT, Art. 129 e Art. 145",
-  },
-  {
-    emoji: "🎄",
-    title: "13º Salário",
-    text: "Pago em duas parcelas: a primeira até novembro e a segunda até dezembro.",
-    legal: "CLT, Art. 1º da Lei nº 4.090/1962 e Lei nº 4.749/1965",
-  },
-  {
+    id: "jornada",
     emoji: "⏰",
-    title: "Jornada de Trabalho",
-    text: "Máximo de 8 horas por dia e 44 horas por semana. Hora extra paga pelo menos 50% a mais. Hora extra acima de 2h por dia é proibida. Você pode recusar horas extras acima do limite legal.",
-    legal: "CLT, Art. 59 e CF/88, Art. 7º, inciso XIII",
+    titulo: "Jornada e Remuneração",
+    descricao: "Horas de trabalho, extras, férias e 13º salário",
+    subtitulo: "Seu tempo e seu salário têm valor — conheça seus direitos",
+    cards: cardsJornada,
+    cor: "bg-blue-50 border-blue-200",
   },
   {
-    emoji: "🛡️",
-    title: "FGTS",
-    text: "O patrão deposita 8% do seu salário todo mês. Você pode sacar na demissão sem justa causa.",
-    legal: "Lei nº 8.036/1990, Art. 15 — depósito obrigatório de 8% sobre a remuneração",
+    id: "protecao",
+    emoji: "🦺",
+    titulo: "Proteção e Segurança",
+    descricao: "FGTS, seguro desemprego e segurança no trabalho",
+    subtitulo: "Seus direitos em caso de demissão e no ambiente de trabalho",
+    cards: cardsProtecao,
+    cor: "bg-green-50 border-green-200",
   },
   {
-    emoji: "🏥",
-    title: "Seguro Desemprego",
-    text: "Se for demitido sem justa causa, pode receber de 3 a 5 parcelas do seguro desemprego.",
-    legal: "Lei nº 7.998/1990 e CF/88, Art. 7º, inciso II",
+    id: "previdencia",
+    emoji: "🏛️",
+    titulo: "Previdência Social",
+    descricao: "INSS, aposentadoria, auxílios e licenças",
+    subtitulo: "O INSS protege você e sua família em momentos difíceis",
+    cards: cardsPrevidencia,
+    cor: "bg-purple-50 border-purple-200",
   },
   {
-    emoji: "⚡🛡️",
-    title: "NR-10: Seu direito à segurança",
-    text: "Todo trabalhador que lida com instalações elétricas tem direito a:\n- Treinamento de 40h antes de iniciar o trabalho (ou 40h + 40h para Alta Tensão)\n- Receber EPIs gratuitamente (luvas, capacete, botina isolante, óculos)\n- Recusar serviço em condições inseguras SEM punição\n- Adicional de insalubridade ou periculosidade no salário",
-    legal: "NR-10 (Portaria MTE 598/2004), CLT Art. 193",
-  },
-  {
-    emoji: "⚠️",
-    title: "Trabalho informal: conhecer para se proteger",
-    text: "Trabalhar sem registro é comum na área elétrica, mas tem riscos sérios: sem FGTS acumulado, sem seguro-desemprego se dispensado, sem cobertura em caso de acidente de trabalho. Se isso acontecer com você, procure o CRAS ou o sindicato da categoria.",
-    legal: "CLT, Art. 47 — multa ao empregador por não registro | Lei nº 8.213/1991 — cobertura previdenciária vinculada ao registro formal",
+    id: "coletivos",
+    emoji: "✊",
+    titulo: "Direitos Coletivos",
+    descricao: "Sindicato, associação e direitos coletivos",
+    subtitulo: "Unidos somos mais fortes — conheça seus direitos coletivos",
+    cards: cardsColetivos,
+    cor: "bg-yellow-50 border-yellow-200",
   },
 ];
 
 export default function RightsGuide({ onBack }) {
+  const [ativa, setAtiva] = useState(null);
+
+  const sub = subpaginas.find((s) => s.id === ativa);
+
+  if (sub) {
+    return (
+      <RightsSubPage
+        titulo={sub.titulo}
+        subtitulo={sub.subtitulo}
+        cards={sub.cards}
+        onBack={() => setAtiva(null)}
+      />
+    );
+  }
+
   return (
     <div>
       <div className="sticky top-0 bg-background/95 backdrop-blur-sm z-40 border-b border-border">
@@ -68,23 +81,23 @@ export default function RightsGuide({ onBack }) {
           <h1 className="font-extrabold text-lg">Direitos Trabalhistas</h1>
         </div>
       </div>
-      <div className="max-w-lg mx-auto px-4 py-5 space-y-3">
+      <div className="max-w-lg mx-auto px-4 py-5 space-y-3 pb-10">
         <div className="bg-accent/10 rounded-2xl p-4 text-center mb-2">
           <p className="text-sm font-semibold">🛡️ Conheça seus direitos — isso é poder!</p>
         </div>
-        {rights.map((r, i) => (
-          <div key={i} className="p-4 bg-card border border-border rounded-2xl">
-            <div className="flex items-center gap-2 mb-1">
-              <span className="text-xl">{r.emoji}</span>
-              <h3 className="font-bold text-sm">{r.title}</h3>
+        {subpaginas.map((s) => (
+          <button
+            key={s.id}
+            onClick={() => setAtiva(s.id)}
+            className={`w-full border rounded-2xl p-4 flex items-center gap-4 text-left active:scale-[0.98] transition-all ${s.cor}`}
+          >
+            <span className="text-3xl shrink-0">{s.emoji}</span>
+            <div className="flex-1 min-w-0">
+              <p className="font-extrabold text-sm leading-tight">{s.titulo}</p>
+              <p className="text-xs text-muted-foreground leading-relaxed mt-0.5">{s.descricao}</p>
             </div>
-            <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">{r.text}</p>
-            {r.legal && (
-              <p className="text-xs text-muted-foreground/70 mt-2 border-t border-border pt-2">
-                📋 <span className="font-semibold">Base legal:</span> {r.legal}
-              </p>
-            )}
-          </div>
+            <ChevronRight className="w-5 h-5 text-muted-foreground shrink-0" />
+          </button>
         ))}
       </div>
     </div>
