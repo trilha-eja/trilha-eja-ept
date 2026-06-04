@@ -66,6 +66,12 @@ const cursos = [
     botoes: [{ label: "🔗 Acessar", url: "https://www.ev.org.br" }],
   },
   {
+    emoji: "📚",
+    titulo: "MEC Livros — Livros Gratuitos",
+    texto: "Biblioteca digital gratuita do governo federal com livros didáticos e de literatura. Acesse pelo celular ou computador sem precisar pagar nada.",
+    botoes: [{ label: "🔗 Acessar biblioteca", url: "https://meclivros.mec.gov.br" }],
+  },
+  {
     emoji: "📋",
     titulo: "ENCCEJA",
     texto: "Se você ainda não concluiu o Ensino Médio, o ENCCEJA é uma prova gratuita do governo para obter o certificado. Sem ele não é possível fazer o ENEM nem acessar o SISU ou PROUNI.",
