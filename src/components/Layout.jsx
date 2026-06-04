@@ -1,6 +1,6 @@
 import { useRef, useCallback, useState } from "react";
 import { Outlet, useLocation, useNavigate, Link } from "react-router-dom";
-import { Home, Briefcase, Zap, BookOpen, Map, GraduationCap, BookMarked, RefreshCw, BookOpenCheck, Star, ShieldCheck, Menu, X, Sparkles } from "lucide-react";
+import { Home, Briefcase, Zap, BookOpen, Map, GraduationCap, BookMarked, RefreshCw, BookOpenCheck, Star, ShieldCheck, Menu, X, Sparkles, Download } from "lucide-react";
 import { usePullToRefresh } from "../hooks/usePullToRefresh";
 import { useScrollRestore } from "../hooks/useScrollRestore";
 
@@ -27,6 +27,7 @@ const menuItems = [
   { path: "/vozes", icon: Sparkles, label: "Vozes da Trilha" },
   { path: "/educador", icon: BookOpenCheck, label: "Para o Educador" },
   { path: "/opiniao", icon: Star, label: "Sua Opinião Importa" },
+  { path: "/materiais", icon: Download, label: "Baixar Materiais" },
 ];
 
 

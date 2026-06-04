@@ -19,6 +19,7 @@ import ParaOEducador from './pages/ParaOEducador';
 import AdminVozes from './pages/AdminVozes';
 import Admin from './pages/Admin';
 import SuaOpiniao from './pages/SuaOpiniao';
+import BaixarMateriais from './pages/BaixarMateriais';
 import { ThemeProvider } from 'next-themes';
 import { AnimatePresence, motion } from 'framer-motion';
 
@@ -57,6 +58,7 @@ function AnimatedRoutes() {
             <Route path="/admin" element={<Admin />} />
             <Route path="/admin-avaliacoes" element={<Admin initialSecao="avaliacoes" />} />
             <Route path="/opiniao" element={<SuaOpiniao />} />
+            <Route path="/materiais" element={<BaixarMateriais />} />
             <Route path="*" element={<PageNotFound />} />
           </Route>
         </Routes>

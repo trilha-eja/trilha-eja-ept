@@ -1,4 +1,4 @@
-import { Briefcase, Zap, BookOpen, Map, GraduationCap, Sparkles, BookMarked, Settings, Star } from "lucide-react";
+import { Briefcase, Zap, BookOpen, Map, GraduationCap, Sparkles, BookMarked, Settings, Star, Download } from "lucide-react";
 import { Link } from "react-router-dom";
 import ModuleCard from "../components/ModuleCard";
 
@@ -65,6 +65,13 @@ const modules = [
     title: "Sua Opinião Importa",
     description: "Avalie o app e ajude a melhorá-lo",
     color: "bg-secondary",
+  },
+  {
+    to: "/materiais",
+    icon: Download,
+    title: "Baixar Materiais",
+    description: "PDFs gratuitos para imprimir e estudar",
+    color: "bg-chart-4",
   },
 ];
 
