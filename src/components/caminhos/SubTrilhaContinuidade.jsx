@@ -8,8 +8,8 @@ const caminhos = [
     emoji: "🔧",
     titulo: "Inserção Profissional",
     texto: "Trabalhar na área técnica com carteira assinada, usando o certificado do curso.",
-    tag: "Disponível agora",
-    tagBg: "bg-orange-100 text-orange-800",
+    tag: null,
+    tagBg: "",
   },
   {
     cor: "#4A90D9",
@@ -17,9 +17,9 @@ const caminhos = [
     borda: "border-blue-300",
     emoji: "📐",
     titulo: "Curso Técnico",
-    texto: "Fazer um curso técnico no SENAI, SENAC ou Instituto Federal.",
-    tag: "Gratuito",
-    tagBg: "bg-blue-100 text-blue-800",
+    texto: "Fazer um curso técnico nos Institutos Federais (gratuito) ou no SENAI e SENAC (pago).",
+    tag: null,
+    tagBg: "",
   },
   {
     cor: "#5BAD6F",
@@ -28,8 +28,8 @@ const caminhos = [
     emoji: "📝",
     titulo: "Fazer o ENEM",
     texto: "Porta de entrada para a universidade gratuita pelo SISU ou PROUNI.",
-    tag: "Gratuito",
-    tagBg: "bg-green-100 text-green-800",
+    tag: null,
+    tagBg: "",
   },
 ];
 
@@ -50,11 +50,11 @@ function Nivel({ cor, emoji, titulo, subtexto, tags }) {
   return (
     <div className="flex flex-col items-center gap-1">
       <div
-        className="w-20 h-20 rounded-full flex flex-col items-center justify-center shadow-md"
-        style={{ backgroundColor: cor }}
+        className="rounded-full flex flex-col items-center justify-center shadow-md"
+        style={{ backgroundColor: cor, width: 120, height: 120, minWidth: 120, padding: 10 }}
       >
-        <span className="text-2xl leading-none">{emoji}</span>
-        <span className="text-white text-xs font-extrabold mt-1 leading-tight text-center px-1">{titulo}</span>
+        <span className="text-3xl leading-none">{emoji}</span>
+        <span className="text-white font-extrabold mt-1 leading-tight text-center" style={{ fontSize: 13 }}>{titulo}</span>
       </div>
       <p className="text-xs text-muted-foreground text-center leading-relaxed max-w-[200px]">{subtexto}</p>
       {tags && (
@@ -86,9 +86,9 @@ export default function SubTrilhaContinuidade({ onBack, onNavigate }) {
 
           {/* Nível 1 — ponto de partida */}
           <div className="flex flex-col items-center gap-1">
-            <div className="w-20 h-20 rounded-full flex flex-col items-center justify-center shadow-md bg-primary">
-              <span className="text-2xl leading-none">🎓</span>
-              <span className="text-white text-xs font-extrabold mt-1 leading-tight text-center px-1">EJA-EPT</span>
+            <div className="rounded-full flex flex-col items-center justify-center shadow-md bg-primary" style={{ width: 120, height: 120, minWidth: 120, padding: 10 }}>
+              <span className="text-3xl leading-none">🎓</span>
+              <span className="text-white font-extrabold mt-1 leading-tight text-center" style={{ fontSize: 13 }}>EJA-EPT</span>
             </div>
             <p className="text-xs text-muted-foreground font-semibold">Você está aqui!</p>
           </div>
@@ -102,7 +102,7 @@ export default function SubTrilhaContinuidade({ onBack, onNavigate }) {
                 <span className="text-xl">{c.emoji}</span>
                 <p className="text-xs font-extrabold leading-tight" style={{ color: c.cor }}>{c.titulo}</p>
                 <p className="text-[10px] text-muted-foreground leading-relaxed">{c.texto}</p>
-                <span className={`text-[9px] font-bold px-2 py-0.5 rounded-full ${c.tagBg}`}>{c.tag}</span>
+                {c.tag && <span className={`text-[9px] font-bold px-2 py-0.5 rounded-full ${c.tagBg}`}>{c.tag}</span>}
               </div>
             ))}
           </div>
