@@ -1,6 +1,6 @@
-import { useRef, useCallback } from "react";
+import { useRef, useCallback, useState } from "react";
 import { Outlet, useLocation, useNavigate, Link } from "react-router-dom";
-import { Home, Briefcase, Zap, BookOpen, Map, GraduationCap, BookMarked, RefreshCw, BookOpenCheck, Star, ShieldCheck } from "lucide-react";
+import { Home, Briefcase, Zap, BookOpen, Map, GraduationCap, BookMarked, RefreshCw, BookOpenCheck, Star, ShieldCheck, Menu, X, Sparkles } from "lucide-react";
 import { usePullToRefresh } from "../hooks/usePullToRefresh";
 import { useScrollRestore } from "../hooks/useScrollRestore";
 
@@ -16,10 +16,29 @@ const navItems = [
   { path: "/opiniao", icon: Star, label: "Opinião" },
 ];
 
+const menuItems = [
+  { path: "/", icon: Home, label: "Início" },
+  { path: "/empregabilidade", icon: Briefcase, label: "Mundo do Trabalho" },
+  { path: "/guia-pratico", icon: Zap, label: "Guia Prático" },
+  { path: "/microlearning", icon: BookOpen, label: "Microlearning" },
+  { path: "/mapa-da-vida", icon: Map, label: "Mapa da Vida" },
+  { path: "/caminhos", icon: GraduationCap, label: "Caminhos de Estudo" },
+  { path: "/glossario", icon: BookMarked, label: "Glossário do Eletricista" },
+  { path: "/vozes", icon: Sparkles, label: "Vozes da Trilha" },
+  { path: "/educador", icon: BookOpenCheck, label: "Para o Educador" },
+  { path: "/opiniao", icon: Star, label: "Sua Opinião Importa" },
+];
+
+const adminItems = [
+  { path: "/admin-vozes", label: "Admin — Vozes" },
+  { path: "/admin-avaliacoes", label: "Admin — Avaliações" },
+];
+
 export default function Layout() {
   const location = useLocation();
   const navigate = useNavigate();
   const scrollRef = useRef(null);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useScrollRestore(scrollRef);
 
@@ -47,12 +66,70 @@ export default function Layout() {
         </div>
       )}
 
-      {/* Top bar com link admin — visível apenas em telas maiores ou como barra discreta */}
-      <div className="bg-background border-b border-border/50 px-4 py-1 flex justify-end">
-        <Link to="/admin" className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground transition-colors">
-          <ShieldCheck className="w-3.5 h-3.5" /> Admin
-        </Link>
+      {/* Top bar com menu hamburguer */}
+      <div className="bg-background border-b border-border/50 px-4 py-1.5 flex justify-between items-center">
+        <span className="text-xs font-bold text-primary">Trilha EJA-EPT</span>
+        <button
+          onClick={() => setMenuOpen((v) => !v)}
+          className="w-8 h-8 flex items-center justify-center rounded-lg text-muted-foreground hover:text-foreground transition-colors"
+          aria-label="Menu"
+        >
+          {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+        </button>
       </div>
+
+      {/* Drawer menu lateral */}
+      {menuOpen && (
+        <div className="fixed inset-0 z-50 flex">
+          {/* Overlay */}
+          <div className="absolute inset-0 bg-black/40" onClick={() => setMenuOpen(false)} />
+          {/* Painel */}
+          <div className="relative ml-auto w-72 max-w-[85vw] h-full bg-card shadow-xl flex flex-col overflow-y-auto">
+            <div className="px-5 py-4 border-b border-border flex items-center justify-between">
+              <span className="font-extrabold text-base">Menu</span>
+              <button onClick={() => setMenuOpen(false)} className="text-muted-foreground hover:text-foreground">
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            <nav className="flex-1 px-3 py-3 space-y-0.5">
+              {menuItems.map(({ path, icon: Icon, label }) => {
+                const isActive = location.pathname === path;
+                return (
+                  <Link
+                    key={path}
+                    to={path}
+                    onClick={() => setMenuOpen(false)}
+                    className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold transition-colors ${
+                      isActive ? "bg-primary/10 text-primary" : "text-foreground hover:bg-muted"
+                    }`}
+                  >
+                    <Icon className="w-4 h-4 shrink-0" />
+                    {label}
+                  </Link>
+                );
+              })}
+            </nav>
+
+            {/* Divisória + links admin */}
+            <div className="px-3 pb-6">
+              <div className="border-t border-border/60 my-3" />
+              <p className="px-3 text-[10px] text-muted-foreground uppercase tracking-widest mb-1.5">Administração</p>
+              {adminItems.map(({ path, label }) => (
+                <Link
+                  key={path}
+                  to={path}
+                  onClick={() => setMenuOpen(false)}
+                  className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+                >
+                  <ShieldCheck className="w-3.5 h-3.5 shrink-0" />
+                  {label}
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
 
       <main
         ref={scrollRef}

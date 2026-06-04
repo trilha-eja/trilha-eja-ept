@@ -261,11 +261,11 @@ function AvaliacoesSection() {
 }
 
 // ── Painel principal ────────────────────────────────────────────────────────
-export default function Admin() {
+export default function Admin({ initialSecao = "vozes" }) {
   const [authed, setAuthed] = useState(() => sessionStorage.getItem("admin_vozes") === "ok");
   const [senha, setSenha] = useState("");
   const [erro, setErro] = useState(false);
-  const [secao, setSecao] = useState("vozes"); // "vozes" | "avaliacoes"
+  const [secao, setSecao] = useState(initialSecao);
 
   const login = () => {
     if (senha === ADMIN_PASSWORD) {

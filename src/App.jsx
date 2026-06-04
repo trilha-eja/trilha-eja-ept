@@ -55,6 +55,7 @@ function AnimatedRoutes() {
             <Route path="/educador" element={<ParaOEducador />} />
             <Route path="/admin-vozes" element={<AdminVozes />} />
             <Route path="/admin" element={<Admin />} />
+            <Route path="/admin-avaliacoes" element={<Admin initialSecao="avaliacoes" />} />
             <Route path="/opiniao" element={<SuaOpiniao />} />
             <Route path="*" element={<PageNotFound />} />
           </Route>
