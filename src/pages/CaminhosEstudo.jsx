@@ -97,12 +97,7 @@ export default function CaminhosEstudo() {
           />
         ))}
 
-        <button
-          onClick={() => window.print()}
-          className="w-full mt-2 py-3 rounded-2xl border border-border text-sm font-semibold text-muted-foreground hover:bg-muted transition-colors print:hidden"
-        >
-          🖨️ Imprimir esta página
-        </button>
+
       </div>
     </div>
   );

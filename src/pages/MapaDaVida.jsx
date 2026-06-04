@@ -460,7 +460,7 @@ export default function MapaDaVida() {
           );
         })}
 
-        <div className="flex gap-3 pt-2">
+        <div className="flex gap-3 pt-2 pb-6">
           <Button variant="outline" onClick={handlePrev} className="flex-1 h-12 rounded-xl gap-2">
             <ArrowLeft className="w-4 h-4" /> Anterior
           </Button>
@@ -473,12 +473,7 @@ export default function MapaDaVida() {
           </Button>
         </div>
 
-        <button
-          onClick={() => window.print()}
-          className="w-full py-3 rounded-2xl border border-border text-sm font-semibold text-muted-foreground hover:bg-muted transition-colors print:hidden pb-6"
-        >
-          🖨️ Imprimir esta página
-        </button>
+
       </div>
     </div>
   );

@@ -1,512 +1,503 @@
+import { useRef, useState } from "react";
 import PageHeader from "../components/PageHeader";
 import { Download } from "lucide-react";
 
-// ── Gerador: Mapa da Vida para imprimir ─────────────────────────────────────
-function gerarMapaVida() {
+// ── Utilitário: html2canvas → jsPDF ─────────────────────────────────────────
+async function htmlToPDF(el, filename, orientation = "portrait") {
   const { jsPDF } = window.jspdf;
-  if (!jsPDF) { alert("PDF nao disponivel."); return; }
+  const html2canvas = window.html2canvas;
+  if (!jsPDF || !html2canvas) { alert("PDF não disponível. Tente novamente."); return; }
 
-  const doc = new jsPDF({ unit: "mm", format: "a4", orientation: "landscape" });
-  const W = 297, H = 210;
-  const cor = "#E86826";
+  el.style.display = "block";
+  await new Promise((r) => setTimeout(r, 100));
 
-  // Fundo creme
-  doc.setFillColor(255, 248, 240);
-  doc.rect(0, 0, W, H, "F");
-
-  // Título
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(20);
-  doc.setTextColor(232, 104, 38);
-  doc.text("Mapa da Vida - Para Preencher a Mao", W / 2, 16, { align: "center" });
-
-  // Subtítulo
-  doc.setFontSize(11);
-  doc.setTextColor(100, 100, 100);
-  doc.text("Trilha EJA-EPT", W / 2, 23, { align: "center" });
-
-  // Nome e Data
-  doc.setFontSize(10);
-  doc.setTextColor(60, 60, 60);
-  doc.text("Nome: _________________________________   Data: ___________", W / 2, 31, { align: "center" });
-
-  // ── TRILHA HORIZONTAL ──
-  const trilhaY = 105;
-  const trilhaH = 10;
-  const xIni = 18, xFim = 279;
-
-  // Trilha fundo
-  doc.setFillColor(196, 149, 106);
-  doc.roundedRect(xIni, trilhaY - trilhaH / 2, xFim - xIni, trilhaH, 4, 4, "F");
-
-  // Linha tracejada no meio
-  doc.setDrawColor(255, 248, 240);
-  doc.setLineWidth(0.5);
-  doc.setLineDash([4, 3]);
-  doc.line(xIni + 8, trilhaY, xFim - 8, trilhaY);
-  doc.setLineDash([]);
-
-  // Ponto de partida
-  doc.setFillColor(232, 104, 38);
-  doc.circle(xIni, trilhaY, 7, "F");
-  doc.setFontSize(7);
-  doc.setTextColor(255, 255, 255);
-  doc.text("HOJE", xIni, trilhaY + 0.5, { align: "center" });
-  doc.setTextColor(232, 104, 38);
-  doc.setFontSize(8);
-  doc.text("Ponto de Partida", xIni, trilhaY + 11, { align: "center" });
-
-  // Estrela final
-  doc.setFontSize(16);
-  doc.setTextColor(232, 104, 38);
-  doc.text("*", xFim, trilhaY + 1, { align: "center" });
-  doc.setFontSize(8);
-  doc.text("Seu futuro", xFim, trilhaY + 11, { align: "center" });
-
-  // Marcos
-  const marcos = [
-    { label: "1 ano",   x: xIni + (xFim - xIni) * 0.28 },
-    { label: "5 anos",  x: xIni + (xFim - xIni) * 0.56 },
-    { label: "10 anos", x: xIni + (xFim - xIni) * 0.82 },
-  ];
-  marcos.forEach(({ label, x }) => {
-    doc.setFillColor(255, 255, 255);
-    doc.setDrawColor(232, 104, 38);
-    doc.setLineWidth(0.8);
-    doc.circle(x, trilhaY, 5.5, "FD");
-    doc.setFontSize(6);
-    doc.setTextColor(232, 104, 38);
-    doc.setFont("helvetica", "bold");
-    doc.text(label, x, trilhaY + 0.5, { align: "center" });
+  const canvas = await html2canvas(el, {
+    scale: 2,
+    useCORS: true,
+    backgroundColor: orientation === "landscape" ? "#FFF8F0" : "#ffffff",
+    windowWidth: orientation === "landscape" ? 1122 : 794,
   });
 
-  // Eixos
+  el.style.display = "none";
+
+  const imgData = canvas.toDataURL("image/png");
+  const doc = new jsPDF({ unit: "mm", format: "a4", orientation });
+
+  const pageW = orientation === "landscape" ? 297 : 210;
+  const pageH = orientation === "landscape" ? 210 : 297;
+  const imgW = pageW;
+  const imgH = (canvas.height * pageW) / canvas.width;
+
+  let position = 0;
+  let remaining = imgH;
+  while (remaining > 0) {
+    doc.addImage(imgData, "PNG", 0, position, imgW, imgH);
+    remaining -= pageH;
+    if (remaining > 0) { doc.addPage(); position -= pageH; }
+  }
+
+  doc.save(filename);
+}
+
+// ── Templates HTML ocultos ───────────────────────────────────────────────────
+
+function TemplateMapa({ refEl }) {
   const eixosAcima = [
-    { emoji: "Trabalho",       gap: 1 },
-    { emoji: "Estudos",        gap: 2 },
-    { emoji: "Familia",        gap: 3 },
+    { cor: "#E86826", label: "🔧 Trabalho" },
+    { cor: "#4A90D9", label: "📚 Estudos" },
+    { cor: "#5BAD6F", label: "👨‍👩‍👧 Família" },
   ];
   const eixosAbaixo = [
-    { emoji: "Eu Mesmo",       gap: 1 },
-    { emoji: "Vida Material",  gap: 2 },
-    { emoji: "Comunidade",     gap: 3 },
+    { cor: "#9B59B6", label: "🌟 Eu Mesmo" },
+    { cor: "#F0A500", label: "🏠 Vida Material" },
+    { cor: "#E74C6C", label: "🤝 Comunidade" },
   ];
-  const branchGap = 15;
-  const lineLen = 28;
+  const marcos = ["1 ano", "5 anos", "10 anos"];
+  const marcoPositions = ["28%", "56%", "82%"];
 
-  doc.setFont("helvetica", "normal");
+  return (
+    <div ref={refEl} style={{ display: "none", position: "fixed", left: "-9999px", top: 0, zIndex: -1 }}>
+      <div style={{
+        width: "1122px",
+        height: "794px",
+        backgroundColor: "#FFF8F0",
+        fontFamily: "Arial, sans-serif",
+        position: "relative",
+        overflow: "hidden",
+        boxSizing: "border-box",
+      }}>
+        {/* Cabeçalho */}
+        <div style={{ textAlign: "center", paddingTop: "28px" }}>
+          <h1 style={{ fontSize: "26px", fontWeight: "bold", color: "#E86826", margin: "0 0 6px 0" }}>
+            Mapa da Vida — Para Preencher à Mão
+          </h1>
+          <p style={{ fontSize: "13px", color: "#888", margin: "0 0 10px 0" }}>Trilha EJA-EPT</p>
+          <p style={{ fontSize: "12px", color: "#555", margin: 0 }}>
+            Nome: _________________________ &nbsp;&nbsp;&nbsp; Data: ___________
+          </p>
+        </div>
 
-  marcos.forEach(({ x }) => {
-    // Acima
-    eixosAcima.forEach(({ emoji, gap }) => {
-      const ty = trilhaY - trilhaH / 2 - gap * branchGap;
-      // linha vertical
-      doc.setDrawColor(180, 180, 180);
-      doc.setLineWidth(0.4);
-      doc.line(x, trilhaY - trilhaH / 2, x, ty + 3);
-      // círculo
-      doc.setFillColor(232, 104, 38);
-      doc.circle(x, ty, 3, "F");
-      // label
-      doc.setFontSize(6);
-      doc.setTextColor(80, 80, 80);
-      doc.setFont("helvetica", "bold");
-      doc.text(emoji, x, ty - 4.5, { align: "center" });
-      // linha para escrever
-      doc.setDrawColor(180, 180, 180);
-      doc.setLineWidth(0.3);
-      doc.line(x - lineLen / 2, ty - 10, x + lineLen / 2, ty - 10);
-    });
+        {/* Área da trilha — posicionada absolutamente no centro vertical */}
+        <div style={{ position: "absolute", left: "60px", right: "60px", top: "155px", bottom: "60px" }}>
 
-    // Abaixo
-    eixosAbaixo.forEach(({ emoji, gap }) => {
-      const ty = trilhaY + trilhaH / 2 + gap * branchGap;
-      doc.setDrawColor(180, 180, 180);
-      doc.setLineWidth(0.4);
-      doc.line(x, trilhaY + trilhaH / 2, x, ty - 3);
-      doc.setFillColor(232, 104, 38);
-      doc.circle(x, ty, 3, "F");
-      doc.setFontSize(6);
-      doc.setTextColor(80, 80, 80);
-      doc.setFont("helvetica", "bold");
-      doc.text(emoji, x, ty + 6, { align: "center" });
-      doc.setDrawColor(180, 180, 180);
-      doc.setLineWidth(0.3);
-      doc.line(x - lineLen / 2, ty + 11, x + lineLen / 2, ty + 11);
-    });
-  });
+          {/* Trilha horizontal */}
+          <div style={{
+            position: "absolute",
+            left: "40px", right: "40px",
+            top: "250px",
+            height: "36px",
+            backgroundColor: "#C4956A",
+            borderRadius: "18px",
+          }} />
 
-  // Legenda eixos
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(7);
-  doc.setTextColor(80, 80, 80);
-  const legendas = ["Trabalho", "Estudos", "Familia", "Eu Mesmo", "Vida Material", "Comunidade"];
-  legendas.forEach((l, i) => {
-    doc.text(`• ${l}`, 4, 40 + i * 8);
-  });
+          {/* Ponto Hoje */}
+          <div style={{ position: "absolute", left: "0px", top: "236px", textAlign: "center", width: "60px" }}>
+            <div style={{
+              width: "60px", height: "60px", borderRadius: "50%",
+              backgroundColor: "#E86826", display: "flex", alignItems: "center",
+              justifyContent: "center", color: "white", fontWeight: "bold", fontSize: "11px",
+              margin: "0 auto",
+            }}>Hoje</div>
+            <div style={{ fontSize: "9px", color: "#E86826", marginTop: "4px" }}>Ponto de Partida</div>
+          </div>
 
-  // Rodapé
-  doc.setFont("helvetica", "normal");
-  doc.setFontSize(8);
-  doc.setTextColor(150, 150, 150);
-  doc.text("Trilha EJA-EPT | ProfEPT", W / 2, H - 5, { align: "center" });
+          {/* Estrela futuro */}
+          <div style={{ position: "absolute", right: "-10px", top: "236px", textAlign: "center", width: "60px" }}>
+            <div style={{ fontSize: "32px", lineHeight: 1 }}>⭐</div>
+            <div style={{ fontSize: "9px", color: "#E86826", marginTop: "2px" }}>Seu futuro</div>
+          </div>
 
-  doc.save("mapa-da-vida-para-preencher.pdf");
+          {/* Marcos */}
+          {marcos.map((m, i) => {
+            const left = [245, 500, 740][i];
+            return (
+              <div key={m} style={{
+                position: "absolute",
+                left: `${left}px`,
+                top: "250px",
+                width: "36px", height: "36px",
+                borderRadius: "50%",
+                backgroundColor: "white",
+                border: "2.5px solid #E86826",
+                display: "flex", alignItems: "center", justifyContent: "center",
+                fontSize: "8px", fontWeight: "bold", color: "#E86826",
+                textAlign: "center", lineHeight: "1.1",
+              }}>{m}</div>
+            );
+          })}
+
+          {/* Ramificações — por marco */}
+          {[245, 500, 740].map((left, mi) => {
+            const cx = left + 18; // centro do marco
+            return (
+              <div key={mi}>
+                {/* ACIMA */}
+                {eixosAcima.map((e, ei) => {
+                  const top = 210 - (ei + 1) * 58;
+                  return (
+                    <div key={ei} style={{ position: "absolute", left: `${cx - 55}px`, top: `${top}px`, width: "110px", textAlign: "center" }}>
+                      <div style={{ fontSize: "8px", fontWeight: "bold", color: e.cor, marginBottom: "3px" }}>{e.label}</div>
+                      <div style={{ fontSize: "10px", color: "#aaa", borderBottom: `1.5px solid ${e.cor}`, paddingBottom: "1px" }}>
+                        ________________________
+                      </div>
+                      {/* linha vertical para a trilha */}
+                      <div style={{
+                        position: "absolute", left: "50%", bottom: "-20px",
+                        width: "1.5px", height: "20px",
+                        backgroundColor: e.cor, transform: "translateX(-50%)",
+                      }} />
+                      <div style={{
+                        position: "absolute", left: "50%", bottom: "-25px",
+                        width: "10px", height: "10px", borderRadius: "50%",
+                        backgroundColor: e.cor, transform: "translateX(-50%)",
+                      }} />
+                    </div>
+                  );
+                })}
+
+                {/* ABAIXO */}
+                {eixosAbaixo.map((e, ei) => {
+                  const top = 300 + (ei) * 58;
+                  return (
+                    <div key={ei} style={{ position: "absolute", left: `${cx - 55}px`, top: `${top}px`, width: "110px", textAlign: "center" }}>
+                      {/* linha vertical da trilha */}
+                      <div style={{
+                        position: "absolute", left: "50%", top: "-15px",
+                        width: "1.5px", height: "15px",
+                        backgroundColor: e.cor, transform: "translateX(-50%)",
+                      }} />
+                      <div style={{
+                        position: "absolute", left: "50%", top: "-20px",
+                        width: "10px", height: "10px", borderRadius: "50%",
+                        backgroundColor: e.cor, transform: "translateX(-50%)",
+                      }} />
+                      <div style={{ fontSize: "10px", color: "#aaa", borderBottom: `1.5px solid ${e.cor}`, paddingBottom: "1px", marginTop: "6px" }}>
+                        ________________________
+                      </div>
+                      <div style={{ fontSize: "8px", fontWeight: "bold", color: e.cor, marginTop: "3px" }}>{e.label}</div>
+                    </div>
+                  );
+                })}
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Rodapé */}
+        <div style={{ position: "absolute", bottom: "10px", left: 0, right: 0, textAlign: "center" }}>
+          <p style={{ fontSize: "10px", fontStyle: "italic", color: "#888", margin: "0 0 3px 0" }}>
+            "Cada passo conta. Você já chegou até aqui."
+          </p>
+          <p style={{ fontSize: "9px", color: "#bbb", margin: 0 }}>Trilha EJA-EPT | ProfEPT</p>
+        </div>
+      </div>
+    </div>
+  );
 }
 
-// ── Gerador: Cartilha de Direitos ───────────────────────────────────────────
-function gerarDireitos() {
-  const { jsPDF } = window.jspdf;
-  if (!jsPDF) { alert("PDF nao disponivel."); return; }
-
-  const doc = new jsPDF({ unit: "mm", format: "a4", orientation: "portrait" });
-  const W = 210;
-  let y = 20;
-
-  // Cabeçalho
-  doc.setFillColor(232, 104, 38);
-  doc.rect(0, 0, W, 35, "F");
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(20);
-  doc.setTextColor(255, 255, 255);
-  doc.text("Seus Direitos Trabalhistas", W / 2, 16, { align: "center" });
-  doc.setFontSize(11);
-  doc.setFont("helvetica", "normal");
-  doc.text("Conhecer seus direitos e poder", W / 2, 26, { align: "center" });
-
-  y = 48;
-
+function TemplateDireitos({ refEl }) {
   const direitos = [
-    {
-      titulo: "Carteira Assinada (CTPS)",
-      base: "CLT Art. 29 e 47",
-      texto: "O empregador e obrigado a assinar sua carteira em ate 5 dias uteis apos a admissao. Trabalhar sem carteira assinada e ilegal. Voce pode denunciar ao Ministerio do Trabalho.",
-    },
-    {
-      titulo: "Salario Minimo",
-      base: "CF/88 Art. 7o IV",
-      texto: "Nenhum trabalhador pode receber menos que o salario minimo nacional. Em 2024, o valor e R$ 1.412,00. Acordos coletivos podem fixar pisos maiores.",
-    },
-    {
-      titulo: "Ferias Remuneradas",
-      base: "CLT Art. 129 e 145",
-      texto: "Apos 12 meses de trabalho, voce tem direito a 30 dias de ferias remuneradas com adicional de 1/3 do salario. Ferias nao tiradas devem ser pagas em dobro.",
-    },
-    {
-      titulo: "13o Salario",
-      base: "Lei 4.090/1962",
-      texto: "Todo trabalhador com carteira assinada tem direito ao 13o salario. E pago em duas parcelas: ate 30/novembro e ate 20/dezembro. Proporcional se trabalhou menos de 12 meses.",
-    },
-    {
-      titulo: "Jornada de Trabalho",
-      base: "CLT Art. 59",
-      texto: "Maximo de 8 horas por dia e 44 horas semanais. Horas extras devem ser pagas com adicional minimo de 50%. Limite de 2 horas extras por dia.",
-    },
-    {
-      titulo: "FGTS",
-      base: "Lei 8.036/1990 Art. 15",
-      texto: "O empregador deposita 8% do seu salario mensalmente no FGTS. Voce pode sacar em caso de demissao sem justa causa, aposentadoria, doenca grave ou compra da casa propria.",
-    },
-    {
-      titulo: "Seguro Desemprego",
-      base: "Lei 7.998/1990",
-      texto: "Trabalhadores demitidos sem justa causa e com pelo menos 12 meses de emprego tem direito ao seguro desemprego. Solicite em ate 120 dias apos a demissao.",
-    },
-    {
-      titulo: "NR-10 — Seguranca Eletrica",
-      base: "Portaria MTE 598/2004",
-      texto: "A NR-10 garante seguranca a eletricistas. O empregador DEVE fornecer EPIs (luvas, oculos, botinas isolantes), treinamento certificado e equipamentos adequados. Sem EPI, recuse o trabalho — e seu direito!",
-    },
+    { titulo: "Carteira Assinada (CTPS)", base: "CLT Art. 29 e 47", texto: "O empregador é obrigado a assinar sua carteira em até 5 dias úteis após a admissão. Trabalhar sem carteira assinada é ilegal. Você pode denunciar ao Ministério do Trabalho." },
+    { titulo: "Salário Mínimo", base: "CF/88 Art. 7º IV", texto: "Nenhum trabalhador pode receber menos que o salário mínimo nacional. Acordos coletivos podem fixar pisos maiores." },
+    { titulo: "Férias Remuneradas", base: "CLT Art. 129 e 145", texto: "Após 12 meses de trabalho, você tem direito a 30 dias de férias remuneradas com adicional de 1/3 do salário. Férias não tiradas devem ser pagas em dobro." },
+    { titulo: "13º Salário", base: "Lei 4.090/1962", texto: "Todo trabalhador com carteira assinada tem direito ao 13º salário. Pago em duas parcelas: até 30/novembro e até 20/dezembro. Proporcional se trabalhou menos de 12 meses." },
+    { titulo: "Jornada de Trabalho", base: "CLT Art. 59", texto: "Máximo de 8 horas por dia e 44 horas semanais. Horas extras devem ser pagas com adicional mínimo de 50%. Limite de 2 horas extras por dia." },
+    { titulo: "FGTS", base: "Lei 8.036/1990 Art. 15", texto: "O empregador deposita 8% do seu salário mensalmente no FGTS. Você pode sacar em caso de demissão sem justa causa, aposentadoria, doença grave ou compra da casa própria." },
+    { titulo: "Seguro Desemprego", base: "Lei 7.998/1990", texto: "Trabalhadores demitidos sem justa causa e com pelo menos 12 meses de emprego têm direito ao seguro desemprego. Solicite em até 120 dias após a demissão." },
+    { titulo: "NR-10 — Segurança Elétrica", base: "Portaria MTE 598/2004", texto: "A NR-10 garante segurança a eletricistas. O empregador DEVE fornecer EPIs (luvas, óculos, botinas isolantes), treinamento certificado e equipamentos adequados. Sem EPI, recuse o trabalho — é seu direito!" },
   ];
-
-  direitos.forEach((d) => {
-    if (y > 255) {
-      doc.addPage();
-      y = 20;
-    }
-
-    // Card fundo
-    doc.setFillColor(255, 248, 240);
-    doc.setDrawColor(232, 104, 38);
-    doc.setLineWidth(0.3);
-    doc.roundedRect(14, y, W - 28, 36, 3, 3, "FD");
-
-    // Badge base legal
-    doc.setFillColor(232, 104, 38);
-    doc.roundedRect(W - 14 - 48, y + 3, 48, 7, 2, 2, "F");
-    doc.setFontSize(6.5);
-    doc.setFont("helvetica", "bold");
-    doc.setTextColor(255, 255, 255);
-    doc.text(d.base, W - 14 - 24, y + 7.5, { align: "center" });
-
-    // Título
-    doc.setFontSize(10);
-    doc.setFont("helvetica", "bold");
-    doc.setTextColor(60, 60, 60);
-    doc.text(d.titulo, 19, y + 9);
-
-    // Texto
-    doc.setFontSize(8);
-    doc.setFont("helvetica", "normal");
-    doc.setTextColor(90, 90, 90);
-    const linhas = doc.splitTextToSize(d.texto, W - 40);
-    doc.text(linhas, 19, y + 16);
-
-    y += 41;
-  });
-
-  // Rodapé
-  doc.setFont("helvetica", "normal");
-  doc.setFontSize(8);
-  doc.setTextColor(150, 150, 150);
-  doc.text("Trilha EJA-EPT | ProfEPT", W / 2, 290, { align: "center" });
-
-  doc.save("direitos-trabalhistas.pdf");
+  return (
+    <div ref={refEl} style={{ display: "none", position: "fixed", left: "-9999px", top: 0, zIndex: -1 }}>
+      <div style={{ width: "794px", backgroundColor: "#ffffff", fontFamily: "Arial, sans-serif", boxSizing: "border-box" }}>
+        {/* Header */}
+        <div style={{ backgroundColor: "#E86826", padding: "28px 40px 20px", textAlign: "center" }}>
+          <h1 style={{ fontSize: "22px", fontWeight: "bold", color: "white", margin: "0 0 6px 0" }}>Seus Direitos Trabalhistas</h1>
+          <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.85)", margin: 0 }}>Conhecer seus direitos é poder</p>
+        </div>
+        <div style={{ padding: "24px 40px 40px" }}>
+          {direitos.map((d, i) => (
+            <div key={i} style={{
+              backgroundColor: "#FFF8F0",
+              border: "1px solid #E86826",
+              borderRadius: "8px",
+              padding: "14px 16px",
+              marginBottom: "14px",
+              position: "relative",
+            }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "6px" }}>
+                <h3 style={{ fontSize: "13px", fontWeight: "bold", color: "#333", margin: 0 }}>{d.titulo}</h3>
+                <span style={{ fontSize: "10px", backgroundColor: "#E86826", color: "white", padding: "2px 8px", borderRadius: "10px", whiteSpace: "nowrap", marginLeft: "8px" }}>{d.base}</span>
+              </div>
+              <p style={{ fontSize: "11px", color: "#555", lineHeight: "1.6", margin: 0 }}>{d.texto}</p>
+            </div>
+          ))}
+          <div style={{ borderTop: "1px solid #ddd", paddingTop: "12px", textAlign: "center", marginTop: "8px" }}>
+            <p style={{ fontSize: "10px", color: "#aaa", margin: 0 }}>Trilha EJA-EPT | ProfEPT</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
 
-// ── Gerador: Checklist ENEM/SISU/PROUNI ────────────────────────────────────
-function gerarChecklist() {
-  const { jsPDF } = window.jspdf;
-  if (!jsPDF) { alert("PDF nao disponivel."); return; }
-
-  const doc = new jsPDF({ unit: "mm", format: "a4", orientation: "portrait" });
-  const W = 210;
-  let y = 20;
-
-  // Cabeçalho
-  doc.setFillColor(91, 173, 111);
-  doc.rect(0, 0, W, 35, "F");
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(20);
-  doc.setTextColor(255, 255, 255);
-  doc.text("Checklist - Caminhos de Estudo", W / 2, 16, { align: "center" });
-  doc.setFontSize(11);
-  doc.setFont("helvetica", "normal");
-  doc.text("Nao perca nenhum prazo", W / 2, 26, { align: "center" });
-
-  y = 45;
-
+function TemplateChecklist({ refEl }) {
   const secoes = [
     {
-      titulo: "ENEM",
-      cor: [232, 104, 38],
+      titulo: "ENEM", cor: "#E86826",
       itens: [
-        "Verificar periodo de inscricoes (maio/junho - enem.inep.gov.br)",
-        "Verificar se tem direito a isencao",
+        "Verificar período de inscrições (maio/junho — enem.inep.gov.br)",
+        "Verificar se tem direito à isenção",
         "Pagar a taxa (R$ 85 aprox.)",
         "Confirmar local de prova",
         "Levar documento com foto no dia da prova",
       ],
     },
     {
-      titulo: "SISU",
-      cor: [91, 173, 111],
+      titulo: "SISU", cor: "#5BAD6F",
       itens: [
-        "Aguardar divulgacao das notas do ENEM (janeiro/fevereiro)",
+        "Aguardar divulgação das notas do ENEM (janeiro/fevereiro)",
         "Acessar sisu.mec.gov.br",
-        "Escolher ate 2 opcoes de curso",
+        "Escolher até 2 opções de curso",
         "Verificar nota de corte do curso desejado",
-        "Fazer matricula na universidade se aprovado",
+        "Fazer matrícula na universidade se aprovado",
       ],
     },
     {
-      titulo: "PROUNI",
-      cor: [74, 144, 217],
+      titulo: "PROUNI", cor: "#4A90D9",
       itens: [
         "Acessar prouniportal.mec.gov.br",
-        "Verificar renda familiar (integral: ate 1,5 sal. minimo / parcial: ate 3 sal.)",
-        "Escolher ate 2 opcoes de curso",
+        "Verificar renda familiar (integral: até 1,5 sal. mínimo / parcial: até 3 sal.)",
+        "Escolher até 2 opções de curso",
         "Separar RG e CPF",
         "Separar comprovante de renda",
-        "Separar comprovante de endereco",
-        "Separar historico escolar",
+        "Separar comprovante de endereço",
+        "Separar histórico escolar",
       ],
     },
   ];
-
-  secoes.forEach((s) => {
-    if (y > 240) { doc.addPage(); y = 20; }
-
-    // Titulo seção
-    doc.setFillColor(...s.cor);
-    doc.roundedRect(14, y, W - 28, 11, 3, 3, "F");
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(13);
-    doc.setTextColor(255, 255, 255);
-    doc.text(s.titulo, W / 2, y + 7.5, { align: "center" });
-    y += 15;
-
-    s.itens.forEach((item) => {
-      if (y > 270) { doc.addPage(); y = 20; }
-      // Checkbox
-      doc.setDrawColor(...s.cor);
-      doc.setLineWidth(0.5);
-      doc.rect(18, y - 3.5, 5, 5);
-      // Texto
-      doc.setFont("helvetica", "normal");
-      doc.setFontSize(9);
-      doc.setTextColor(60, 60, 60);
-      const linhas = doc.splitTextToSize(item, W - 44);
-      doc.text(linhas, 27, y);
-      y += linhas.length * 5 + 2;
-    });
-
-    y += 8;
-  });
-
-  // Rodapé
-  doc.setFont("helvetica", "normal");
-  doc.setFontSize(8);
-  doc.setTextColor(150, 150, 150);
-  doc.text("Trilha EJA-EPT | ProfEPT", W / 2, 290, { align: "center" });
-
-  doc.save("checklist-enem-sisu-prouni.pdf");
+  return (
+    <div ref={refEl} style={{ display: "none", position: "fixed", left: "-9999px", top: 0, zIndex: -1 }}>
+      <div style={{ width: "794px", backgroundColor: "#ffffff", fontFamily: "Arial, sans-serif", boxSizing: "border-box" }}>
+        <div style={{ backgroundColor: "#5BAD6F", padding: "28px 40px 20px", textAlign: "center" }}>
+          <h1 style={{ fontSize: "22px", fontWeight: "bold", color: "white", margin: "0 0 6px 0" }}>Checklist — Caminhos de Estudo</h1>
+          <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.85)", margin: 0 }}>Não perca nenhum prazo</p>
+        </div>
+        <div style={{ padding: "24px 40px 40px" }}>
+          {secoes.map((s, si) => (
+            <div key={si} style={{ marginBottom: "24px" }}>
+              <div style={{ backgroundColor: s.cor, borderRadius: "8px", padding: "8px 16px", marginBottom: "12px" }}>
+                <h2 style={{ fontSize: "15px", fontWeight: "bold", color: "white", margin: 0 }}>{s.titulo}</h2>
+              </div>
+              {s.itens.map((item, ii) => (
+                <div key={ii} style={{ display: "flex", alignItems: "flex-start", gap: "10px", marginBottom: "10px" }}>
+                  <div style={{
+                    width: "16px", height: "16px", border: `2px solid ${s.cor}`,
+                    borderRadius: "3px", flexShrink: 0, marginTop: "1px",
+                  }} />
+                  <p style={{ fontSize: "12px", color: "#444", margin: 0, lineHeight: "1.5" }}>{item}</p>
+                </div>
+              ))}
+            </div>
+          ))}
+          <div style={{ borderTop: "1px solid #ddd", paddingTop: "12px", textAlign: "center" }}>
+            <p style={{ fontSize: "10px", color: "#aaa", margin: 0 }}>Trilha EJA-EPT | ProfEPT</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
 
-// ── Gerador: Glossário ──────────────────────────────────────────────────────
-function gerarGlossario() {
-  const { jsPDF } = window.jspdf;
-  if (!jsPDF) { alert("PDF nao disponivel."); return; }
-
-  const doc = new jsPDF({ unit: "mm", format: "a4", orientation: "portrait" });
-  const W = 210;
-  let y = 20;
-
-  // Cabeçalho
-  doc.setFillColor(74, 144, 217);
-  doc.rect(0, 0, W, 35, "F");
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(20);
-  doc.setTextColor(255, 255, 255);
-  doc.text("Glossario do Eletricista", W / 2, 16, { align: "center" });
-  doc.setFontSize(11);
-  doc.setFont("helvetica", "normal");
-  doc.text("Termos tecnicos em linguagem simples", W / 2, 26, { align: "center" });
-
-  y = 44;
-
+function TemplateGlossario({ refEl }) {
   const termos = [
-    { term: "FASE", emoji: "⚡", simple: "O fio que carrega a eletricidade", detail: "E o fio 'vivo' do circuito. Geralmente preto, vermelho ou marrom. Nunca toque sem desligar o disjuntor! Tensao: 127V ou 220V.", tip: "Fio vermelho ou preto = PERIGO, e o fase!" },
-    { term: "NEUTRO", emoji: "", simple: "O fio de retorno da energia", detail: "Ele completa o circuito, permitindo que a corrente 'volte' apos passar pela carga. Geralmente azul. Sem tensao, mas ainda perigoso!", tip: "Fio azul = NEUTRO. Sem tensao, mas cuidado!" },
-    { term: "TERRA", emoji: "", simple: "O fio de seguranca que protege voce", detail: "Conectado diretamente ao chao. Se houver vazamento de energia, conduz a corrente para o solo, evitando choque.", tip: "Fio verde = TERRA. Sua protecao!" },
-    { term: "DISJUNTOR", emoji: "", simple: "O guarda-costas do circuito", detail: "Fica no quadro de distribuicao. Quando passa corrente demais ou ha curto-circuito, desliga automaticamente para proteger.", tip: "Se o disjuntor caiu: descubra o porque antes de religar!" },
-    { term: "CURTO-CIRCUITO", emoji: "", simple: "Quando a eletricidade toma um atalho perigoso", detail: "Acontece quando o fio fase toca o neutro sem passar por nenhuma carga. Gera calor, faisca e risco de incendio.", tip: "Faisca + disjuntor caindo = sinal de curto! Chame um tecnico." },
-    { term: "TENSAO (VOLTAGEM)", emoji: "", simple: "A pressao que empurra a eletricidade", detail: "Medida em Volts (V). No Brasil: 127V ou 220V. Sempre confira a tensao antes de ligar um aparelho!", tip: "127V ou 220V - sempre confira!" },
-    { term: "CORRENTE (AMPERAGEM)", emoji: "", simple: "A quantidade de eletricidade que flui", detail: "Medida em Amperes (A). Fios tem limite de corrente - passar mais que isso aquece e pode causar incendio.", tip: "Amperagem alta = fio mais grosso necessario!" },
-    { term: "RESISTENCIA", emoji: "", simple: "O quanto algo dificulta a passagem da eletricidade", detail: "Medida em Ohms. Fios finos tem mais resistencia. Quando corrente passa por resistencia, gera calor.", tip: "Quanto mais fio, mais resistencia. Use o minimo!" },
-    { term: "POTENCIA", emoji: "", simple: "Quanto de energia um aparelho usa", detail: "Medida em Watts (W). A conta de luz e em kWh. Um chuveiro eletrico usa ~5.500W - o aparelho mais 'guloso'!", tip: "W = V x A. Quanto maior o W, mais energia consome!" },
-    { term: "ATERRAMENTO", emoji: "", simple: "Ligar a instalacao a terra para seguranca", detail: "Conecta partes metalicas ao solo. Se houver falha eletrica, a energia vai para a terra, nao para voce. Obrigatorio (NBR 5410).", tip: "Sem aterramento = risco de choque. Exija aterramento!" },
-    { term: "DISJUNTOR DR", emoji: "", simple: "O protetor que salva vidas de choques", detail: "Detecta pequenas fugas de corrente - inclusive pelo corpo humano - e desliga em milissegundos.", tip: "DR no banheiro e cozinha = protecao essencial!" },
-    { term: "SOBRECARGA", emoji: "", simple: "Quando passa mais energia do que o fio aguenta", detail: "Ocorre com aparelhos demais num mesmo circuito. O fio esquenta, pode derreter o isolamento e causar incendio.", tip: "Nao use benjamins! Distribua os aparelhos." },
-    { term: "MULTIMETRO", emoji: "", simple: "O instrumento que le a eletricidade", detail: "Mede tensao (V), corrente (A) e resistencia. E a ferramenta mais importante do eletricista.", tip: "Todo eletricista tem um multimetro. E seu melhor amigo!" },
-    { term: "EPI", emoji: "", simple: "Equipamento que protege seu corpo no trabalho", detail: "EPI = Equipamento de Protecao Individual. Luvas isolantes, oculos, capacete, botina isolante e roupa anti-chama. A empresa DEVE fornecer gratuitamente.", tip: "Sem EPI, nao trabalhe. E seu direito e e sua vida!" },
+    { term: "FASE", emoji: "⚡", simple: "O fio que carrega a eletricidade", detail: "É o fio 'vivo' do circuito. Geralmente preto, vermelho ou marrom. Nunca toque sem desligar o disjuntor! Tensão: 127V ou 220V.", tip: "Fio vermelho ou preto = PERIGO, é o fase!" },
+    { term: "NEUTRO", emoji: "🔵", simple: "O fio de retorno da energia", detail: "Ele completa o circuito, permitindo que a corrente 'volte' após passar pela carga. Geralmente azul. Sem tensão, mas ainda perigoso!", tip: "Fio azul = NEUTRO. Cuidado!" },
+    { term: "TERRA", emoji: "🌱", simple: "O fio de segurança que protege você", detail: "Conectado ao chão. Se houver vazamento de energia, conduz a corrente para o solo, evitando choque. Obrigatório (NBR 5410).", tip: "Fio verde = TERRA. Sua proteção!" },
+    { term: "DISJUNTOR", emoji: "🔲", simple: "O 'guarda-costas' do circuito", detail: "Quando passa corrente demais ou há curto-circuito, desliga automaticamente para proteger a fiação e evitar incêndios.", tip: "Se o disjuntor caiu: descubra o porquê antes de religar!" },
+    { term: "CURTO-CIRCUITO", emoji: "💥", simple: "Quando a eletricidade toma um atalho perigoso", detail: "Acontece quando o fio fase toca o neutro sem passar por nenhuma carga. Gera calor, faísca e risco de incêndio.", tip: "Faísca + disjuntor caindo = sinal de curto! Chame um técnico." },
+    { term: "TENSÃO (VOLTAGEM)", emoji: "🌊", simple: "A 'pressão' que empurra a eletricidade", detail: "Medida em Volts (V). No Brasil: 127V ou 220V. Sempre confira a tensão antes de ligar um aparelho!", tip: "127V ou 220V — sempre confira!" },
+    { term: "CORRENTE (AMPERAGEM)", emoji: "🌊", simple: "A quantidade de eletricidade que flui", detail: "Medida em Ampères (A). Fios têm limite de corrente — passar mais do que isso aquece e pode causar incêndio.", tip: "Amperagem alta = fio mais grosso necessário!" },
+    { term: "RESISTÊNCIA", emoji: "🌀", simple: "O quanto algo 'dificulta' a passagem da eletricidade", detail: "Medida em Ohms (Ω). Quando a corrente passa por uma resistência, gera calor — é assim que chuveiros funcionam!", tip: "Quanto mais fio, mais resistência. Use o mínimo!" },
+    { term: "POTÊNCIA", emoji: "💪", simple: "Quanto de energia um aparelho usa ou produz", detail: "Medida em Watts (W). A conta de luz é em kWh. Um chuveiro elétrico usa ~5.500W!", tip: "W = V × A. Quanto maior o W, mais energia consome!" },
+    { term: "ATERRAMENTO", emoji: "⏚", simple: "Ligar a instalação à terra para segurança", detail: "Conecta partes metálicas ao solo. Se houver falha elétrica, a energia vai para a terra, não para você.", tip: "Sem aterramento = risco de choque. Exija aterramento!" },
+    { term: "DISJUNTOR DR", emoji: "🛡️", simple: "O protetor que salva vidas de choques", detail: "Detecta pequenas fugas de corrente — inclusive pelo corpo humano — e desliga em milissegundos.", tip: "DR no banheiro e cozinha = proteção essencial!" },
+    { term: "SOBRECARGA", emoji: "🔥", simple: "Quando passa mais energia do que o fio aguenta", detail: "Ocorre com aparelhos demais num mesmo circuito. O fio esquenta, pode derreter o isolamento e causar incêndio.", tip: "Não use benjamins! Distribua os aparelhos." },
+    { term: "MULTÍMETRO", emoji: "🔬", simple: "O instrumento que 'lê' a eletricidade", detail: "Mede tensão (V), corrente (A) e resistência (Ω). É a ferramenta mais importante do eletricista.", tip: "Todo eletricista tem um multímetro. É o seu melhor amigo!" },
+    { term: "EPI", emoji: "🧤", simple: "Equipamento que protege seu corpo no trabalho", detail: "EPI = Equipamento de Proteção Individual. Luvas isolantes, óculos, capacete, botina isolante e roupa anti-chama. A empresa DEVE fornecer gratuitamente.", tip: "Sem EPI, não trabalhe. É seu direito e é sua vida!" },
   ];
 
-  // Dois por linha
-  const colW = (W - 28) / 2;
-  let col = 0;
+  // dois por linha
+  const pares = [];
+  for (let i = 0; i < termos.length; i += 2) pares.push(termos.slice(i, i + 2));
 
-  termos.forEach((t) => {
-    const xBase = col === 0 ? 14 : 14 + colW + 4;
-    const cardH = 34;
-
-    if (y + cardH > 275) {
-      if (col === 1) { col = 0; y += cardH + 4; }
-      else { doc.addPage(); y = 20; col = 0; }
-    }
-
-    doc.setFillColor(245, 248, 255);
-    doc.setDrawColor(180, 200, 230);
-    doc.setLineWidth(0.3);
-    doc.roundedRect(xBase, y, colW, cardH, 2, 2, "FD");
-
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(8);
-    doc.setTextColor(74, 144, 217);
-    doc.text(t.term, xBase + 3, y + 6);
-
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(7);
-    doc.setTextColor(60, 60, 60);
-    const simLines = doc.splitTextToSize(t.simple, colW - 6);
-    doc.text(simLines, xBase + 3, y + 12);
-
-    doc.setFont("helvetica", "normal");
-    doc.setFontSize(6.5);
-    doc.setTextColor(100, 100, 100);
-    const detLines = doc.splitTextToSize(t.detail, colW - 6);
-    const maxLines = detLines.slice(0, 3);
-    doc.text(maxLines, xBase + 3, y + 12 + simLines.length * 4 + 2);
-
-    if (col === 0) {
-      col = 1;
-    } else {
-      col = 0;
-      y += cardH + 4;
-    }
-  });
-
-  if (col === 1) y += 34 + 4; // flush última linha se ímpar
-
-  // Rodapé
-  doc.setFont("helvetica", "normal");
-  doc.setFontSize(8);
-  doc.setTextColor(150, 150, 150);
-  doc.text("Trilha EJA-EPT | ProfEPT", W / 2, 290, { align: "center" });
-
-  doc.save("glossario-eletricista.pdf");
+  return (
+    <div ref={refEl} style={{ display: "none", position: "fixed", left: "-9999px", top: 0, zIndex: -1 }}>
+      <div style={{ width: "794px", backgroundColor: "#ffffff", fontFamily: "Arial, sans-serif", boxSizing: "border-box" }}>
+        <div style={{ backgroundColor: "#4A90D9", padding: "28px 40px 20px", textAlign: "center" }}>
+          <h1 style={{ fontSize: "22px", fontWeight: "bold", color: "white", margin: "0 0 6px 0" }}>Glossário do Eletricista</h1>
+          <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.85)", margin: 0 }}>Termos técnicos em linguagem simples</p>
+        </div>
+        <div style={{ padding: "20px 32px 40px" }}>
+          {pares.map((par, pi) => (
+            <div key={pi} style={{ display: "flex", gap: "12px", marginBottom: "12px" }}>
+              {par.map((t, ti) => (
+                <div key={ti} style={{
+                  flex: 1,
+                  backgroundColor: "#F5F8FF",
+                  border: "1px solid #B4C8E6",
+                  borderRadius: "8px",
+                  padding: "10px 12px",
+                }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: "6px", marginBottom: "4px" }}>
+                    <span style={{ fontSize: "16px" }}>{t.emoji}</span>
+                    <span style={{ fontSize: "11px", fontWeight: "bold", color: "#4A90D9" }}>{t.term}</span>
+                  </div>
+                  <p style={{ fontSize: "10px", fontWeight: "bold", color: "#333", margin: "0 0 4px 0" }}>{t.simple}</p>
+                  <p style={{ fontSize: "9.5px", color: "#666", lineHeight: "1.5", margin: "0 0 5px 0" }}>{t.detail}</p>
+                  <p style={{ fontSize: "9px", fontStyle: "italic", color: "#888", margin: 0 }}>💡 {t.tip}</p>
+                </div>
+              ))}
+              {par.length === 1 && <div style={{ flex: 1 }} />}
+            </div>
+          ))}
+          <div style={{ borderTop: "1px solid #ddd", paddingTop: "12px", textAlign: "center", marginTop: "8px" }}>
+            <p style={{ fontSize: "10px", color: "#aaa", margin: 0 }}>Trilha EJA-EPT | ProfEPT</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
 
-// ── Gerador: Guia do Educador (delegado para ParaOEducador) ─────────────────
-function gerarGuiaEducador() {
-  // Redireciona para o módulo que já tem a geração funcionando
-  window.location.href = "/educador";
-}
+function TemplateGuiaEducador({ refEl }) {
+  return (
+    <div ref={refEl} style={{ display: "none", position: "fixed", left: "-9999px", top: 0, zIndex: -1 }}>
+      <div style={{ width: "794px", backgroundColor: "#ffffff", color: "#000000", fontFamily: "Arial, sans-serif", padding: "75px 76px", boxSizing: "border-box" }}>
+        <h1 style={{ fontSize: "22px", fontWeight: "bold", textAlign: "center", margin: "0 0 8px 0" }}>
+          Guia do Educador — Trilha EJA-EPT
+        </h1>
+        <p style={{ fontSize: "13px", color: "#666", textAlign: "center", margin: "0 0 16px 0" }}>
+          Orientações pedagógicas para uso em sala
+        </p>
+        <hr style={{ border: "none", borderTop: "1px solid #ccc", marginBottom: "28px" }} />
 
-// ── Lista de materiais ───────────────────────────────────────────────────────
-const materiais = [
-  {
-    emoji: "🗺️",
-    titulo: "Mapa da Vida — Versão para Imprimir",
-    descricao: "Versão em papel do Mapa da Vida com espaços para escrever à mão suas metas de 1, 5 e 10 anos.",
-    cor: "bg-orange-50 border-orange-200",
-    gerar: gerarMapaVida,
-  },
-  {
-    emoji: "🛡️",
-    titulo: "Cartilha de Direitos Trabalhistas",
-    descricao: "Seus direitos garantidos por lei, em linguagem simples. Inclui CLT, NR-10 e dicas para se proteger.",
-    cor: "bg-blue-50 border-blue-200",
-    gerar: gerarDireitos,
-  },
-  {
-    emoji: "📋",
-    titulo: "Checklist ENEM/SISU/PROUNI",
-    descricao: "Lista de documentos e prazos para não perder nenhuma oportunidade de continuar estudando.",
-    cor: "bg-green-50 border-green-200",
-    gerar: gerarChecklist,
-  },
-  {
-    emoji: "⚡",
-    titulo: "Glossário do Eletricista — Versão para Imprimir",
-    descricao: "Todos os termos técnicos em linguagem simples, formatados para colar no caderno ou na parede da oficina.",
-    cor: "bg-yellow-50 border-yellow-200",
-    gerar: gerarGlossario,
-  },
-  {
-    emoji: "📚",
-    titulo: "Guia do Educador (PDF Completo)",
-    descricao: "Para professores: orientações pedagógicas para uso do Trilha EJA-EPT em perspectiva emancipatória.",
-    cor: "bg-purple-50 border-purple-200",
-    gerar: gerarGuiaEducador,
-  },
-];
+        <h2 style={{ fontSize: "16px", fontWeight: "bold", margin: "0 0 8px 0" }}>1. Quem é o estudante da EJA-EPT?</h2>
+        <p style={{ fontSize: "12px", lineHeight: "1.7", margin: "0 0 8px 0" }}>
+          O estudante da EJA-EPT é um trabalhador-estudante adulto que carrega saberes construídos na vida, no trabalho e nas lutas cotidianas. Como disse Miguel Arroyo, ele é um passageiro da noite — não por falta de esforço, mas porque as condições estruturais da sociedade o afastaram da escola. Ao usar este aplicativo, lembre-se: você não está ensinando alguém que não sabe. Você está reconhecendo quem já sabe muito.
+        </p>
+        <p style={{ fontSize: "11px", fontStyle: "italic", color: "#555", margin: "0 0 32px 0" }}>
+          Referência: ARROYO, M. G. Passageiros da noite. Petrópolis: Vozes, 2012.
+        </p>
+
+        <h2 style={{ fontSize: "16px", fontWeight: "bold", margin: "0 0 8px 0" }}>2. Mundo do Trabalho x Mercado de Trabalho</h2>
+        <p style={{ fontSize: "12px", lineHeight: "1.7", margin: "0 0 8px 0" }}>
+          Este aplicativo usa intencionalmente Mundo do Trabalho, não mercado de trabalho. A diferença é política: formar para o mercado adapta o estudante às necessidades do capital. Formar para o mundo do trabalho instrumentaliza o cidadão a compreender, questionar e transformar as relações de produção. Use essa distinção em suas aulas.
+        </p>
+        <p style={{ fontSize: "11px", fontStyle: "italic", color: "#555", margin: "0 0 32px 0" }}>
+          Referência: FRIGOTTO, G.; CIAVATTA, M.; RAMOS, M. (Orgs.). Ensino Médio Integrado. São Paulo: Cortez, 2005.
+        </p>
+
+        <h2 style={{ fontSize: "16px", fontWeight: "bold", margin: "0 0 12px 0" }}>3. Como usar o Mapa da Vida sem cair na meritocracia</h2>
+        <p style={{ fontSize: "12px", fontWeight: "bold", color: "#2a7a2a", margin: "0 0 4px 0" }}>FAÇA:</p>
+        <p style={{ fontSize: "12px", lineHeight: "1.7", margin: "0 0 4px 8px" }}>— Pergunte à turma quais barreiras estruturais (falta de transporte, cansaço, cuidado de filhos) dificultam seus projetos e debata soluções coletivas.</p>
+        <p style={{ fontSize: "12px", lineHeight: "1.7", margin: "0 0 14px 8px" }}>— Conecte as metas individuais a direitos coletivos (moradia, educação, saúde).</p>
+        <p style={{ fontSize: "12px", fontWeight: "bold", color: "#b02020", margin: "0 0 4px 0" }}>EVITE:</p>
+        <p style={{ fontSize: "12px", lineHeight: "1.7", margin: "0 0 4px 8px" }}>— Frases como "basta querer" ou "quem se esforça chega lá".</p>
+        <p style={{ fontSize: "12px", lineHeight: "1.7", margin: "0 0 14px 8px" }}>— Tratar o projeto de vida como plano individual de ascensão.</p>
+        <p style={{ fontSize: "12px", fontStyle: "italic", lineHeight: "1.7", margin: "0 0 8px 0" }}>O Mapa da Vida é um ato político de esperança coletiva, não um plano de carreira.</p>
+        <p style={{ fontSize: "11px", fontStyle: "italic", color: "#555", margin: "0 0 32px 0" }}>
+          Referência: FREIRE, P. Pedagogia da Esperança. Rio de Janeiro: Paz e Terra, 1992.
+        </p>
+
+        <h2 style={{ fontSize: "16px", fontWeight: "bold", margin: "0 0 12px 0" }}>4. Roteiro Sugerido de 4 Encontros</h2>
+        {[
+          { label: "Encontro 1 — Mundo do Trabalho + Direitos", detail: "Módulos de direitos trabalhistas + NR-10" },
+          { label: "Encontro 2 — Empregabilidade Crítica", detail: "Gerador de currículo em grupo + Valorize sua Experiência" },
+          { label: "Encontro 3 — Mapa da Vida", detail: "Em roda de conversa, com relatos de egressos — Vozes da Trilha" },
+          { label: "Encontro 4 — Caminhos de Estudo", detail: "Use os módulos ENEM/SISU/PROUNI como ponto de partida para uma roda de conversa sobre os projetos de futuro da turma." },
+        ].map((enc, i) => (
+          <div key={i} style={{ marginBottom: "14px" }}>
+            <p style={{ fontSize: "12px", fontWeight: "bold", margin: "0 0 2px 0" }}>{enc.label}</p>
+            <p style={{ fontSize: "12px", color: "#444", margin: 0 }}>{enc.detail}</p>
+          </div>
+        ))}
+
+        <div style={{ marginTop: "40px", borderTop: "1px solid #ccc", paddingTop: "12px", textAlign: "center" }}>
+          <p style={{ fontSize: "10px", color: "#888", margin: 0 }}>Trilha EJA-EPT | Produto Educacional — ProfEPT | IFC</p>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 // ── Componente principal ─────────────────────────────────────────────────────
 export default function BaixarMateriais() {
+  const refMapa = useRef(null);
+  const refDireitos = useRef(null);
+  const refChecklist = useRef(null);
+  const refGlossario = useRef(null);
+  const refGuia = useRef(null);
+  const [loading, setLoading] = useState(null);
+
+  const materiais = [
+    {
+      id: "mapa",
+      emoji: "🗺️",
+      titulo: "Mapa da Vida — Versão para Imprimir",
+      descricao: "Versão em papel do Mapa da Vida com espaços para escrever à mão suas metas de 1, 5 e 10 anos.",
+      cor: "bg-orange-50 border-orange-200",
+      gerar: () => htmlToPDF(refMapa.current, "mapa-da-vida-para-preencher.pdf", "landscape"),
+    },
+    {
+      id: "direitos",
+      emoji: "🛡️",
+      titulo: "Cartilha de Direitos Trabalhistas",
+      descricao: "Seus direitos garantidos por lei, em linguagem simples. Inclui CLT, NR-10 e dicas para se proteger.",
+      cor: "bg-blue-50 border-blue-200",
+      gerar: () => htmlToPDF(refDireitos.current, "direitos-trabalhistas.pdf", "portrait"),
+    },
+    {
+      id: "checklist",
+      emoji: "📋",
+      titulo: "Checklist ENEM/SISU/PROUNI",
+      descricao: "Lista de documentos e prazos para não perder nenhuma oportunidade de continuar estudando.",
+      cor: "bg-green-50 border-green-200",
+      gerar: () => htmlToPDF(refChecklist.current, "checklist-enem-sisu-prouni.pdf", "portrait"),
+    },
+    {
+      id: "glossario",
+      emoji: "⚡",
+      titulo: "Glossário do Eletricista — Versão para Imprimir",
+      descricao: "Todos os termos técnicos em linguagem simples, formatados para colar no caderno ou na parede da oficina.",
+      cor: "bg-yellow-50 border-yellow-200",
+      gerar: () => htmlToPDF(refGlossario.current, "glossario-eletricista.pdf", "portrait"),
+    },
+    {
+      id: "guia",
+      emoji: "📚",
+      titulo: "Guia do Educador (PDF Completo)",
+      descricao: "Para professores: orientações pedagógicas para uso do Trilha EJA-EPT em perspectiva emancipatória.",
+      cor: "bg-purple-50 border-purple-200",
+      gerar: () => htmlToPDF(refGuia.current, "guia-do-educador-trilha-eja-ept.pdf", "portrait"),
+    },
+  ];
+
+  const handleGerar = async (m) => {
+    setLoading(m.id);
+    await m.gerar();
+    setLoading(null);
+  };
+
   return (
     <div>
       <PageHeader title="Baixar Materiais" backTo="/" />
+
+      {/* Templates ocultos */}
+      <TemplateMapa refEl={refMapa} />
+      <TemplateDireitos refEl={refDireitos} />
+      <TemplateChecklist refEl={refChecklist} />
+      <TemplateGlossario refEl={refGlossario} />
+      <TemplateGuiaEducador refEl={refGuia} />
 
       <div className="max-w-lg mx-auto px-4 py-6 space-y-6">
         {/* Hero */}
@@ -521,20 +512,18 @@ export default function BaixarMateriais() {
         {/* Cards */}
         <div className="space-y-3">
           {materiais.map((m) => (
-            <div
-              key={m.titulo}
-              className={`border rounded-2xl p-4 flex items-start gap-4 ${m.cor}`}
-            >
+            <div key={m.id} className={`border rounded-2xl p-4 flex items-start gap-4 ${m.cor}`}>
               <span className="text-3xl shrink-0 mt-0.5">{m.emoji}</span>
               <div className="flex-1 min-w-0">
                 <h3 className="font-bold text-sm leading-snug mb-1">{m.titulo}</h3>
                 <p className="text-xs text-muted-foreground leading-relaxed mb-3">{m.descricao}</p>
                 <button
-                  onClick={m.gerar}
-                  className="flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all"
+                  onClick={() => handleGerar(m)}
+                  disabled={loading === m.id}
+                  className="flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all disabled:opacity-60"
                 >
                   <Download className="w-3.5 h-3.5" />
-                  ⬇️ Baixar PDF
+                  {loading === m.id ? "Gerando…" : "⬇️ Baixar PDF"}
                 </button>
               </div>
             </div>
