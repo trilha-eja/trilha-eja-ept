@@ -485,7 +485,7 @@ export default function BaixarMateriais() {
       titulo: "Mapa da Vida — Versão para Imprimir",
       descricao: "Versão em papel do Mapa da Vida com espaços para escrever à mão suas metas de 1, 5 e 10 anos.",
       cor: "bg-orange-50 border-orange-200",
-      gerar: () => htmlToPDF(refMapa.current, "mapa-da-vida-para-preencher.pdf", "landscape"),
+      link: "https://drive.google.com/file/d/1cK4ySDLz0tJiQfq22gUNqeLW7LhprSpj/view?usp=sharing",
     },
     {
       id: "direitos",
@@ -493,7 +493,7 @@ export default function BaixarMateriais() {
       titulo: "Cartilha de Direitos Trabalhistas",
       descricao: "Seus direitos garantidos por lei, em linguagem simples. Inclui CLT, NR-10 e dicas para se proteger.",
       cor: "bg-blue-50 border-blue-200",
-      gerar: () => htmlToPDF(refDireitos.current, "direitos-trabalhistas.pdf", "portrait"),
+      link: "https://drive.google.com/file/d/1KFyruBVoZJW6wNjKjNGsDXRW9FyW66Bz/view?usp=sharing",
     },
     {
       id: "checklist",
@@ -556,14 +556,26 @@ export default function BaixarMateriais() {
               <div className="flex-1 min-w-0">
                 <h3 className="font-bold text-sm leading-snug mb-1">{m.titulo}</h3>
                 <p className="text-xs text-muted-foreground leading-relaxed mb-3">{m.descricao}</p>
-                <button
-                  onClick={() => handleGerar(m)}
-                  disabled={loading === m.id}
-                  className="flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all disabled:opacity-60"
-                >
-                  <Download className="w-3.5 h-3.5" />
-                  {loading === m.id ? "Gerando…" : "⬇️ Baixar PDF"}
-                </button>
+                {m.link ? (
+                  <a
+                    href={m.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all"
+                  >
+                    <Download className="w-3.5 h-3.5" />
+                    ⬇️ Baixar PDF
+                  </a>
+                ) : (
+                  <button
+                    onClick={() => handleGerar(m)}
+                    disabled={loading === m.id}
+                    className="flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all disabled:opacity-60"
+                  >
+                    <Download className="w-3.5 h-3.5" />
+                    {loading === m.id ? "Gerando…" : "⬇️ Baixar PDF"}
+                  </button>
+                )}
               </div>
             </div>
           ))}
