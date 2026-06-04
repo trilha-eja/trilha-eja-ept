@@ -9,13 +9,19 @@ async function htmlToPDF(el, filename, orientation = "portrait") {
   if (!jsPDF || !html2canvas) { alert("PDF não disponível. Tente novamente."); return; }
 
   el.style.display = "block";
-  await new Promise((r) => setTimeout(r, 100));
+  await new Promise((r) => setTimeout(r, 150));
 
-  const canvas = await html2canvas(el, {
+  // Para landscape (Mapa), capturar exatamente a div interna de altura fixa
+  const innerEl = orientation === "landscape" ? el.firstElementChild : el;
+  const captureH = orientation === "landscape" ? 794 : undefined;
+
+  const canvas = await html2canvas(innerEl, {
     scale: 2,
     useCORS: true,
     backgroundColor: orientation === "landscape" ? "#FFF8F0" : "#ffffff",
     windowWidth: orientation === "landscape" ? 1122 : 794,
+    width: orientation === "landscape" ? 1122 : undefined,
+    height: captureH,
   });
 
   el.style.display = "none";
@@ -42,18 +48,27 @@ async function htmlToPDF(el, filename, orientation = "portrait") {
 // ── Templates HTML ocultos ───────────────────────────────────────────────────
 
 function TemplateMapa({ refEl }) {
+  // Eixos acima: índice 0 = mais próximo da trilha (Trabalho), índice 2 = mais longe (Família)
   const eixosAcima = [
     { cor: "#E86826", label: "🔧 Trabalho" },
     { cor: "#4A90D9", label: "📚 Estudos" },
     { cor: "#5BAD6F", label: "👨‍👩‍👧 Família" },
   ];
+  // Eixos abaixo: índice 0 = mais próximo da trilha (Eu Mesmo), índice 2 = mais longe (Comunidade)
   const eixosAbaixo = [
     { cor: "#9B59B6", label: "🌟 Eu Mesmo" },
     { cor: "#F0A500", label: "🏠 Vida Material" },
     { cor: "#E74C6C", label: "🤝 Comunidade" },
   ];
   const marcos = ["1 ano", "5 anos", "10 anos"];
-  const marcoPositions = ["28%", "56%", "82%"];
+
+  // Layout: trilha no centro vertical da área de conteúdo
+  // Área de conteúdo: y=120 até y=750 (630px de altura)
+  // Trilha: y=380 (centro aproximado)
+  const TRILHA_Y = 370;
+  const TRILHA_H = 36;
+  const GAP = 52; // espaçamento mínimo entre eixos (≥50px)
+  const LABEL_H = 28; // altura de cada bloco de label + linha
 
   return (
     <div ref={refEl} style={{ display: "none", position: "fixed", left: "-9999px", top: 0, zIndex: -1 }}>
@@ -67,128 +82,152 @@ function TemplateMapa({ refEl }) {
         boxSizing: "border-box",
       }}>
         {/* Cabeçalho */}
-        <div style={{ textAlign: "center", paddingTop: "28px" }}>
-          <h1 style={{ fontSize: "26px", fontWeight: "bold", color: "#E86826", margin: "0 0 6px 0" }}>
+        <div style={{ textAlign: "center", paddingTop: "22px" }}>
+          <h1 style={{ fontSize: "24px", fontWeight: "bold", color: "#E86826", margin: "0 0 4px 0" }}>
             Mapa da Vida — Para Preencher à Mão
           </h1>
-          <p style={{ fontSize: "13px", color: "#888", margin: "0 0 10px 0" }}>Trilha EJA-EPT</p>
-          <p style={{ fontSize: "12px", color: "#555", margin: 0 }}>
+          <p style={{ fontSize: "12px", color: "#888", margin: "0 0 6px 0" }}>Trilha EJA-EPT</p>
+          <p style={{ fontSize: "11px", color: "#555", margin: 0 }}>
             Nome: _________________________ &nbsp;&nbsp;&nbsp; Data: ___________
           </p>
         </div>
 
-        {/* Área da trilha — posicionada absolutamente no centro vertical */}
-        <div style={{ position: "absolute", left: "60px", right: "60px", top: "155px", bottom: "60px" }}>
+        {/* Trilha horizontal */}
+        <div style={{
+          position: "absolute",
+          left: "100px", right: "100px",
+          top: `${TRILHA_Y}px`,
+          height: `${TRILHA_H}px`,
+          backgroundColor: "#C4956A",
+          borderRadius: "18px",
+        }} />
 
-          {/* Trilha horizontal */}
+        {/* Ponto Hoje */}
+        <div style={{ position: "absolute", left: "40px", top: `${TRILHA_Y - 12}px`, textAlign: "center", width: "60px" }}>
           <div style={{
-            position: "absolute",
-            left: "40px", right: "40px",
-            top: "250px",
-            height: "36px",
-            backgroundColor: "#C4956A",
-            borderRadius: "18px",
-          }} />
+            width: "60px", height: "60px", borderRadius: "50%",
+            backgroundColor: "#E86826", display: "flex", alignItems: "center",
+            justifyContent: "center", color: "white", fontWeight: "bold", fontSize: "11px",
+          }}>Hoje</div>
+          <div style={{ fontSize: "9px", color: "#E86826", marginTop: "3px" }}>Ponto de Partida</div>
+        </div>
 
-          {/* Ponto Hoje */}
-          <div style={{ position: "absolute", left: "0px", top: "236px", textAlign: "center", width: "60px" }}>
-            <div style={{
-              width: "60px", height: "60px", borderRadius: "50%",
-              backgroundColor: "#E86826", display: "flex", alignItems: "center",
-              justifyContent: "center", color: "white", fontWeight: "bold", fontSize: "11px",
-              margin: "0 auto",
-            }}>Hoje</div>
-            <div style={{ fontSize: "9px", color: "#E86826", marginTop: "4px" }}>Ponto de Partida</div>
-          </div>
+        {/* Estrela futuro */}
+        <div style={{ position: "absolute", right: "30px", top: `${TRILHA_Y - 12}px`, textAlign: "center", width: "60px" }}>
+          <div style={{ fontSize: "30px", lineHeight: 1 }}>⭐</div>
+          <div style={{ fontSize: "9px", color: "#E86826", marginTop: "2px" }}>Seu futuro</div>
+        </div>
 
-          {/* Estrela futuro */}
-          <div style={{ position: "absolute", right: "-10px", top: "236px", textAlign: "center", width: "60px" }}>
-            <div style={{ fontSize: "32px", lineHeight: 1 }}>⭐</div>
-            <div style={{ fontSize: "9px", color: "#E86826", marginTop: "2px" }}>Seu futuro</div>
-          </div>
-
-          {/* Marcos */}
-          {marcos.map((m, i) => {
-            const left = [245, 500, 740][i];
-            return (
-              <div key={m} style={{
+        {/* Marcos + ramificações */}
+        {[230, 530, 810].map((marcoLeft, mi) => {
+          const cx = marcoLeft + 18;
+          return (
+            <div key={mi}>
+              {/* Círculo marco */}
+              <div style={{
                 position: "absolute",
-                left: `${left}px`,
-                top: "250px",
+                left: `${marcoLeft}px`,
+                top: `${TRILHA_Y}px`,
                 width: "36px", height: "36px",
                 borderRadius: "50%",
                 backgroundColor: "white",
                 border: "2.5px solid #E86826",
                 display: "flex", alignItems: "center", justifyContent: "center",
-                fontSize: "8px", fontWeight: "bold", color: "#E86826",
+                fontSize: "7px", fontWeight: "bold", color: "#E86826",
                 textAlign: "center", lineHeight: "1.1",
-              }}>{m}</div>
-            );
-          })}
+                zIndex: 2,
+              }}>{marcos[mi]}</div>
 
-          {/* Ramificações — por marco */}
-          {[245, 500, 740].map((left, mi) => {
-            const cx = left + 18; // centro do marco
-            return (
-              <div key={mi}>
-                {/* ACIMA */}
-                {eixosAcima.map((e, ei) => {
-                  const top = 210 - (ei + 1) * 58;
-                  return (
-                    <div key={ei} style={{ position: "absolute", left: `${cx - 55}px`, top: `${top}px`, width: "110px", textAlign: "center" }}>
-                      <div style={{ fontSize: "8px", fontWeight: "bold", color: e.cor, marginBottom: "3px" }}>{e.label}</div>
-                      <div style={{ fontSize: "10px", color: "#aaa", borderBottom: `1.5px solid ${e.cor}`, paddingBottom: "1px" }}>
-                        ________________________
-                      </div>
-                      {/* linha vertical para a trilha */}
-                      <div style={{
-                        position: "absolute", left: "50%", bottom: "-20px",
-                        width: "1.5px", height: "20px",
-                        backgroundColor: e.cor, transform: "translateX(-50%)",
-                      }} />
-                      <div style={{
-                        position: "absolute", left: "50%", bottom: "-25px",
-                        width: "10px", height: "10px", borderRadius: "50%",
-                        backgroundColor: e.cor, transform: "translateX(-50%)",
-                      }} />
+              {/* ACIMA: eixo 0 = mais próximo (Trabalho), eixo 2 = mais longe (Família) */}
+              {eixosAcima.map((e, ei) => {
+                // ei=0 → mais próximo da trilha → menor distância
+                const blockY = TRILHA_Y - TRILHA_H / 2 - (ei + 1) * GAP - LABEL_H;
+                const lineStartY = TRILHA_Y - TRILHA_H / 2;
+                const lineEndY = blockY + LABEL_H + 4;
+                return (
+                  <div key={ei}>
+                    {/* Linha vertical */}
+                    <div style={{
+                      position: "absolute",
+                      left: `${cx - 1}px`,
+                      top: `${lineEndY}px`,
+                      width: "2px",
+                      height: `${lineStartY - lineEndY}px`,
+                      backgroundColor: e.cor,
+                    }} />
+                    {/* Círculo no ponto de conexão */}
+                    <div style={{
+                      position: "absolute",
+                      left: `${cx - 5}px`,
+                      top: `${lineEndY - 5}px`,
+                      width: "10px", height: "10px",
+                      borderRadius: "50%",
+                      backgroundColor: e.cor,
+                    }} />
+                    {/* Label + linha para escrever */}
+                    <div style={{
+                      position: "absolute",
+                      left: `${cx - 58}px`,
+                      top: `${blockY}px`,
+                      width: "116px",
+                      textAlign: "center",
+                    }}>
+                      <div style={{ fontSize: "8px", fontWeight: "bold", color: e.cor, marginBottom: "4px" }}>{e.label}</div>
+                      <div style={{ borderBottom: `1.5px solid ${e.cor}`, color: "#ccc", fontSize: "9px" }}>________________________</div>
                     </div>
-                  );
-                })}
+                  </div>
+                );
+              })}
 
-                {/* ABAIXO */}
-                {eixosAbaixo.map((e, ei) => {
-                  const top = 300 + (ei) * 58;
-                  return (
-                    <div key={ei} style={{ position: "absolute", left: `${cx - 55}px`, top: `${top}px`, width: "110px", textAlign: "center" }}>
-                      {/* linha vertical da trilha */}
-                      <div style={{
-                        position: "absolute", left: "50%", top: "-15px",
-                        width: "1.5px", height: "15px",
-                        backgroundColor: e.cor, transform: "translateX(-50%)",
-                      }} />
-                      <div style={{
-                        position: "absolute", left: "50%", top: "-20px",
-                        width: "10px", height: "10px", borderRadius: "50%",
-                        backgroundColor: e.cor, transform: "translateX(-50%)",
-                      }} />
-                      <div style={{ fontSize: "10px", color: "#aaa", borderBottom: `1.5px solid ${e.cor}`, paddingBottom: "1px", marginTop: "6px" }}>
-                        ________________________
-                      </div>
-                      <div style={{ fontSize: "8px", fontWeight: "bold", color: e.cor, marginTop: "3px" }}>{e.label}</div>
+              {/* ABAIXO: eixo 0 = mais próximo (Eu Mesmo), eixo 2 = mais longe (Comunidade) */}
+              {eixosAbaixo.map((e, ei) => {
+                const blockY = TRILHA_Y + TRILHA_H / 2 + (ei + 1) * GAP;
+                const lineStartY = TRILHA_Y + TRILHA_H / 2;
+                const lineEndY = blockY - 6;
+                return (
+                  <div key={ei}>
+                    {/* Linha vertical */}
+                    <div style={{
+                      position: "absolute",
+                      left: `${cx - 1}px`,
+                      top: `${lineStartY}px`,
+                      width: "2px",
+                      height: `${lineEndY - lineStartY}px`,
+                      backgroundColor: e.cor,
+                    }} />
+                    {/* Círculo */}
+                    <div style={{
+                      position: "absolute",
+                      left: `${cx - 5}px`,
+                      top: `${lineEndY}px`,
+                      width: "10px", height: "10px",
+                      borderRadius: "50%",
+                      backgroundColor: e.cor,
+                    }} />
+                    {/* Label + linha para escrever */}
+                    <div style={{
+                      position: "absolute",
+                      left: `${cx - 58}px`,
+                      top: `${blockY + 6}px`,
+                      width: "116px",
+                      textAlign: "center",
+                    }}>
+                      <div style={{ borderBottom: `1.5px solid ${e.cor}`, color: "#ccc", fontSize: "9px", marginBottom: "4px" }}>________________________</div>
+                      <div style={{ fontSize: "8px", fontWeight: "bold", color: e.cor }}>{e.label}</div>
                     </div>
-                  );
-                })}
-              </div>
-            );
-          })}
-        </div>
+                  </div>
+                );
+              })}
+            </div>
+          );
+        })}
 
         {/* Rodapé */}
-        <div style={{ position: "absolute", bottom: "10px", left: 0, right: 0, textAlign: "center" }}>
-          <p style={{ fontSize: "10px", fontStyle: "italic", color: "#888", margin: "0 0 3px 0" }}>
+        <div style={{ position: "absolute", bottom: "8px", left: 0, right: 0, textAlign: "center" }}>
+          <p style={{ fontSize: "9px", fontStyle: "italic", color: "#888", margin: "0 0 2px 0" }}>
             "Cada passo conta. Você já chegou até aqui."
           </p>
-          <p style={{ fontSize: "9px", color: "#bbb", margin: 0 }}>Trilha EJA-EPT | ProfEPT</p>
+          <p style={{ fontSize: "8px", color: "#bbb", margin: 0 }}>Trilha EJA-EPT | ProfEPT</p>
         </div>
       </div>
     </div>
@@ -224,9 +263,9 @@ function TemplateDireitos({ refEl }) {
               marginBottom: "14px",
               position: "relative",
             }}>
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "6px" }}>
-                <h3 style={{ fontSize: "13px", fontWeight: "bold", color: "#333", margin: 0 }}>{d.titulo}</h3>
-                <span style={{ fontSize: "10px", backgroundColor: "#E86826", color: "white", padding: "2px 8px", borderRadius: "10px", whiteSpace: "nowrap", marginLeft: "8px" }}>{d.base}</span>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "6px", gap: "8px" }}>
+                <h3 style={{ fontSize: "13px", fontWeight: "bold", color: "#333", margin: 0, flexShrink: 0 }}>{d.titulo}</h3>
+                <span style={{ fontSize: "9px", backgroundColor: "#E86826", color: "white", padding: "3px 4px", borderRadius: "6px", lineHeight: "1.3", textAlign: "center", maxWidth: "110px", flexShrink: 0 }}>{d.base}</span>
               </div>
               <p style={{ fontSize: "11px", color: "#555", lineHeight: "1.6", margin: 0 }}>{d.texto}</p>
             </div>
