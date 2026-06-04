@@ -22,6 +22,26 @@ export default function RightsSubPage({ titulo, subtitulo, cards, onBack }) {
               <h3 className="font-bold text-sm">{r.titulo}</h3>
             </div>
             <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">{r.texto}</p>
+            {r.canais && (
+              <div className="mt-3 space-y-3">
+                {r.canais.map((c, ci) => (
+                  <div key={ci} className="bg-muted/50 rounded-xl p-3">
+                    <p className="font-bold text-xs mb-1">{c.nome}</p>
+                    <p className="text-xs text-muted-foreground leading-relaxed">{c.descricao}</p>
+                    {c.link && (
+                      <a
+                        href={c.link.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-2 inline-flex items-center gap-1.5 text-xs font-bold px-3 py-1.5 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all"
+                      >
+                        {c.link.label}
+                      </a>
+                    )}
+                  </div>
+                ))}
+              </div>
+            )}
             {r.legal && (
               <p className="text-xs text-muted-foreground/70 mt-2 border-t border-border pt-2">
                 📋 <span className="font-semibold">Base legal:</span> {r.legal}

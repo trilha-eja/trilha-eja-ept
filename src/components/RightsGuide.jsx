@@ -83,7 +83,7 @@ export default function RightsGuide({ onBack }) {
       </div>
       <div className="max-w-lg mx-auto px-4 py-5 space-y-3 pb-10">
         <div className="bg-accent/10 rounded-2xl p-4 text-center mb-2">
-          <p className="text-sm font-semibold">🛡️ Conheça seus direitos — isso é poder!</p>
+          <p className="text-sm font-semibold">🛡️ Conheça seus direitos — eles existem para proteger sua dignidade!</p>
         </div>
         {subpaginas.map((s) => (
           <button
