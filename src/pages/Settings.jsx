@@ -1,27 +1,10 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Trash2, AlertTriangle, ArrowLeft, Moon, Sun, Monitor } from "lucide-react";
+import { ArrowLeft, Moon, Sun, Monitor } from "lucide-react";
 import { useTheme } from "next-themes";
-import { Button } from "@/components/ui/button";
-import { base44 } from "@/api/base44Client";
 
 export default function Settings() {
   const navigate = useNavigate();
   const { theme, setTheme } = useTheme();
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const [deleting, setDeleting] = useState(false);
-
-  const handleDeleteAccount = async () => {
-    setDeleting(true);
-    try {
-      await base44.auth.logout();
-    } catch {
-      // ignore, redirect anyway
-    } finally {
-      setDeleting(false);
-      setShowDeleteModal(false);
-    }
-  };
 
   const themeOptions = [
     { value: "system", icon: Monitor, label: "Sistema" },
@@ -77,56 +60,7 @@ export default function Settings() {
           </p>
         </div>
 
-        {/* Danger zone */}
-        <div className="bg-destructive/5 border border-destructive/20 rounded-2xl p-5">
-          <h2 className="font-bold text-sm text-destructive uppercase tracking-wide mb-1">Zona de Perigo</h2>
-          <p className="text-xs text-muted-foreground mb-4">
-            Esta ação não pode ser desfeita.
-          </p>
-          <Button
-            variant="destructive"
-            className="w-full h-12 rounded-xl gap-2"
-            onClick={() => setShowDeleteModal(true)}
-          >
-            <Trash2 className="w-4 h-4" /> Excluir Conta
-          </Button>
-        </div>
       </div>
-
-      {/* Delete confirmation modal */}
-      {showDeleteModal && (
-        <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/50 backdrop-blur-sm px-4 pb-6">
-          <div className="bg-card w-full max-w-sm rounded-3xl p-6 shadow-2xl">
-            <div className="flex justify-center mb-4">
-              <div className="w-14 h-14 bg-destructive/10 rounded-full flex items-center justify-center">
-                <AlertTriangle className="w-7 h-7 text-destructive" />
-              </div>
-            </div>
-            <h2 className="font-extrabold text-lg text-center mb-2">Excluir conta?</h2>
-            <p className="text-sm text-muted-foreground text-center leading-relaxed mb-6">
-              Todos os seus dados (currículo, mapa da vida, metas) serão apagados permanentemente. Tem certeza?
-            </p>
-            <div className="flex gap-3">
-              <Button
-                variant="outline"
-                className="flex-1 h-12 rounded-xl"
-                onClick={() => setShowDeleteModal(false)}
-                disabled={deleting}
-              >
-                Cancelar
-              </Button>
-              <Button
-                variant="destructive"
-                className="flex-1 h-12 rounded-xl"
-                onClick={handleDeleteAccount}
-                disabled={deleting}
-              >
-                {deleting ? "Excluindo..." : "Sim, excluir"}
-              </Button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
