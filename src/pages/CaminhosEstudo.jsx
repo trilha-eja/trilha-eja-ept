@@ -1,56 +1,75 @@
-import { useState } from "react";
 import PageHeader from "../components/PageHeader";
-import AbaEnemSisu from "../components/caminhos/AbaEnemSisu";
-import AbaCursosGratuitos from "../components/caminhos/AbaCursosGratuitos";
+import SecaoEnem from "../components/caminhos/SecaoEnem";
+import SecaoSisu from "../components/caminhos/SecaoSisu";
+import SecaoProuni from "../components/caminhos/SecaoProuni";
+import SecaoCursosGratuitos from "../components/caminhos/SecaoCursosGratuitos";
 import AbaDicasEstudo from "../components/caminhos/AbaDicasEstudo";
 import AbaFerramentasDigitais from "../components/caminhos/AbaFerramentasDigitais";
 import AbaVideos from "../components/caminhos/AbaVideos";
 
-const abas = [
-  { id: "enem", label: "ENEM/SISU/PROUNI", emoji: "🎓" },
-  { id: "cursos", label: "Cursos Gratuitos", emoji: "📚" },
-  { id: "dicas", label: "Dicas de Estudo", emoji: "💡" },
-  { id: "ferramentas", label: "Ferramentas Digitais", emoji: "📱" },
-  { id: "videos", label: "Vídeos", emoji: "🎬" },
-];
+function SecaoTitulo({ emoji, titulo, subtitulo, cor }) {
+  return (
+    <div className={`rounded-2xl px-4 py-3 ${cor}`}>
+      <div className="flex items-center gap-2">
+        <span className="text-2xl">{emoji}</span>
+        <div>
+          <h2 className="font-extrabold text-base leading-tight">{titulo}</h2>
+          {subtitulo && <p className="text-xs opacity-80">{subtitulo}</p>}
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function CaminhosEstudo() {
-  const [abaAtiva, setAbaAtiva] = useState("enem");
-
   return (
     <div>
       <PageHeader title="Caminhos de Estudo" subtitle="Continue crescendo!" />
 
-      {/* Abas — scroll horizontal no mobile */}
-      <div className="sticky top-[57px] z-30 bg-background border-b border-border">
-        <div
-          className="flex overflow-x-auto gap-1 px-3 py-2"
-          style={{ scrollbarWidth: "none", WebkitOverflowScrolling: "touch" }}
-        >
-          {abas.map((a) => (
-            <button
-              key={a.id}
-              onClick={() => setAbaAtiva(a.id)}
-              className={`flex items-center gap-1.5 whitespace-nowrap px-3 py-1.5 rounded-xl text-xs font-bold transition-all shrink-0 ${
-                abaAtiva === a.id
-                  ? "bg-primary text-primary-foreground shadow-sm"
-                  : "bg-muted text-muted-foreground hover:text-foreground"
-              }`}
-            >
-              <span>{a.emoji}</span>
-              <span>{a.label}</span>
-            </button>
-          ))}
-        </div>
-      </div>
+      <div className="max-w-lg mx-auto px-4 py-5 pb-10 space-y-8">
 
-      {/* Conteúdo da aba */}
-      <div className="max-w-lg mx-auto px-4 py-5 pb-10">
-        {abaAtiva === "enem" && <AbaEnemSisu />}
-        {abaAtiva === "cursos" && <AbaCursosGratuitos />}
-        {abaAtiva === "dicas" && <AbaDicasEstudo />}
-        {abaAtiva === "ferramentas" && <AbaFerramentasDigitais />}
-        {abaAtiva === "videos" && <AbaVideos />}
+        {/* ── ENEM ── */}
+        <section className="space-y-3">
+          <SecaoTitulo emoji="📝" titulo="ENEM" subtitulo="Exame Nacional do Ensino Médio" cor="bg-primary/10 text-foreground" />
+          <SecaoEnem />
+        </section>
+
+        {/* ── SISU ── */}
+        <section className="space-y-3">
+          <SecaoTitulo emoji="🏛️" titulo="SISU" subtitulo="Sistema de Seleção Unificada" cor="bg-accent/10 text-foreground" />
+          <SecaoSisu />
+        </section>
+
+        {/* ── PROUNI ── */}
+        <section className="space-y-3">
+          <SecaoTitulo emoji="🎓" titulo="PROUNI" subtitulo="Programa Universidade para Todos" cor="bg-chart-4/10 text-foreground" />
+          <SecaoProuni />
+        </section>
+
+        {/* ── Cursos Gratuitos ── */}
+        <section className="space-y-3">
+          <SecaoTitulo emoji="📚" titulo="Cursos Gratuitos" subtitulo="Outras formas de continuar estudando" cor="bg-chart-2/10 text-foreground" />
+          <SecaoCursosGratuitos />
+        </section>
+
+        {/* ── Dicas de Estudo ── */}
+        <section className="space-y-3">
+          <SecaoTitulo emoji="💡" titulo="Dicas de Estudo" subtitulo="Para quem trabalha e estuda" cor="bg-secondary/30 text-foreground" />
+          <AbaDicasEstudo />
+        </section>
+
+        {/* ── Ferramentas Digitais ── */}
+        <section className="space-y-3">
+          <SecaoTitulo emoji="📱" titulo="Ferramentas Digitais" subtitulo="Seu celular pode ser seu melhor aliado" cor="bg-muted text-foreground" />
+          <AbaFerramentasDigitais />
+        </section>
+
+        {/* ── Vídeos ── */}
+        <section className="space-y-3">
+          <SecaoTitulo emoji="🎬" titulo="Vídeos Recomendados" subtitulo="Busca direta no YouTube" cor="bg-destructive/10 text-foreground" />
+          <AbaVideos />
+        </section>
+
       </div>
     </div>
   );
