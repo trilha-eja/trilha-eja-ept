@@ -6,6 +6,7 @@ import SubEnem from "../components/caminhos/SubEnem";
 import SubSisu from "../components/caminhos/SubSisu";
 import SubProuni from "../components/caminhos/SubProuni";
 import SubFies from "../components/caminhos/SubFies";
+import SubTrilhaContinuidade from "../components/caminhos/SubTrilhaContinuidade";
 import SubCursosGratuitos from "../components/caminhos/SubCursosGratuitos";
 import SubDicasEstudo from "../components/caminhos/SubDicasEstudo";
 import SubFerramentasDigitais from "../components/caminhos/SubFerramentasDigitais";
@@ -16,6 +17,7 @@ const sections = [
   { id: "sisu",        icon: Award,          title: "SISU",                   description: "Sistema de Seleção Unificada",          color: "bg-accent" },
   { id: "prouni",      icon: GraduationCap,  title: "PROUNI",                 description: "Programa Universidade para Todos",      color: "bg-chart-4" },
   { id: "fies",        icon: GraduationCap,  title: "FIES",                   description: "Financiamento Estudantil do Governo Federal",   color: "bg-destructive" },
+  { id: "trilha",      icon: BookOpen,       title: "Trilha de Continuidade",  description: "Veja os caminhos possíveis após a EJA-EPT",     color: "bg-chart-3" },
   { id: "cursos",      icon: School,         title: "Cursos Gratuitos",        description: "Estude de graça onde estiver",          color: "bg-chart-2" },
   { id: "dicas",       icon: Lightbulb,      title: "Dicas de Estudo",         description: "Como estudar com pouco tempo",          color: "bg-secondary" },
   { id: "ferramentas", icon: Smartphone,     title: "Ferramentas Digitais",    description: "Seu celular como aliado nos estudos",   color: "bg-chart-1" },
@@ -27,6 +29,7 @@ const subMap = {
   sisu:        (back) => <SubSisu onBack={back} />,
   prouni:      (back) => <SubProuni onBack={back} />,
   fies:        (back) => <SubFies onBack={back} />,
+  trilha:      (back, nav) => <SubTrilhaContinuidade onBack={back} onNavigate={nav} />,
   cursos:      (back) => <SubCursosGratuitos onBack={back} />,
   dicas:       (back) => <SubDicasEstudo onBack={back} />,
   ferramentas: (back) => <SubFerramentasDigitais onBack={back} />,
@@ -36,7 +39,7 @@ const subMap = {
 export default function CaminhosEstudo() {
   const [active, setActive] = useState(null);
 
-  if (active) return subMap[active](() => setActive(null));
+  if (active) return subMap[active](() => setActive(null), setActive);
 
   return (
     <div>

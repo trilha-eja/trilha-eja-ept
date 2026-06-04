@@ -1,0 +1,196 @@
+import PageHeader from "../PageHeader";
+
+const caminhos = [
+  {
+    cor: "#E86826",
+    bg: "bg-orange-50",
+    borda: "border-orange-300",
+    emoji: "🔧",
+    titulo: "Inserção Profissional",
+    texto: "Trabalhar na área técnica com carteira assinada, usando o certificado do curso.",
+    tag: "Disponível agora",
+    tagBg: "bg-orange-100 text-orange-800",
+  },
+  {
+    cor: "#4A90D9",
+    bg: "bg-blue-50",
+    borda: "border-blue-300",
+    emoji: "📐",
+    titulo: "Curso Técnico",
+    texto: "Fazer um curso técnico no SENAI, SENAC ou Instituto Federal.",
+    tag: "Gratuito",
+    tagBg: "bg-blue-100 text-blue-800",
+  },
+  {
+    cor: "#5BAD6F",
+    bg: "bg-green-50",
+    borda: "border-green-300",
+    emoji: "📝",
+    titulo: "Fazer o ENEM",
+    texto: "Porta de entrada para a universidade gratuita pelo SISU ou PROUNI.",
+    tag: "Gratuito",
+    tagBg: "bg-green-100 text-green-800",
+  },
+];
+
+function Seta({ label }) {
+  return (
+    <div className="flex flex-col items-center gap-1 py-1">
+      <div className="w-px h-5 bg-border" />
+      {label && <p className="text-xs text-muted-foreground font-semibold px-2 text-center">{label}</p>}
+      <svg width="16" height="10" viewBox="0 0 16 10" fill="none">
+        <path d="M8 10L0 0h16L8 10z" fill="hsl(var(--muted-foreground))" opacity="0.5" />
+      </svg>
+      <div className="w-px h-3 bg-border" />
+    </div>
+  );
+}
+
+function Nivel({ cor, emoji, titulo, subtexto, tags }) {
+  return (
+    <div className="flex flex-col items-center gap-1">
+      <div
+        className="w-20 h-20 rounded-full flex flex-col items-center justify-center shadow-md"
+        style={{ backgroundColor: cor }}
+      >
+        <span className="text-2xl leading-none">{emoji}</span>
+        <span className="text-white text-xs font-extrabold mt-1 leading-tight text-center px-1">{titulo}</span>
+      </div>
+      <p className="text-xs text-muted-foreground text-center leading-relaxed max-w-[200px]">{subtexto}</p>
+      {tags && (
+        <div className="flex flex-wrap justify-center gap-1 mt-1">
+          {tags.map((t) => (
+            <span key={t} className="text-[10px] bg-muted text-muted-foreground px-2 py-0.5 rounded-full font-semibold">{t}</span>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default function SubTrilhaContinuidade({ onBack, onNavigate }) {
+  return (
+    <div>
+      <PageHeader title="Sua Trilha de Continuidade" subtitle="Existem muitos caminhos possíveis após a EJA-EPT" backTo="/" />
+      <div className="max-w-lg mx-auto px-4 py-5 pb-10 space-y-4">
+
+        {/* Intro */}
+        <div className="rounded-2xl p-4 bg-orange-50 border border-orange-200">
+          <p className="text-xs text-orange-800 leading-relaxed">
+            💡 <strong>Não existe um único caminho certo.</strong> Você pode seguir qualquer uma dessas trilhas — no seu tempo, do seu jeito. O importante é continuar!
+          </p>
+        </div>
+
+        {/* TRILHA VISUAL */}
+        <div className="flex flex-col items-center">
+
+          {/* Nível 1 — ponto de partida */}
+          <div className="flex flex-col items-center gap-1">
+            <div className="w-20 h-20 rounded-full flex flex-col items-center justify-center shadow-md bg-primary">
+              <span className="text-2xl leading-none">🎓</span>
+              <span className="text-white text-xs font-extrabold mt-1 leading-tight text-center px-1">EJA-EPT</span>
+            </div>
+            <p className="text-xs text-muted-foreground font-semibold">Você está aqui!</p>
+          </div>
+
+          <Seta label="O que vem depois?" />
+
+          {/* Nível 2 — 3 caminhos */}
+          <div className="w-full grid grid-cols-3 gap-2">
+            {caminhos.map((c) => (
+              <div key={c.titulo} className={`border ${c.borda} ${c.bg} rounded-2xl p-3 flex flex-col items-center gap-1.5 text-center`}>
+                <span className="text-xl">{c.emoji}</span>
+                <p className="text-xs font-extrabold leading-tight" style={{ color: c.cor }}>{c.titulo}</p>
+                <p className="text-[10px] text-muted-foreground leading-relaxed">{c.texto}</p>
+                <span className={`text-[9px] font-bold px-2 py-0.5 rounded-full ${c.tagBg}`}>{c.tag}</span>
+              </div>
+            ))}
+          </div>
+
+          <Seta />
+
+          {/* Nível 3 — Graduação */}
+          <Nivel
+            cor="#4A90D9"
+            emoji="🏫"
+            titulo="Graduação"
+            subtexto="Engenharia Elétrica, Tecnólogo, Licenciatura e muito mais"
+            tags={["SISU", "PROUNI", "FIES"]}
+          />
+
+          <Seta />
+
+          {/* Nível 4 — Pós */}
+          <Nivel
+            cor="#5BAD6F"
+            emoji="📚"
+            titulo="Especialização"
+            subtexto="Aprofunde seus conhecimentos na sua área de atuação"
+          />
+
+          <Seta />
+
+          {/* Nível 5 — Mestrado */}
+          <div className="flex flex-col items-center gap-1">
+            <Nivel
+              cor="#9B59B6"
+              emoji="🔬"
+              titulo="Mestrado"
+              subtexto="Pesquisa e desenvolvimento na sua área"
+            />
+            <span className="text-[10px] bg-purple-100 text-purple-800 font-bold px-2 py-0.5 rounded-full">Gratuito nas universidades públicas</span>
+          </div>
+
+          <Seta />
+
+          {/* Nível 6 — Doutorado */}
+          <div className="flex flex-col items-center gap-1">
+            <Nivel
+              cor="#C8A200"
+              emoji="⭐"
+              titulo="Doutorado"
+              subtexto="O nível mais alto da formação acadêmica"
+            />
+            <span className="text-[10px] bg-yellow-100 text-yellow-800 font-bold px-2 py-0.5 rounded-full">Gratuito nas universidades públicas</span>
+          </div>
+
+        </div>
+
+        {/* Mensagem motivacional */}
+        <div className="rounded-2xl p-4 border border-orange-300" style={{ backgroundColor: "#FFF8F0" }}>
+          <p className="text-xs text-orange-900 leading-relaxed">
+            🌱 <strong>Você já deu o primeiro passo</strong> voltando a estudar. Cada nível desta trilha é uma possibilidade real — não uma obrigação. Vá no seu ritmo, no seu tempo. Sua história já é inspiração para quem vem depois.
+          </p>
+        </div>
+
+        {/* Cards de ação rápida */}
+        <div className="space-y-2">
+          <p className="text-sm font-extrabold px-1">Por onde quer começar?</p>
+
+          {[
+            { emoji: "📝", titulo: "Quero fazer o ENEM", botao: "Ver como funciona", nav: "enem" },
+            { emoji: "🎁", titulo: "Quero uma bolsa de estudos", botao: "Ver PROUNI", nav: "prouni" },
+            { emoji: "📚", titulo: "Quero estudar de graça agora", botao: "Ver cursos gratuitos", nav: "cursos" },
+          ].map((a) => (
+            <div key={a.nav} className="border border-border rounded-2xl p-4 bg-card flex items-center gap-3">
+              <span className="text-2xl shrink-0">{a.emoji}</span>
+              <div className="flex-1 min-w-0">
+                <p className="font-bold text-sm mb-2">{a.titulo}</p>
+                <button
+                  onClick={() => onNavigate(a.nav)}
+                  className="inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all"
+                >
+                  {a.botao} →
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <button onClick={onBack} className="w-full text-sm text-muted-foreground underline underline-offset-4 py-2">
+          ← Voltar para Caminhos de Estudo
+        </button>
+      </div>
+    </div>
+  );
+}
