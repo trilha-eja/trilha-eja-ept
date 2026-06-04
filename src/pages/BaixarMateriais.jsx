@@ -485,7 +485,7 @@ export default function BaixarMateriais() {
       titulo: "Mapa da Vida — Versão para Imprimir",
       descricao: "Versão em papel do Mapa da Vida com espaços para escrever à mão suas metas de 1, 5 e 10 anos.",
       cor: "bg-orange-50 border-orange-200",
-      link: "https://drive.google.com/file/d/1cK4ySDLz0tJiQfq22gUNqeLW7LhprSpj/view?usp=sharing",
+      link: "https://trilha-eja.github.io/materiais/Mapa-da-vida.png",
     },
     {
       id: "direitos",
@@ -493,7 +493,7 @@ export default function BaixarMateriais() {
       titulo: "Cartilha de Direitos Trabalhistas",
       descricao: "Seus direitos garantidos por lei, em linguagem simples. Inclui CLT, NR-10 e dicas para se proteger.",
       cor: "bg-blue-50 border-blue-200",
-      link: "https://drive.google.com/file/d/1KFyruBVoZJW6wNjKjNGsDXRW9FyW66Bz/view?usp=sharing",
+      link: "https://trilha-eja.github.io/materiais/Direitos-trabalhistas.png",
     },
     {
       id: "checklist",
