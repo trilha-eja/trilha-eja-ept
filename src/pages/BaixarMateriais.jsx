@@ -573,7 +573,7 @@ export default function BaixarMateriais() {
                     className="flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all disabled:opacity-60"
                   >
                     <Download className="w-3.5 h-3.5" />
-                    {loading === m.id ? "Gerando…" : "⬇️ Baixar PDF"}
+                    {loading === m.id ? "Gerando…" : "⬇️ Baixar e Imprimir"}
                   </button>
                 )}
               </div>
