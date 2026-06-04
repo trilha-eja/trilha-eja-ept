@@ -6,12 +6,14 @@ import ResumeBuilder from "../components/ResumeBuilder";
 import RightsGuide from "../components/RightsGuide";
 import SoftSkillsTips from "../components/SoftSkillsTips";
 import JobSites from "../components/JobSites";
+import InternshipSites from "../components/InternshipSites";
 
 const sections = [
   { id: "resume", icon: FileText, title: "Criar meu Currículo", description: "Passo a passo simples", color: "bg-primary" },
   { id: "skills", icon: Star, title: "Valorize sua Experiência", description: "Suas habilidades de vida contam!", color: "bg-secondary" },
   { id: "rights", icon: Shield, title: "Seus Direitos Trabalhistas", description: "O básico que você precisa saber", color: "bg-accent" },
   { id: "jobs", icon: ExternalLink, title: "Sites de Emprego", description: "Onde procurar vagas agora", color: "bg-chart-4" },
+  { id: "internship", icon: ExternalLink, title: "Sites de Estágio", description: "Onde encontrar e se cadastrar para estágios", color: "bg-chart-5" },
 ];
 
 export default function Empregabilidade() {
@@ -21,6 +23,7 @@ export default function Empregabilidade() {
   if (activeSection === "skills") return <SoftSkillsTips onBack={() => setActiveSection(null)} />;
   if (activeSection === "rights") return <RightsGuide onBack={() => setActiveSection(null)} />;
   if (activeSection === "jobs") return <JobSites onBack={() => setActiveSection(null)} />;
+  if (activeSection === "internship") return <InternshipSites onBack={() => setActiveSection(null)} />;
 
   return (
     <div>
