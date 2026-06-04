@@ -1,6 +1,6 @@
 import { useRef, useCallback } from "react";
-import { Outlet, useLocation, useNavigate } from "react-router-dom";
-import { Home, Briefcase, Zap, BookOpen, Map, GraduationCap, BookMarked, RefreshCw, BookOpenCheck } from "lucide-react";
+import { Outlet, useLocation, useNavigate, Link } from "react-router-dom";
+import { Home, Briefcase, Zap, BookOpen, Map, GraduationCap, BookMarked, RefreshCw, BookOpenCheck, Star, ShieldCheck } from "lucide-react";
 import { usePullToRefresh } from "../hooks/usePullToRefresh";
 import { useScrollRestore } from "../hooks/useScrollRestore";
 
@@ -13,6 +13,7 @@ const navItems = [
   { path: "/caminhos", icon: GraduationCap, label: "Estudo" },
   { path: "/glossario", icon: BookMarked, label: "Glossário" },
   { path: "/educador", icon: BookOpenCheck, label: "Educador" },
+  { path: "/opiniao", icon: Star, label: "Opinião" },
 ];
 
 export default function Layout() {
@@ -45,6 +46,13 @@ export default function Layout() {
           </div>
         </div>
       )}
+
+      {/* Top bar com link admin — visível apenas em telas maiores ou como barra discreta */}
+      <div className="bg-background border-b border-border/50 px-4 py-1 flex justify-end">
+        <Link to="/admin" className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground transition-colors">
+          <ShieldCheck className="w-3.5 h-3.5" /> Admin
+        </Link>
+      </div>
 
       <main
         ref={scrollRef}

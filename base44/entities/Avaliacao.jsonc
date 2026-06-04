@@ -1,0 +1,54 @@
+{
+  "name": "Avaliacao",
+  "type": "object",
+  "properties": {
+    "perfil": {
+      "type": "string",
+      "enum": [
+        "estudante",
+        "educador"
+      ],
+      "title": "Perfil"
+    },
+    "estrelas": {
+      "type": "number",
+      "title": "Estrelas (1-5)"
+    },
+    "melhoria": {
+      "type": "string",
+      "title": "O que mudaria (estudante)"
+    },
+    "dialoga_eja": {
+      "type": "string",
+      "title": "Dialoga com EJA-EPT (educador)"
+    },
+    "sugestao": {
+      "type": "string",
+      "title": "Sugest\u00f5es (educador)"
+    },
+    "trabalha": {
+      "type": "string",
+      "title": "Trabalha atualmente (estudante)"
+    },
+    "faixa_etaria": {
+      "type": "string",
+      "title": "Faixa et\u00e1ria (estudante)"
+    },
+    "anos_eja": {
+      "type": "string",
+      "title": "Anos na EJA (educador)"
+    },
+    "rede_ensino": {
+      "type": "string",
+      "title": "Rede de ensino (educador)"
+    },
+    "data_envio": {
+      "type": "string",
+      "title": "Data e hora do envio"
+    }
+  },
+  "required": [
+    "perfil",
+    "estrelas"
+  ]
+}

@@ -1,4 +1,4 @@
-import { Briefcase, Zap, BookOpen, Map, GraduationCap, Sparkles, BookMarked, Settings } from "lucide-react";
+import { Briefcase, Zap, BookOpen, Map, GraduationCap, Sparkles, BookMarked, Settings, Star } from "lucide-react";
 import { Link } from "react-router-dom";
 import ModuleCard from "../components/ModuleCard";
 
@@ -59,6 +59,13 @@ const modules = [
     description: "Orientações pedagógicas para uso em sala",
     color: "bg-chart-4",
   },
+  {
+    to: "/opiniao",
+    icon: Star,
+    title: "Sua Opinião Importa",
+    description: "Avalie o app e ajude a melhorá-lo",
+    color: "bg-secondary",
+  },
 ];
 
 export default function Home() {
@@ -98,7 +105,7 @@ export default function Home() {
       {/* Footer info */}
       <div className="mt-8 text-center text-xs text-muted-foreground pb-4 flex flex-col items-center gap-3">
         <p>Curso Eletricista Industrial — EJA-EPT</p>
-        <p>Feito com ❤️ para estudantes trabalhadores</p>
+        <p>Feito com ❤️ para trabalhadores-estudantes</p>
         <Link
           to="/settings"
           className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors"
