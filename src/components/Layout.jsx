@@ -29,10 +29,7 @@ const menuItems = [
   { path: "/opiniao", icon: Star, label: "Sua Opinião Importa" },
 ];
 
-const adminItems = [
-  { path: "/admin-vozes", label: "Admin — Vozes" },
-  { path: "/admin-avaliacoes", label: "Admin — Avaliações" },
-];
+
 
 export default function Layout() {
   const location = useLocation();
@@ -111,21 +108,17 @@ export default function Layout() {
               })}
             </nav>
 
-            {/* Divisória + links admin */}
+            {/* Divisória + link admin único */}
             <div className="px-3 pb-6">
               <div className="border-t border-border/60 my-3" />
-              <p className="px-3 text-[10px] text-muted-foreground uppercase tracking-widest mb-1.5">Administração</p>
-              {adminItems.map(({ path, label }) => (
-                <Link
-                  key={path}
-                  to={path}
-                  onClick={() => setMenuOpen(false)}
-                  className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
-                >
-                  <ShieldCheck className="w-3.5 h-3.5 shrink-0" />
-                  {label}
-                </Link>
-              ))}
+              <Link
+                to="/admin"
+                onClick={() => setMenuOpen(false)}
+                className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+              >
+                <ShieldCheck className="w-3.5 h-3.5 shrink-0" />
+                Admin
+              </Link>
             </div>
           </div>
         </div>
