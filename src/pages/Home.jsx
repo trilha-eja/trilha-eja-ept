@@ -117,7 +117,7 @@ export default function Home() {
       {/* Footer info */}
       <div className="mt-8 text-center text-xs text-muted-foreground pb-4 flex flex-col items-center gap-3">
         <p>Curso Eletricista Industrial — EJA-EPT</p>
-        <p>Feito com ❤️ para trabalhadores(as)-estudantes</p>
+        <p>Feito com ❤️ para trabalhadores-estudantes</p>
         <Link
           to="/settings"
           className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors"

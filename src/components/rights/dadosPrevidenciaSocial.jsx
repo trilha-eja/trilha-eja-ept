@@ -2,7 +2,7 @@ export const cards = [
   {
     emoji: "🏛️",
     titulo: "INSS — O que é?",
-    texto: "O INSS (Instituto Nacional do Seguro Social) é o órgão do governo que garante benefícios aos(às) trabalhadores(as) em situações como doença, acidente, maternidade e aposentadoria. A contribuição é descontada automaticamente do seu salário. Trabalhadores(as) informais podem contribuir como autônomos(as) para ter acesso aos benefícios.",
+    texto: "O INSS (Instituto Nacional do Seguro Social) é o órgão do governo que garante benefícios aos trabalhadores em situações como doença, acidente, maternidade e aposentadoria. A contribuição é descontada automaticamente do seu salário. Trabalhadores informais podem contribuir como autônomos para ter acesso aos benefícios.",
     legal: "Lei nº 8.213/1991 e Lei nº 8.212/1991",
   },
   {
@@ -14,7 +14,7 @@ export const cards = [
   {
     emoji: "🏥",
     titulo: "Auxílio-doença",
-    texto: "Se você ficar doente e não puder trabalhar por mais de 15 dias, tem direito ao auxílio-doença pelo INSS. Os primeiros 15 dias são pagos pelo(a) empregador(a). Do 16º dia em diante o INSS paga. Para receber é necessário ter pelo menos 12 meses de contribuição (salvo acidente de trabalho).",
+    texto: "Se você ficar doente e não puder trabalhar por mais de 15 dias, tem direito ao auxílio-doença pelo INSS. Os primeiros 15 dias são pagos pelo empregador. Do 16º dia em diante o INSS paga. Para receber é necessário ter pelo menos 12 meses de contribuição (salvo acidente de trabalho).",
     legal: "Lei nº 8.213/1991 Art. 59 a 63",
   },
   {
@@ -32,7 +32,7 @@ export const cards = [
   {
     emoji: "👨‍👶",
     titulo: "Licença-Paternidade",
-    texto: "O(a) trabalhador(a) tem direito a 5 dias de licença-paternidade após o nascimento do filho. Empresas que participam do programa Empresa Cidadã concedem 20 dias. Válido também para adoção.",
+    texto: "O trabalhador tem direito a 5 dias de licença-paternidade após o nascimento do filho. Empresas que participam do programa Empresa Cidadã concedem 20 dias. Válido também para adoção.",
     legal: "CF/88 Art. 7º, inciso XIX e ADCT Art. 10, §1º",
   },
 ];
