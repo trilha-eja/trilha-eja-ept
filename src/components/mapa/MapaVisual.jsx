@@ -451,9 +451,6 @@ Seus sonhos:
           <Download className="w-4 h-4" />
           {loadingPdf ? "Gerando PDF…" : "⬇️ Baixar meu Mapa em PDF"}
         </Button>
-        <Button variant="outline" onClick={handlePrint} className="w-full h-12 rounded-2xl font-bold gap-2">
-          <Printer className="w-4 h-4" /> 🖨️ Imprimir meu Mapa
-        </Button>
         <Button variant="ghost" onClick={onEdit} className="w-full h-12 rounded-2xl font-bold gap-2">
           <Edit className="w-4 h-4" /> ✏️ Editar meu Mapa
         </Button>
