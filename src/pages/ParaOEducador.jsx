@@ -115,7 +115,7 @@ export default function ParaOEducador() {
 
   return (
     <div>
-      <PageHeader title="Área do Educador" subtitle="Orientações pedagógicas para uso do Trilha EJA-EPT em sala" backTo="/" />
+      <PageHeader title="Para o Educador" subtitle="Orientações pedagógicas para o uso do Trilha EJA-EPT em sala" backTo="/" />
 
       <div className="max-w-lg mx-auto px-4 py-5 space-y-4">
         {/* Intro banner */}

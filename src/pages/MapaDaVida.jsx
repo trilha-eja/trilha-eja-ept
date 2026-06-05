@@ -174,13 +174,13 @@ function TelaEntrada({ onStart, onContinue, hasDraft, draftDate, onApagar }) {
 
   return (
     <div>
-      <PageHeader title="Mapa da Vida" backTo="/" />
+      <PageHeader title="Mapa da Vida" subtitle="Construa seu projeto de vida com consciência e esperança" backTo="/" />
       <div className="max-w-lg mx-auto px-4 py-8 flex flex-col items-center gap-6">
         <span className="text-6xl">🗺️</span>
         <div className="text-center space-y-3">
           <h2 className="text-2xl font-extrabold leading-tight">Mapa da Vida</h2>
           <p className="text-muted-foreground leading-relaxed text-sm">
-            Seu futuro não está pronto — ele está sendo construído por você, agora. Este mapa é um convite para olhar para si mesmo(a) com cuidado, esperança e coragem.
+            Seu futuro não está pronto — ele está sendo construído por você, agora. Este mapa é um convite para olhar para si mesmo(a) com cuidado e coragem.
           </p>
           <p className="text-xs italic" style={{ color: "#888888" }}>
             💡 Dica: use frases curtas e diretas — elas ficam mais bonitas no seu mapa. Exemplo: "concluir o ensino médio" em vez de "quero muito concluir o ensino médio este ano"

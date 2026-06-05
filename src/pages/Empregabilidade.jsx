@@ -11,8 +11,8 @@ import InternshipSites from "../components/InternshipSites";
 const sections = [
   { id: "resume", icon: FileText, title: "Criar meu Currículo", description: "Passo a passo simples", color: "bg-primary" },
   { id: "skills", icon: Star, title: "Valorize sua Experiência", description: "Suas habilidades de vida contam!", color: "bg-secondary" },
-  { id: "rights", icon: Shield, title: "Seus Direitos Trabalhistas", description: "O básico que você precisa saber", color: "bg-accent" },
-  { id: "jobs", icon: ExternalLink, title: "Sites de Emprego", description: "Onde procurar vagas agora", color: "bg-chart-4" },
+  { id: "rights", icon: Shield, title: "Seus Direitos Trabalhistas", description: "Conheça seus direitos e faça valer", color: "bg-accent" },
+  { id: "jobs", icon: ExternalLink, title: "Sites de Emprego", description: "Plataformas para buscar oportunidades", color: "bg-chart-4" },
   { id: "internship", icon: ExternalLink, title: "Sites de Estágio", description: "Onde encontrar e se cadastrar para estágios", color: "bg-chart-5" },
 ];
 
@@ -27,11 +27,11 @@ export default function Empregabilidade() {
 
   return (
     <div>
-      <PageHeader title="Mundo do Trabalho" subtitle="Conheça seus direitos no Mundo do Trabalho" />
+      <PageHeader title="Mundo do Trabalho" subtitle="Direitos, currículo e caminhos no mundo do trabalho" />
       <div className="max-w-lg mx-auto px-4 py-5 space-y-3">
         <div className="bg-primary/10 border border-primary/20 rounded-2xl p-4 mb-1">
           <p className="text-sm leading-relaxed text-foreground">
-            🌍 Aqui falamos de <strong>Mundo do Trabalho</strong> — não apenas de emprego. Você tem direitos, história e saberes que o mercado não pode apagar. Este módulo é para você conhecer esses direitos e se posicionar com dignidade.
+            🌍 Aqui falamos de <strong>Mundo do Trabalho</strong> — não apenas de emprego. Você tem direitos, história e saberes que o mercado não pode apagar. Aqui você encontra ferramentas para se posicionar com dignidade: seus direitos, seu currículo e onde buscar oportunidades.
           </p>
         </div>
         <div className="bg-secondary/20 rounded-2xl p-4 mb-2">

@@ -67,8 +67,11 @@ export default function Microlearning() {
 
   return (
     <div>
-      <PageHeader title="Microlearning" subtitle="Conteúdos rápidos para quem tem pouco tempo — mas nunca para de aprender" />
+      <PageHeader title="Microlearning" subtitle="Conteúdos rápidos para quem nunca para de aprender" />
       <div className="max-w-lg mx-auto px-4 py-5">
+        <div className="bg-muted/60 rounded-2xl p-4 mb-4 text-center">
+          <p className="text-sm text-muted-foreground leading-relaxed">Para quem tem pouco tempo mas não abre mão de aprender. Cada conteúdo foi pensado para caber na sua rotina.</p>
+        </div>
         <div className="flex items-center justify-center gap-2 mb-4">
           <Clock className="w-4 h-4 text-muted-foreground" />
           <span className="text-xs text-muted-foreground font-semibold">

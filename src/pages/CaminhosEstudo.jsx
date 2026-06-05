@@ -43,7 +43,7 @@ export default function CaminhosEstudo() {
 
   return (
     <div>
-      <PageHeader title="Caminhos de Estudo" subtitle="Conheça seus caminhos de continuidade" />
+      <PageHeader title="Caminhos de Estudo" subtitle="Conheça seus caminhos de continuidade" backTo="/" />
       <div className="max-w-lg mx-auto px-4 py-5 space-y-3">
         <div className="bg-primary/10 border border-primary/20 rounded-2xl p-4 mb-1">
           <p className="text-sm leading-relaxed text-foreground">

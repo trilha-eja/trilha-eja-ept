@@ -529,7 +529,7 @@ export default function BaixarMateriais() {
 
   return (
     <div>
-      <PageHeader title="Baixar Materiais" backTo="/" />
+      <PageHeader title="Baixar Materiais" subtitle="PDFs gratuitos para imprimir e estudar" backTo="/" />
 
       {/* Templates ocultos */}
       <TemplateMapa refEl={refMapa} />

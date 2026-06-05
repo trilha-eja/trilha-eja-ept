@@ -37,7 +37,7 @@ export default function VozesDaTrilha() {
 
   return (
     <div>
-      <PageHeader title="Vozes da Trilha" backTo="/" />
+      <PageHeader title="Vozes da Trilha" subtitle="Histórias reais de quem trilhou esse caminho" backTo="/" />
       <div className="max-w-lg mx-auto px-4 py-5 space-y-5">
 
         {/* Intro */}
