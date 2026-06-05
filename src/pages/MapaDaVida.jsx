@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import MapaVisual from "../components/mapa/MapaVisual";
+import BlocoIntro from "../components/mapa/BlocoIntro";
 
 const STORAGE_KEY = "mapa_vida_rascunho";
 const NOME_KEY = "mapa_vida_nome";
@@ -35,7 +36,7 @@ const BLOCOS = [
       { field: "hoje_desafio", label: "Qual é seu maior desafio neste momento?",           placeholder: "O que mais dificulta sua caminhada hoje?", max: 100 },
       { field: "hoje_apoio",   label: "Quem ou o que te apoia nessa caminhada?",           placeholder: "Família, amigos, colegas, fé...", max: 100 },
       { field: "hoje_curso",   label: "O que este curso está mudando na sua vida?",        placeholder: "No trabalho, na autoestima, nas perspectivas...", max: 100 },
-      { field: "hoje_forca",   label: "Qual é sua maior força neste momento?",             placeholder: "Coragem, persistência, responsabilidade...", max: 50 },
+      { field: "hoje_forca",   label: "Qual é sua maior força neste momento?",             placeholder: "Coragem, persistência...", max: 30 },
     ],
   },
   {
@@ -44,10 +45,10 @@ const BLOCOS = [
     subtitulo: "Onde você quer chegar como profissional?",
     intro: "Falamos de Mundo do Trabalho — não apenas de emprego. Seu trabalho tem história, tem valor e tem direitos.",
     campos: [
-      { field: "trabalho_semana",  label: "Esta semana, qual pequeno passo posso dar na minha vida profissional?", placeholder: "Ex: atualizar meu currículo...", max: 50 },
-      { field: "trabalho_1ano",    label: "Em 1 ano, onde quero estar profissionalmente?",                         placeholder: "Ex: trabalhando com carteira assinada...", max: 50 },
-      { field: "trabalho_5anos",   label: "Em 5 anos, como imagino minha vida no trabalho?",                      placeholder: "Ex: ter minha própria empresa...", max: 50 },
-      { field: "trabalho_10anos",  label: "Em 10 anos, qual é meu maior sonho profissional?",                     placeholder: "Ex: ter estabilidade, ser referência...", max: 50 },
+      { field: "trabalho_semana",  label: "Esta semana, qual pequeno passo posso dar na minha vida profissional?", placeholder: "Ex: atualizar meu currículo...", max: 30 },
+      { field: "trabalho_1ano",    label: "Em 1 ano, onde quero estar profissionalmente?",                         placeholder: "Ex: trabalhando registrado...", max: 30 },
+      { field: "trabalho_5anos",   label: "Em 5 anos, como imagino minha vida no trabalho?",                      placeholder: "Ex: ter minha própria empresa...", max: 30 },
+      { field: "trabalho_10anos",  label: "Em 10 anos, qual é meu maior sonho profissional?",                     placeholder: "Ex: ter estabilidade...", max: 30 },
     ],
   },
   {
@@ -56,10 +57,10 @@ const BLOCOS = [
     subtitulo: "A educação é um direito — seu caminho de aprendizado não termina aqui.",
     intro: "Continuar estudando é uma escolha que transforma não só o currículo, mas a forma como você se vê e se posiciona no mundo.",
     campos: [
-      { field: "estudos_semana",  label: "Esta semana, o que posso fazer pelos meus estudos?",                    placeholder: "Ex: revisar o conteúdo, pesquisar sobre o ENEM...", max: 50 },
-      { field: "estudos_1ano",    label: "Em 1 ano, o que quero ter aprendido ou conquistado?",                   placeholder: "Ex: concluir o curso, me inscrever no ENEM...", max: 50 },
-      { field: "estudos_5anos",   label: "Em 5 anos, como imagino minha formação?",                              placeholder: "Ex: estar cursando uma graduação...", max: 50 },
-      { field: "estudos_10anos",  label: "Em 10 anos, qual é meu maior sonho nos estudos?",                      placeholder: "Ex: ter uma graduação, fazer uma especialização...", max: 50 },
+      { field: "estudos_semana",  label: "Esta semana, o que posso fazer pelos meus estudos?",                    placeholder: "Ex: revisar o conteúdo...", max: 30 },
+      { field: "estudos_1ano",    label: "Em 1 ano, o que quero ter aprendido ou conquistado?",                   placeholder: "Ex: concluir o curso...", max: 30 },
+      { field: "estudos_5anos",   label: "Em 5 anos, como imagino minha formação?",                              placeholder: "Ex: estar em uma graduação...", max: 30 },
+      { field: "estudos_10anos",  label: "Em 10 anos, qual é meu maior sonho nos estudos?",                      placeholder: "Ex: ter uma graduação...", max: 30 },
     ],
   },
   {
@@ -68,10 +69,10 @@ const BLOCOS = [
     subtitulo: "Seu crescimento pessoal, sua saúde e seu bem-estar.",
     intro: "Cuidar de si mesmo(a) não é egoísmo — é condição para continuar caminhando e ajudando quem você ama.",
     campos: [
-      { field: "eu_semana",  label: "Esta semana, o que posso fazer por mim mesmo(a)?",                           placeholder: "Ex: dormir melhor, reservar um momento só meu...", max: 50 },
-      { field: "eu_1ano",    label: "Em 1 ano, que versão de mim quero ser?",                                    placeholder: "Ex: mais confiante, mais saudável...", max: 50 },
-      { field: "eu_5anos",   label: "Em 5 anos, o que quero ter superado ou conquistado para mim?",              placeholder: "Ex: superar o medo de falar em público...", max: 50 },
-      { field: "eu_10anos",  label: "Em 10 anos, como quero me sentir sobre minha trajetória?",                  placeholder: "Ex: orgulhoso(a) do caminho percorrido...", max: 50 },
+      { field: "eu_semana",  label: "Esta semana, o que posso fazer por mim mesmo(a)?",                           placeholder: "Ex: dormir melhor...", max: 30 },
+      { field: "eu_1ano",    label: "Em 1 ano, que versão de mim quero ser?",                                    placeholder: "Ex: mais confiante...", max: 30 },
+      { field: "eu_5anos",   label: "Em 5 anos, o que quero ter superado ou conquistado para mim?",              placeholder: "Ex: superar o medo...", max: 30 },
+      { field: "eu_10anos",  label: "Em 10 anos, como quero me sentir sobre minha trajetória?",                  placeholder: "Ex: orgulhoso(a)...", max: 30 },
     ],
   },
   {
@@ -80,10 +81,10 @@ const BLOCOS = [
     subtitulo: "Estabilidade, moradia e conquistas concretas.",
     intro: "Ter condições dignas de vida é um direito — não um privilégio. Sonhar com estabilidade é legítimo e faz parte do seu projeto de vida.",
     campos: [
-      { field: "vida_semana",  label: "Esta semana, o que posso fazer pela minha estabilidade?",                  placeholder: "Ex: organizar minhas contas...", max: 50 },
-      { field: "vida_1ano",    label: "Em 1 ano, o que quero ter conquistado em termos de condições de vida?",    placeholder: "Ex: mais estabilidade financeira...", max: 50 },
-      { field: "vida_5anos",   label: "Em 5 anos, como imagino minhas condições de vida?",                       placeholder: "Ex: casa própria, mais tranquilidade...", max: 50 },
-      { field: "vida_10anos",  label: "Em 10 anos, qual é meu maior sonho de bem-estar e estabilidade?",         placeholder: "Ex: vida confortável para minha família...", max: 50 },
+      { field: "vida_semana",  label: "Esta semana, o que posso fazer pela minha estabilidade?",                  placeholder: "Ex: organizar minhas contas...", max: 30 },
+      { field: "vida_1ano",    label: "Em 1 ano, o que quero ter conquistado em termos de condições de vida?",    placeholder: "Ex: mais estabilidade...", max: 30 },
+      { field: "vida_5anos",   label: "Em 5 anos, como imagino minhas condições de vida?",                       placeholder: "Ex: casa própria...", max: 30 },
+      { field: "vida_10anos",  label: "Em 10 anos, qual é meu maior sonho de bem-estar e estabilidade?",         placeholder: "Ex: vida estável para a família...", max: 30 },
     ],
   },
   {
@@ -92,10 +93,10 @@ const BLOCOS = [
     subtitulo: "Você não está sozinho(a) nessa caminhada.",
     intro: "Os projetos de vida não se constroem sozinhos. Reconhecer quem nos apoia e como podemos contribuir com os outros fortalece nossa caminhada.",
     campos: [
-      { field: "comunidade_rede",        label: "Quem faz parte da sua rede de apoio hoje?",                     placeholder: "Família, amigos, colegas, fé...", max: 50 },
-      { field: "comunidade_contribui",   label: "Como você contribui ou gostaria de contribuir com sua comunidade?", placeholder: "Ex: ajudar um colega, participar do bairro...", max: 50 },
-      { field: "comunidade_5anos",       label: "Em 5 anos, que impacto quer ter causado ao seu redor?",         placeholder: "Ex: ter inspirado alguém a voltar a estudar...", max: 50 },
-      { field: "comunidade_10anos",      label: "Em 10 anos, como quer ser lembrado(a) pelas pessoas ao seu redor?", placeholder: "Ex: como alguém que fez diferença...", max: 50 },
+      { field: "comunidade_rede",        label: "Quem faz parte da sua rede de apoio hoje?",                     placeholder: "Família, amigos, colegas...", max: 30 },
+      { field: "comunidade_contribui",   label: "Como você contribui ou gostaria de contribuir com sua comunidade?", placeholder: "Ex: ajudar um colega...", max: 30 },
+      { field: "comunidade_5anos",       label: "Em 5 anos, que impacto quer ter causado ao seu redor?",         placeholder: "Ex: inspirar alguém...", max: 30 },
+      { field: "comunidade_10anos",      label: "Em 10 anos, como quer ser lembrado(a) pelas pessoas ao seu redor?", placeholder: "Ex: alguém que fez diferença...", max: 30 },
     ],
   },
   {
@@ -376,10 +377,8 @@ export default function MapaDaVida() {
           <p className="text-sm text-muted-foreground leading-relaxed">{blocoAtual.subtitulo}</p>
         </div>
 
-        {/* Caixinha intro */}
-        <div className="bg-primary/8 border border-primary/20 rounded-2xl p-4">
-          <p className="text-sm leading-relaxed text-foreground">{blocoAtual.intro}</p>
-        </div>
+        {/* Caixinha intro colorida por bloco */}
+        <BlocoIntro bloco={bloco} emoji={blocoAtual.emoji} titulo={blocoAtual.titulo} intro={blocoAtual.intro} />
 
         {/* Campo nome — apenas no bloco 0 */}
         {blocoAtual.temNome && (
