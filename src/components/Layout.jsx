@@ -12,8 +12,10 @@ const navItems = [
   { path: "/mapa-da-vida", icon: Map, label: "Mapa" },
   { path: "/caminhos", icon: GraduationCap, label: "Estudo" },
   { path: "/glossario", icon: BookMarked, label: "Glossário" },
+  { path: "/vozes", icon: Sparkles, label: "Vozes" },
   { path: "/educador", icon: BookOpenCheck, label: "Educador" },
   { path: "/opiniao", icon: Star, label: "Opinião" },
+  { path: "/materiais", icon: Download, label: "Materiais" },
 ];
 
 const menuItems = [
