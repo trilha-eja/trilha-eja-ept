@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ArrowLeft, ArrowRight, Sparkles } from "lucide-react";
 import PageHeader from "../components/PageHeader";
 import { Button } from "@/components/ui/button";
@@ -9,96 +9,106 @@ import MapaVisual from "../components/mapa/MapaVisual";
 const STORAGE_KEY = "mapa_vida_rascunho";
 const NOME_KEY = "mapa_vida_nome";
 
-const NOME_MAX = 25;
-
-// Mapa de limites por field — usado na validação do localStorage
-const FIELD_LIMITS = {
-  partida_forca: 25, partida_orgulho: 80, partida_motivacao: 80,
-  trabalho_semana: 35, trabalho_1ano: 35, trabalho_5anos: 35, trabalho_10anos: 35,
-  estudos_semana:  35, estudos_1ano:  35, estudos_5anos:  35, estudos_10anos:  35,
-  familia_semana:  35, familia_1ano:  35, familia_5anos:  35, familia_10anos:  35,
-  eu_semana:       35, eu_1ano:       35, eu_5anos:       35, eu_10anos:       35,
-  material_semana: 35, material_1ano: 35, material_5anos: 35, material_10anos: 35,
-  comunidade_semana: 35, comunidade_1ano: 35, comunidade_5anos: 35, comunidade_10anos: 35,
-};
-
-const ETAPAS = [
+// ─── Estrutura dos 8 blocos ─────────────────────────────────────────────────
+const BLOCOS = [
   {
     emoji: "🌱",
-    titulo: "Seu ponto de partida",
-    subtitulo: "Antes de olhar para frente, reconheça o que você já construiu.",
-    perguntas: [
-      // campo de nome é tratado separadamente no render
-      { field: "partida_forca",     maxLength: 25, label: "Qual é a sua maior força hoje?",                              placeholder: "Pode ser coragem, paciência, persistência, cuidado com os outros..." },
-      { field: "partida_orgulho",   maxLength: 80, label: "O que você já conquistou na vida que te enche de orgulho?",  placeholder: "Criar seus filhos, chegar até aqui, aprender uma habilidade — tudo isso é conquista real." },
-      { field: "partida_motivacao", maxLength: 80, label: "O que te trouxe até este curso?",                            placeholder: "O que te motivou a voltar a estudar?" },
+    titulo: "De onde venho?",
+    subtitulo: "Sua história começa muito antes deste curso.",
+    intro: "Antes de olhar para o futuro, vale reconhecer o caminho que te trouxe até aqui. Sua trajetória é única e tem muito valor.",
+    campos: [
+      { field: "origem_apresentacao", label: "Como você se apresentaria para alguém que não te conhece?", placeholder: "De onde vem, o que faz...", max: 100 },
+      { field: "origem_afastou",      label: "O que te afastou da escola em algum momento da vida?",         placeholder: "Trabalho, família, condições financeiras...", max: 100 },
+      { field: "origem_voltou",       label: "O que te trouxe de volta aos estudos?",                        placeholder: "O que te motivou a voltar?", max: 100 },
+      { field: "origem_orgulho",      label: "Qual conquista da sua vida te enche de orgulho?",              placeholder: "Criar seus filhos, aprender um ofício, superar uma dificuldade...", max: 100 },
+      { field: "origem_aprendeu",     label: "O que você aprendeu na vida que nenhuma escola te ensinou?",   placeholder: "Saberes do trabalho, da família, da experiência...", max: 100 },
+    ],
+    temNome: true,
+  },
+  {
+    emoji: "📍",
+    titulo: "Onde estou?",
+    subtitulo: "Um olhar honesto sobre sua realidade hoje.",
+    intro: "Reconhecer onde estamos — com nossas dificuldades e recursos — é o ponto de partida para construir caminhos reais. Não há resposta certa ou errada aqui.",
+    campos: [
+      { field: "hoje_vida",    label: "Como você descreveria sua vida hoje?",              placeholder: "No trabalho, na família, nos estudos...", max: 100 },
+      { field: "hoje_desafio", label: "Qual é seu maior desafio neste momento?",           placeholder: "O que mais dificulta sua caminhada hoje?", max: 100 },
+      { field: "hoje_apoio",   label: "Quem ou o que te apoia nessa caminhada?",           placeholder: "Família, amigos, colegas, fé...", max: 100 },
+      { field: "hoje_curso",   label: "O que este curso está mudando na sua vida?",        placeholder: "No trabalho, na autoestima, nas perspectivas...", max: 100 },
+      { field: "hoje_forca",   label: "Qual é sua maior força neste momento?",             placeholder: "Coragem, persistência, responsabilidade...", max: 50 },
     ],
   },
   {
     emoji: "🔧",
-    titulo: "Trabalho e Profissão",
+    titulo: "Mundo do Trabalho e Projetos Profissionais",
     subtitulo: "Onde você quer chegar como profissional?",
-    perguntas: [
-      { field: "trabalho_semana",  maxLength: 35, label: "Esta semana, qual pequeno passo posso dar na minha vida profissional?", placeholder: "Ex: Atualizar meu currículo, pesquisar uma vaga..." },
-      { field: "trabalho_1ano",   maxLength: 35, label: "Em 1 ano, onde quero estar profissionalmente?",                         placeholder: "Ex: Trabalhando como eletricista com carteira assinada..." },
-      { field: "trabalho_5anos",  maxLength: 35, label: "Em 5 anos, como imagino minha vida no trabalho?",                      placeholder: "Ex: Ter minha própria empresa, ser técnico sênior..." },
-      { field: "trabalho_10anos", maxLength: 35, label: "Em 10 anos, qual é meu maior sonho profissional?",                     placeholder: "Ex: Ter estabilidade, ser referência na minha área..." },
+    intro: "Falamos de Mundo do Trabalho — não apenas de emprego. Seu trabalho tem história, tem valor e tem direitos.",
+    campos: [
+      { field: "trabalho_semana",  label: "Esta semana, qual pequeno passo posso dar na minha vida profissional?", placeholder: "Ex: atualizar meu currículo...", max: 50 },
+      { field: "trabalho_1ano",    label: "Em 1 ano, onde quero estar profissionalmente?",                         placeholder: "Ex: trabalhando com carteira assinada...", max: 50 },
+      { field: "trabalho_5anos",   label: "Em 5 anos, como imagino minha vida no trabalho?",                      placeholder: "Ex: ter minha própria empresa...", max: 50 },
+      { field: "trabalho_10anos",  label: "Em 10 anos, qual é meu maior sonho profissional?",                     placeholder: "Ex: ter estabilidade, ser referência...", max: 50 },
     ],
   },
   {
     emoji: "📚",
-    titulo: "Estudos e Aprendizado",
-    subtitulo: "O conhecimento que você quer buscar para si mesmo.",
-    perguntas: [
-      { field: "estudos_semana",  maxLength: 35, label: "Esta semana, o que posso fazer pelos meus estudos?",                   placeholder: "Ex: Revisar o conteúdo da aula, pesquisar sobre o ENEM..." },
-      { field: "estudos_1ano",   maxLength: 35, label: "Em 1 ano, o que quero ter aprendido ou conquistado nos estudos?",       placeholder: "Ex: Concluir o curso técnico, me inscrever no ENEM..." },
-      { field: "estudos_5anos",  maxLength: 35, label: "Em 5 anos, como imagino minha formação?",                              placeholder: "Ex: Estar cursando engenharia elétrica..." },
-      { field: "estudos_10anos", maxLength: 35, label: "Em 10 anos, qual é meu maior sonho nos estudos?",                      placeholder: "Ex: Ter uma graduação, fazer uma especialização..." },
-    ],
-  },
-  {
-    emoji: "👨‍👩‍👧",
-    titulo: "Família e Relações",
-    subtitulo: "As pessoas que você ama e quer construir junto.",
-    perguntas: [
-      { field: "familia_semana",  maxLength: 35, label: "Esta semana, o que posso fazer pela minha família?",                   placeholder: "Ex: Passar mais tempo com meus filhos, ligar para alguém que não falo há tempo..." },
-      { field: "familia_1ano",   maxLength: 35, label: "Em 1 ano, como quero que seja minha vida familiar?",                   placeholder: "Ex: Ter mais tempo de qualidade com minha família..." },
-      { field: "familia_5anos",  maxLength: 35, label: "Em 5 anos, o que quero ter construído com quem amo?",                  placeholder: "Ex: Uma vida mais estável para meus filhos..." },
-      { field: "familia_10anos", maxLength: 35, label: "Em 10 anos, qual é meu maior sonho para minha família?",               placeholder: "Ex: Ver meus filhos realizados, ter uma família unida..." },
+    titulo: "Estudos e Aprendizagem",
+    subtitulo: "A educação é um direito — seu caminho de aprendizado não termina aqui.",
+    intro: "Continuar estudando é uma escolha que transforma não só o currículo, mas a forma como você se vê e se posiciona no mundo.",
+    campos: [
+      { field: "estudos_semana",  label: "Esta semana, o que posso fazer pelos meus estudos?",                    placeholder: "Ex: revisar o conteúdo, pesquisar sobre o ENEM...", max: 50 },
+      { field: "estudos_1ano",    label: "Em 1 ano, o que quero ter aprendido ou conquistado?",                   placeholder: "Ex: concluir o curso, me inscrever no ENEM...", max: 50 },
+      { field: "estudos_5anos",   label: "Em 5 anos, como imagino minha formação?",                              placeholder: "Ex: estar cursando uma graduação...", max: 50 },
+      { field: "estudos_10anos",  label: "Em 10 anos, qual é meu maior sonho nos estudos?",                      placeholder: "Ex: ter uma graduação, fazer uma especialização...", max: 50 },
     ],
   },
   {
     emoji: "🌟",
     titulo: "Eu Mesmo(a)",
-    subtitulo: "Seu crescimento pessoal, sua saúde, seu bem-estar.",
-    perguntas: [
-      { field: "eu_semana",  maxLength: 35, label: "Esta semana, o que posso fazer por mim mesmo?",                            placeholder: "Ex: Dormir melhor, reservar um momento só meu..." },
-      { field: "eu_1ano",   maxLength: 35, label: "Em 1 ano, que versão de mim quero ser?",                                   placeholder: "Ex: Mais confiante, mais saudável, mais tranquilo..." },
-      { field: "eu_5anos",  maxLength: 35, label: "Em 5 anos, o que quero ter superado ou conquistado para mim mesmo?",       placeholder: "Ex: Superar o medo de falar em público, cuidar melhor da minha saúde..." },
-      { field: "eu_10anos", maxLength: 35, label: "Em 10 anos, como quero me sentir sobre a minha trajetória?",               placeholder: "Ex: Orgulhoso do caminho que percorri..." },
+    subtitulo: "Seu crescimento pessoal, sua saúde e seu bem-estar.",
+    intro: "Cuidar de si mesmo(a) não é egoísmo — é condição para continuar caminhando e ajudando quem você ama.",
+    campos: [
+      { field: "eu_semana",  label: "Esta semana, o que posso fazer por mim mesmo(a)?",                           placeholder: "Ex: dormir melhor, reservar um momento só meu...", max: 50 },
+      { field: "eu_1ano",    label: "Em 1 ano, que versão de mim quero ser?",                                    placeholder: "Ex: mais confiante, mais saudável...", max: 50 },
+      { field: "eu_5anos",   label: "Em 5 anos, o que quero ter superado ou conquistado para mim?",              placeholder: "Ex: superar o medo de falar em público...", max: 50 },
+      { field: "eu_10anos",  label: "Em 10 anos, como quero me sentir sobre minha trajetória?",                  placeholder: "Ex: orgulhoso(a) do caminho percorrido...", max: 50 },
     ],
   },
   {
     emoji: "🏠",
-    titulo: "Vida Material",
+    titulo: "Condições de Vida e Bem-Estar",
     subtitulo: "Estabilidade, moradia e conquistas concretas.",
-    perguntas: [
-      { field: "material_semana",  maxLength: 35, label: "Esta semana, o que posso fazer pela minha estabilidade financeira?", placeholder: "Ex: Organizar minhas contas, pesquisar uma renda extra..." },
-      { field: "material_1ano",   maxLength: 35, label: "Em 1 ano, o que quero ter conquistado materialmente?",               placeholder: "Ex: Sair do aluguel, ter uma reserva financeira..." },
-      { field: "material_5anos",  maxLength: 35, label: "Em 5 anos, como imagino minha vida material?",                      placeholder: "Ex: Casa própria, carro, mais estabilidade..." },
-      { field: "material_10anos", maxLength: 35, label: "Em 10 anos, qual é meu maior sonho de conquista material?",          placeholder: "Ex: Uma vida confortável para minha família, independência financeira..." },
+    intro: "Ter condições dignas de vida é um direito — não um privilégio. Sonhar com estabilidade é legítimo e faz parte do seu projeto de vida.",
+    campos: [
+      { field: "vida_semana",  label: "Esta semana, o que posso fazer pela minha estabilidade?",                  placeholder: "Ex: organizar minhas contas...", max: 50 },
+      { field: "vida_1ano",    label: "Em 1 ano, o que quero ter conquistado em termos de condições de vida?",    placeholder: "Ex: mais estabilidade financeira...", max: 50 },
+      { field: "vida_5anos",   label: "Em 5 anos, como imagino minhas condições de vida?",                       placeholder: "Ex: casa própria, mais tranquilidade...", max: 50 },
+      { field: "vida_10anos",  label: "Em 10 anos, qual é meu maior sonho de bem-estar e estabilidade?",         placeholder: "Ex: vida confortável para minha família...", max: 50 },
     ],
   },
   {
     emoji: "🤝",
-    titulo: "Comunidade",
-    subtitulo: "Como você quer contribuir com as pessoas ao seu redor.",
-    perguntas: [
-      { field: "comunidade_semana",  maxLength: 35, label: "Esta semana, o que posso fazer por alguém além de mim?",          placeholder: "Ex: Ajudar um colega de curso, participar de algo no meu bairro..." },
-      { field: "comunidade_1ano",   maxLength: 35, label: "Em 1 ano, como quero contribuir com minha comunidade?",            placeholder: "Ex: Ser referência para alguém mais novo..." },
-      { field: "comunidade_5anos",  maxLength: 35, label: "Em 5 anos, que impacto quero ter causado ao meu redor?",           placeholder: "Ex: Ter ajudado alguém a voltar a estudar..." },
-      { field: "comunidade_10anos", maxLength: 35, label: "Em 10 anos, como quero ser lembrado pelas pessoas ao meu redor?",  placeholder: "Ex: Como alguém que fez diferença, que ajudou, que inspirou..." },
+    titulo: "Comunidade e Redes de Apoio",
+    subtitulo: "Você não está sozinho(a) nessa caminhada.",
+    intro: "Os projetos de vida não se constroem sozinhos. Reconhecer quem nos apoia e como podemos contribuir com os outros fortalece nossa caminhada.",
+    campos: [
+      { field: "comunidade_rede",        label: "Quem faz parte da sua rede de apoio hoje?",                     placeholder: "Família, amigos, colegas, fé...", max: 50 },
+      { field: "comunidade_contribui",   label: "Como você contribui ou gostaria de contribuir com sua comunidade?", placeholder: "Ex: ajudar um colega, participar do bairro...", max: 50 },
+      { field: "comunidade_5anos",       label: "Em 5 anos, que impacto quer ter causado ao seu redor?",         placeholder: "Ex: ter inspirado alguém a voltar a estudar...", max: 50 },
+      { field: "comunidade_10anos",      label: "Em 10 anos, como quer ser lembrado(a) pelas pessoas ao seu redor?", placeholder: "Ex: como alguém que fez diferença...", max: 50 },
     ],
+  },
+  {
+    emoji: "✨",
+    titulo: "Síntese Final",
+    subtitulo: "Um olhar sobre tudo que você construiu até aqui.",
+    intro: "Antes de gerar seu Mapa da Vida, responda estas últimas perguntas. Elas ajudarão a criar um texto reflexivo personalizado sobre sua trajetória.",
+    campos: [
+      { field: "sintese_projeto",  label: "Em uma frase, como você descreveria seu projeto de vida hoje?",       placeholder: "Ex: quero construir uma vida digna para minha família...", max: 100 },
+      { field: "sintese_mensagem", label: "Qual é a mensagem que você deixaria para si mesmo(a) no futuro?",     placeholder: "Ex: não desista, cada passo vale...", max: 100 },
+      { field: "sintese_colega",   label: "O que você diria para um(a) colega que está pensando em desistir?",   placeholder: "Ex: valeu a pena, continue...", max: 100 },
+    ],
+    isFinal: true,
   },
 ];
 
@@ -111,15 +121,10 @@ function saveDraft(data) {
 }
 function loadNome() {
   try {
-    // 1. chave própria do mapa
     const nome = localStorage.getItem(NOME_KEY);
     if (nome) return nome;
-    // 2. curriculo_rascunho
     const cur = localStorage.getItem("curriculo_rascunho");
-    if (cur) {
-      const parsed = JSON.parse(cur);
-      return parsed.full_name || parsed.nome || "";
-    }
+    if (cur) { const p = JSON.parse(cur); return p.full_name || p.nome || ""; }
   } catch {}
   return "";
 }
@@ -133,30 +138,13 @@ function formatDate(iso) {
   if (!iso) return "";
   return new Date(iso).toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit", year: "numeric" });
 }
-// Verifica se algum valor salvo ultrapassa os novos limites
-function hasStaleData() {
-  try {
-    const draft = loadDraft();
-    if (draft) {
-      for (const [field, limit] of Object.entries(FIELD_LIMITS)) {
-        if (draft[field] && draft[field].length > limit) return true;
-      }
-    }
-    const nome = localStorage.getItem(NOME_KEY);
-    if (nome && nome.length > NOME_MAX) return true;
-  } catch {}
-  return false;
-}
 
 // ─── Contador de caracteres ─────────────────────────────────────────────────
 function CharCounter({ current, max }) {
-  const remaining = max - current;
   const pct = current / max;
   const color = pct >= 1 ? "#dc2626" : pct >= 0.8 ? "#f97316" : "#888888";
   return (
-    <p className="text-xs text-right" style={{ color }}>
-      {current}/{max} caracteres
-    </p>
+    <p className="text-xs text-right" style={{ color }}>{current}/{max} caracteres</p>
   );
 }
 
@@ -177,28 +165,33 @@ function TelaEntrada({ onStart, onContinue, hasDraft, draftDate, onApagar }) {
       <PageHeader title="Mapa da Vida" subtitle="Construa seu projeto de vida com consciência e esperança" backTo="/" />
       <div className="max-w-lg mx-auto px-4 py-8 flex flex-col items-center gap-6">
         <span className="text-6xl">🗺️</span>
-        <div className="text-center space-y-3">
-          <h2 className="text-2xl font-extrabold leading-tight">Mapa da Vida</h2>
-          <div className="bg-chart-5/10 border border-chart-5/20 rounded-2xl p-4 text-left w-full">
-            <p className="text-sm leading-relaxed text-foreground">Seu futuro não está pronto — ele está sendo construído por <strong>você</strong>, agora. Este mapa é um convite para olhar para si mesmo(a) com <strong>cuidado</strong> e <strong>coragem</strong>.</p>
-          </div>
-          <p className="text-xs italic" style={{ color: "#888888" }}>
-            💡 Dica: use frases curtas e diretas — elas ficam mais bonitas no seu mapa. Exemplo: "concluir o ensino médio" em vez de "quero muito concluir o ensino médio este ano"
+
+        <div className="w-full bg-chart-5/10 border border-chart-5/20 rounded-2xl p-5 space-y-2">
+          <p className="text-sm leading-relaxed text-foreground">
+            Este mapa não é um plano de metas nem uma lista de objetivos a cumprir.
+            É um convite para você olhar para sua história, reconhecer suas conquistas,
+            nomear seus desafios e imaginar seus caminhos possíveis.
+          </p>
+          <p className="text-sm leading-relaxed text-foreground">
+            Seu projeto de vida está sendo construído por você — agora, no seu tempo, da sua forma.
+          </p>
+          <p className="text-sm italic text-muted-foreground mt-2">
+            "O mundo não é. O mundo está sendo." (Freire, 2002)
           </p>
         </div>
 
         {apagado && (
-          <div className="w-full bg-accent/10 border border-accent/20 rounded-xl px-4 py-3 text-sm text-center text-accent-foreground">
+          <div className="w-full bg-accent/10 border border-accent/20 rounded-xl px-4 py-3 text-sm text-center">
             ✓ Mapa apagado. Você pode começar um novo mapa quando quiser.
           </div>
         )}
 
-        <div className="w-full space-y-3 pt-2">
-          <Button onClick={onStart} className="w-full h-14 rounded-2xl text-base font-bold gap-2">
+        <div className="w-full space-y-3">
+          <Button onClick={onStart} className="w-full h-14 rounded-2xl text-base font-bold">
             🌱 Começar meu Mapa
           </Button>
           {mostrarDraft && (
-            <Button onClick={onContinue} variant="outline" className="w-full h-14 rounded-2xl text-base font-bold gap-2">
+            <Button onClick={onContinue} variant="outline" className="w-full h-14 rounded-2xl text-base font-bold">
               📝 Continuar de onde parou
             </Button>
           )}
@@ -243,54 +236,25 @@ function TelaEntrada({ onStart, onContinue, hasDraft, draftDate, onApagar }) {
   );
 }
 
-// ─── Tela final ─────────────────────────────────────────────────────────────
-function TelaFinal({ onEdit, onGerar }) {
-  return (
-    <div>
-      <PageHeader title="Mapa da Vida" backTo="/" />
-      <div className="max-w-lg mx-auto px-4 py-10 flex flex-col items-center gap-6 text-center">
-        <span className="text-6xl">🎉</span>
-        <h2 className="text-2xl font-extrabold">Seu mapa está quase pronto!</h2>
-        <p className="text-muted-foreground leading-relaxed text-sm">
-          Você preencheu todas as etapas. Agora vamos transformar tudo isso em um mapa visual da sua vida.
-        </p>
-        <Button onClick={onGerar} className="w-full h-14 rounded-2xl text-base font-bold gap-2">
-          <Sparkles className="w-5 h-5" /> Gerar meu Mapa da Vida
-        </Button>
-        <button
-          onClick={onEdit}
-          className="text-sm text-muted-foreground underline underline-offset-4"
-        >
-          ✏️ Editar respostas
-        </button>
-      </div>
-    </div>
-  );
-}
-
 // ─── Componente principal ────────────────────────────────────────────────────
 export default function MapaDaVida() {
-  const [screen, setScreen] = useState("entrada"); // "entrada" | "form" | "final" | "mapa"
-  const [etapa, setEtapa] = useState(0);
+  const [screen, setScreen] = useState("entrada"); // "entrada" | "form" | "mapa"
+  const [bloco, setBloco] = useState(0);
   const [data, setData] = useState({});
   const [nome, setNome] = useState(() => loadNome());
   const [toast, setToast] = useState(null);
-
-  // Corr. 2: limpar dados obsoletos ao montar
-  useState(() => {
-    if (hasStaleData()) {
-      clearStorage();
-      setToast("📝 Seus dados anteriores foram resetados por conta de uma atualização do aplicativo. Por favor preencha o mapa novamente.");
-      setTimeout(() => setToast(null), 5000);
-    }
-  });
 
   const draft = loadDraft();
   const hasDraft = !!draft && Object.keys(draft).some((k) => !k.startsWith("_") && draft[k]);
   const draftDate = draft?._savedAt ? formatDate(draft._savedAt) : null;
 
-  const etapaAtual = ETAPAS[etapa];
-  const total = ETAPAS.length;
+  const blocoAtual = BLOCOS[bloco];
+  const total = BLOCOS.length;
+
+  function showToast(msg, ms = 4000) {
+    setToast(msg);
+    setTimeout(() => setToast(null), ms);
+  }
 
   function handleField(field, value) {
     const next = { ...data, [field]: value };
@@ -299,13 +263,11 @@ export default function MapaDaVida() {
   }
 
   function handleNome(value) {
-    setNome(value);
-    saveNome(value);
-  }
-
-  function showToast(msg, ms = 4000) {
-    setToast(msg);
-    setTimeout(() => setToast(null), ms);
+    setNome(value.slice(0, 30));
+    saveNome(value.slice(0, 30));
+    const next = { ...data };
+    setData(next);
+    saveDraft(next);
   }
 
   function handleApagar() {
@@ -317,7 +279,7 @@ export default function MapaDaVida() {
   function handleStart() {
     setData({});
     setNome(loadNome());
-    setEtapa(0);
+    setBloco(0);
     setScreen("form");
   }
 
@@ -329,27 +291,26 @@ export default function MapaDaVida() {
       showToast(`📝 Mapa recuperado — última edição em ${formatDate(_savedAt)}. Continue de onde parou!`);
     }
     setNome(loadNome());
-    setEtapa(0);
+    setBloco(0);
     setScreen("form");
   }
 
   function handleNext() {
-    if (etapa < total - 1) setEtapa(etapa + 1);
-    else setScreen("final");
+    if (bloco < total - 1) { setBloco(bloco + 1); window.scrollTo(0, 0); }
   }
 
   function handlePrev() {
-    if (etapa > 0) setEtapa(etapa - 1);
+    if (bloco > 0) { setBloco(bloco - 1); window.scrollTo(0, 0); }
     else setScreen("entrada");
   }
 
-  // ── Tela do mapa visual ──
+  // Tela mapa visual
   if (screen === "mapa") {
     return (
       <MapaVisual
         data={data}
         nome={nome}
-        onEdit={() => { setEtapa(0); setScreen("form"); }}
+        onEdit={() => { setBloco(0); setScreen("form"); }}
       />
     );
   }
@@ -359,9 +320,7 @@ export default function MapaDaVida() {
       <>
         {toast && (
           <div className="max-w-lg mx-auto px-4 pt-4">
-            <div className="bg-accent/10 border border-accent/20 rounded-xl px-4 py-2 text-sm text-accent-foreground">
-              {toast}
-            </div>
+            <div className="bg-accent/10 border border-accent/20 rounded-xl px-4 py-2 text-sm">{toast}</div>
           </div>
         )}
         <TelaEntrada
@@ -372,15 +331,6 @@ export default function MapaDaVida() {
           onApagar={handleApagar}
         />
       </>
-    );
-  }
-
-  if (screen === "final") {
-    return (
-      <TelaFinal
-        onEdit={() => { setEtapa(0); setScreen("form"); }}
-        onGerar={() => setScreen("mapa")}
-      />
     );
   }
 
@@ -398,14 +348,14 @@ export default function MapaDaVida() {
           </button>
           <div className="flex-1 min-w-0">
             <h1 className="font-extrabold text-base leading-tight truncate">Mapa da Vida</h1>
-            <p className="text-xs text-muted-foreground">Etapa {etapa + 1} de {total}</p>
+            <p className="text-xs text-muted-foreground">Bloco {bloco + 1} de {total}</p>
           </div>
         </div>
         <div className="max-w-lg mx-auto px-4 pb-3">
           <div className="h-2 bg-muted rounded-full overflow-hidden">
             <div
               className="h-full bg-primary rounded-full transition-all duration-300"
-              style={{ width: `${((etapa + 1) / total) * 100}%` }}
+              style={{ width: `${((bloco + 1) / total) * 100}%` }}
             />
           </div>
         </div>
@@ -414,66 +364,76 @@ export default function MapaDaVida() {
       {/* Toast */}
       {toast && (
         <div className="max-w-lg mx-auto px-4 pt-3">
-          <div className="bg-accent/10 border border-accent/20 rounded-xl px-4 py-2 text-sm text-accent-foreground">
-            {toast}
-          </div>
+          <div className="bg-accent/10 border border-accent/20 rounded-xl px-4 py-2 text-sm">{toast}</div>
         </div>
       )}
 
-      {/* Conteúdo da etapa */}
+      {/* Conteúdo do bloco */}
       <div className="max-w-lg mx-auto px-4 py-6 space-y-5">
-        <div className="text-center space-y-2 pb-2">
-          <span className="text-5xl block">{etapaAtual.emoji}</span>
-          <h2 className="text-xl font-extrabold">{etapaAtual.titulo}</h2>
-          <p className="text-sm text-muted-foreground leading-relaxed">{etapaAtual.subtitulo}</p>
+        <div className="text-center space-y-1 pb-1">
+          <span className="text-5xl block">{blocoAtual.emoji}</span>
+          <h2 className="text-xl font-extrabold leading-snug">{blocoAtual.titulo}</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed">{blocoAtual.subtitulo}</p>
         </div>
 
-        {/* Campo de nome — apenas na Etapa 0 */}
-        {etapa === 0 && (
+        {/* Caixinha intro */}
+        <div className="bg-primary/8 border border-primary/20 rounded-2xl p-4">
+          <p className="text-sm leading-relaxed text-foreground">{blocoAtual.intro}</p>
+        </div>
+
+        {/* Campo nome — apenas no bloco 0 */}
+        {blocoAtual.temNome && (
           <div className="space-y-1">
-            <label className="text-sm font-bold leading-snug block">Como você quer ser chamado?</label>
+            <label className="text-sm font-bold leading-snug block">Como você quer ser chamado(a)?</label>
             <Input
               value={nome}
-              onChange={(e) => handleNome(e.target.value.slice(0, NOME_MAX))}
-              placeholder="Ex: Maria, João, seu apelido..."
+              onChange={(e) => handleNome(e.target.value)}
+              placeholder="Seu nome ou apelido..."
               className="rounded-xl text-sm h-10"
-              maxLength={NOME_MAX}
+              maxLength={30}
             />
-            <CharCounter current={nome.length} max={NOME_MAX} />
+            <CharCounter current={nome.length} max={30} />
           </div>
         )}
 
-        {etapaAtual.perguntas.map((p) => {
-          const val = data[p.field] || "";
+        {/* Campos do bloco */}
+        {blocoAtual.campos.map((c) => {
+          const val = data[c.field] || "";
           return (
-            <div key={p.field} className="space-y-1">
-              <label className="text-sm font-bold leading-snug block">{p.label}</label>
+            <div key={c.field} className="space-y-1">
+              <label className="text-sm font-bold leading-snug block">{c.label}</label>
               <Textarea
                 value={val}
-                onChange={(e) => handleField(p.field, e.target.value.slice(0, p.maxLength))}
-                placeholder={p.placeholder}
+                onChange={(e) => handleField(c.field, e.target.value.slice(0, c.max))}
+                placeholder={c.placeholder}
                 className="rounded-xl text-sm min-h-[80px] resize-none"
-                maxLength={p.maxLength}
+                maxLength={c.max}
               />
-              <CharCounter current={val.length} max={p.maxLength} />
+              <CharCounter current={val.length} max={c.max} />
             </div>
           );
         })}
+
+        {/* Botão Gerar — apenas no último bloco */}
+        {blocoAtual.isFinal && (
+          <Button
+            onClick={() => setScreen("mapa")}
+            className="w-full h-14 rounded-2xl text-base font-bold gap-2 mt-2"
+          >
+            <Sparkles className="w-5 h-5" /> Gerar meu Mapa da Vida
+          </Button>
+        )}
 
         <div className="flex gap-3 pt-2 pb-6">
           <Button variant="outline" onClick={handlePrev} className="flex-1 h-12 rounded-xl gap-2">
             <ArrowLeft className="w-4 h-4" /> Anterior
           </Button>
-          <Button onClick={handleNext} className="flex-1 h-12 rounded-xl gap-2 font-bold">
-            {etapa < total - 1 ? (
-              <>Próximo <ArrowRight className="w-4 h-4" /></>
-            ) : (
-              <>Concluir <ArrowRight className="w-4 h-4" /></>
-            )}
-          </Button>
+          {!blocoAtual.isFinal && (
+            <Button onClick={handleNext} className="flex-1 h-12 rounded-xl gap-2 font-bold">
+              Próximo <ArrowRight className="w-4 h-4" />
+            </Button>
+          )}
         </div>
-
-
       </div>
     </div>
   );
