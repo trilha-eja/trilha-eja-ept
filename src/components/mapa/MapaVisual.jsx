@@ -35,7 +35,7 @@ const EIXOS_ACIMA = [
   { key: "familia",  emoji: "👨‍👩‍👧", label: "Família",   cor: "#5BAD6F", fields: ["familia_1ano",  "familia_5anos",  "familia_10anos"]  },
 ];
 const EIXOS_ABAIXO = [
-  { key: "eu",         emoji: "🌟", label: "Eu Mesmo",      cor: "#9B59B6", fields: ["eu_1ano",         "eu_5anos",         "eu_10anos"]        },
+  { key: "eu",         emoji: "🌟", label: "Eu Mesmo(a)",  cor: "#9B59B6", fields: ["eu_1ano",         "eu_5anos",         "eu_10anos"]        },
   { key: "material",   emoji: "🏠", label: "Vida Material", cor: "#F0A500", fields: ["material_1ano",   "material_5anos",   "material_10anos"]  },
   { key: "comunidade", emoji: "🤝", label: "Comunidade",    cor: "#E74C6C", fields: ["comunidade_1ano", "comunidade_5anos", "comunidade_10anos"] },
 ];

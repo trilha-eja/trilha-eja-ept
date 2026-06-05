@@ -69,7 +69,7 @@ const ETAPAS = [
   },
   {
     emoji: "🌟",
-    titulo: "Eu Mesmo",
+    titulo: "Eu Mesmo(a)",
     subtitulo: "Seu crescimento pessoal, sua saúde, seu bem-estar.",
     perguntas: [
       { field: "eu_semana",  maxLength: 35, label: "Esta semana, o que posso fazer por mim mesmo?",                            placeholder: "Ex: Dormir melhor, reservar um momento só meu..." },
@@ -183,7 +183,7 @@ function TelaEntrada({ onStart, onContinue, hasDraft, draftDate, onApagar }) {
             Sua história não começa aqui — ela já vem de longe. Este mapa é para você enxergar onde está e para onde quer caminhar.
           </p>
           <p className="text-xs italic" style={{ color: "#888888" }}>
-            💡 Dica: use frases curtas e diretas — elas ficam mais bonitas no seu mapa. Exemplo: "concluir o mestrado" em vez de "quero muito concluir o mestrado este ano"
+            💡 Dica: use frases curtas e diretas — elas ficam mais bonitas no seu mapa. Exemplo: "concluir o ensino médio" em vez de "quero muito concluir o ensino médio este ano"
           </p>
         </div>
 

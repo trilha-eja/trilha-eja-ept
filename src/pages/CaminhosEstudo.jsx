@@ -18,7 +18,7 @@ const sections = [
   { id: "prouni",      icon: GraduationCap,  title: "PROUNI",                 description: "Programa Universidade para Todos",      color: "bg-chart-4" },
   { id: "fies",        icon: GraduationCap,  title: "FIES",                   description: "Financiamento Estudantil do Governo Federal",   color: "bg-destructive" },
   { id: "trilha",      icon: BookOpen,       title: "Trilha de Continuidade",  description: "Veja os caminhos possíveis após a EJA-EPT",     color: "bg-chart-3" },
-  { id: "cursos",      icon: School,         title: "Cursos Gratuitos",        description: "Estude de graça onde estiver",          color: "bg-chart-2" },
+  { id: "cursos",      icon: School,         title: "Cursos Gratuitos",        description: "Conheça caminhos de aprendizado ao seu alcance",          color: "bg-chart-2" },
   { id: "dicas",       icon: Lightbulb,      title: "Dicas de Estudo",         description: "Como estudar com pouco tempo",          color: "bg-secondary" },
   { id: "ferramentas", icon: Smartphone,     title: "Ferramentas Digitais",    description: "Seu celular como aliado nos estudos",   color: "bg-chart-1" },
   { id: "videos",      icon: Video,          title: "Vídeos Recomendados",     description: "Aprenda assistindo",                    color: "bg-chart-5" },

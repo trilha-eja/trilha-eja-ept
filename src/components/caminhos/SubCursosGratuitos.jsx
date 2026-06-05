@@ -46,24 +46,40 @@ const cursos = [
   {
     emoji: "⚙️",
     titulo: "SENAI — Cursos Técnicos",
-    texto: "Cursos técnicos gratuitos pelo programa Pronatec. Eletricidade, mecânica, informática e muito mais.",
+    texto: "O SENAI oferece cursos técnicos profissionalizantes. A maioria dos cursos é paga, mas periodicamente são abertos editais de vagas gratuitas. Fique atento aos editais de gratuidade e candidate-se quando abertos.",
     botoes: [
-      { label: "🔗 Cursos gratuitos SENAI SC", url: "https://ensinotecnicogratuito.sc.senai.br" },
-      { label: "🔗 SENAI Play", url: "https://play.senai.br" },
+      { label: "🔗 Ver editais de gratuidade", url: "https://sc.senai.br/pt-br/editais-gratuidade-senai" },
     ],
-    nota: "⚠️ Alguns cursos do SENAI Play são gratuitos e outros são pagos. Verifique antes de se inscrever.",
   },
   {
     emoji: "🛎️",
     titulo: "SENAC — Cursos Profissionais",
-    texto: "Cursos profissionalizantes gratuitos pelo Pronatec. Gastronomia, beleza, comércio, informática e muito mais.",
-    botoes: [{ label: "🔗 Acessar SENAC", url: "https://www.senac.br" }],
+    texto: "O SENAC oferece cursos nas áreas de comércio, gastronomia, beleza, informática e muito mais. A maioria dos cursos é paga, mas há vagas gratuitas disponíveis periodicamente. Consulte os cursos gratuitos disponíveis em SC.",
+    botoes: [{ label: "🔗 Ver cursos gratuitos", url: "https://portal.sc.senac.br/cursos-gratuitos" }],
+  },
+  {
+    emoji: "🏛️",
+    titulo: "ENAP — Escola Nacional de Administração Pública",
+    texto: "Cursos gratuitos e certificados nas áreas de gestão pública, liderança, tecnologia e cidadania. Aberto a todos os cidadãos brasileiros.",
+    botoes: [{ label: "🔗 Acessar", url: "https://www.enap.gov.br" }],
   },
   {
     emoji: "🌐",
     titulo: "Fundação Bradesco",
     texto: "Cursos online gratuitos de informática, administração, contabilidade e mais. Certificado gratuito ao concluir.",
     botoes: [{ label: "🔗 Acessar", url: "https://www.ev.org.br" }],
+  },
+  {
+    emoji: "🎓",
+    titulo: "IFSC — Instituto Federal de Santa Catarina",
+    texto: "O IFSC oferece cursos técnicos e superiores gratuitos em todo o estado de Santa Catarina. Consulte os cursos disponíveis e as formas de ingresso.",
+    botoes: [{ label: "🔗 Ver cursos", url: "https://www.ifsc.edu.br/cursos" }],
+  },
+  {
+    emoji: "🎓",
+    titulo: "IFC — Instituto Federal Catarinense",
+    texto: "O IFC oferece cursos técnicos, de graduação e pós-graduação gratuitos em Santa Catarina. Você já conhece o IFC — explore outros cursos disponíveis!",
+    botoes: [{ label: "🔗 Ver guia de cursos", url: "https://ingresso.ifc.edu.br/guia-de-cursos" }],
   },
   {
     emoji: "📚",
