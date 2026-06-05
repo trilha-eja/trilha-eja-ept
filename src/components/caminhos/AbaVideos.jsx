@@ -67,16 +67,8 @@ const secoes = [
 export default function AbaVideos() {
   return (
     <div className="space-y-5">
-      <div className="text-center space-y-1 pb-1">
+      <div className="text-center pb-1">
         <h2 className="text-base font-extrabold">🎬 Vídeos para Te Ajudar a Estudar</h2>
-        <p className="text-xs text-muted-foreground leading-relaxed">
-          Clique no tema que você quer aprender — abrirá uma busca no YouTube com os melhores vídeos sobre esse assunto.
-        </p>
-      </div>
-
-      {/* Nota explicativa */}
-      <div className="bg-primary/10 border border-primary/20 rounded-2xl px-4 py-3 text-xs leading-relaxed text-foreground">
-        💡 <strong>Como funciona:</strong> ao clicar em "Ver vídeos", o YouTube abrirá com uma busca já feita sobre o tema. Escolha o vídeo que parecer mais claro para você!
       </div>
 
       {secoes.map((s) => (

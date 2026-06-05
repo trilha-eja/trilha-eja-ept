@@ -294,9 +294,8 @@ export default function SuaOpiniao() {
 
         <div className="max-w-lg mx-auto px-4 py-8 flex flex-col items-center gap-6">
           <span className="text-6xl">⭐</span>
-          <div className="text-center space-y-2">
+          <div className="text-center">
             <h2 className="text-2xl font-extrabold leading-tight">Sua Opinião Importa</h2>
-            <p className="text-muted-foreground text-sm font-semibold">Sua voz transforma este aplicativo.</p>
           </div>
 
           <p className="font-semibold text-base">Você é:</p>

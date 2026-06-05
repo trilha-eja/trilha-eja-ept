@@ -46,11 +46,8 @@ const ferramentas = [
 export default function AbaFerramentasDigitais() {
   return (
     <div className="space-y-4">
-      <div className="text-center space-y-1 pb-1">
+      <div className="text-center pb-1">
         <h2 className="text-base font-extrabold">📱 Ferramentas Digitais para Estudar</h2>
-        <p className="text-xs text-muted-foreground leading-relaxed">
-          Seu celular pode ser seu maior aliado nos estudos — e de graça!
-        </p>
       </div>
 
       {ferramentas.map((f) => (

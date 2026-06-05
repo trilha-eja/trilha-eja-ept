@@ -34,11 +34,8 @@ const dicas = [
 export default function AbaDicasEstudo() {
   return (
     <div className="space-y-4">
-      <div className="text-center space-y-1 pb-1">
+      <div className="text-center pb-1">
         <h2 className="text-base font-extrabold">💡 Dicas para Estudar com Pouco Tempo</h2>
-        <p className="text-xs text-muted-foreground leading-relaxed">
-          Para quem trabalha o dia todo e ainda encontra força para estudar — você já é um exemplo de persistência.
-        </p>
       </div>
 
       {dicas.map((d) => (
