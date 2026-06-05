@@ -20,7 +20,7 @@ export default function TrabalhoPrecarizado({ onBack }) {
         {/* Intro box */}
         <div className="bg-yellow-50 border border-yellow-200 rounded-2xl p-4">
           <p className="text-sm leading-relaxed text-foreground">
-            ⚠️ Na área elétrica, ouvimos muito falar na "liberdade" de ser o próprio chefe. Mas cuidado: muitas vezes, essa <strong>autonomia</strong> esconde a <strong>precarização do trabalho</strong>.
+            ⚠️ Na área elétrica, ouvimos muito falar na "liberdade" de ser o(a) próprio(a) chefe. Mas cuidado: muitas vezes, essa <strong>autonomia</strong> esconde a <strong>precarização do trabalho</strong>.
           </p>
         </div>
 
@@ -30,7 +30,7 @@ export default function TrabalhoPrecarizado({ onBack }) {
           <div className="flex-1 min-w-0">
             <h3 className="font-extrabold text-sm mb-2">A armadilha do "Empreendedor de si mesmo"</h3>
             <p className="text-xs text-muted-foreground leading-relaxed">
-              Isso significa assumir <strong>todos os riscos sozinho</strong>, perdendo direitos básicos como férias e auxílio-doença e enfrentando jornadas exaustivas para dar conta do sustento.
+              Isso significa assumir <strong>todos os riscos sozinho(a)</strong>, perdendo direitos básicos como férias e auxílio-doença e enfrentando jornadas exaustivas para dar conta do sustento.
             </p>
             <p className="text-xs text-muted-foreground leading-relaxed mt-2">
               Estudiosos do mundo do trabalho, como <strong>Ricardo Antunes</strong>, chamam isso de <strong>'precariado'</strong>: quando a perda de direitos sociais é disfarçada de empreendedorismo.
@@ -47,7 +47,7 @@ export default function TrabalhoPrecarizado({ onBack }) {
           <div className="flex-1 min-w-0">
             <h3 className="font-extrabold text-sm mb-2">Proteja-se na prática!</h3>
             <p className="text-xs text-muted-foreground leading-relaxed">
-              A precarização é um problema estrutural do mercado, mas você tem ferramentas para não ficar desamparado:
+              A precarização é um problema estrutural do mercado, mas você tem ferramentas para não ficar desamparado(a):
             </p>
           </div>
         </div>
@@ -84,7 +84,7 @@ export default function TrabalhoPrecarizado({ onBack }) {
           <div className="flex-1 min-w-0">
             <h3 className="font-extrabold text-sm mb-2">Conheça seus Direitos Coletivos</h3>
             <p className="text-xs text-muted-foreground leading-relaxed">
-              Você não está sozinho! O sindicato da sua categoria é um aliado importante na luta contra a precarização.
+              Você não está sozinho(a)! O sindicato da sua categoria é um aliado importante na luta contra a precarização.
             </p>
             <p className="text-xs text-muted-foreground leading-relaxed mt-2">
               💡 Consulte a seção <strong>Direitos Coletivos</strong> neste aplicativo para saber como encontrar seu sindicato e o que ele pode fazer por você.

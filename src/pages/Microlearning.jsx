@@ -8,6 +8,7 @@ const cards = [
     emoji: "🛡️",
     title: "NR-10: O Básico",
     content: "A NR-10 é a norma que protege quem trabalha com eletricidade. Ela exige treinamento obrigatório de 40h antes de mexer em qualquer instalação elétrica.",
+
     color: "bg-destructive/10 border-destructive/20",
   },
   {
@@ -42,7 +43,7 @@ const cards = [
     category: "Carreira",
     emoji: "📈",
     title: "Quanto Ganha?",
-    content: "Um eletricista industrial iniciante ganha em média R$ 2.500 a R$ 3.500. Com experiência e NR-10, pode chegar a R$ 5.000 ou mais!",
+    content: "Um(a) eletricista industrial iniciante ganha em média R$ 2.500 a R$ 3.500. Com experiência e NR-10, pode chegar a R$ 5.000 ou mais!",
     color: "bg-chart-5/10 border-chart-5/20",
   },
   {
@@ -70,7 +71,7 @@ export default function Microlearning() {
       <PageHeader title="Microlearning" subtitle="Conteúdos rápidos para quem nunca para de aprender" />
       <div className="max-w-lg mx-auto px-4 py-5">
         <div className="bg-primary/10 border border-primary/20 rounded-2xl p-4 mb-4">
-          <p className="text-sm leading-relaxed text-foreground">Para quem tem <strong>pouco tempo</strong> mas não abre mão de aprender. Cada conteúdo foi pensado para caber na sua rotina.</p>
+          <p className="text-sm leading-relaxed text-foreground">Para quem tem <strong>pouco tempo</strong> mas não abre mão de aprender. Cada conteúdo foi pensado para caber na rotina de cada um(a).</p>
         </div>
         <div className="flex items-center justify-center gap-2 mb-4">
           <Clock className="w-4 h-4 text-muted-foreground" />

@@ -5,9 +5,9 @@ import EducatorCard from "../components/educator/EducatorCard";
 
 const cards = [
   {
-    title: "Quem é o estudante da EJA-EPT?",
+    title: "Quem é o(a) estudante da EJA-EPT?",
     emoji: "👤",
-    text: `O estudante da EJA-EPT é um trabalhador-estudante adulto que carrega saberes construídos na vida, no trabalho e nas lutas cotidianas. Como disse Miguel Arroyo, ele é um "passageiro da noite" — não por falta de esforço, mas porque as condições estruturais da sociedade o afastaram da escola.
+    text: `O(a) estudante da EJA-EPT é um(a) trabalhador(a)-estudante adulto(a) que carrega saberes construídos na vida, no trabalho e nas lutas cotidianas. Como disse Miguel Arroyo, ele/ela é um "passageiro da noite" — não por falta de esforço, mas porque as condições estruturais da sociedade o(a) afastaram da escola.
 
 Ao usar este aplicativo, lembre-se: você não está ensinando alguém que não sabe. Você está reconhecendo quem já sabe muito.`,
     reference: "ARROYO, M. G. Passageiros da noite. Petrópolis: Vozes, 2012.",
@@ -15,7 +15,7 @@ Ao usar este aplicativo, lembre-se: você não está ensinando alguém que não 
   {
     title: "Mundo do Trabalho x Mercado de Trabalho",
     emoji: "⚖️",
-    text: `Este aplicativo usa intencionalmente "Mundo do Trabalho", não "mercado de trabalho". A diferença é política: formar para o mercado adapta o estudante às necessidades do capital. Formar para o mundo do trabalho instrumentaliza o cidadão a compreender, questionar e transformar as relações de produção.
+    text: `Este aplicativo usa intencionalmente "Mundo do Trabalho", não "mercado de trabalho". A diferença é política: formar para o mercado adapta o(a) estudante às necessidades do capital. Formar para o mundo do trabalho instrumentaliza o(a) cidadão(ã) a compreender, questionar e transformar as relações de produção.
 
 Use essa distinção em suas aulas.`,
     reference: "FRIGOTTO, G.; CIAVATTA, M.; RAMOS, M. (Orgs.). Ensino Médio Integrado. São Paulo: Cortez, 2005.",
@@ -171,7 +171,7 @@ export default function ParaOEducador() {
             1. Quem é o estudante da EJA-EPT?
           </h2>
           <p style={{ fontSize: "12px", lineHeight: "1.7", margin: "0 0 8px 0" }}>
-            O estudante da EJA-EPT é um trabalhador-estudante adulto que carrega saberes construídos na vida, no trabalho e nas lutas cotidianas. Como disse Miguel Arroyo, ele é um passageiro da noite — não por falta de esforço, mas porque as condições estruturais da sociedade o afastaram da escola. Ao usar este aplicativo, lembre-se: você não está ensinando alguém que não sabe. Você está reconhecendo quem já sabe muito.
+            O(a) estudante da EJA-EPT é um(a) trabalhador(a)-estudante adulto(a) que carrega saberes construídos na vida, no trabalho e nas lutas cotidianas. Como disse Miguel Arroyo, ele/ela é um "passageiro da noite" — não por falta de esforço, mas porque as condições estruturais da sociedade o(a) afastaram da escola. Ao usar este aplicativo, lembre-se: você não está ensinando alguém que não sabe. Você está reconhecendo quem já sabe muito.
           </p>
           <p style={{ fontSize: "11px", fontStyle: "italic", color: "#555", margin: "0 0 32px 0" }}>
             Referência: ARROYO, M. G. Passageiros da noite. Petrópolis: Vozes, 2012.
@@ -182,7 +182,7 @@ export default function ParaOEducador() {
             2. Mundo do Trabalho x Mercado de Trabalho
           </h2>
           <p style={{ fontSize: "12px", lineHeight: "1.7", margin: "0 0 8px 0" }}>
-            Este aplicativo usa intencionalmente Mundo do Trabalho, não mercado de trabalho. A diferença é política: formar para o mercado adapta o estudante às necessidades do capital. Formar para o mundo do trabalho instrumentaliza o cidadão a compreender, questionar e transformar as relações de produção. Use essa distinção em suas aulas.
+            Este aplicativo usa intencionalmente Mundo do Trabalho, não mercado de trabalho. A diferença é política: formar para o mercado adapta o(a) estudante às necessidades do capital. Formar para o mundo do trabalho instrumentaliza o(a) cidadão(ã) a compreender, questionar e transformar as relações de produção. Use essa distinção em suas aulas.
           </p>
           <p style={{ fontSize: "11px", fontStyle: "italic", color: "#555", margin: "0 0 32px 0" }}>
             Referência: FRIGOTTO, G.; CIAVATTA, M.; RAMOS, M. (Orgs.). Ensino Médio Integrado. São Paulo: Cortez, 2005.

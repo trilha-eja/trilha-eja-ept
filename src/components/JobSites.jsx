@@ -55,7 +55,7 @@ export default function JobSites({ onBack }) {
       </div>
       <div className="max-w-lg mx-auto px-4 py-5 space-y-3">
         <div className="bg-chart-4/10 border border-chart-4/20 rounded-2xl p-4">
-          <p className="text-sm leading-relaxed text-foreground">Plataformas onde trabalhadores-estudantes buscam oportunidades no <strong>mundo do trabalho</strong>. Clique para abrir o site diretamente 👇</p>
+          <p className="text-sm leading-relaxed text-foreground">Plataformas onde trabalhadores(as)-estudantes buscam oportunidades no <strong>mundo do trabalho</strong>. Clique para abrir o site diretamente 👇</p>
         </div>
         {sites.map((site, i) => (
           <a

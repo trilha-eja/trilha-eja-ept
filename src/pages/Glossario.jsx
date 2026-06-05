@@ -118,8 +118,8 @@ const terms = [
     color: "bg-slate-50 border-slate-200",
     badge: "bg-slate-100 text-slate-700",
     simple: "O instrumento que 'lê' a eletricidade",
-    detail: "Mede tensão (V), corrente (A) e resistência (Ω). É a ferramenta mais importante do eletricista. Com ele você testa se há energia, se o fio está rompido e muito mais.",
-    tip: "🔬 Todo eletricista tem um multímetro. É o seu melhor amigo!",
+    detail: "Mede tensão (V), corrente (A) e resistência (Ω). É a ferramenta mais importante do(a) eletricista. Com ele você testa se há energia, se o fio está rompido e muito mais.",
+    tip: "🔬 Todo(a) eletricista tem um multímetro. É o seu melhor amigo!",
   },
   {
     term: "EPI",
@@ -127,7 +127,7 @@ const terms = [
     color: "bg-orange-50 border-orange-200",
     badge: "bg-orange-100 text-orange-700",
     simple: "Equipamento que protege seu corpo no trabalho",
-    detail: "EPI = Equipamento de Proteção Individual. Para eletricistas: luvas isolantes, óculos, capacete, botina isolante e roupa anti-chama. A empresa é OBRIGADA a fornecer gratuitamente.",
+    detail: "EPI = Equipamento de Proteção Individual. Para eletricistas(as): luvas isolantes, óculos, capacete, botina isolante e roupa anti-chama. A empresa é OBRIGADA a fornecer gratuitamente.",
     tip: "🧤 Sem EPI, não trabalhe. É seu direito e é sua vida!",
   },
 ];

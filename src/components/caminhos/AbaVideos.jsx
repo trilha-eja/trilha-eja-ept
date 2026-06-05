@@ -36,7 +36,7 @@ const secoes = [
       },
       {
         titulo: "ENEM para quem trabalha",
-        texto: "Dicas específicas para trabalhadores-estudantes.",
+        texto: "Dicas específicas para trabalhadores(as)-estudantes.",
         url: "https://www.youtube.com/results?search_query=enem+para+quem+trabalha+dicas+estudo",
       },
     ],

@@ -2,19 +2,19 @@ export const cards = [
   {
     emoji: "🤝",
     titulo: "Direito ao Sindicato",
-    texto: "Todo trabalhador tem direito de se associar ao sindicato da sua categoria. O sindicato defende seus direitos nas negociações com os empregadores, presta assistência jurídica gratuita e representa os trabalhadores em acordos coletivos. Para encontrar seu sindicato: pesquise 'sindicato eletricista + sua cidade' no Google.",
+    texto: "Todo(a) trabalhador(a) tem direito de se associar ao sindicato da sua categoria. O sindicato defende seus direitos nas negociações com os(as) empregadores(as), presta assistência jurídica gratuita e representa os(as) trabalhadores(as) em acordos coletivos. Para encontrar seu sindicato: pesquise 'sindicato eletricista + sua cidade' no Google.",
     legal: "CF/88 Art. 8º",
   },
   {
     emoji: "📜",
     titulo: "Convenção Coletiva",
-    texto: "É um acordo negociado entre o sindicato dos trabalhadores e o sindicato dos empregadores. Pode garantir direitos maiores que os previstos na CLT, como: salários maiores, mais dias de férias ou benefícios adicionais. Pergunte ao seu sindicato sobre a convenção coletiva da sua categoria.",
+    texto: "É um acordo negociado entre o sindicato dos(as) trabalhadores(as) e o sindicato dos(as) empregadores(as). Pode garantir direitos maiores que os previstos na CLT, como: salários maiores, mais dias de férias ou benefícios adicionais. Pergunte ao seu sindicato sobre a convenção coletiva da sua categoria.",
     legal: "CLT Art. 611",
   },
   {
     emoji: "✊",
     titulo: "Direito de Greve",
-    texto: "Os trabalhadores têm direito de fazer greve para defender seus interesses profissionais. Durante a greve o trabalhador não pode ser demitido por justa causa apenas por participar. O sindicato deve comunicar o empregador com antecedência.",
+    texto: "Os(as) trabalhadores(as) têm direito de fazer greve para defender seus interesses profissionais. Durante a greve o(a) trabalhador(a) não pode ser demitido(a) por justa causa apenas por participar. O sindicato deve comunicar o(a) empregador(a) com antecedência.",
     legal: "CF/88 Art. 9º e Lei nº 7.783/1989",
   },
   {
@@ -35,7 +35,7 @@ export const cards = [
       },
       {
         nome: "Ministério Público do Trabalho",
-        descricao: "Defende os direitos coletivos dos trabalhadores.",
+        descricao: "Defende os direitos coletivos dos(as) trabalhadores(as).",
         link: { url: "https://mpt.mp.br", label: "🔗 Acessar" },
       },
       {
