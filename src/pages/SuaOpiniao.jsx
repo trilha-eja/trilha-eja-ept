@@ -285,7 +285,10 @@ export default function SuaOpiniao() {
             <Link to="/" className="w-10 h-10 rounded-xl bg-muted flex items-center justify-center">
               <ArrowLeft className="w-5 h-5" />
             </Link>
-            <h1 className="font-extrabold text-lg">Sua Opinião Importa</h1>
+            <div>
+              <h1 className="font-extrabold text-lg leading-tight">Sua Opinião Importa</h1>
+              <p className="text-sm text-muted-foreground">Sua voz transforma este aplicativo.</p>
+            </div>
           </div>
         </div>
 
@@ -293,7 +296,7 @@ export default function SuaOpiniao() {
           <span className="text-6xl">⭐</span>
           <div className="text-center space-y-2">
             <h2 className="text-2xl font-extrabold leading-tight">Sua Opinião Importa</h2>
-            <p className="text-muted-foreground text-sm">Sua voz transforma este aplicativo.</p>
+            <p className="text-muted-foreground text-sm font-semibold">Sua voz transforma este aplicativo.</p>
           </div>
 
           <p className="font-semibold text-base">Você é:</p>

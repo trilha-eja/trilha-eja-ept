@@ -156,9 +156,9 @@ export default function Glossario() {
           />
         </div>
 
-        <p className="text-xs text-muted-foreground text-center mb-1">
-          Dominar os termos técnicos é também dominar o seu ofício. Consulte sempre que precisar.
-        </p>
+        <div className="bg-chart-3/10 border border-chart-3/20 rounded-2xl p-4 mb-1">
+          <p className="text-sm leading-relaxed text-foreground">Dominar os <strong>termos técnicos</strong> é também dominar o <strong>seu ofício</strong>. Consulte sempre que precisar.</p>
+        </div>
         <p className="text-xs text-muted-foreground text-center">
           {filtered.length} termos • Toque em um para ver mais detalhes
         </p>
