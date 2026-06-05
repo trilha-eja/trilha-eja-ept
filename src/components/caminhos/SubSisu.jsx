@@ -15,9 +15,9 @@ export default function SubSisu({ onBack }) {
       <PageHeader title="SISU" subtitle="Sistema de Seleção Unificada" backTo="/" />
       <div className="max-w-lg mx-auto px-4 py-5 pb-10 space-y-3">
 
-        <p className="text-sm text-muted-foreground leading-relaxed px-1">
-          Use sua nota do ENEM para entrar em universidades públicas gratuitas.
-        </p>
+        <div className="bg-accent/10 border border-accent/20 rounded-2xl p-4">
+          <p className="text-sm leading-relaxed text-foreground">O <strong>SISU</strong> usa sua nota do ENEM para garantir uma vaga em universidade pública e gratuita. É tudo online e sem taxa.</p>
+        </div>
 
         {infos.map((i) => (
           <div key={i.titulo} className="border border-border rounded-2xl p-4 bg-card flex items-start gap-3">

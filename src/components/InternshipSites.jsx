@@ -41,12 +41,15 @@ export default function InternshipSites({ onBack }) {
             <ArrowLeft className="w-5 h-5" />
           </button>
           <div>
-            <h1 className="font-extrabold text-lg">Sites de Estágio</h1>
-            <p className="text-xs text-muted-foreground">Clique para abrir o site diretamente 👇</p>
+            <h1 className="font-extrabold text-lg leading-tight">Sites de Estágio</h1>
+            <p className="text-sm text-muted-foreground">Onde encontrar e se cadastrar para estágios</p>
           </div>
         </div>
       </div>
       <div className="max-w-lg mx-auto px-4 py-5 space-y-5 pb-10">
+        <div className="bg-chart-5/10 border border-chart-5/20 rounded-2xl p-4">
+          <p className="text-sm leading-relaxed text-foreground">Plataformas para quem busca <strong>estágio</strong> — o primeiro passo para entrar no mundo do trabalho com direitos garantidos. Clique para abrir o site diretamente 👇</p>
+        </div>
         <div className="bg-orange-50 border border-orange-200 rounded-2xl p-4">
           <p className="text-xs text-orange-800 leading-relaxed">
             💡 Alguns sites servem para você se <strong>CADASTRAR</strong> e receber indicações de vagas. Outros servem para <strong>BUSCAR</strong> vagas abertas e se candidatar. Veja a diferença em cada um!

@@ -32,9 +32,9 @@ export default function SubEnem({ onBack }) {
       <PageHeader title="ENEM" subtitle="Exame Nacional do Ensino Médio" backTo="/" />
       <div className="max-w-lg mx-auto px-4 py-5 pb-10 space-y-3">
 
-        <p className="text-sm text-muted-foreground leading-relaxed px-1">
-          A porta de entrada para o ensino superior gratuito no Brasil.
-        </p>
+        <div className="bg-primary/10 border border-primary/20 rounded-2xl p-4">
+          <p className="text-sm leading-relaxed text-foreground">O <strong>ENEM</strong> é a porta de entrada para a universidade pública e gratuita. Entenda como funciona e prepare-se no seu tempo.</p>
+        </div>
 
         {infos.map((i) => (
           <div key={i.titulo} className="border border-border rounded-2xl p-4 bg-card flex items-start gap-3">

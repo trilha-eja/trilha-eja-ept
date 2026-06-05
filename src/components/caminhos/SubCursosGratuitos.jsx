@@ -98,8 +98,11 @@ const cursos = [
 export default function SubCursosGratuitos({ onBack }) {
   return (
     <div>
-      <PageHeader title="Cursos Gratuitos" subtitle="Estude de graça onde estiver" backTo="/" />
+      <PageHeader title="Cursos Gratuitos" subtitle="Conheça caminhos de aprendizado ao seu alcance" backTo="/" />
       <div className="max-w-lg mx-auto px-4 py-5 pb-10 space-y-3">
+        <div className="bg-chart-2/10 border border-chart-2/20 rounded-2xl p-4">
+          <p className="text-sm leading-relaxed text-foreground">A <strong>educação</strong> é um direito. Aqui você encontra cursos, plataformas e instituições que podem ampliar sua formação — muitos totalmente gratuitos.</p>
+        </div>
         {cursos.map((c) => (
           <div key={c.titulo} className="border border-border rounded-2xl p-4 bg-card flex items-start gap-3">
             <span className="text-2xl shrink-0 mt-0.5">{c.emoji}</span>

@@ -71,14 +71,12 @@ function Nivel({ cor, emoji, titulo, subtexto, tags }) {
 export default function SubTrilhaContinuidade({ onBack, onNavigate }) {
   return (
     <div>
-      <PageHeader title="Sua Trilha de Continuidade" subtitle="Existem muitos caminhos possíveis após a EJA-EPT" backTo="/" />
+      <PageHeader title="Trilha de Continuidade" subtitle="Veja os caminhos possíveis após a EJA-EPT" backTo="/" />
       <div className="max-w-lg mx-auto px-4 py-5 pb-10 space-y-4">
 
         {/* Intro */}
-        <div className="rounded-2xl p-4 bg-orange-50 border border-orange-200">
-          <p className="text-xs text-orange-800 leading-relaxed">
-            💡 <strong>Não existe um único caminho certo.</strong> Você pode seguir qualquer uma dessas trilhas — no seu tempo, do seu jeito. O importante é continuar!
-          </p>
+        <div className="bg-primary/10 border border-primary/20 rounded-2xl p-4">
+          <p className="text-sm leading-relaxed text-foreground">Não existe um único caminho certo. Você pode seguir qualquer uma dessas trilhas — <strong>no seu tempo</strong>, da sua forma. O importante é continuar!</p>
         </div>
 
         {/* TRILHA VISUAL */}

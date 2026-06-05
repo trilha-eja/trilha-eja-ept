@@ -18,8 +18,8 @@ export default function PracticalGuideDetail({ guide, onBack }) {
             <ArrowLeft className="w-5 h-5" />
           </button>
           <div className="flex-1">
-            <h1 className="font-extrabold text-lg">{guide.title}</h1>
-            <p className="text-xs text-muted-foreground">Passo {step + 1} de {guide.steps.length}</p>
+            <h1 className="font-extrabold text-lg leading-tight">{guide.title}</h1>
+            <p className="text-sm text-muted-foreground">{guide.steps.length} passos simples • Passo {step + 1} de {guide.steps.length}</p>
           </div>
         </div>
         <div className="max-w-lg mx-auto px-4 pb-3">

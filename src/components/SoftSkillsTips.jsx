@@ -47,13 +47,16 @@ export default function SoftSkillsTips({ onBack }) {
           <button onClick={onBack} className="w-10 h-10 rounded-xl bg-muted flex items-center justify-center">
             <ArrowLeft className="w-5 h-5" />
           </button>
-          <h1 className="font-extrabold text-lg">Valorize sua Experiência</h1>
+          <div>
+            <h1 className="font-extrabold text-lg leading-tight">Valorize sua Experiência</h1>
+            <p className="text-sm text-muted-foreground">Suas habilidades de vida contam!</p>
+          </div>
         </div>
       </div>
       <div className="max-w-lg mx-auto px-4 py-5 space-y-3">
-        <p className="text-sm text-muted-foreground text-center mb-4">
-          Tudo que você viveu tem valor formativo. Seu trabalho, sua família, suas lutas — são saberes que nenhum diploma apaga. Veja como reconhecê-los:
-        </p>
+        <div className="bg-secondary/20 border border-secondary/30 rounded-2xl p-4">
+          <p className="text-sm leading-relaxed text-foreground">Tudo que você viveu tem <strong>valor formativo</strong>. Seu trabalho, sua família, suas lutas — são saberes que nenhum diploma apaga. Veja como reconhecê-los:</p>
+        </div>
         {tips.map((tip, i) => {
           const Icon = tip.icon;
           return (

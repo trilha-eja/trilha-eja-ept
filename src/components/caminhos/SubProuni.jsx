@@ -15,9 +15,9 @@ export default function SubProuni({ onBack }) {
       <PageHeader title="PROUNI" subtitle="Programa Universidade para Todos" backTo="/" />
       <div className="max-w-lg mx-auto px-4 py-5 pb-10 space-y-3">
 
-        <p className="text-sm text-muted-foreground leading-relaxed px-1">
-          Bolsas de estudo de 50% ou 100% em faculdades particulares.
-        </p>
+        <div className="bg-chart-4/10 border border-chart-4/20 rounded-2xl p-4">
+          <p className="text-sm leading-relaxed text-foreground">O <strong>PROUNI</strong> oferece bolsas em faculdades particulares — integral ou parcial. Conheça os critérios e veja se você tem direito.</p>
+        </div>
 
         {infos.map((i) => (
           <div key={i.titulo} className="border border-border rounded-2xl p-4 bg-card flex items-start gap-3">

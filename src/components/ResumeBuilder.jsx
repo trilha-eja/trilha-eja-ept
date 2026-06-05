@@ -118,7 +118,7 @@ export default function ResumeBuilder({ onBack }) {
           </button>
           <div className="flex-1 min-w-0">
             <h1 className="font-extrabold text-lg leading-tight">Criar Currículo</h1>
-            <p className="text-xs text-muted-foreground">{progress}% preenchido</p>
+            <p className="text-sm text-muted-foreground">Passo a passo simples • {progress}% preenchido</p>
           </div>
         </div>
 

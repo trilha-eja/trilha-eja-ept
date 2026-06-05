@@ -47,13 +47,16 @@ export default function JobSites({ onBack }) {
           <button onClick={onBack} className="w-10 h-10 rounded-xl bg-muted flex items-center justify-center">
             <ArrowLeft className="w-5 h-5" />
           </button>
-          <h1 className="font-extrabold text-lg">Sites de Emprego</h1>
+          <div>
+            <h1 className="font-extrabold text-lg leading-tight">Sites de Emprego</h1>
+            <p className="text-sm text-muted-foreground">Plataformas para buscar oportunidades</p>
+          </div>
         </div>
       </div>
       <div className="max-w-lg mx-auto px-4 py-5 space-y-3">
-        <p className="text-sm text-muted-foreground text-center mb-2">
-          Plataformas para buscar oportunidades. Clique para abrir o site diretamente 👇
-        </p>
+        <div className="bg-chart-4/10 border border-chart-4/20 rounded-2xl p-4">
+          <p className="text-sm leading-relaxed text-foreground">Plataformas onde trabalhadores-estudantes buscam oportunidades no <strong>mundo do trabalho</strong>. Clique para abrir o site diretamente 👇</p>
+        </div>
         {sites.map((site, i) => (
           <a
             key={i}

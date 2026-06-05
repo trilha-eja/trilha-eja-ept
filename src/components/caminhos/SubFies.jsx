@@ -11,8 +11,12 @@ const infos = [
 export default function SubFies({ onBack }) {
   return (
     <div>
-      <PageHeader title="FIES" subtitle="Financiamento Estudantil — entenda antes de decidir" backTo="/" />
+      <PageHeader title="FIES" subtitle="Financiamento Estudantil do Governo Federal" backTo="/" />
       <div className="max-w-lg mx-auto px-4 py-5 pb-10 space-y-3">
+
+        <div className="bg-destructive/10 border border-destructive/20 rounded-2xl p-4">
+          <p className="text-sm leading-relaxed text-foreground">⚠️ O <strong>FIES</strong> é um empréstimo do governo — não uma bolsa. Antes de decidir, conheça bem como funciona e considere primeiro o PROUNI e o SISU, que são gratuitos.</p>
+        </div>
 
         {/* Aviso em destaque */}
         <div className="rounded-2xl p-4 bg-red-50 border border-red-300 space-y-1">

@@ -1,6 +1,6 @@
 import { ArrowLeft } from "lucide-react";
 
-export default function RightsSubPage({ titulo, subtitulo, cards, onBack }) {
+export default function RightsSubPage({ titulo, subtitulo, intro, introBg, cards, onBack }) {
   return (
     <div>
       <div className="sticky top-0 bg-background/95 backdrop-blur-sm z-40 border-b border-border">
@@ -10,11 +10,16 @@ export default function RightsSubPage({ titulo, subtitulo, cards, onBack }) {
           </button>
           <div>
             <h1 className="font-extrabold text-lg leading-tight">{titulo}</h1>
-            {subtitulo && <p className="text-xs text-muted-foreground leading-snug">{subtitulo}</p>}
+            {subtitulo && <p className="text-sm text-muted-foreground leading-snug">{subtitulo}</p>}
           </div>
         </div>
       </div>
       <div className="max-w-lg mx-auto px-4 py-5 space-y-3 pb-10">
+        {intro && (
+          <div className={`border rounded-2xl p-4 ${introBg || "bg-muted/40 border-border"}`}>
+            <p className="text-sm leading-relaxed text-foreground">{intro}</p>
+          </div>
+        )}
         {cards.map((r, i) => (
           <div key={i} className="p-4 bg-card border border-border rounded-2xl">
             <div className="flex items-center gap-2 mb-1">
