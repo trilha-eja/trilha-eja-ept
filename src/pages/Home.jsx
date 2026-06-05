@@ -95,10 +95,11 @@ export default function Home() {
       </div>
 
       {/* Motivational quote */}
-      <div className="bg-secondary/20 border border-secondary/30 rounded-2xl p-4 mb-6">
-        <p className="text-sm text-foreground font-semibold text-center leading-relaxed">
-          💡 "Voltar a estudar é um ato de coragem e de luta pelo que é seu por direito."
+      <div className="bg-secondary/20 border border-secondary/30 rounded-2xl p-4 mb-6 text-center">
+        <p className="text-base font-extrabold text-foreground leading-snug">
+          💡 "O mundo não é. O mundo está sendo."
         </p>
+        <p className="text-xs italic text-muted-foreground mt-1">(Freire, 2002)</p>
       </div>
 
       {/* Module cards */}

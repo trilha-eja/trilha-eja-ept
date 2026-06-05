@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FileText, Shield, ExternalLink, Star, Heart, Users, Clock } from "lucide-react";
+import { FileText, Shield, ExternalLink, Star, Heart, Users, Clock, AlertTriangle } from "lucide-react";
 import PageHeader from "../components/PageHeader";
 import ContentCard from "../components/ContentCard";
 import ResumeBuilder from "../components/ResumeBuilder";
@@ -7,10 +7,12 @@ import RightsGuide from "../components/RightsGuide";
 import SoftSkillsTips from "../components/SoftSkillsTips";
 import JobSites from "../components/JobSites";
 import InternshipSites from "../components/InternshipSites";
+import TrabalhoPrecarizado from "../components/TrabalhoPrecarizado";
 
 const sections = [
   { id: "resume", icon: FileText, title: "Criar meu Currículo", description: "Passo a passo simples", color: "bg-primary" },
   { id: "skills", icon: Star, title: "Valorize sua Experiência", description: "Suas habilidades de vida contam!", color: "bg-secondary" },
+  { id: "precario", icon: AlertTriangle, title: "Trabalho Precarizado", description: "Autonomia ou armadilha? Conheça os riscos", color: "bg-destructive" },
   { id: "rights", icon: Shield, title: "Seus Direitos Trabalhistas", description: "Conheça seus direitos e faça valer", color: "bg-accent" },
   { id: "jobs", icon: ExternalLink, title: "Sites de Emprego", description: "Plataformas para buscar oportunidades", color: "bg-chart-4" },
   { id: "internship", icon: ExternalLink, title: "Sites de Estágio", description: "Onde encontrar e se cadastrar para estágios", color: "bg-chart-5" },
@@ -21,6 +23,7 @@ export default function Empregabilidade() {
 
   if (activeSection === "resume") return <ResumeBuilder onBack={() => setActiveSection(null)} />;
   if (activeSection === "skills") return <SoftSkillsTips onBack={() => setActiveSection(null)} />;
+  if (activeSection === "precario") return <TrabalhoPrecarizado onBack={() => setActiveSection(null)} />;
   if (activeSection === "rights") return <RightsGuide onBack={() => setActiveSection(null)} />;
   if (activeSection === "jobs") return <JobSites onBack={() => setActiveSection(null)} />;
   if (activeSection === "internship") return <InternshipSites onBack={() => setActiveSection(null)} />;
