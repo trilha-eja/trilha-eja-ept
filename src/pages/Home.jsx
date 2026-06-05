@@ -1,6 +1,7 @@
 import { Briefcase, Zap, BookOpen, Map, GraduationCap, Sparkles, BookMarked, Settings, Star, Download } from "lucide-react";
 import { Link } from "react-router-dom";
 import ModuleCard from "../components/ModuleCard";
+import GlobalSearch from "../components/GlobalSearch";
 
 const modules = [
   {
@@ -101,6 +102,9 @@ export default function Home() {
         </p>
         <p className="text-xs italic text-muted-foreground mt-1">(Freire, 2002)</p>
       </div>
+
+      {/* Global Search */}
+      <GlobalSearch />
 
       {/* Module cards */}
       <h2 className="font-extrabold text-lg mb-3">Escolha um módulo</h2>
