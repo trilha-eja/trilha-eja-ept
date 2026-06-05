@@ -180,7 +180,7 @@ function TelaEntrada({ onStart, onContinue, hasDraft, draftDate, onApagar }) {
         <div className="text-center space-y-3">
           <h2 className="text-2xl font-extrabold leading-tight">Mapa da Vida</h2>
           <p className="text-muted-foreground leading-relaxed text-sm">
-            Sua história não começa aqui — ela já vem de longe. Este mapa é para você enxergar onde está e para onde quer caminhar.
+            Seu futuro não está pronto — ele está sendo construído por você, agora. Este mapa é um convite para olhar para si mesmo(a) com cuidado, esperança e coragem.
           </p>
           <p className="text-xs italic" style={{ color: "#888888" }}>
             💡 Dica: use frases curtas e diretas — elas ficam mais bonitas no seu mapa. Exemplo: "concluir o ensino médio" em vez de "quero muito concluir o ensino médio este ano"

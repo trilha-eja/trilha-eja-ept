@@ -52,7 +52,7 @@ export default function JobSites({ onBack }) {
       </div>
       <div className="max-w-lg mx-auto px-4 py-5 space-y-3">
         <p className="text-sm text-muted-foreground text-center mb-2">
-          Clique para abrir o site diretamente 👇
+          Plataformas para buscar oportunidades no mundo do trabalho. Clique para abrir o site diretamente 👇
         </p>
         {sites.map((site, i) => (
           <a

@@ -143,7 +143,7 @@ export default function Glossario() {
 
   return (
     <div>
-      <PageHeader title="Glossário do Eletricista" subtitle="Termos técnicos em linguagem simples" />
+      <PageHeader title="Glossário do Eletricista" subtitle="Dominar os termos técnicos é também dominar o seu ofício" />
       <div className="max-w-lg mx-auto px-4 py-4 space-y-3">
         {/* Search */}
         <div className="relative">

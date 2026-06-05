@@ -122,7 +122,7 @@ export default function ParaOEducador() {
         <div className="bg-chart-4/10 border border-chart-4/20 rounded-2xl p-4">
           <div className="flex items-center gap-2 mb-1">
             <BookOpen className="w-5 h-5 text-chart-4" />
-            <p className="font-bold text-sm">Para quem ensina e aprende junto</p>
+            <p className="font-bold text-sm">Para educadores que compreendem que ensinar na EJA é um ato político de esperança</p>
           </div>
           <p className="text-sm text-muted-foreground leading-relaxed">
             Este espaço reúne orientações pedagógicas fundamentadas para apoiar educadores da EJA-EPT no uso crítico e transformador deste aplicativo.

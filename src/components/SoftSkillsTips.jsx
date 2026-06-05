@@ -52,7 +52,7 @@ export default function SoftSkillsTips({ onBack }) {
       </div>
       <div className="max-w-lg mx-auto px-4 py-5 space-y-3">
         <p className="text-sm text-muted-foreground text-center mb-4">
-          Sua história de vida é cheia de habilidades valiosas! Veja como usá-las:
+          Tudo que você viveu tem valor formativo. Seu trabalho, sua família, suas lutas — são saberes que nenhum diploma apaga. Veja como reconhecê-los:
         </p>
         {tips.map((tip, i) => {
           const Icon = tip.icon;

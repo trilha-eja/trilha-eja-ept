@@ -19,9 +19,9 @@ const sections = [
   { id: "fies",        icon: GraduationCap,  title: "FIES",                   description: "Financiamento Estudantil do Governo Federal",   color: "bg-destructive" },
   { id: "trilha",      icon: BookOpen,       title: "Trilha de Continuidade",  description: "Veja os caminhos possíveis após a EJA-EPT",     color: "bg-chart-3" },
   { id: "cursos",      icon: School,         title: "Cursos Gratuitos",        description: "Conheça caminhos de aprendizado ao seu alcance",          color: "bg-chart-2" },
-  { id: "dicas",       icon: Lightbulb,      title: "Dicas de Estudo",         description: "Como estudar com pouco tempo",          color: "bg-secondary" },
-  { id: "ferramentas", icon: Smartphone,     title: "Ferramentas Digitais",    description: "Seu celular como aliado nos estudos",   color: "bg-chart-1" },
-  { id: "videos",      icon: Video,          title: "Vídeos Recomendados",     description: "Aprenda assistindo",                    color: "bg-chart-5" },
+  { id: "dicas",       icon: Lightbulb,      title: "Dicas de Estudo",         description: "Estudar trabalhando é um desafio real — estas dicas são para quem vive essa realidade",          color: "bg-secondary" },
+  { id: "ferramentas", icon: Smartphone,     title: "Ferramentas Digitais",    description: "Tecnologia a serviço da sua formação — gratuita e acessível",   color: "bg-chart-1" },
+  { id: "videos",      icon: Video,          title: "Vídeos Recomendados",     description: "Vídeos gratuitos sobre estudo, carreira e aprendizado",                    color: "bg-chart-5" },
 ];
 
 const subMap = {
@@ -43,11 +43,11 @@ export default function CaminhosEstudo() {
 
   return (
     <div>
-      <PageHeader title="Caminhos de Estudo" subtitle="Continue crescendo!" />
+      <PageHeader title="Caminhos de Estudo" subtitle="Conheça seus caminhos de continuidade" />
       <div className="max-w-lg mx-auto px-4 py-5 space-y-3">
         <div className="bg-primary/10 border border-primary/20 rounded-2xl p-4 mb-1">
           <p className="text-sm leading-relaxed text-foreground">
-            🎓 Aqui você encontra caminhos para <strong>continuar estudando</strong> — do ENEM a cursos gratuitos. Cada passo conta, e você já está dando o mais importante.
+            🎓 A educação é um direito — não um privilégio. Aqui você encontra caminhos reais para continuar sua formação, no seu tempo e do seu jeito.
           </p>
         </div>
         {sections.map((s) => (

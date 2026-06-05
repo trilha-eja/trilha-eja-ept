@@ -68,7 +68,7 @@ export default function GuiaPratico() {
       <PageHeader title="Guia Prático" subtitle="Aprenda fazendo, passo a passo" />
       <div className="max-w-lg mx-auto px-4 py-5 space-y-3">
         <div className="bg-accent/10 rounded-2xl p-4 text-center mb-2">
-          <p className="text-sm font-semibold">🔧 A prática faz o mestre! Escolha um tema:</p>
+          <p className="text-sm font-semibold">🔧 O conhecimento técnico é seu — construído na prática e no dia a dia do trabalho. Aqui você encontra orientações para fortalecer ainda mais esse saber. Escolha um tema:</p>
         </div>
         {guides.map((g) => (
           <ContentCard

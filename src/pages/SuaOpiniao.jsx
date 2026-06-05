@@ -293,7 +293,7 @@ export default function SuaOpiniao() {
           <span className="text-6xl">⭐</span>
           <div className="text-center space-y-2">
             <h2 className="text-2xl font-extrabold leading-tight">Sua Opinião Transforma Este Aplicativo</h2>
-            <p className="text-muted-foreground text-sm">Rápido e anônimo — menos de 1 minuto.</p>
+            <p className="text-muted-foreground text-sm">Sua voz importa — este aplicativo se transforma com a participação de quem o usa.</p>
           </div>
 
           <p className="font-semibold text-base">Você é:</p>

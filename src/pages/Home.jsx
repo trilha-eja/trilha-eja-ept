@@ -28,7 +28,7 @@ const modules = [
     to: "/mapa-da-vida",
     icon: Map,
     title: "Mapa da Vida",
-    description: "Planeje seu futuro passo a passo",
+    description: "Construa seu projeto de vida — no seu tempo, do seu jeito",
     color: "bg-chart-5",
   },
   {
@@ -42,7 +42,7 @@ const modules = [
     to: "/glossario",
     icon: BookMarked,
     title: "Glossário do Eletricista",
-    description: "Termos técnicos em linguagem simples",
+    description: "Dominar os termos técnicos é também dominar o seu ofício",
     color: "bg-chart-3",
   },
   {
@@ -89,7 +89,7 @@ export default function Home() {
             Trilha EJA-EPT
           </h1>
           <p className="text-sm opacity-90 leading-relaxed">
-            Práticas, Direitos e Futuros — seu guia para crescer como eletricista e como pessoa.
+            Um guia para fortalecer seu projeto de vida — no seu tempo, do seu jeito.
           </p>
         </div>
       </div>
@@ -97,7 +97,7 @@ export default function Home() {
       {/* Motivational quote */}
       <div className="bg-secondary/20 border border-secondary/30 rounded-2xl p-4 mb-6">
         <p className="text-sm text-foreground font-semibold text-center leading-relaxed">
-          💡 "Você já chegou até aqui. Cada passo conta. Continue!"
+          💡 "Voltar a estudar é um ato de coragem e de luta pelo que é seu por direito."
         </p>
       </div>
 
