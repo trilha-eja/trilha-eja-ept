@@ -55,14 +55,7 @@ export default function SubRecursosIFC({ onBack }) {
             <h2 className="font-bold text-sm">Auxílios e Apoio Estudantil</h2>
           </div>
           <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">
-            {`Procure o SISAE — Serviço Integrado de Suporte e Acompanhamento Educacional do seu campus.
-A equipe pode orientar sobre:
-- Auxílios financeiros
-- Bolsas
-- Programas de permanência
-- Outros serviços de apoio ao estudante
-
-Você não precisa enfrentar as dificuldades sozinho(a).`}
+            {`Procure o SISAE — Serviço Integrado de Suporte e Acompanhamento Educacional do seu campus.\nA equipe pode orientar sobre:\n- Auxílios financeiros\n- Bolsas\n- Programas de permanência\n- Outros serviços de apoio ao estudante\n\nVocê não precisa enfrentar as dificuldades sozinho(a).`}
           </p>
         </div>
 

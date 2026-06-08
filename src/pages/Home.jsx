@@ -2,7 +2,6 @@ import { Briefcase, Zap, BookOpen, Map, GraduationCap, Sparkles, BookMarked, Set
 import { Link } from "react-router-dom";
 import ModuleCard from "../components/ModuleCard";
 import GlobalSearch from "../components/GlobalSearch";
-import CardAjuda from "../components/CardAjuda";
 
 const modules = [
   {
@@ -113,11 +112,6 @@ export default function Home() {
         {modules.map((mod) => (
           <ModuleCard key={mod.to} {...mod} />
         ))}
-      </div>
-
-      {/* Card Ajuda */}
-      <div className="mt-4">
-        <CardAjuda />
       </div>
 
       {/* Footer info */}
