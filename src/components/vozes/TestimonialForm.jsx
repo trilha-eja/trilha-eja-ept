@@ -2,88 +2,222 @@ import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
-const MAX_CHARS = 1000;
+const MAX = 300;
+
+const APOS_SUGGESTIONS = [
+  "Continuei estudando",
+  "Ingressei no ensino superior",
+  "Consegui uma nova oportunidade",
+  "Continuei na mesma atividade",
+  "Abri meu próprio negócio",
+];
+
+const SITUACAO_OPTIONS = [
+  "Continuei trabalhando",
+  "Continuei estudando",
+  "Continuei trabalhando e estudando",
+  "Estou procurando novas oportunidades",
+  "Outro",
+];
+
+const CONTRIBUICAO_OPTIONS = [
+  "Sim, muito",
+  "Sim, parcialmente",
+  "Pouco",
+  "Ainda estou construindo esse caminho",
+];
+
+function Field({ label, hint, children }) {
+  return (
+    <div className="space-y-1.5">
+      <label className="text-sm font-bold leading-snug block">{label}</label>
+      {hint && <p className="text-xs text-muted-foreground leading-snug">{hint}</p>}
+      {children}
+    </div>
+  );
+}
+
+function CharTextarea({ value, onChange, placeholder, max }) {
+  return (
+    <div className="relative">
+      <textarea
+        value={value}
+        onChange={(e) => onChange(e.target.value.slice(0, max))}
+        placeholder={placeholder}
+        rows={4}
+        className="w-full rounded-xl border border-input bg-background px-3 py-2 text-base focus:outline-none focus:ring-2 focus:ring-ring resize-none"
+      />
+      <span className="absolute bottom-2 right-3 text-[10px] text-muted-foreground">
+        {value.length}/{max}
+      </span>
+    </div>
+  );
+}
 
 export default function TestimonialForm({ onSubmit, onCancel }) {
   const [form, setForm] = useState({
-    nome: "", idade: "", curso: "", ano_conclusao: "",
-    cidade_estado: "", texto: "", autorizado: false,
+    nome: "",
+    idade: "",
+    ano_conclusao: "",
+    curso: "",
+    cidade_estado: "",
+    texto_conciliar: "",
+    texto_apos: "",
+    contribuicao_projetos: "",
+    situacao_atual: [],
+    mensagem: "",
+    autorizado: false,
   });
   const [loading, setLoading] = useState(false);
 
   const set = (field, value) => setForm((f) => ({ ...f, [field]: value }));
 
-  const isValid = form.nome.trim() && form.idade && form.curso.trim() &&
-    form.ano_conclusao && form.texto.trim() && form.autorizado;
+  const toggleSituacao = (opt) => {
+    setForm((f) => {
+      const cur = f.situacao_atual;
+      return {
+        ...f,
+        situacao_atual: cur.includes(opt) ? cur.filter((x) => x !== opt) : [...cur, opt],
+      };
+    });
+  };
+
+  const isValid = form.nome.trim() && form.ano_conclusao && form.curso.trim() && form.autorizado;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!isValid) return;
     setLoading(true);
-    await onSubmit({ ...form, idade: Number(form.idade), ano_conclusao: Number(form.ano_conclusao) });
+    await onSubmit({
+      ...form,
+      idade: form.idade ? Number(form.idade) : undefined,
+      ano_conclusao: Number(form.ano_conclusao),
+    });
     setLoading(false);
   };
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-lg mx-auto px-4 py-5 space-y-4">
+    <form onSubmit={handleSubmit} className="max-w-lg mx-auto px-4 py-5 space-y-5 pb-10">
+
       <div className="bg-primary/10 border border-primary/20 rounded-2xl p-4">
-        <p className="text-sm text-foreground leading-relaxed">
-          🌟 Sua história pode iluminar o caminho de alguém que está exatamente onde você esteve. Obrigado por compartilhar!
-        </p>
+        <p className="text-sm font-semibold text-foreground leading-snug">Compartilhe sua trajetória</p>
+        <p className="text-sm text-muted-foreground mt-1 leading-relaxed">Sua história pode inspirar quem está estudando hoje.</p>
       </div>
 
-      <Field label="Nome completo *">
+      {/* Nome */}
+      <Field label="Nome completo *" hint="Seu nome completo é usado apenas para identificação interna. Publicamente aparecerá apenas seu primeiro nome.">
         <Input value={form.nome} onChange={(e) => set("nome", e.target.value)}
           placeholder="Ex: Maria da Silva" className="h-12 rounded-xl text-base" />
       </Field>
 
-      <div className="grid grid-cols-2 gap-3">
-        <Field label="Idade *">
-          <Input type="number" value={form.idade} onChange={(e) => set("idade", e.target.value)}
-            placeholder="Ex: 42" className="h-12 rounded-xl text-base" />
-        </Field>
-        <Field label="Ano de conclusão *">
-          <Input type="number" value={form.ano_conclusao} onChange={(e) => set("ano_conclusao", e.target.value)}
-            placeholder="Ex: 2023" className="h-12 rounded-xl text-base" />
-        </Field>
-      </div>
+      {/* Idade */}
+      <Field label="Idade">
+        <Input type="number" value={form.idade} onChange={(e) => set("idade", e.target.value)}
+          placeholder="Opcional" className="h-12 rounded-xl text-base" />
+      </Field>
 
-      <Field label="Curso que concluiu na EJA *">
+      {/* Ano de conclusão */}
+      <Field label="Ano de conclusão do curso *">
+        <Input type="number" value={form.ano_conclusao} onChange={(e) => set("ano_conclusao", e.target.value)}
+          placeholder="Ex: 2024" className="h-12 rounded-xl text-base" />
+      </Field>
+
+      {/* Curso */}
+      <Field label="Curso que você concluiu *">
         <Input value={form.curso} onChange={(e) => set("curso", e.target.value)}
-          placeholder="Ex: Eletricista Industrial — IFC" className="h-12 rounded-xl text-base" />
+          placeholder="Ex: Eletricista Industrial" className="h-12 rounded-xl text-base" />
       </Field>
 
-      <Field label="Cidade e Estado (opcional)">
+      {/* Cidade */}
+      <Field label="Cidade e Estado">
         <Input value={form.cidade_estado} onChange={(e) => set("cidade_estado", e.target.value)}
-          placeholder="Ex: Blumenau — SC" className="h-12 rounded-xl text-base" />
+          placeholder="Ex: Blumenau - SC (opcional)" className="h-12 rounded-xl text-base" />
       </Field>
 
-      <Field label={`Sua história * (${form.texto.length}/${MAX_CHARS})`}>
-        <textarea
-          value={form.texto}
-          onChange={(e) => set("texto", e.target.value.slice(0, MAX_CHARS))}
-          placeholder="Conte como foi conciliar trabalho e estudo, como você deu o próximo passo e o que diria para quem está na sala de aula agora..."
-          rows={6}
-          className="w-full rounded-xl border border-input bg-background px-3 py-2 text-base focus:outline-none focus:ring-2 focus:ring-ring resize-none"
+      {/* Como foi conciliar */}
+      <Field label="📖 Como foi conciliar trabalho, família e estudos?">
+        <CharTextarea
+          value={form.texto_conciliar}
+          onChange={(v) => set("texto_conciliar", v)}
+          placeholder="Conte um pouco sobre sua experiência..."
+          max={MAX}
         />
       </Field>
 
+      {/* Após a conclusão */}
+      <Field label="🎓 O que aconteceu após a conclusão do curso?">
+        <CharTextarea
+          value={form.texto_apos}
+          onChange={(v) => set("texto_apos", v)}
+          placeholder="Continuei estudando, consegui uma nova oportunidade, abri meu próprio negócio..."
+          max={MAX}
+        />
+        <p className="text-xs text-muted-foreground mt-1">💡 Sugestões — clique para usar:</p>
+        <div className="flex flex-wrap gap-2 mt-1">
+          {APOS_SUGGESTIONS.map((s) => (
+            <button key={s} type="button"
+              onClick={() => set("texto_apos", s)}
+              className="text-xs px-3 py-1.5 rounded-xl border border-primary/40 bg-primary/5 text-primary font-semibold hover:bg-primary/15 active:scale-95 transition-all">
+              {s}
+            </button>
+          ))}
+        </div>
+      </Field>
+
+      {/* Contribuição para projetos — radio */}
+      <Field label="🌱 O curso contribuiu para seus projetos de vida?">
+        <div className="space-y-2 pt-1">
+          {CONTRIBUICAO_OPTIONS.map((opt) => (
+            <label key={opt} className="flex items-center gap-3 cursor-pointer">
+              <input type="radio" name="contribuicao" value={opt}
+                checked={form.contribuicao_projetos === opt}
+                onChange={() => set("contribuicao_projetos", opt)}
+                className="w-4 h-4 accent-primary shrink-0" />
+              <span className="text-sm">{opt}</span>
+            </label>
+          ))}
+        </div>
+      </Field>
+
+      {/* Situação atual — checkbox */}
+      <Field label="📚 Após concluir o curso, você:">
+        <div className="space-y-2 pt-1">
+          {SITUACAO_OPTIONS.map((opt) => (
+            <label key={opt} className="flex items-center gap-3 cursor-pointer">
+              <input type="checkbox" value={opt}
+                checked={form.situacao_atual.includes(opt)}
+                onChange={() => toggleSituacao(opt)}
+                className="w-4 h-4 accent-primary shrink-0" />
+              <span className="text-sm">{opt}</span>
+            </label>
+          ))}
+        </div>
+      </Field>
+
+      {/* Mensagem */}
+      <Field label="💬 Que mensagem você gostaria de deixar para quem está estudando hoje?">
+        <CharTextarea
+          value={form.mensagem}
+          onChange={(v) => set("mensagem", v)}
+          placeholder="Uma palavra, uma frase, um conselho para quem está na sala de aula agora..."
+          max={MAX}
+        />
+      </Field>
+
+      {/* Autorização */}
       <label className="flex items-start gap-3 cursor-pointer">
-        <input
-          type="checkbox"
-          checked={form.autorizado}
+        <input type="checkbox" checked={form.autorizado}
           onChange={(e) => set("autorizado", e.target.checked)}
-          className="mt-1 w-5 h-5 accent-primary shrink-0"
-        />
+          className="mt-1 w-5 h-5 accent-primary shrink-0" />
         <span className="text-xs text-muted-foreground leading-relaxed">
-          Autorizo a publicação do meu depoimento no aplicativo Trilha EJA-EPT, podendo ser removido a qualquer momento mediante solicitação. Meus dados não serão compartilhados com terceiros.
+          Autorizo a publicação do meu depoimento no aplicativo Trilha EJA-EPT. Estou ciente de que apenas meu primeiro nome, idade (se autorizada), ano de conclusão e cidade (se informada) serão exibidos publicamente. Meus dados completos não serão compartilhados com terceiros. Posso solicitar a remoção a qualquer momento.
         </span>
       </label>
 
       <div className="space-y-2 pb-6">
         <Button type="submit" disabled={!isValid || loading}
           className="w-full h-14 rounded-xl text-base font-bold">
-          {loading ? "Enviando…" : "Enviar minha história"}
+          {loading ? "Enviando…" : "Enviar minha história ✓"}
         </Button>
         <Button type="button" variant="ghost" onClick={onCancel}
           className="w-full h-11 rounded-xl text-base">
@@ -91,14 +225,5 @@ export default function TestimonialForm({ onSubmit, onCancel }) {
         </Button>
       </div>
     </form>
-  );
-}
-
-function Field({ label, children }) {
-  return (
-    <div className="space-y-1.5">
-      <label className="text-sm font-bold">{label}</label>
-      {children}
-    </div>
   );
 }

@@ -131,13 +131,46 @@ export default function AdminVozes() {
             {filtered.map((d) => (
               <div key={d.id} className="bg-card border border-border rounded-2xl p-4 space-y-3">
                 <div>
-                  <p className="font-bold">{d.nome}, {d.idade} anos</p>
+                  <p className="font-bold">{d.nome}{d.idade ? `, ${d.idade} anos` : ""}</p>
                   <p className="text-sm text-muted-foreground">{d.curso} • {d.ano_conclusao}{d.cidade_estado ? ` • ${d.cidade_estado}` : ""}</p>
                   <p className="text-xs text-muted-foreground mt-0.5">
                     Enviado em: {d.data_envio ? new Date(d.data_envio).toLocaleDateString("pt-BR") : "—"}
                   </p>
                 </div>
-                <p className="text-sm leading-relaxed bg-muted rounded-xl p-3">"{d.texto}"</p>
+                {d.texto_conciliar && (
+                  <div>
+                    <p className="text-xs font-semibold text-muted-foreground uppercase mb-1">Como foi conciliar trabalho, família e estudos</p>
+                    <p className="text-sm leading-relaxed bg-muted rounded-xl p-3">"{d.texto_conciliar}"</p>
+                  </div>
+                )}
+                {d.texto_apos && (
+                  <div>
+                    <p className="text-xs font-semibold text-muted-foreground uppercase mb-1">O que aconteceu após o curso</p>
+                    <p className="text-sm leading-relaxed bg-muted rounded-xl p-3">"{d.texto_apos}"</p>
+                  </div>
+                )}
+                {d.texto && (
+                  <div>
+                    <p className="text-xs font-semibold text-muted-foreground uppercase mb-1">Depoimento (legado)</p>
+                    <p className="text-sm leading-relaxed bg-muted rounded-xl p-3">"{d.texto}"</p>
+                  </div>
+                )}
+                {d.contribuicao_projetos && (
+                  <p className="text-xs text-muted-foreground">
+                    <span className="font-semibold">Contribuição para projetos de vida:</span> {d.contribuicao_projetos}
+                  </p>
+                )}
+                {d.situacao_atual && d.situacao_atual.length > 0 && (
+                  <p className="text-xs text-muted-foreground">
+                    <span className="font-semibold">Situação após o curso:</span> {d.situacao_atual.join(", ")}
+                  </p>
+                )}
+                {d.mensagem && (
+                  <div>
+                    <p className="text-xs font-semibold text-muted-foreground uppercase mb-1">Mensagem para quem está estudando</p>
+                    <p className="text-sm leading-relaxed bg-muted rounded-xl p-3">"{d.mensagem}"</p>
+                  </div>
+                )}
                 <p className="text-xs text-muted-foreground">
                   Autorização: {d.autorizado ? "✅ Sim" : "❌ Não"}
                 </p>

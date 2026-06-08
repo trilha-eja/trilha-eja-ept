@@ -37,16 +37,17 @@ export default function VozesDaTrilha() {
 
   return (
     <div>
-      <PageHeader title="Vozes da Trilha" subtitle="Histórias reais de quem trilhou esse caminho" backTo="/" />
+      <PageHeader
+        title="Vozes da Trilha"
+        subtitle="Histórias reais de quem trilhou esse caminho — de trabalhador-estudante para trabalhador-estudante."
+        backTo="/"
+      />
       <div className="max-w-lg mx-auto px-4 py-5 space-y-5">
 
         {/* Intro */}
-        <div className="bg-chart-5/10 border border-chart-5/20 rounded-2xl p-4 space-y-2">
-          <p className="text-sm font-bold text-foreground leading-snug">
-            Histórias reais de quem trilhou esse caminho — de trabalhador-estudante para trabalhador-estudante.
-          </p>
-          <p className="text-sm text-muted-foreground leading-relaxed">
-            Estas histórias são de pessoas reais que, como você, conciliaram trabalho, família e escola. Não são exemplos de quem "se esforçou mais" — são companheiros de caminhada mostrando que o caminho existe.
+        <div className="bg-orange-50 border border-orange-200 rounded-2xl p-4">
+          <p className="text-sm leading-relaxed text-foreground">
+            Estas histórias são de pessoas reais que, como você, conciliaram trabalho, família e escola. Não são exemplos de quem "se esforçou mais", mas relatos de pessoas que enfrentaram desafios semelhantes e construíram seus próprios caminhos.
           </p>
         </div>
 
@@ -54,7 +55,7 @@ export default function VozesDaTrilha() {
         {submitted && (
           <div className="bg-green-50 border border-green-200 rounded-2xl p-4">
             <p className="text-sm font-semibold text-green-700">
-              🙏 Obrigado por compartilhar! Seu depoimento será revisado e publicado em breve. Sua história vai inspirar muita gente.
+              Obrigado(a) por compartilhar! Seu depoimento será revisado e publicado em breve. Sua história vai inspirar muita gente.
             </p>
           </div>
         )}
@@ -89,6 +90,26 @@ export default function VozesDaTrilha() {
             </div>
           )}
         </div>
+
+        {/* Portal de Egressos */}
+        <div className="bg-blue-50 border border-blue-200 rounded-2xl p-4 space-y-3">
+          <div className="flex items-center gap-2">
+            <span className="text-xl">🎓</span>
+            <h3 className="font-bold text-sm">Continue conectado(a) ao IFC</h3>
+          </div>
+          <p className="text-sm text-blue-800 leading-relaxed">
+            O IFC acompanha as trajetórias dos estudantes após a conclusão dos cursos. Participar das iniciativas voltadas aos egressos ajuda a fortalecer a instituição e contribui para melhorias nos cursos e nas políticas educacionais.
+          </p>
+          <a
+            href="https://egresso.ifc.edu.br"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center text-xs font-bold px-4 py-2.5 rounded-xl bg-blue-600 text-white hover:bg-blue-700 active:scale-95 transition-all"
+          >
+            🔗 Portal de Egressos do IFC
+          </a>
+        </div>
+
       </div>
     </div>
   );

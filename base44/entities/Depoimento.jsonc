@@ -22,9 +22,38 @@
       "type": "string",
       "title": "Cidade e Estado"
     },
+    "texto_conciliar": {
+      "type": "string",
+      "title": "Como foi conciliar trabalho, fam\u00edlia e estudos"
+    },
+    "texto_apos": {
+      "type": "string",
+      "title": "O que aconteceu ap\u00f3s a conclus\u00e3o"
+    },
+    "contribuicao_projetos": {
+      "type": "string",
+      "title": "Contribui\u00e7\u00e3o para projetos de vida",
+      "enum": [
+        "Sim, muito",
+        "Sim, parcialmente",
+        "Pouco",
+        "Ainda estou construindo esse caminho"
+      ]
+    },
+    "situacao_atual": {
+      "type": "array",
+      "title": "Situa\u00e7\u00e3o ap\u00f3s o curso",
+      "items": {
+        "type": "string"
+      }
+    },
+    "mensagem": {
+      "type": "string",
+      "title": "Mensagem para quem est\u00e1 estudando hoje"
+    },
     "texto": {
       "type": "string",
-      "title": "Depoimento"
+      "title": "Depoimento (campo legado)"
     },
     "autorizado": {
       "type": "boolean",
@@ -47,10 +76,8 @@
   },
   "required": [
     "nome",
-    "idade",
-    "curso",
     "ano_conclusao",
-    "texto",
+    "curso",
     "autorizado"
   ]
 }
