@@ -6,6 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import MapaVisual from "../components/mapa/MapaVisual";
 import BlocoIntro from "../components/mapa/BlocoIntro";
+import CardAjuda from "../components/CardAjuda";
 
 const STORAGE_KEY = "mapa_vida_rascunho";
 const NOME_KEY = "mapa_vida_nome";
@@ -421,6 +422,12 @@ export default function MapaDaVida() {
           >
             <Sparkles className="w-5 h-5" /> Gerar meu Mapa da Vida
           </Button>
+        )}
+
+        {blocoAtual.isFinal && (
+          <div className="pt-2">
+            <CardAjuda />
+          </div>
         )}
 
         <div className="flex gap-3 pt-2 pb-6">

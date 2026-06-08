@@ -11,6 +11,7 @@ import SubCursosGratuitos from "../components/caminhos/SubCursosGratuitos";
 import SubDicasEstudo from "../components/caminhos/SubDicasEstudo";
 import SubFerramentasDigitais from "../components/caminhos/SubFerramentasDigitais";
 import SubVideos from "../components/caminhos/SubVideos";
+import SubRecursosIFC from "../components/caminhos/SubRecursosIFC";
 
 const sections = [
   { id: "enem",        icon: BookOpen,       title: "ENEM",                   description: "Exame Nacional do Ensino Médio",       color: "bg-primary" },
@@ -22,6 +23,7 @@ const sections = [
   { id: "dicas",       icon: Lightbulb,      title: "Dicas de Estudo",         description: "Estudar trabalhando é um desafio real — estas dicas são para quem vive essa realidade",          color: "bg-secondary" },
   { id: "ferramentas", icon: Smartphone,     title: "Ferramentas Digitais",    description: "Tecnologia a serviço da sua formação — gratuita e acessível",   color: "bg-chart-1" },
   { id: "videos",      icon: Video,          title: "Vídeos Recomendados",     description: "Vídeos gratuitos sobre estudo, carreira e aprendizado",                    color: "bg-chart-5" },
+  { id: "recursos",    icon: School,         title: "Recursos do IFC",          description: "Auxílios, bolsas e apoio estudantil",                                          color: "bg-chart-4" },
 ];
 
 const subMap = {
@@ -34,6 +36,7 @@ const subMap = {
   dicas:       (back) => <SubDicasEstudo onBack={back} />,
   ferramentas: (back) => <SubFerramentasDigitais onBack={back} />,
   videos:      (back) => <SubVideos onBack={back} />,
+  recursos:    (back) => <SubRecursosIFC onBack={back} />,
 };
 
 export default function CaminhosEstudo() {
