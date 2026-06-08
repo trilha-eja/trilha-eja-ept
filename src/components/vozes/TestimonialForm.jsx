@@ -54,21 +54,25 @@ function CharTextarea({ value, onChange, placeholder, max }) {
   );
 }
 
+const emptyForm = {
+  nome: "",
+  idade: "",
+  ano_conclusao: "",
+  curso: "",
+  cidade_estado: "",
+  texto_conciliar: "",
+  texto_apos: "",
+  contribuicao_projetos: "",
+  situacao_atual: [],
+  mensagem: "",
+  autorizado: false,
+};
+
 export default function TestimonialForm({ onSubmit, onCancel }) {
-  const [form, setForm] = useState({
-    nome: "",
-    idade: "",
-    ano_conclusao: "",
-    curso: "",
-    cidade_estado: "",
-    texto_conciliar: "",
-    texto_apos: "",
-    contribuicao_projetos: "",
-    situacao_atual: [],
-    mensagem: "",
-    autorizado: false,
-  });
+  const [form, setForm] = useState({ ...emptyForm });
   const [loading, setLoading] = useState(false);
+  const [validationError, setValidationError] = useState(false);
+  const [done, setDone] = useState(false);
 
   const set = (field, value) => setForm((f) => ({ ...f, [field]: value }));
 
@@ -82,11 +86,13 @@ export default function TestimonialForm({ onSubmit, onCancel }) {
     });
   };
 
-  const isValid = form.nome.trim() && form.ano_conclusao && form.curso.trim() && form.autorizado;
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!isValid) return;
+  const handleEnviar = async () => {
+    // Validação dos obrigatórios
+    if (!form.nome.trim() || !form.ano_conclusao || !form.curso.trim() || !form.autorizado) {
+      setValidationError(true);
+      return;
+    }
+    setValidationError(false);
     setLoading(true);
     await onSubmit({
       ...form,
@@ -94,10 +100,29 @@ export default function TestimonialForm({ onSubmit, onCancel }) {
       ano_conclusao: Number(form.ano_conclusao),
     });
     setLoading(false);
+    setDone(true);
   };
 
+  // Tela de sucesso
+  if (done) {
+    return (
+      <div className="max-w-lg mx-auto px-4 py-10 space-y-5 text-center">
+        <div className="text-5xl">🙏</div>
+        <div className="bg-green-50 border border-green-200 rounded-2xl p-5 space-y-2">
+          <p className="text-base font-bold text-green-800">Obrigado(a) por compartilhar!</p>
+          <p className="text-sm text-green-700 leading-relaxed">
+            Seu depoimento será revisado e publicado em breve. Sua história vai inspirar muita gente.
+          </p>
+        </div>
+        <Button onClick={onCancel} className="w-full h-12 rounded-xl text-base font-bold">
+          Voltar para Vozes da Trilha
+        </Button>
+      </div>
+    );
+  }
+
   return (
-    <form onSubmit={handleSubmit} className="max-w-lg mx-auto px-4 py-5 space-y-5 pb-10">
+    <div className="max-w-lg mx-auto px-4 py-5 space-y-5 pb-10">
 
       <div className="bg-primary/10 border border-primary/20 rounded-2xl p-4">
         <p className="text-sm font-semibold text-foreground leading-snug">Compartilhe sua trajetória</p>
@@ -214,9 +239,20 @@ export default function TestimonialForm({ onSubmit, onCancel }) {
         </span>
       </label>
 
+      {/* Erro de validação */}
+      {validationError && (
+        <div className="bg-red-50 border border-red-200 rounded-xl px-4 py-3 text-sm text-red-700 font-semibold">
+          Por favor preencha os campos obrigatórios antes de enviar.
+        </div>
+      )}
+
       <div className="space-y-2 pb-6">
-        <Button type="submit" disabled={!isValid || loading}
-          className="w-full h-14 rounded-xl text-base font-bold">
+        <Button
+          type="button"
+          onClick={handleEnviar}
+          disabled={loading}
+          className="w-full h-14 rounded-xl text-base font-bold"
+        >
           {loading ? "Enviando…" : "Enviar minha história ✓"}
         </Button>
         <Button type="button" variant="ghost" onClick={onCancel}
@@ -224,6 +260,6 @@ export default function TestimonialForm({ onSubmit, onCancel }) {
           Cancelar
         </Button>
       </div>
-    </form>
+    </div>
   );
 }
