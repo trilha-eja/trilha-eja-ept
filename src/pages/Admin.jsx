@@ -40,10 +40,20 @@ function exportCSV(avaliacoes) {
 }
 
 // ── Seção: Vozes da Trilha ──────────────────────────────────────────────────
+function Campo({ label, value }) {
+  const display = value && String(value).trim() ? String(value) : "Não informado";
+  return (
+    <p className="text-xs text-muted-foreground">
+      <span className="font-semibold">{label}:</span> {display}
+    </p>
+  );
+}
+
 function VozesSection() {
   const [depoimentos, setDepoimentos] = useState([]);
   const [loading, setLoading] = useState(false);
   const [tab, setTab] = useState("pendente");
+  const [confirmId, setConfirmId] = useState(null);
 
   const load = async () => {
     setLoading(true);
@@ -62,6 +72,7 @@ function VozesSection() {
   const remove = async (id) => {
     await base44.entities.Depoimento.delete(id);
     setDepoimentos((prev) => prev.filter((d) => d.id !== id));
+    setConfirmId(null);
   };
 
   const counts = {
@@ -102,42 +113,73 @@ function VozesSection() {
         <div className="space-y-4">
           {filtered.map((d) => (
             <div key={d.id} className="bg-card border border-border rounded-2xl p-4 space-y-3">
-              <div>
-                <p className="font-bold">{d.nome}, {d.idade} anos</p>
-                <p className="text-sm text-muted-foreground">{d.curso} • {d.ano_conclusao}{d.cidade_estado ? ` • ${d.cidade_estado}` : ""}</p>
-                <p className="text-xs text-muted-foreground mt-0.5">
+              {/* Cabeçalho */}
+              <div className="space-y-0.5">
+                <Campo label="Nome" value={d.nome} />
+                <Campo label="Idade" value={d.idade} />
+                <Campo label="Ano de conclusão" value={d.ano_conclusao} />
+                <Campo label="Curso" value={d.curso} />
+                <Campo label="Cidade" value={d.cidade_estado} />
+                <Campo label="Como conciliou" value={d.texto_conciliar} />
+                <Campo label="Após conclusão" value={d.texto_apos} />
+                <Campo label="Contribuição" value={d.contribuicao_projetos} />
+                <Campo
+                  label="Situação atual"
+                  value={d.situacao_atual && d.situacao_atual.length > 0 ? d.situacao_atual.join(", ") : null}
+                />
+                <Campo label="Mensagem" value={d.mensagem} />
+                {d.texto && <Campo label="Depoimento (legado)" value={d.texto} />}
+                <p className="text-xs text-muted-foreground pt-1">
+                  Autorização: {d.autorizado ? "✅ Sim" : "❌ Não"} •{" "}
                   Enviado em: {d.data_envio ? new Date(d.data_envio).toLocaleDateString("pt-BR") : "—"}
                 </p>
               </div>
-              <p className="text-sm leading-relaxed bg-muted rounded-xl p-3">"{d.texto}"</p>
-              <p className="text-xs text-muted-foreground">Autorização: {d.autorizado ? "✅ Sim" : "❌ Não"}</p>
-              <div className="flex gap-2 flex-wrap">
-                {tab === "pendente" && (
-                  <>
-                    <Button size="sm" onClick={() => update(d.id, "aprovado")} className="gap-1.5 rounded-xl bg-accent hover:bg-accent/90">
-                      <CheckCircle className="w-4 h-4" /> Aprovar e publicar
+
+              {/* Confirmação de remoção */}
+              {confirmId === d.id ? (
+                <div className="bg-red-50 border border-red-200 rounded-xl p-3 space-y-2">
+                  <p className="text-sm font-semibold text-red-800">
+                    Tem certeza que deseja remover este depoimento? Esta ação não pode ser desfeita.
+                  </p>
+                  <div className="flex gap-2">
+                    <Button size="sm" onClick={() => remove(d.id)}
+                      className="gap-1.5 rounded-xl bg-destructive hover:bg-destructive/90 text-white">
+                      <Trash2 className="w-4 h-4" /> Sim, remover
                     </Button>
-                    <Button size="sm" variant="outline" onClick={() => update(d.id, "recusado")} className="gap-1.5 rounded-xl text-destructive border-destructive/40 hover:bg-destructive/10">
-                      <XCircle className="w-4 h-4" /> Recusar
+                    <Button size="sm" variant="outline" onClick={() => setConfirmId(null)}
+                      className="rounded-xl">
+                      Cancelar
                     </Button>
-                  </>
-                )}
-                {tab === "aprovado" && (
-                  <Button size="sm" variant="outline" onClick={() => remove(d.id)} className="gap-1.5 rounded-xl text-destructive border-destructive/40 hover:bg-destructive/10">
-                    <Trash2 className="w-4 h-4" /> Remover
-                  </Button>
-                )}
-                {tab === "recusado" && (
-                  <>
+                  </div>
+                </div>
+              ) : (
+                <div className="flex gap-2 flex-wrap">
+                  {tab === "pendente" && (
+                    <>
+                      <Button size="sm" onClick={() => update(d.id, "aprovado")} className="gap-1.5 rounded-xl bg-accent hover:bg-accent/90">
+                        <CheckCircle className="w-4 h-4" /> Aprovar e publicar
+                      </Button>
+                      <Button size="sm" variant="outline" onClick={() => update(d.id, "recusado")} className="gap-1.5 rounded-xl text-destructive border-destructive/40 hover:bg-destructive/10">
+                        <XCircle className="w-4 h-4" /> Recusar
+                      </Button>
+                    </>
+                  )}
+                  {tab === "aprovado" && (
+                    <Button size="sm" onClick={() => update(d.id, "recusado")} variant="outline" className="gap-1.5 rounded-xl text-destructive border-destructive/40 hover:bg-destructive/10">
+                      <XCircle className="w-4 h-4" /> Despublicar
+                    </Button>
+                  )}
+                  {tab === "recusado" && (
                     <Button size="sm" onClick={() => update(d.id, "aprovado")} className="gap-1.5 rounded-xl bg-accent hover:bg-accent/90">
                       <CheckCircle className="w-4 h-4" /> Aprovar mesmo assim
                     </Button>
-                    <Button size="sm" variant="outline" onClick={() => remove(d.id)} className="gap-1.5 rounded-xl text-destructive border-destructive/40 hover:bg-destructive/10">
-                      <Trash2 className="w-4 h-4" /> Excluir
-                    </Button>
-                  </>
-                )}
-              </div>
+                  )}
+                  <Button size="sm" variant="outline" onClick={() => setConfirmId(d.id)}
+                    className="gap-1.5 rounded-xl text-destructive border-destructive/40 hover:bg-destructive/10">
+                    <Trash2 className="w-4 h-4" /> 🗑️ Remover
+                  </Button>
+                </div>
+              )}
             </div>
           ))}
         </div>
