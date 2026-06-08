@@ -8,6 +8,7 @@ import SoftSkillsTips from "../components/SoftSkillsTips";
 import JobSites from "../components/JobSites";
 import InternshipSites from "../components/InternshipSites";
 import TrabalhoPrecarizado from "../components/TrabalhoPrecarizado";
+import ConcursosProcessos from "../components/ConcursosProcessos";
 
 const sections = [
   { id: "resume", icon: FileText, title: "Criar meu Currículo", description: "Passo a passo simples", color: "bg-primary" },
@@ -16,6 +17,7 @@ const sections = [
   { id: "rights", icon: Shield, title: "Seus Direitos Trabalhistas", description: "Conheça seus direitos e faça valer", color: "bg-accent" },
   { id: "jobs", icon: ExternalLink, title: "Central de Oportunidades", description: "Plataformas, dicas e orientações para o mundo do trabalho", color: "bg-chart-4" },
   { id: "internship", icon: ExternalLink, title: "Sites de Estágio", description: "Onde encontrar e se cadastrar para estágios", color: "bg-chart-5" },
+  { id: "concursos", icon: ExternalLink, title: "Concursos e Processos Seletivos", description: "Oportunidades além das vagas tradicionais", color: "bg-chart-3" },
 ];
 
 export default function Empregabilidade() {
@@ -27,6 +29,7 @@ export default function Empregabilidade() {
   if (activeSection === "rights") return <RightsGuide onBack={() => setActiveSection(null)} />;
   if (activeSection === "jobs") return <JobSites onBack={() => setActiveSection(null)} />;
   if (activeSection === "internship") return <InternshipSites onBack={() => setActiveSection(null)} />;
+  if (activeSection === "concursos") return <ConcursosProcessos onBack={() => setActiveSection(null)} />;
 
   return (
     <div>
