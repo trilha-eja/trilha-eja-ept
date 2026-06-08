@@ -18,10 +18,7 @@ export const cards = [
     legal: "CLT Art. 154 a 201 e Normas Regulamentadoras (NRs) do Ministério do Trabalho",
   },
   {
-    emoji: "⚡",
-    titulo: "NR-10: Seu direito à segurança elétrica",
-    texto: "Todo trabalhador que lida com instalações elétricas tem direito a:\n- Treinamento de 40h antes de iniciar o trabalho (ou 40h + 40h para Alta Tensão)\n- Receber EPIs gratuitamente (luvas, capacete, botina isolante, óculos)\n- Recusar serviço em condições inseguras SEM punição\n- Adicional de insalubridade ou periculosidade no salário",
-    legal: "NR-10 (Portaria MTE nº 598/2004)",
+    customComponent: "CardNR10",
   },
   {
     emoji: "🏥",

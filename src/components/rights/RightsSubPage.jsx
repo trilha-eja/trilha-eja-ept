@@ -1,4 +1,5 @@
 import { ArrowLeft } from "lucide-react";
+import CardNR10 from "./CardNR10";
 
 export default function RightsSubPage({ titulo, subtitulo, intro, introBg, cards, onBack }) {
   return (
@@ -20,7 +21,9 @@ export default function RightsSubPage({ titulo, subtitulo, intro, introBg, cards
             <p className="text-sm leading-relaxed text-foreground">{intro}</p>
           </div>
         )}
-        {cards.map((r, i) => (
+        {cards.map((r, i) => {
+          if (r.customComponent === "CardNR10") return <CardNR10 key={i} />;
+          return (
           <div key={i} className="p-4 bg-card border border-border rounded-2xl">
             <div className="flex items-center gap-2 mb-1">
               <span className="text-xl">{r.emoji}</span>
@@ -63,7 +66,8 @@ export default function RightsSubPage({ titulo, subtitulo, intro, introBg, cards
               </a>
             )}
           </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );
