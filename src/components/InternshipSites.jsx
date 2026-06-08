@@ -46,9 +46,14 @@ export default function InternshipSites({ onBack }) {
           </div>
         </div>
       </div>
-      <div className="max-w-lg mx-auto px-4 py-5 space-y-5 pb-10">
+
+      <div className="max-w-lg mx-auto px-4 py-5 space-y-5 pb-12">
+
+        {/* Intro atualizado */}
         <div className="bg-chart-5/10 border border-chart-5/20 rounded-2xl p-4">
-          <p className="text-sm leading-relaxed text-foreground">Plataformas para quem busca <strong>estágio</strong> — o primeiro passo para entrar no mundo do trabalho com direitos garantidos. Clique para abrir o site diretamente 👇</p>
+          <p className="text-sm leading-relaxed text-foreground">
+            O estágio pode ser uma oportunidade de aprendizagem, desenvolvimento profissional e aproximação com o mundo do trabalho. Nesta seção você encontrará plataformas confiáveis, programas institucionais e orientações para acompanhar oportunidades.
+          </p>
         </div>
         <div className="bg-orange-50 border border-orange-200 rounded-2xl p-4">
           <p className="text-xs text-orange-800 leading-relaxed">
@@ -56,6 +61,27 @@ export default function InternshipSites({ onBack }) {
           </p>
         </div>
 
+        {/* ── Nova Seção 1 — O que é estágio? ── */}
+        <div>
+          <h2 className="font-extrabold text-sm mb-3">❓ O que é Estágio?</h2>
+          <div className="p-4 bg-card border border-border rounded-2xl space-y-3">
+            <div className="flex items-center gap-2">
+              <span className="text-xl">📚</span>
+              <h3 className="font-bold text-sm">Entenda o que é estágio</h3>
+            </div>
+            <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">{`O estágio é uma atividade educativa supervisionada que faz parte do processo de formação profissional.\n\n- Permite desenvolver conhecimentos e experiências práticas\n- Pode ser obrigatório (previsto no curso) ou não obrigatório\n- Possui direitos e regras definidos em lei\n- O(a) estudante tem direito a bolsa-auxílio, seguro e condições dignas`}</p>
+            <div className="bg-muted/40 rounded-xl px-3 py-2 flex items-center gap-2">
+              <span className="text-base">📋</span>
+              <span className="text-xs font-semibold">Lei nº 11.788/2008 — Lei do Estágio</span>
+            </div>
+            <a href="https://www.planalto.gov.br/ccivil_03/_ato2007-2010/2008/lei/l11788.htm" target="_blank" rel="noopener noreferrer"
+              className="flex items-center justify-center text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all">
+              🔗 Conhecer a Lei do Estágio
+            </a>
+          </div>
+        </div>
+
+        {/* ── Seções existentes ── */}
         {secoes.map((s) => (
           <div key={s.titulo} className="space-y-3">
             <div>
@@ -63,13 +89,8 @@ export default function InternshipSites({ onBack }) {
               <p className="text-xs text-muted-foreground mt-0.5">{s.subtitulo}</p>
             </div>
             {s.sites.map((site, i) => (
-              <a
-                key={i}
-                href={site.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-4 p-4 bg-card border border-border rounded-2xl hover:shadow-md transition-all active:scale-[0.98]"
-              >
+              <a key={i} href={site.url} target="_blank" rel="noopener noreferrer"
+                className="flex items-center gap-4 p-4 bg-card border border-border rounded-2xl hover:shadow-md transition-all active:scale-[0.98]">
                 <span className="text-2xl">{site.emoji}</span>
                 <div className="flex-1 min-w-0">
                   <h3 className="font-bold text-sm">{site.name}</h3>
@@ -80,6 +101,70 @@ export default function InternshipSites({ onBack }) {
             ))}
           </div>
         ))}
+
+        {/* ── Nova Seção 2 — IFC e Rede Federal ── */}
+        <div className="space-y-3">
+          <h2 className="font-extrabold text-sm">🏫 Oportunidades no IFC e na Rede Federal</h2>
+          <div className="bg-orange-50 border border-orange-200 rounded-2xl p-4">
+            <p className="text-sm leading-relaxed">
+              Além dos sites de estágio, muitas oportunidades podem surgir dentro do próprio IFC. Algumas são divulgadas por meio de editais, outras pelos professores, coordenação do curso ou setores institucionais. Fique atento às informações compartilhadas pela escola.
+            </p>
+          </div>
+          {[
+            { emoji: "👨‍🏫", titulo: "Coordenação do Curso", texto: "A coordenação do curso pode informar sobre:\n- Oportunidades de estágio\n- Empresas parceiras\n- Visitas técnicas\n- Projetos institucionais\n- Encaminhamentos profissionais\n- Eventos da área\n\nMantenha contato com a coordenação e fique atento aos avisos!" },
+            { emoji: "📢", titulo: "Murais e Canais Oficiais", texto: "Muitas oportunidades são divulgadas por meio de:\n- Site oficial do campus\n- Murais físicos\n- E-mails institucionais\n- Redes sociais oficiais\n- Comunicados da coordenação\n- Avisos em sala de aula\n\nNem todas as oportunidades aparecem nos grandes portais. Muitas são divulgadas diretamente pela instituição." },
+            { emoji: "🔬", titulo: "Projetos de Ensino, Pesquisa e Extensão", texto: "Os Institutos Federais frequentemente oferecem:\n- Bolsas de pesquisa\n- Bolsas de extensão\n- Monitorias\n- Projetos comunitários\n- Atividades de formação complementar\n\nEssas experiências também contribuem para sua formação profissional e para o seu currículo!" },
+            { emoji: "🤝", titulo: "Converse com seus Professores", texto: "Muitos professores possuem contato com:\n- Empresas da região\n- Projetos institucionais\n- Oportunidades de estágio\n- Processos seletivos\n- Programas de bolsas\n\nNão hesite em conversar — eles podem abrir portas que você ainda não conhece!" },
+          ].map((c, i) => (
+            <div key={i} className="p-4 bg-card border border-border rounded-2xl">
+              <div className="flex items-center gap-2 mb-1">
+                <span className="text-xl">{c.emoji}</span>
+                <h3 className="font-bold text-sm">{c.titulo}</h3>
+              </div>
+              <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">{c.texto}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* ── Nova Seção 3 — Você Sabia? ── */}
+        <div className="bg-blue-50 border border-blue-200 rounded-2xl p-4">
+          <div className="flex items-center gap-2 mb-2">
+            <span className="text-xl">💡</span>
+            <h3 className="font-bold text-sm">Você Sabia?</h3>
+          </div>
+          <p className="text-sm leading-relaxed">
+            Muitas oportunidades de estágio, bolsas e projetos chegam primeiro à escola, aos professores ou à coordenação do curso.
+          </p>
+          <p className="text-sm leading-relaxed mt-2">
+            Por isso, acompanhar os canais institucionais e manter diálogo com a equipe do curso pode abrir novos caminhos.
+          </p>
+        </div>
+
+        {/* ── Nova Seção 4 — Como Acompanhar ── */}
+        <div className="space-y-3">
+          <h2 className="font-extrabold text-sm">🎯 Como Acompanhar Oportunidades</h2>
+          <div className="p-4 bg-card border border-border rounded-2xl">
+            <div className="flex items-center gap-2 mb-2">
+              <span className="text-xl">✅</span>
+            </div>
+            <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">{`• Verifique regularmente os murais da instituição\n- Leia os e-mails institucionais\n- Acompanhe o site oficial do campus\n- Participe de eventos e palestras\n- Converse com professores e coordenação\n- Atualize seu currículo periodicamente`}</p>
+          </div>
+        </div>
+
+        {/* Mensagem final */}
+        <div className="border border-orange-300 rounded-2xl p-4" style={{ background: "#FFF8F0" }}>
+          <div className="flex items-center gap-2 mb-2">
+            <span className="text-xl">🌱</span>
+            <h3 className="font-bold text-sm">Conexão com seu Projeto de Vida</h3>
+          </div>
+          <p className="text-sm leading-relaxed">
+            As oportunidades de estágio, pesquisa, extensão e formação complementar podem contribuir para a construção dos seus projetos de vida.
+          </p>
+          <p className="text-sm leading-relaxed mt-2">
+            Além de desenvolver conhecimentos técnicos, essas experiências ajudam a conhecer novas possibilidades de estudo, trabalho e participação social.
+          </p>
+        </div>
+
       </div>
     </div>
   );
