@@ -6,8 +6,7 @@ export default function CardAjuda() {
         <h3 className="font-bold text-sm text-blue-900">Precisa de ajuda?</h3>
       </div>
       <p className="text-sm text-blue-800 leading-relaxed whitespace-pre-line">
-        {`Você não precisa enfrentar as dificuldades sozinho(a).
-O IFC possui profissionais e setores preparados para orientar estudantes sobre estudos, auxílios, bolsas, editais e oportunidades.
+        {`O IFC possui profissionais e setores preparados para orientar estudantes sobre estudos, auxílios, bolsas, editais e oportunidades.
 
 Procure:
 - SISAE
