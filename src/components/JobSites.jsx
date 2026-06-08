@@ -130,7 +130,7 @@ export default function JobSites({ onBack }) {
           <p className="text-sm text-muted-foreground leading-relaxed">
             Serviço público e gratuito que auxilia trabalhadores(as) na busca por oportunidades de trabalho, encaminhamento para entrevistas e acesso a informações sobre qualificação profissional.
           </p>
-          <a href="https://www.gov.br/trabalho-e-emprego/pt-br/servicos/trabalhador/sine" target="_blank" rel="noopener noreferrer"
+          <a href="https://servicos.mte.gov.br/spme-v2/#/login" target="_blank" rel="noopener noreferrer"
             className="flex items-center justify-center text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all">
             🔗 Acessar Plataforma
           </a>
