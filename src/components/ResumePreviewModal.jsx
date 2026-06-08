@@ -1,79 +1,97 @@
 import { X, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
 
-export function generateResumePDF(data) {
+export async function generateResumePDF(data) {
   if (!data.full_name || !data.full_name.trim()) {
     alert("Preencha pelo menos seu nome para baixar o currículo.");
     return;
   }
 
-  const { jsPDF } = window.jspdf;
-  const doc = new jsPDF({ unit: "mm", format: "a4" });
+  const { jsPDF } = await import("jspdf");
+  const doc = new jsPDF({ unit: "mm", format: "a4", orientation: "portrait" });
+
   const marginL = 20;
   const marginR = 20;
   const pageW = 210;
+  const pageH = 297;
   const contentW = pageW - marginL - marginR;
-  let y = 25;
+  let y = 20;
 
-  const addText = (text, fontSize, bold = false, color = [30, 30, 30]) => {
+  const addWrappedText = (text, fontSize, bold = false, color = [51, 51, 51]) => {
     doc.setFontSize(fontSize);
     doc.setFont("helvetica", bold ? "bold" : "normal");
     doc.setTextColor(...color);
     const lines = doc.splitTextToSize(String(text || ""), contentW);
     doc.text(lines, marginL, y);
-    y += lines.length * (fontSize * 0.38) + 2;
+    y += lines.length * (fontSize * 0.4) + 1;
   };
 
   const addSectionTitle = (title) => {
-    y += 4;
-    doc.setDrawColor(200, 200, 200);
-    doc.line(marginL, y, pageW - marginR, y);
-    y += 6;
-    addText(title, 10, true, [180, 80, 20]);
+    y += 5;
+    addWrappedText(title, 12, true, [51, 51, 51]);
     y += 1;
+    doc.setDrawColor(200, 200, 200);
+    doc.setLineWidth(0.3);
+    doc.line(marginL, y, pageW - marginR, y);
+    y += 4;
   };
 
-  // Nome
-  addText(data.full_name, 18, true, [20, 20, 20]);
+  // 1. Nome
+  addWrappedText(data.full_name, 18, true, [232, 104, 38]);
   y += 1;
 
-  // Linha separadora sob nome
-  doc.setDrawColor(180, 80, 20);
-  doc.setLineWidth(0.5);
+  // 2. Linha separadora após nome
+  doc.setDrawColor(232, 104, 38);
+  doc.setLineWidth(0.6);
   doc.line(marginL, y, pageW - marginR, y);
-  doc.setLineWidth(0.2);
-  y += 6;
+  doc.setLineWidth(0.3);
+  y += 5;
 
-  // Contato
+  // 3. Contato em linha
   const contactParts = [data.phone, data.email, data.city].filter(Boolean);
   if (contactParts.length) {
-    addText(contactParts.join("   |   "), 10, false, [80, 80, 80]);
+    addWrappedText(contactParts.join("   |   "), 10, false, [100, 100, 100]);
     y += 2;
   }
 
+  // 4. Linha separadora após contato
+  doc.setDrawColor(200, 200, 200);
+  doc.setLineWidth(0.3);
+  doc.line(marginL, y, pageW - marginR, y);
+  y += 3;
+
+  // 5–9. Seções
   if (data.objective) {
     addSectionTitle("OBJETIVO PROFISSIONAL");
-    addText(data.objective, 11);
+    addWrappedText(data.objective, 11);
   }
   if (data.education) {
     addSectionTitle("FORMAÇÃO ESCOLAR");
-    addText(data.education, 11);
+    addWrappedText(data.education, 11);
+  }
+  if (data.courses && data.courses.trim()) {
+    addSectionTitle("CURSOS E CERTIFICAÇÕES");
+    addWrappedText(data.courses, 11);
   }
   if (data.experience) {
     addSectionTitle("EXPERIÊNCIAS");
-    addText(data.experience, 11);
+    addWrappedText(data.experience, 11);
   }
   if (data.skills) {
     addSectionTitle("HABILIDADES");
-    addText(data.skills, 11);
+    addWrappedText(data.skills, 11);
   }
 
-  // Rodapé
+  // 10. Linha separadora no rodapé
+  doc.setDrawColor(200, 200, 200);
+  doc.setLineWidth(0.3);
+  doc.line(marginL, pageH - 15, pageW - marginR, pageH - 15);
+
+  // 11. Rodapé
   doc.setFontSize(8);
   doc.setFont("helvetica", "italic");
   doc.setTextColor(160, 160, 160);
-  doc.text("Currículo gerado pelo Trilha EJA-EPT", marginL, 285);
+  doc.text("Currículo gerado pelo Trilha EJA-EPT", marginL, pageH - 10);
 
   const safeName = data.full_name.replace(/\s+/g, "_").toLowerCase();
   doc.save(`${safeName}_curriculo.pdf`);
@@ -87,10 +105,7 @@ export default function ResumePreviewModal({ data, onClose }) {
         {/* Header */}
         <div className="flex items-center justify-between px-5 py-4 border-b border-border shrink-0">
           <h2 className="font-extrabold text-lg">Pré-visualização</h2>
-          <button
-            onClick={onClose}
-            className="w-9 h-9 rounded-xl bg-muted flex items-center justify-center active:scale-95"
-          >
+          <button onClick={onClose} className="w-9 h-9 rounded-xl bg-muted flex items-center justify-center active:scale-95">
             <X className="w-5 h-5" />
           </button>
         </div>
@@ -101,7 +116,7 @@ export default function ResumePreviewModal({ data, onClose }) {
 
             {/* Nome + Contato */}
             <div className="text-center pb-4 border-b border-border">
-              <h3 className="text-xl font-extrabold text-gray-900">{data.full_name || "—"}</h3>
+              <h3 className="text-xl font-extrabold" style={{ color: "#E86826" }}>{data.full_name || "—"}</h3>
               <p className="text-sm text-gray-500 mt-1">
                 {[data.phone, data.email, data.city].filter(Boolean).join(" · ") || "Sem contato informado"}
               </p>
@@ -117,6 +132,12 @@ export default function ResumePreviewModal({ data, onClose }) {
               <div>
                 <p className="text-[11px] font-bold text-primary tracking-widest uppercase mb-1">Formação Escolar</p>
                 <p className="text-sm whitespace-pre-line leading-relaxed text-gray-800">{data.education}</p>
+              </div>
+            )}
+            {data.courses && data.courses.trim() && (
+              <div>
+                <p className="text-[11px] font-bold text-primary tracking-widest uppercase mb-1">Cursos e Certificações</p>
+                <p className="text-sm whitespace-pre-line leading-relaxed text-gray-800">{data.courses}</p>
               </div>
             )}
             {data.experience && (
@@ -136,10 +157,7 @@ export default function ResumePreviewModal({ data, onClose }) {
 
         {/* Actions */}
         <div className="px-5 py-4 border-t border-border shrink-0 space-y-2">
-          <Button
-            onClick={() => generateResumePDF(data)}
-            className="w-full h-12 rounded-xl text-base font-bold gap-2"
-          >
+          <Button onClick={() => generateResumePDF(data)} className="w-full h-12 rounded-xl text-base font-bold gap-2">
             <Download className="w-5 h-5" /> Baixar em PDF
           </Button>
           <p className="text-xs text-muted-foreground text-center">
