@@ -10,11 +10,16 @@ export default function VozesDaTrilha() {
   const [showForm, setShowForm] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
-  useEffect(() => {
+  const fetchDepoimentos = () => {
+    setLoading(true);
     base44.entities.Depoimento.filter({ status: "aprovado" }, "-data_envio", 50)
       .then(setDepoimentos)
       .finally(() => setLoading(false));
-  }, []);
+  };
+
+  useEffect(() => {
+    fetchDepoimentos();
+  }, [showForm]); // re-busca sempre que sai do formulário também
 
   const handleSubmit = async (formData) => {
     await base44.entities.Depoimento.create({
