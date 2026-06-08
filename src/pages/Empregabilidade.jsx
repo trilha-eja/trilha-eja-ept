@@ -14,7 +14,7 @@ const sections = [
   { id: "skills", icon: Star, title: "Valorize sua Experiência", description: "Suas habilidades de vida contam!", color: "bg-secondary" },
   { id: "precario", icon: AlertTriangle, title: "Trabalho Precarizado", description: "Autonomia ou armadilha? Conheça os riscos", color: "bg-destructive" },
   { id: "rights", icon: Shield, title: "Seus Direitos Trabalhistas", description: "Conheça seus direitos e faça valer", color: "bg-accent" },
-  { id: "jobs", icon: ExternalLink, title: "Sites de Emprego", description: "Plataformas para buscar oportunidades", color: "bg-chart-4" },
+  { id: "jobs", icon: ExternalLink, title: "Central de Oportunidades", description: "Plataformas, dicas e orientações para o mundo do trabalho", color: "bg-chart-4" },
   { id: "internship", icon: ExternalLink, title: "Sites de Estágio", description: "Onde encontrar e se cadastrar para estágios", color: "bg-chart-5" },
 ];
 
