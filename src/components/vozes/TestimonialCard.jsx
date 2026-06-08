@@ -23,7 +23,7 @@ export default function TestimonialCard({ depoimento: d }) {
       <div className="flex items-start justify-between gap-2">
         <div>
           <p className="font-bold text-sm">
-            {primeiroNome(d.nome)}{d.idade ? `, ${d.idade} anos` : ""}
+            {primeiroNome(d.nome)}{d.idade && Number(d.idade) >= 1 && Number(d.idade) <= 120 ? `, ${d.idade} anos` : ""}
           </p>
           <p className="text-xs text-muted-foreground">{d.curso} • {d.ano_conclusao}</p>
           {d.cidade_estado && (

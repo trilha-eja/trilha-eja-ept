@@ -96,7 +96,7 @@ export default function TestimonialForm({ onSubmit, onCancel }) {
     setLoading(true);
     await onSubmit({
       ...form,
-      idade: form.idade ? Number(form.idade) : undefined,
+      idade: form.idade && Number(form.idade) >= 1 ? Number(form.idade) : null,
       ano_conclusao: Number(form.ano_conclusao),
     });
     setLoading(false);
@@ -137,7 +137,17 @@ export default function TestimonialForm({ onSubmit, onCancel }) {
 
       {/* Idade */}
       <Field label="Idade">
-        <Input type="number" value={form.idade} onChange={(e) => set("idade", e.target.value)}
+        <Input
+          type="number"
+          value={form.idade}
+          onChange={(e) => {
+            const v = e.target.value;
+            if (v === "") { set("idade", ""); return; }
+            const n = parseInt(v, 10);
+            if (n >= 1 && n <= 120) set("idade", n);
+          }}
+          min={1}
+          max={120}
           placeholder="Opcional" className="h-12 rounded-xl text-base" />
       </Field>
 
