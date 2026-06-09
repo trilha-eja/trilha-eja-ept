@@ -117,8 +117,24 @@ export default function Microlearning() {
     <div>
       <PageHeader title="Microlearning" subtitle="Conteúdos rápidos para quem nunca para de aprender" />
       <div className="max-w-lg mx-auto px-4 py-5">
-        <div className="bg-primary/10 border border-primary/20 rounded-2xl p-4 mb-4">
-          <p className="text-sm leading-relaxed text-foreground">Para quem tem <strong>pouco tempo</strong> mas não abre mão de aprender. Cada conteúdo foi pensado para caber na sua rotina.</p>
+        {/* Card introdutório */}
+        <div className="rounded-2xl border-2 p-5 mb-4 space-y-3" style={{ backgroundColor: "#FFF3E0", borderColor: "#E86826" }}>
+          <div className="flex items-center gap-2">
+            <span className="text-2xl">📚</span>
+            <p className="font-extrabold text-base leading-tight text-foreground">Aprender no seu tempo, do seu jeito</p>
+          </div>
+          <p className="text-sm italic leading-relaxed text-foreground">
+            Você trabalha, cuida da família e ainda encontra tempo para estudar. Isso já diz muito sobre quem você é.
+          </p>
+          <p className="text-sm leading-relaxed text-foreground">
+            Os cards desta seção foram pensados para quem tem pouco tempo mas não abre mão de aprender. Cada conteúdo cabe em aproximadamente 1 minuto de leitura — no intervalo, no transporte ou onde for possível.
+          </p>
+          <p className="text-sm leading-relaxed text-foreground">
+            Estes conteúdos são introdutórios e complementares. Para aprofundar, converse com seus professores e consulte materiais técnicos confiáveis.
+          </p>
+          <p className="text-sm leading-relaxed text-foreground">
+            <strong>Lembre-se:</strong> na área elétrica, o conhecimento protege vidas. A formação adequada, os treinamentos obrigatórios e a supervisão profissional são insubstituíveis.
+          </p>
         </div>
         <div className="flex items-center justify-center gap-2 mb-4">
           <Clock className="w-4 h-4 text-muted-foreground" />
