@@ -14,8 +14,8 @@ export const cards = [
   {
     emoji: "⚡",
     titulo: "Adicional de Insalubridade e Periculosidade",
-    texto: "Trabalhadores expostos a condições insalubres ou perigosas têm direito a adicional no salário.\nInsalubridade: 10%, 20% ou 40% sobre o salário mínimo.\nPericulosidade (como eletricistas): 30% sobre o salário base.\nEletricistas que trabalham com energia elétrica têm direito ao adicional de periculosidade.",
-    legal: "CLT Art. 192 e Art. 193 e NR-16 e NR-10",
+    texto: "Trabalhadores expostos a condições insalubres ou perigosas têm direito a adicional no salário.\nInsalubridade: 10%, 20% ou 40% sobre o salário mínimo, conforme o grau definido em laudo técnico.\nPericulosidade (como eletricistas): 30% sobre o salário base, mediante laudo técnico comprobatório.",
+    legal: "CLT Art. 192 (insalubridade) e CLT Art. 193 (periculosidade) · NR-15 · NR-16",
   },
   {
     emoji: "🎄",
