@@ -1,41 +1,119 @@
 import PageHeader from "../PageHeader";
 
-const infos = [
-  { emoji: "🎁", titulo: "O que é?", texto: "O PROUNI oferece bolsas em faculdades particulares. Pode ser bolsa integral (100%) ou parcial (50%)." },
-  { emoji: "📋", titulo: "Quem pode?", texto: "Precisa ter feito o ENEM mais recente com pelo menos 450 pontos e não ter zerado a redação." },
-  { emoji: "💰", titulo: "Renda familiar", texto: "Bolsa integral: renda de até 1,5 salário mínimo por pessoa. Parcial: até 3 salários." },
-  { emoji: "🏫", titulo: "Cursos disponíveis", texto: "Tem de tudo: engenharia, administração, direito, tecnologia... Confira no site!" },
-  { emoji: "📝", titulo: "Como se inscrever?", texto: "Acesse o site oficial no período de inscrições. Escolha até 2 opções." },
-  { emoji: "📄", titulo: "Documentos", texto: "RG, CPF, comprovante de renda, comprovante de endereço e histórico escolar." },
-];
-
 export default function SubProuni({ onBack }) {
   return (
     <div>
       <PageHeader title="PROUNI" subtitle="Programa Universidade para Todos" backTo="/" />
       <div className="max-w-lg mx-auto px-4 py-5 pb-10 space-y-3">
 
+        {/* Abertura */}
         <div className="bg-chart-4/10 border border-chart-4/20 rounded-2xl p-4">
-          <p className="text-sm leading-relaxed text-foreground">O <strong>PROUNI</strong> oferece bolsas em faculdades particulares — integral ou parcial. Conheça os critérios e veja se você tem direito.</p>
+          <p className="text-sm leading-relaxed text-foreground">O <strong>PROUNI</strong> oferece bolsas de estudo em faculdades particulares — sem gerar dívida e sem precisar devolver nada. Conheça os critérios e veja se você tem direito.</p>
         </div>
 
-        {infos.map((i) => (
-          <div key={i.titulo} className="border border-border rounded-2xl p-4 bg-card flex items-start gap-3">
-            <span className="text-xl shrink-0 mt-0.5">{i.emoji}</span>
+        {/* Card 1 — O que é o PROUNI? */}
+        <div className="border border-border rounded-2xl p-4 bg-card flex items-start gap-3">
+          <span className="text-xl shrink-0 mt-0.5">🎁</span>
+          <div>
+            <p className="font-bold text-sm mb-1">O que é o PROUNI?</p>
+            <p className="text-xs text-muted-foreground leading-relaxed">O Programa Universidade para Todos oferece bolsas de estudo em faculdades particulares. Existem dois tipos:</p>
+            <ul className="mt-1.5 space-y-1 text-xs text-muted-foreground">
+              <li>• <strong>Bolsa integral</strong> — cobre 100% da mensalidade</li>
+              <li>• <strong>Bolsa parcial</strong> — cobre 50% da mensalidade</li>
+            </ul>
+            <p className="text-xs text-muted-foreground leading-relaxed mt-1.5">Diferente do FIES, o PROUNI é uma bolsa — não um empréstimo. Você não precisa devolver nada.</p>
+          </div>
+        </div>
+
+        {/* Card 2 — Quem pode participar? */}
+        <div className="border border-border rounded-2xl p-4 bg-card space-y-2">
+          <div className="flex items-start gap-3">
+            <span className="text-xl shrink-0 mt-0.5">👥</span>
             <div>
-              <p className="font-bold text-sm mb-0.5">{i.titulo}</p>
-              <p className="text-xs text-muted-foreground leading-relaxed">{i.texto}</p>
+              <p className="font-bold text-sm mb-1">Quem pode participar?</p>
+              <p className="text-xs text-muted-foreground leading-relaxed">Para concorrer ao PROUNI você precisa:</p>
+              <ul className="mt-1.5 space-y-1 text-xs text-muted-foreground">
+                <li>• Ter feito o ENEM</li>
+                <li>• Ter atingido a pontuação mínima exigida (exceto na redação nota zero)</li>
+                <li>• Não ter diploma de curso superior</li>
+                <li>• Atender aos critérios de renda familiar</li>
+              </ul>
+              <p className="text-xs text-muted-foreground leading-relaxed mt-1.5">Verifique os critérios atualizados no site oficial do PROUNI — as regras podem mudar a cada edição.</p>
             </div>
           </div>
-        ))}
+          <div className="bg-blue-50 border border-blue-200 rounded-xl p-3">
+            <p className="text-xs leading-relaxed text-foreground">💡 Há vagas reservadas para professores da rede pública, pessoas com deficiência e indígenas — mesmo que não atendam aos critérios de renda.</p>
+          </div>
+        </div>
+
+        {/* Card 3 — Critério de renda */}
+        <div className="border border-border rounded-2xl p-4 bg-card flex items-start gap-3">
+          <span className="text-xl shrink-0 mt-0.5">💰</span>
+          <div>
+            <p className="font-bold text-sm mb-1">Critério de renda</p>
+            <p className="text-xs text-muted-foreground leading-relaxed">O PROUNI tem critérios de renda familiar por pessoa. Os valores são atualizados anualmente e variam conforme o tipo de bolsa:</p>
+            <ul className="mt-1.5 space-y-1 text-xs text-muted-foreground">
+              <li>• <strong>Bolsa integral:</strong> renda menor</li>
+              <li>• <strong>Bolsa parcial:</strong> renda um pouco maior</li>
+            </ul>
+            <p className="text-xs text-muted-foreground leading-relaxed mt-1.5">Consulte os valores exatos no site oficial do PROUNI — eles mudam a cada edição.</p>
+          </div>
+        </div>
+
+        {/* Card 4 — Cursos disponíveis */}
+        <div className="border border-border rounded-2xl p-4 bg-card flex items-start gap-3">
+          <span className="text-xl shrink-0 mt-0.5">🏫</span>
+          <div>
+            <p className="font-bold text-sm mb-1">Quais cursos estão disponíveis?</p>
+            <p className="text-xs text-muted-foreground leading-relaxed">O PROUNI oferece bolsas em centenas de cursos diferentes: engenharia, tecnologia, saúde, educação, administração e muito mais. A disponibilidade varia conforme a instituição e a região. Pesquise no site oficial os cursos disponíveis na sua cidade.</p>
+          </div>
+        </div>
+
+        {/* Card 5 — Como se inscrever? */}
+        <div className="border border-border rounded-2xl p-4 bg-card flex items-start gap-3">
+          <span className="text-xl shrink-0 mt-0.5">📝</span>
+          <div>
+            <p className="font-bold text-sm mb-1">Como se inscrever?</p>
+            <p className="text-xs text-muted-foreground leading-relaxed">As inscrições são feitas pelo site oficial do PROUNI, totalmente online e gratuitas. Você pode escolher até 2 opções de curso e instituição. As datas de inscrição mudam a cada edição — fique atento ao site oficial.</p>
+          </div>
+        </div>
+
+        {/* Card 6 — Documentos necessários */}
+        <div className="border border-border rounded-2xl p-4 bg-card flex items-start gap-3">
+          <span className="text-xl shrink-0 mt-0.5">📄</span>
+          <div>
+            <p className="font-bold text-sm mb-1">Documentos necessários</p>
+            <p className="text-xs text-muted-foreground leading-relaxed">Separe com antecedência:</p>
+            <ul className="mt-1.5 space-y-1 text-xs text-muted-foreground">
+              <li>• RG e CPF</li>
+              <li>• Comprovante de renda familiar</li>
+              <li>• Comprovante de residência</li>
+              <li>• Histórico escolar</li>
+              <li>• Outros documentos que a instituição solicitar</li>
+            </ul>
+            <p className="text-xs text-muted-foreground leading-relaxed mt-1.5">Guarde cópias de tudo — podem ser solicitados em diferentes etapas.</p>
+          </div>
+        </div>
+
+        {/* Card 7 — E se a bolsa for parcial? */}
+        <div className="border border-border rounded-2xl p-4 bg-card flex items-start gap-3">
+          <span className="text-xl shrink-0 mt-0.5">🔄</span>
+          <div>
+            <p className="font-bold text-sm mb-1">E se a bolsa for parcial?</p>
+            <p className="text-xs text-muted-foreground leading-relaxed">A bolsa parcial cobre 50% da mensalidade. Para o restante, algumas opções são:</p>
+            <ul className="mt-1.5 space-y-1 text-xs text-muted-foreground">
+              <li>• Solicitar o FIES para financiar a parte não coberta</li>
+              <li>• Verificar se a instituição oferece bolsas complementares</li>
+              <li>• Negociar diretamente com a faculdade</li>
+            </ul>
+            <p className="text-xs text-muted-foreground leading-relaxed mt-1.5">Pesquise todas as possibilidades antes de desistir.</p>
+          </div>
+        </div>
 
         {/* Aviso de segurança */}
         <div className="rounded-2xl p-4 bg-orange-50 border border-orange-200 space-y-2">
-          <p className="text-sm font-bold text-orange-800">✅ Site oficial verificado</p>
-          <p className="text-xs text-orange-700 leading-relaxed">
-            <strong>prouniportal.mec.gov.br</strong><br />
-            Desconfie de sites parecidos — use sempre o link oficial abaixo.
-          </p>
+          <p className="text-sm font-bold text-orange-800">✅ Site oficial verificado: prouniportal.mec.gov.br</p>
+          <p className="text-xs text-orange-700 leading-relaxed">Desconfie de sites parecidos — use sempre o link oficial abaixo.</p>
           <a href="https://prouniportal.mec.gov.br" target="_blank" rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all">
             🔗 Acessar site oficial do PROUNI
