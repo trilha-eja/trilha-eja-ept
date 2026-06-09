@@ -1,24 +1,12 @@
 import PageHeader from "../PageHeader";
 
-const infos = [
-  { emoji: "🎓", titulo: "O que é o FIES?", texto: "O FIES (Fundo de Financiamento Estudantil) é um programa do governo federal que financia até 100% das mensalidades de faculdades privadas. Você paga enquanto estuda uma taxa mínima e quita o restante após se formar, com juros baixos." },
-  { emoji: "📋", titulo: "Quem pode participar?", texto: "Para se candidatar ao FIES você precisa:\n- Ter feito o ENEM a partir de 2010 com nota acima de 450 pontos\n- Não ter zerado a redação\n- Renda familiar de até 3 salários mínimos por pessoa\n- Não ter diploma de curso superior" },
-  { emoji: "💰", titulo: "Como funciona o pagamento?", texto: "Durante o curso você paga uma parcela mínima mensal. Após se formar, tem até 3 vezes o tempo do curso para quitar a dívida com juros de 3,4% ao ano. Exemplo: curso de 4 anos → até 12 anos para pagar depois." },
-  { emoji: "⚠️", titulo: "Cuidados importantes", texto: "Antes de assinar o contrato do FIES, considere:\n- Você terá uma dívida real para pagar após se formar\n- Calcule se o salário da sua profissão vai cobrir as parcelas\n- Pesquise bem a faculdade — escolha cursos reconhecidos pelo MEC\n- Guarde todos os comprovantes de pagamento" },
-  { emoji: "🔄", titulo: "FIES x PROUNI — qual escolher?", texto: "Se você tem renda familiar de até 3 salários mínimos por pessoa, tente primeiro o PROUNI — é bolsa, não empréstimo. Use o FIES apenas se não conseguir o PROUNI ou o SISU, e se tiver certeza que conseguirá pagar a dívida depois de formado." },
-];
-
 export default function SubFies({ onBack }) {
   return (
     <div>
       <PageHeader title="FIES" subtitle="Financiamento Estudantil do Governo Federal" backTo="/" />
       <div className="max-w-lg mx-auto px-4 py-5 pb-10 space-y-3">
 
-        <div className="bg-destructive/10 border border-destructive/20 rounded-2xl p-4">
-          <p className="text-sm leading-relaxed text-foreground">⚠️ O <strong>FIES</strong> é um empréstimo do governo — não uma bolsa. Antes de decidir, conheça bem como funciona e considere primeiro o PROUNI e o SISU, que são gratuitos.</p>
-        </div>
-
-        {/* Aviso em destaque */}
+        {/* Aviso em destaque — manter exatamente */}
         <div className="rounded-2xl p-4 bg-red-50 border border-red-300 space-y-1">
           <p className="text-sm font-bold text-red-800">⚠️ Atenção antes de continuar!</p>
           <p className="text-xs text-red-700 leading-relaxed">
@@ -26,36 +14,100 @@ export default function SubFies({ onBack }) {
           </p>
         </div>
 
-        {infos.map((i) => (
-          <div key={i.titulo} className="border border-border rounded-2xl p-4 bg-card flex items-start gap-3">
-            <span className="text-xl shrink-0 mt-0.5">{i.emoji}</span>
-            <div>
-              <p className="font-bold text-sm mb-0.5">{i.titulo}</p>
-              <p className="text-xs text-muted-foreground leading-relaxed whitespace-pre-line">{i.texto}</p>
-            </div>
-          </div>
-        ))}
-
-        {/* Card 6 — Como se inscrever com botão */}
+        {/* Card — O que é o FIES? */}
         <div className="border border-border rounded-2xl p-4 bg-card flex items-start gap-3">
-          <span className="text-xl shrink-0 mt-0.5">📝</span>
-          <div className="flex-1 min-w-0">
-            <p className="font-bold text-sm mb-0.5">Como se inscrever?</p>
-            <p className="text-xs text-muted-foreground leading-relaxed mb-3">
-              As inscrições são feitas pelo site oficial do FIES. O processo é online e gratuito. Tenha em mãos: RG, CPF, comprovante de renda e resultado do ENEM.
-            </p>
-            <a
-              href="https://www.gov.br/fnde/pt-br/acesso-a-informacao/acoes-e-programas/financiamento/fies"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all"
-            >
-              🔗 Acessar site oficial do FIES
-            </a>
+          <span className="text-xl shrink-0 mt-0.5">🎓</span>
+          <div>
+            <p className="font-bold text-sm mb-1">O que é o FIES?</p>
+            <p className="text-xs text-muted-foreground leading-relaxed">O FIES (Fundo de Financiamento Estudantil) é um programa do governo federal que financia parte ou a totalidade das mensalidades de faculdades privadas. Durante o curso você paga uma parcela mínima. Após se formar, tem um prazo para quitar o restante com juros. É um empréstimo — não uma bolsa.</p>
           </div>
         </div>
 
-        {/* Mensagem de encorajamento */}
+        {/* Card — Quem pode participar? */}
+        <div className="border border-border rounded-2xl p-4 bg-card flex items-start gap-3">
+          <span className="text-xl shrink-0 mt-0.5">📋</span>
+          <div>
+            <p className="font-bold text-sm mb-1">Quem pode participar?</p>
+            <p className="text-xs text-muted-foreground leading-relaxed">Para se candidatar ao FIES você precisa:</p>
+            <ul className="mt-1.5 space-y-1 text-xs text-muted-foreground">
+              <li>• Ter feito o ENEM com pontuação mínima exigida (exceto nota zero na redação)</li>
+              <li>• Atender aos critérios de renda familiar estabelecidos para cada edição</li>
+              <li>• Não ter diploma de curso superior</li>
+            </ul>
+            <p className="text-xs text-muted-foreground leading-relaxed mt-1.5">Os critérios de pontuação e renda mudam a cada edição — consulte sempre o site oficial antes de se inscrever.</p>
+          </div>
+        </div>
+
+        {/* Card — Como funciona o pagamento? */}
+        <div className="border border-border rounded-2xl p-4 bg-card flex items-start gap-3">
+          <span className="text-xl shrink-0 mt-0.5">💰</span>
+          <div>
+            <p className="font-bold text-sm mb-1">Como funciona o pagamento?</p>
+            <p className="text-xs text-muted-foreground leading-relaxed">Durante o curso você paga uma parcela mínima mensal. Após se formar, você tem um prazo para quitar o restante com juros — conforme as regras vigentes no momento da contratação.</p>
+            <p className="text-xs text-muted-foreground leading-relaxed mt-1.5">Antes de assinar, verifique no site oficial:</p>
+            <ul className="mt-1 space-y-1 text-xs text-muted-foreground">
+              <li>• O valor das parcelas durante o curso</li>
+              <li>• O prazo total para quitação</li>
+              <li>• A taxa de juros atual</li>
+            </ul>
+            <p className="text-xs text-muted-foreground leading-relaxed mt-1.5">As condições podem mudar a cada edição do programa.</p>
+          </div>
+        </div>
+
+        {/* Card — Cuidados importantes */}
+        <div className="border border-border rounded-2xl p-4 bg-card flex items-start gap-3">
+          <span className="text-xl shrink-0 mt-0.5">⚠️</span>
+          <div>
+            <p className="font-bold text-sm mb-1">Cuidados importantes</p>
+            <p className="text-xs text-muted-foreground leading-relaxed">Antes de assinar o contrato do FIES, considere:</p>
+            <ul className="mt-1.5 space-y-1 text-xs text-muted-foreground">
+              <li>• Você terá uma dívida real para pagar após se formar(a)</li>
+              <li>• Calcule se a renda esperada na sua profissão vai cobrir as parcelas</li>
+              <li>• Pesquise se o curso é reconhecido pelo MEC — cursos não reconhecidos não têm validade no mercado</li>
+              <li>• Guarde todos os comprovantes de pagamento</li>
+              <li>• Nunca pague para se inscrever no FIES — a inscrição é sempre gratuita pelo site oficial</li>
+            </ul>
+          </div>
+        </div>
+
+        {/* Card — FIES x PROUNI — manter exatamente */}
+        <div className="border border-border rounded-2xl p-4 bg-card flex items-start gap-3">
+          <span className="text-xl shrink-0 mt-0.5">🔄</span>
+          <div>
+            <p className="font-bold text-sm mb-1">FIES x PROUNI — qual escolher?</p>
+            <p className="text-xs text-muted-foreground leading-relaxed">Se você tem renda familiar de até 3 salários mínimos por pessoa, tente primeiro o PROUNI — é bolsa, não empréstimo. Use o FIES apenas se não conseguir o PROUNI ou o SISU, e se tiver certeza que conseguirá pagar a dívida depois de formado(a).</p>
+          </div>
+        </div>
+
+        {/* Card — Como se inscrever? */}
+        <div className="border border-border rounded-2xl p-4 bg-card space-y-3">
+          <div className="flex items-start gap-3">
+            <span className="text-xl shrink-0 mt-0.5">📝</span>
+            <div>
+              <p className="font-bold text-sm mb-1">Como se inscrever?</p>
+              <p className="text-xs text-muted-foreground leading-relaxed">As inscrições são feitas pelo site oficial do FIES, totalmente online e gratuitas. Tenha em mãos:</p>
+              <ul className="mt-1.5 space-y-1 text-xs text-muted-foreground">
+                <li>• RG e CPF</li>
+                <li>• Comprovante de renda familiar</li>
+                <li>• Resultado do ENEM</li>
+              </ul>
+              <p className="text-xs text-muted-foreground leading-relaxed mt-1.5">As datas de inscrição mudam a cada edição — acompanhe o site oficial.</p>
+            </div>
+          </div>
+          <div className="bg-red-50 border border-red-200 rounded-xl p-3">
+            <p className="text-xs leading-relaxed text-red-800">⚠️ Atenção: nunca pague para se inscrever no FIES. Desconfie de sites que cobram taxas — a inscrição é sempre gratuita pelo site oficial.</p>
+          </div>
+          <a
+            href="https://www.gov.br/fnde/pt-br/acesso-a-informacao/acoes-e-programas/financiamento/fies"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all"
+          >
+            🔗 Acessar site oficial do FIES
+          </a>
+        </div>
+
+        {/* Mensagem de encorajamento — manter exatamente */}
         <div className="rounded-2xl p-4 bg-orange-50 border border-orange-200">
           <p className="text-xs text-orange-800 leading-relaxed">
             💡 <strong>Lembre-se:</strong> existem caminhos gratuitos como o PROUNI e o SISU. Pesquise todas as opções antes de assumir um financiamento. Conhecer suas opções é o primeiro passo para uma decisão consciente.
