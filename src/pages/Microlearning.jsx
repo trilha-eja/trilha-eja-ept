@@ -7,15 +7,14 @@ const cards = [
     category: "Segurança",
     emoji: "🛡️",
     title: "NR-10: O Básico",
-    content: "A NR-10 é a norma que protege quem trabalha com eletricidade. Ela exige treinamento obrigatório de 40h antes de mexer em qualquer instalação elétrica.",
-
+    content: "A NR-10 é a norma que protege quem trabalha com eletricidade. Exige treinamento obrigatório de 40h antes de atuar em instalações elétricas. Para atividades em Média ou Alta Tensão, há complementação: mais 16h para o SEC (indústrias) ou 40h para o SEP (transmissão). Atualizada em 2026 pela Portaria MTE nº 737.",
     color: "bg-destructive/10 border-destructive/20",
   },
   {
     category: "Ferramenta",
     emoji: "🔧",
     title: "Alicate Universal",
-    content: "Serve para cortar, dobrar e segurar fios. Sempre use um com cabo isolado (até 1000V). É a ferramenta mais usada pelo eletricista.",
+    content: "Serve para cortar, dobrar e segurar fios e cabos. Sempre use um com cabo isolado (identificado com a marcação 1000V). É uma das ferramentas mais usadas pelo(a) eletricista industrial no dia a dia.",
     color: "bg-primary/10 border-primary/20",
   },
   {
@@ -26,31 +25,31 @@ const cards = [
     color: "bg-accent/10 border-accent/20",
   },
   {
-    category: "Dica",
-    emoji: "💡",
+    category: "Conceito",
+    emoji: "⚡",
     title: "Fio Fase: Cuidado!",
-    content: "O fio fase é o que conduz energia. Nunca toque sem desligar o disjuntor. Use a chave teste para identificar: se a lâmpada acender, é fase!",
+    content: "O fio fase é o condutor energizado do circuito — por onde a energia chega ao equipamento. É o fio que representa maior risco de choque elétrico. Antes de qualquer trabalho, desligue sempre o disjuntor correspondente e verifique a ausência de tensão com equipamento adequado.",
     color: "bg-secondary/10 border-secondary/20",
   },
   {
-    category: "Prática",
+    category: "Conceito",
     emoji: "🔌",
-    title: "Emendas de Fio",
-    content: "Para emendar fios, desencape 2cm de cada um, torça juntos no sentido horário e cubra com fita isolante. Faça pelo menos 3 camadas de fita.",
+    title: "Emendas Elétricas",
+    content: "Emendas elétricas mal feitas são uma das principais causas de incêndios e falhas em instalações. Na indústria, toda emenda deve seguir normas técnicas e ser realizada por profissional habilitado. Conhecer o procedimento correto faz parte da formação do(a) eletricista industrial.",
     color: "bg-chart-4/10 border-chart-4/20",
   },
   {
-    category: "Carreira",
-    emoji: "📈",
-    title: "Quanto Ganha?",
-    content: "Um eletricista industrial iniciante ganha em média R$ 2.500 a R$ 3.500. Com experiência e NR-10, pode chegar a R$ 5.000 ou mais!",
+    category: "Mundo do Trabalho",
+    emoji: "💼",
+    title: "Remuneração e Direitos",
+    content: "A remuneração do(a) eletricista industrial varia conforme a região, o setor de atuação, o vínculo empregatício e a experiência profissional. Conhecer seus direitos trabalhistas — como o adicional de periculosidade — é tão importante quanto conhecer o salário. Trabalhador(a) informado(a) negocia melhor.",
     color: "bg-chart-5/10 border-chart-5/20",
   },
   {
     category: "Segurança",
     emoji: "🧤",
     title: "EPIs Obrigatórios",
-    content: "Luva isolante, óculos de proteção, capacete, botina com solado isolante e roupa anti-chama. A empresa DEVE fornecer tudo gratuitamente.",
+    content: "Os EPIs do(a) eletricista industrial incluem: luvas isolantes, óculos de proteção, capacete, calçados adequados para serviços elétricos e vestimentas apropriadas. A empresa é obrigada a fornecer todos gratuitamente e em boas condições. (NR-06 e NR-10)",
     color: "bg-destructive/10 border-destructive/20",
   },
   {
@@ -59,6 +58,54 @@ const cards = [
     title: "Circuito Série x Paralelo",
     content: "Série: tudo em fila (se uma lâmpada queima, todas apagam). Paralelo: cada um no seu caminho (se uma queima, as outras continuam). Casas usam paralelo!",
     color: "bg-accent/10 border-accent/20",
+  },
+  {
+    category: "Segurança",
+    emoji: "⚡",
+    title: "Arco Elétrico — Perigo Invisível",
+    content: "O arco elétrico é uma descarga elétrica que pode atingir temperaturas superiores a 20.000°C. Ocorre em painéis energizados e pode causar queimaduras graves em frações de segundo. O uso correto dos EPIs e dos procedimentos de segurança é a principal proteção.",
+    dica: "Nunca abra um painel elétrico energizado sem os EPIs adequados e sem autorização.",
+    color: "bg-destructive/10 border-destructive/20",
+  },
+  {
+    category: "Conceito",
+    emoji: "🔧",
+    title: "O que é um Contator?",
+    content: "O contator é um dispositivo que liga e desliga motores e equipamentos industriais de forma controlada. Funciona como um interruptor de alta capacidade comandado por um circuito de controle. É um dos componentes mais comuns em painéis elétricos industriais.",
+    dica: "Na manutenção, verifique o estado dos contatos do contator — desgastes causam falhas nos equipamentos.",
+    color: "bg-primary/10 border-primary/20",
+  },
+  {
+    category: "Segurança",
+    emoji: "🔒",
+    title: "LOTO — Bloqueio e Etiquetagem",
+    content: "Antes de realizar qualquer manutenção em equipamentos elétricos, o procedimento LOTO garante que a máquina esteja desligada, bloqueada e sinalizada. É uma exigência de segurança — não apenas uma recomendação. Protege a vida de quem realiza a manutenção.",
+    dica: "Nunca confie apenas no aviso verbal de que a máquina está desligada — aplique sempre o bloqueio físico.",
+    color: "bg-destructive/10 border-destructive/20",
+  },
+  {
+    category: "Conceito",
+    emoji: "⚙️",
+    title: "Motor Elétrico",
+    content: "O motor elétrico transforma energia elétrica em movimento mecânico. É um dos equipamentos mais presentes na indústria — bombas, compressores, esteiras e máquinas dependem dele. Saber identificar falhas em motores é uma habilidade essencial do(a) eletricista industrial.",
+    dica: "Ruído excessivo, vibração e aquecimento fora do normal são sinais de que um motor precisa de manutenção.",
+    color: "bg-accent/10 border-accent/20",
+  },
+  {
+    category: "Direitos",
+    emoji: "🛡️",
+    title: "Adicional de Periculosidade",
+    content: "Quem trabalha com eletricidade em condições de risco tem direito ao adicional de periculosidade — 30% sobre o salário base. Esse direito é garantido pela CLT e pela NR-16, não pela NR-10. Conhecer seus direitos é parte da sua formação profissional.",
+    dica: "Se você atua com eletricidade e não recebe o adicional, consulte o sindicato da sua categoria.",
+    color: "bg-chart-5/10 border-chart-5/20",
+  },
+  {
+    category: "Conceito",
+    emoji: "📐",
+    title: "Leitura de Plaqueta do Motor",
+    content: "Todo motor elétrico tem uma plaqueta com informações essenciais: tensão de operação, corrente nominal, potência, rotação e fator de serviço. Saber ler essas informações é fundamental para ligar corretamente o motor e evitar danos ao equipamento.",
+    dica: "Antes de ligar qualquer motor, verifique se a tensão da rede corresponde à tensão indicada na plaqueta.",
+    color: "bg-primary/10 border-primary/20",
   },
 ];
 
@@ -88,6 +135,11 @@ export default function Microlearning() {
           <span className="text-5xl mb-4">{card.emoji}</span>
           <h2 className="text-xl font-extrabold mb-3">{card.title}</h2>
           <p className="text-base leading-relaxed text-foreground">{card.content}</p>
+          {card.dica && (
+            <div className="mt-4 bg-white/60 rounded-xl px-4 py-3 w-full">
+              <p className="text-sm font-semibold text-foreground">💡 {card.dica}</p>
+            </div>
+          )}
         </div>
 
         {/* Navigation */}
