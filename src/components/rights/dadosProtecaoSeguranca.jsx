@@ -23,7 +23,7 @@ export const cards = [
   {
     emoji: "🏥",
     titulo: "Acidente de Trabalho",
-    texto: "Se você sofrer acidente durante o trabalho ou no trajeto casa-trabalho-casa, tem direito a:\n- Afastamento remunerado pelo INSS\n- Estabilidade de 12 meses após retornar ao trabalho\n- Estabilidade de 12 meses após o retorno ao trabalho — não pode ser demitido nesse período\nComunique imediatamente ao empregador e exija a CAT (Comunicação de Acidente de Trabalho).",
+    texto: "Se você sofrer acidente durante o trabalho ou no trajeto casa-trabalho-casa, tem direito a:\n- Afastamento remunerado pelo INSS\n- Estabilidade de 12 meses após o retorno ao trabalho — não pode ser demitido nesse período\nComunique imediatamente ao empregador e exija a CAT (Comunicação de Acidente de Trabalho).",
     legal: "Lei nº 8.213/1991 Art. 19 a 23 e CLT Art. 118",
   },
   {

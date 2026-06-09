@@ -8,7 +8,7 @@ export const cards = [
   {
     emoji: "👴",
     titulo: "Aposentadoria",
-    texto: "Existem diferentes tipos de aposentadoria:\n- Por idade: homens 65 anos / mulheres 62 anos com mínimo de 15 anos de contribuição\n- Por tempo de contribuição: homens 35 anos / mulheres 30 anos\n- Por incapacidade permanente: quando não pode mais trabalhar por doença ou acidente",
+    texto: "Existem diferentes tipos de aposentadoria:\n- Por idade: homens com 65 anos e mulheres com 62 anos, com tempo mínimo de contribuição\n- Por incapacidade permanente: quando não pode mais trabalhar por doença ou acidente\nA Reforma da Previdência (EC nº 103/2019) alterou as regras. Consulte o Meu INSS para verificar sua situação específica.",
     legal: "Lei nº 8.213/1991 Art. 42 a 57 e EC nº 103/2019",
   },
   {
