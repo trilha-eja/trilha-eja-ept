@@ -31,6 +31,26 @@ const caminhos = [
     tag: null,
     tagBg: "",
   },
+  {
+    cor: "#5BAD6F",
+    bg: "bg-green-50",
+    borda: "border-green-300",
+    emoji: "📚",
+    titulo: "Cursos de Aperfeiçoamento",
+    texto: "Qualificações, certificações e formações complementares na sua área.",
+    tag: null,
+    tagBg: "",
+  },
+  {
+    cor: "#2C5F8A",
+    bg: "bg-blue-50",
+    borda: "border-blue-300",
+    emoji: "🏛️",
+    titulo: "Concursos e Processos Seletivos",
+    texto: "Oportunidades em órgãos públicos, empresas públicas e instituições.",
+    tag: null,
+    tagBg: "",
+  },
 ];
 
 function Seta({ label }) {
@@ -76,7 +96,7 @@ export default function SubTrilhaContinuidade({ onBack, onNavigate }) {
 
         {/* Intro */}
         <div className="bg-primary/10 border border-primary/20 rounded-2xl p-4">
-          <p className="text-sm leading-relaxed text-foreground">Não existe um único caminho certo. Você pode seguir qualquer uma dessas trilhas — <strong>no seu tempo</strong>, da sua forma. O importante é continuar!</p>
+          <p className="text-sm leading-relaxed text-foreground">Não existe um único caminho certo. Após a EJA-EPT existem múltiplas possibilidades — cada uma válida e adequada a diferentes projetos de vida, trajetórias e realidades. Os níveis seguintes representam possibilidades, não obrigações.</p>
         </div>
 
         {/* TRILHA VISUAL */}
@@ -93,8 +113,8 @@ export default function SubTrilhaContinuidade({ onBack, onNavigate }) {
 
           <Seta label="O que vem depois?" />
 
-          {/* Nível 2 — 3 caminhos */}
-          <div className="w-full grid grid-cols-3 gap-2">
+          {/* Nível 2 — 5 caminhos */}
+          <div className="w-full grid grid-cols-2 gap-2 sm:grid-cols-3">
             {caminhos.map((c) => (
               <div key={c.titulo} className={`border ${c.borda} ${c.bg} rounded-2xl p-3 flex flex-col items-center gap-1.5 text-center`}>
                 <span className="text-xl">{c.emoji}</span>
@@ -157,7 +177,7 @@ export default function SubTrilhaContinuidade({ onBack, onNavigate }) {
         {/* Mensagem motivacional */}
         <div className="rounded-2xl p-4 border border-orange-300" style={{ backgroundColor: "#FFF8F0" }}>
           <p className="text-xs text-orange-900 leading-relaxed">
-            🌱 <strong>Você já deu o primeiro passo</strong> voltando a estudar. Cada nível desta trilha é uma possibilidade real — não uma obrigação. Vá no seu ritmo, no seu tempo. Sua história já é inspiração para quem vem depois.
+            🌱 Você já deu um passo importante voltando a estudar. Cada um dos caminhos desta trilha é uma possibilidade real — não uma obrigação. Vá no seu ritmo, no seu tempo, construindo seus próprios projetos de vida.
           </p>
         </div>
 
