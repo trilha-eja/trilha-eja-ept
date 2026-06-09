@@ -1,7 +1,7 @@
 import PageHeader from "../PageHeader";
 import AbaDicasEstudo from "./AbaDicasEstudo";
 
-export default function SubDicasEstudo({ onBack }) {
+export default function SubDicasEstudo({ onBack, onNavigate }) {
   return (
     <div>
       <PageHeader title="Dicas de Estudo" subtitle="Estudar trabalhando é um desafio real — estas dicas são para quem vive essa realidade." backTo="/" />
@@ -9,7 +9,7 @@ export default function SubDicasEstudo({ onBack }) {
         <div className="bg-secondary/20 border border-secondary/30 rounded-2xl p-4">
           <p className="text-sm leading-relaxed text-foreground">Estas dicas foram pensadas para quem concilia trabalho, família e estudos. Não existe fórmula perfeita — o que importa é encontrar o que funciona para você.</p>
         </div>
-        <AbaDicasEstudo />
+        <AbaDicasEstudo onNavigate={onNavigate} />
         <button onClick={onBack} className="w-full text-sm text-muted-foreground underline underline-offset-4 py-2">
           ← Voltar para Caminhos de Estudo
         </button>

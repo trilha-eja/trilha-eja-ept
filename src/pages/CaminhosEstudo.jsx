@@ -33,7 +33,7 @@ const subMap = {
   fies:        (back) => <SubFies onBack={back} />,
   trilha:      (back, nav) => <SubTrilhaContinuidade onBack={back} onNavigate={nav} />,
   cursos:      (back) => <SubCursosGratuitos onBack={back} />,
-  dicas:       (back) => <SubDicasEstudo onBack={back} />,
+  dicas:       (back, nav) => <SubDicasEstudo onBack={back} onNavigate={nav} />,
   ferramentas: (back) => <SubFerramentasDigitais onBack={back} />,
   videos:      (back) => <SubVideos onBack={back} />,
   recursos:    (back) => <SubRecursosIFC onBack={back} />,
