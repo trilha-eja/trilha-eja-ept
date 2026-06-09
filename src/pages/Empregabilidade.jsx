@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FileText, Shield, ExternalLink, Star, Heart, Users, Clock, AlertTriangle } from "lucide-react";
+import { FileText, Shield, ExternalLink, Star, Heart, Users, Clock, AlertTriangle, Zap } from "lucide-react";
 import PageHeader from "../components/PageHeader";
 import ContentCard from "../components/ContentCard";
 import ResumeBuilder from "../components/ResumeBuilder";
@@ -9,10 +9,12 @@ import JobSites from "../components/JobSites";
 import InternshipSites from "../components/InternshipSites";
 import TrabalhoPrecarizado from "../components/TrabalhoPrecarizado";
 import ConcursosProcessos from "../components/ConcursosProcessos";
+import EletricistaIndustrial from "../components/EletricistaIndustrial";
 
 const sections = [
   { id: "resume", icon: FileText, title: "Criar meu Currículo", description: "Passo a passo simples", color: "bg-primary" },
   { id: "skills", icon: Star, title: "Valorize sua Experiência", description: "Suas habilidades de vida contam!", color: "bg-secondary" },
+  { id: "eletricista", icon: Zap, title: "O que faz um Eletricista Industrial?", description: "Conheça sua profissão e seus caminhos", color: "bg-chart-3" },
   { id: "precario", icon: AlertTriangle, title: "Trabalho Precarizado", description: "Autonomia ou armadilha? Conheça os riscos", color: "bg-destructive" },
   { id: "rights", icon: Shield, title: "Seus Direitos Trabalhistas", description: "Conheça seus direitos e faça valer", color: "bg-accent" },
   { id: "jobs", icon: ExternalLink, title: "Central de Oportunidades", description: "Plataformas, dicas e orientações para o mundo do trabalho", color: "bg-chart-4" },
@@ -30,6 +32,7 @@ export default function Empregabilidade() {
   if (activeSection === "jobs") return <JobSites onBack={() => setActiveSection(null)} />;
   if (activeSection === "internship") return <InternshipSites onBack={() => setActiveSection(null)} />;
   if (activeSection === "concursos") return <ConcursosProcessos onBack={() => setActiveSection(null)} />;
+  if (activeSection === "eletricista") return <EletricistaIndustrial onBack={() => setActiveSection(null)} onNavigate={(sec) => setActiveSection(sec)} />;
 
   return (
     <div>
