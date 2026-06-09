@@ -103,15 +103,77 @@ async function generatePDF(containerRef) {
   doc.save("guia-do-educador-trilha-eja-ept.pdf");
 }
 
+// Senha ofuscada em base64 para não expor em texto visível
+const _k = atob("cHJvZmVwdDIwMjY=");
+
 export default function ParaOEducador() {
   const pdfRef = useRef(null);
   const [loading, setLoading] = useState(false);
+  const [acesso, setAcesso] = useState(() => sessionStorage.getItem("educador_acesso") === "1");
+  const [senha, setSenha] = useState("");
+  const [erro, setErro] = useState(false);
+
+  const handleAcessar = () => {
+    if (senha === _k) {
+      sessionStorage.setItem("educador_acesso", "1");
+      setAcesso(true);
+      setErro(false);
+    } else {
+      setErro(true);
+    }
+  };
 
   const handleDownload = async () => {
     setLoading(true);
     await generatePDF(pdfRef);
     setLoading(false);
   };
+
+  if (!acesso) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center px-4">
+        <div className="w-full max-w-sm space-y-5">
+          <div className="text-center space-y-1">
+            <div className="text-5xl mb-2">👨‍🏫</div>
+            <h1 className="font-extrabold text-2xl">Para o Educador</h1>
+            <p className="text-sm text-muted-foreground leading-snug">
+              Orientações pedagógicas para o uso do Trilha EJA-EPT em sala
+            </p>
+          </div>
+
+          <div className="bg-primary/10 border border-primary/20 rounded-2xl p-4 text-sm leading-relaxed">
+            <p>Este espaço é destinado a educadores(as) da EJA-EPT. Para receber a senha de acesso, entre em contato pelo e-mail:</p>
+            <p className="font-semibold mt-2">📧 marileia.hillesheim@ifc.edu.br</p>
+            <p className="text-muted-foreground mt-1">A senha será enviada em até 48 horas.</p>
+          </div>
+
+          <div className="space-y-2">
+            <label className="text-sm font-semibold">Digite a senha de acesso:</label>
+            <input
+              type="password"
+              value={senha}
+              onChange={e => { setSenha(e.target.value); setErro(false); }}
+              onKeyDown={e => e.key === "Enter" && handleAcessar()}
+              placeholder="Senha"
+              className="w-full px-4 py-3 rounded-xl border border-input bg-background text-base focus:outline-none focus:ring-2 focus:ring-ring"
+            />
+            {erro && (
+              <p className="text-destructive text-sm">
+                Senha incorreta. Solicite o acesso pelo e-mail indicado.
+              </p>
+            )}
+          </div>
+
+          <button
+            onClick={handleAcessar}
+            className="w-full py-3 rounded-2xl bg-primary text-primary-foreground font-bold text-base active:scale-95 transition-all"
+          >
+            Acessar
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div>
