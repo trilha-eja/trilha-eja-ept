@@ -24,18 +24,55 @@ function avg(arr) {
   return (arr.reduce((s, v) => s + v, 0) / arr.length).toFixed(1);
 }
 
+const KEY_ESTUDANTE = "avaliacao_estudante_enviada";
+const KEY_EDUCADOR = "avaliacao_educador_enviada";
+
 function exportCSV(avaliacoes) {
-  const header = ["perfil","estrelas","melhoria","dialoga_eja","sugestao","trabalha","faixa_etaria","anos_eja","rede_ensino","data_envio"];
-  const rows = avaliacoes.map((a) =>
-    header.map((k) => `"${(a[k] ?? "").toString().replace(/"/g, '""')}"`).join(",")
-  );
-  const csv = [header.join(","), ...rows].join("\n");
+  const cols = [
+    "perfil",
+    "data_envio",
+    "avaliacao_estrelas",
+    "ajudou_oportunidades",
+    "o_que_mais_ajudou",
+    "o_que_melhorar",
+    "trabalha_atualmente",
+    "faixa_etaria",
+    "contribui_orientar_eja",
+    "o_que_considerou_relevante",
+    "sugestoes_melhoria",
+    "anos_na_eja",
+    "rede_atuacao",
+  ];
+
+  const getVal = (a, col) => {
+    const map = {
+      perfil: a.perfil,
+      data_envio: a.data_envio ? new Date(a.data_envio).toLocaleString("pt-BR") : "",
+      avaliacao_estrelas: a.estrelas ?? "",
+      // estudante
+      ajudou_oportunidades: a.perfil === "estudante" ? (a.dialoga_eja ?? "") : "",
+      o_que_mais_ajudou: a.perfil === "estudante" ? (a.sugestao ?? "") : "",
+      o_que_melhorar: a.perfil === "estudante" ? (a.melhoria ?? "") : "",
+      trabalha_atualmente: a.perfil === "estudante" ? (a.trabalha ?? "") : "",
+      faixa_etaria: a.perfil === "estudante" ? (a.faixa_etaria ?? "") : "",
+      // educador
+      contribui_orientar_eja: a.perfil === "educador" ? (a.dialoga_eja ?? "") : "",
+      o_que_considerou_relevante: a.perfil === "educador" ? (a.melhoria ?? "") : "",
+      sugestoes_melhoria: a.perfil === "educador" ? (a.sugestao ?? "") : "",
+      anos_na_eja: a.perfil === "educador" ? (a.anos_eja ?? "") : "",
+      rede_atuacao: a.perfil === "educador" ? (a.rede_ensino ?? "") : "",
+    };
+    return `"${String(map[col] ?? "").replace(/"/g, '""')}"`;
+  };
+
+  const rows = avaliacoes.map((a) => cols.map((c) => getVal(a, c)).join(";"));
+  const csv = [cols.join(";"), ...rows].join("\n");
   const blob = new Blob(["\uFEFF" + csv], { type: "text/csv;charset=utf-8;" });
   const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = `avaliacoes-${new Date().toISOString().slice(0,10)}.csv`;
-  a.click();
+  const el = document.createElement("a");
+  el.href = url;
+  el.download = `avaliacoes-${new Date().toISOString().slice(0, 10)}.csv`;
+  el.click();
   URL.revokeObjectURL(url);
 }
 
@@ -260,6 +297,8 @@ function CardAvaliacao({ a, onDelete }) {
 function AvaliacoesSection() {
   const [avaliacoes, setAvaliacoes] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [resetConfirm, setResetConfirm] = useState(false);
+  const [resetMsg, setResetMsg] = useState("");
 
   const load = async () => {
     setLoading(true);
@@ -273,6 +312,14 @@ function AvaliacoesSection() {
   const handleDelete = async (id) => {
     await base44.entities.Avaliacao.delete(id);
     setAvaliacoes((prev) => prev.filter((a) => a.id !== id));
+  };
+
+  const handleResetDispositivo = () => {
+    localStorage.removeItem(KEY_ESTUDANTE);
+    localStorage.removeItem(KEY_EDUCADOR);
+    setResetConfirm(false);
+    setResetMsg("✅ Dispositivo resetado. Você pode enviar um novo teste.");
+    setTimeout(() => setResetMsg(""), 4000);
   };
 
   const estudantes = avaliacoes.filter((a) => a.perfil === "estudante");
@@ -301,6 +348,30 @@ function AvaliacoesSection() {
       <Button variant="outline" onClick={() => exportCSV(avaliacoes)} className="w-full rounded-xl gap-2 font-bold">
         <Download className="w-4 h-4" /> ⬇️ Exportar avaliações em CSV
       </Button>
+
+      {/* Resetar dispositivo para teste */}
+      {resetConfirm ? (
+        <div className="bg-yellow-50 border border-yellow-300 rounded-2xl p-4 space-y-2">
+          <p className="text-sm font-semibold text-yellow-900">
+            Isso permitirá um novo envio de teste neste dispositivo. As respostas já salvas no banco não serão afetadas.
+          </p>
+          <div className="flex gap-2">
+            <Button size="sm" onClick={handleResetDispositivo}
+              className="rounded-xl bg-yellow-500 hover:bg-yellow-600 text-white font-bold">
+              Sim, resetar
+            </Button>
+            <Button size="sm" variant="outline" onClick={() => setResetConfirm(false)} className="rounded-xl">
+              Cancelar
+            </Button>
+          </div>
+        </div>
+      ) : (
+        <Button variant="outline" onClick={() => setResetConfirm(true)}
+          className="w-full rounded-xl gap-2 font-bold text-yellow-700 border-yellow-400 hover:bg-yellow-50">
+          🔄 Resetar meu dispositivo para novo teste
+        </Button>
+      )}
+      {resetMsg && <p className="text-sm text-accent font-semibold text-center">{resetMsg}</p>}
 
       {loading && (
         <div className="flex justify-center py-8">
