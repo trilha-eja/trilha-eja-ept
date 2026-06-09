@@ -70,7 +70,7 @@ const categoria2 = [
     emoji: "📷",
     titulo: "Microsoft Lens",
     texto: "Aplicativo gratuito que transforma fotos de apostilas, quadros e documentos em PDFs organizados. Muito útil para digitalizar materiais do curso e guardar no celular ou no Drive.",
-    url: "https://www.microsoft.com/pt-br/microsoft-365/mobile/microsoft-office-lens",
+    url: "https://play.google.com/store/search?q=lens&c=apps",
     botao: "🔗 Baixar aplicativo",
   },
 ];
