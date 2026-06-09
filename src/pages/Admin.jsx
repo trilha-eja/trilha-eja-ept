@@ -189,17 +189,91 @@ function VozesSection() {
 }
 
 // ── Seção: Avaliações do App ────────────────────────────────────────────────
+function CampoAv({ label, value }) {
+  if (!value && value !== 0) return null;
+  return (
+    <p className="text-xs text-muted-foreground">
+      <span className="font-semibold text-foreground">{label}:</span> {String(value)}
+    </p>
+  );
+}
+
+function CardAvaliacao({ a, onDelete }) {
+  const [confirm, setConfirm] = useState(false);
+  const isEst = a.perfil === "estudante";
+
+  return (
+    <div className="bg-card border border-border rounded-2xl p-4 space-y-2">
+      <div className="flex items-start justify-between gap-2">
+        <div className="space-y-0.5">
+          <p className="text-xs font-bold">{isEst ? "👨‍🎓 Perfil: Estudante" : "👨‍🏫 Perfil: Educador(a)"}</p>
+          <p className="text-xs text-muted-foreground">Data: {fmt(a.data_envio)}</p>
+        </div>
+        <StarDisplay n={a.estrelas} />
+      </div>
+
+      <div className="space-y-1 pt-1 border-t border-border">
+        {isEst ? (
+          <>
+            <CampoAv label="Ajudou a conhecer oportunidades" value={a.dialoga_eja} />
+            <CampoAv label="O que mais ajudou" value={a.sugestao} />
+            <CampoAv label="O que melhorar" value={a.melhoria} />
+            <CampoAv label="Trabalha" value={a.trabalha} />
+            <CampoAv label="Faixa etária" value={a.faixa_etaria} />
+          </>
+        ) : (
+          <>
+            <CampoAv label="Contribui para orientar estudantes" value={a.dialoga_eja} />
+            <CampoAv label="O que considerou relevante" value={a.melhoria} />
+            <CampoAv label="Sugestões de melhoria" value={a.sugestao} />
+            <CampoAv label="Anos na EJA" value={a.anos_eja} />
+            <CampoAv label="Rede de atuação" value={a.rede_ensino} />
+          </>
+        )}
+      </div>
+
+      {confirm ? (
+        <div className="bg-red-50 border border-red-200 rounded-xl p-3 space-y-2">
+          <p className="text-sm font-semibold text-red-800">
+            Tem certeza que deseja excluir esta avaliação? Esta ação não pode ser desfeita.
+          </p>
+          <div className="flex gap-2">
+            <Button size="sm" onClick={() => onDelete(a.id)}
+              className="gap-1.5 rounded-xl bg-destructive hover:bg-destructive/90 text-white">
+              <Trash2 className="w-4 h-4" /> Sim, excluir
+            </Button>
+            <Button size="sm" variant="outline" onClick={() => setConfirm(false)} className="rounded-xl">
+              Cancelar
+            </Button>
+          </div>
+        </div>
+      ) : (
+        <Button size="sm" variant="outline" onClick={() => setConfirm(true)}
+          className="gap-1.5 rounded-xl text-destructive border-destructive/40 hover:bg-destructive/10">
+          <Trash2 className="w-4 h-4" /> 🗑️ Excluir
+        </Button>
+      )}
+    </div>
+  );
+}
+
 function AvaliacoesSection() {
   const [avaliacoes, setAvaliacoes] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
+  const load = async () => {
     setLoading(true);
-    base44.entities.Avaliacao.list("-data_envio", 500).then((all) => {
-      setAvaliacoes(all);
-      setLoading(false);
-    });
-  }, []);
+    const all = await base44.entities.Avaliacao.list("-data_envio", 500);
+    setAvaliacoes(all);
+    setLoading(false);
+  };
+
+  useEffect(() => { load(); }, []);
+
+  const handleDelete = async (id) => {
+    await base44.entities.Avaliacao.delete(id);
+    setAvaliacoes((prev) => prev.filter((a) => a.id !== id));
+  };
 
   const estudantes = avaliacoes.filter((a) => a.perfil === "estudante");
   const educadores = avaliacoes.filter((a) => a.perfil === "educador");
@@ -214,8 +288,8 @@ function AvaliacoesSection() {
           { label: "Total", value: avaliacoes.length, color: "text-primary" },
           { label: "Estudantes", value: estudantes.length, color: "text-chart-4" },
           { label: "Educadores", value: educadores.length, color: "text-accent" },
-          { label: "⭐ Estudantes", value: mediaEst, color: "text-secondary" },
-          { label: "⭐ Educadores", value: mediaEdu, color: "text-accent" },
+          { label: "⭐ Média Estudantes", value: mediaEst, color: "text-secondary" },
+          { label: "⭐ Média Educadores", value: mediaEdu, color: "text-accent" },
         ].map(({ label, value, color }) => (
           <div key={label} className="bg-card border border-border rounded-2xl p-3 text-center">
             <p className={`text-2xl font-extrabold ${color}`}>{value}</p>
@@ -234,7 +308,6 @@ function AvaliacoesSection() {
         </div>
       )}
 
-      {/* Estudantes */}
       {!loading && (
         <>
           <div>
@@ -243,56 +316,18 @@ function AvaliacoesSection() {
               <p className="text-sm text-muted-foreground text-center py-6">Nenhuma avaliação ainda.</p>
             ) : (
               <div className="space-y-3">
-                {estudantes.map((a) => (
-                  <div key={a.id} className="bg-card border border-border rounded-2xl p-4 space-y-2">
-                    <div className="flex items-center justify-between">
-                      <StarDisplay n={a.estrelas} />
-                      <span className="text-xs text-muted-foreground">{fmt(a.data_envio)}</span>
-                    </div>
-                    {a.melhoria && (
-                      <p className="text-sm bg-muted rounded-xl p-3 leading-relaxed">"{a.melhoria}"</p>
-                    )}
-                    <div className="flex gap-3 text-xs text-muted-foreground flex-wrap">
-                      {a.trabalha && <span>Trabalha: {a.trabalha}</span>}
-                      {a.faixa_etaria && <span>Faixa: {a.faixa_etaria}</span>}
-                    </div>
-                  </div>
-                ))}
+                {estudantes.map((a) => <CardAvaliacao key={a.id} a={a} onDelete={handleDelete} />)}
               </div>
             )}
           </div>
 
-          {/* Educadores */}
           <div>
             <h3 className="font-extrabold text-base mb-3">👨‍🏫 Avaliações de Educadores ({educadores.length})</h3>
             {educadores.length === 0 ? (
               <p className="text-sm text-muted-foreground text-center py-6">Nenhuma avaliação ainda.</p>
             ) : (
               <div className="space-y-3">
-                {educadores.map((a) => (
-                  <div key={a.id} className="bg-card border border-border rounded-2xl p-4 space-y-2">
-                    <div className="flex items-center justify-between">
-                      <StarDisplay n={a.estrelas} />
-                      <span className="text-xs text-muted-foreground">{fmt(a.data_envio)}</span>
-                    </div>
-                    {a.dialoga_eja && (
-                      <div>
-                        <p className="text-xs font-semibold text-muted-foreground mb-1">Dialoga com EJA-EPT:</p>
-                        <p className="text-sm bg-muted rounded-xl p-3 leading-relaxed">"{a.dialoga_eja}"</p>
-                      </div>
-                    )}
-                    {a.sugestao && (
-                      <div>
-                        <p className="text-xs font-semibold text-muted-foreground mb-1">Sugestões:</p>
-                        <p className="text-sm bg-muted rounded-xl p-3 leading-relaxed">"{a.sugestao}"</p>
-                      </div>
-                    )}
-                    <div className="flex gap-3 text-xs text-muted-foreground flex-wrap">
-                      {a.anos_eja && <span>Anos na EJA: {a.anos_eja}</span>}
-                      {a.rede_ensino && <span>Rede: {a.rede_ensino}</span>}
-                    </div>
-                  </div>
-                ))}
+                {educadores.map((a) => <CardAvaliacao key={a.id} a={a} onDelete={handleDelete} />)}
               </div>
             )}
           </div>

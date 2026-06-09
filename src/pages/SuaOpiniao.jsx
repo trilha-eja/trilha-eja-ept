@@ -75,6 +75,8 @@ function CharCounter({ current, max }) {
 
 function FormEstudante({ onSuccess }) {
   const [estrelas, setEstrelas] = useState(0);
+  const [ajudouOportunidades, setAjudouOportunidades] = useState("");
+  const [oQueAjudou, setOQueAjudou] = useState("");
   const [melhoria, setMelhoria] = useState("");
   const [trabalha, setTrabalha] = useState("");
   const [faixa, setFaixa] = useState("");
@@ -88,6 +90,8 @@ function FormEstudante({ onSuccess }) {
     await base44.entities.Avaliacao.create({
       perfil: "estudante",
       estrelas,
+      dialoga_eja: ajudouOportunidades || undefined,
+      sugestao: oQueAjudou || undefined,
       melhoria: melhoria || undefined,
       trabalha: trabalha || undefined,
       faixa_etaria: faixa || undefined,
@@ -108,8 +112,33 @@ function FormEstudante({ onSuccess }) {
       </div>
 
       {/* Seção 2 */}
+      <div className="bg-card border border-border rounded-2xl p-5 space-y-3">
+        <h2 className="font-extrabold text-base">O aplicativo ajudou você a conhecer oportunidades?</h2>
+        <p className="text-xs text-muted-foreground">Opcional</p>
+        <RadioGroup
+          options={["Sim", "Parcialmente", "Ainda não"]}
+          value={ajudouOportunidades}
+          onChange={setAjudouOportunidades}
+        />
+      </div>
+
+      {/* Seção 3 */}
       <div className="bg-card border border-border rounded-2xl p-5 space-y-2">
-        <h2 className="font-extrabold text-base">O que você mudaria ou melhoraria no aplicativo?</h2>
+        <h2 className="font-extrabold text-base">O que mais ajudou você?</h2>
+        <p className="text-xs text-muted-foreground">Opcional</p>
+        <Textarea
+          value={oQueAjudou}
+          onChange={(e) => setOQueAjudou(e.target.value.slice(0, 200))}
+          placeholder="Escreva aqui..."
+          className="rounded-xl text-sm min-h-[90px] resize-none"
+          maxLength={200}
+        />
+        <CharCounter current={oQueAjudou.length} max={200} />
+      </div>
+
+      {/* Seção 4 */}
+      <div className="bg-card border border-border rounded-2xl p-5 space-y-2">
+        <h2 className="font-extrabold text-base">O que poderia ser melhorado?</h2>
         <p className="text-xs text-muted-foreground">Opcional</p>
         <Textarea
           value={melhoria}
@@ -121,7 +150,7 @@ function FormEstudante({ onSuccess }) {
         <CharCounter current={melhoria.length} max={200} />
       </div>
 
-      {/* Seção 3 */}
+      {/* Seção 5 */}
       <div className="bg-card border border-border rounded-2xl p-5 space-y-4">
         <h2 className="font-extrabold text-base">Sobre você <span className="text-muted-foreground font-normal text-sm">(opcional)</span></h2>
         <div className="space-y-2">
@@ -153,7 +182,8 @@ function FormEstudante({ onSuccess }) {
 
 function FormEducador({ onSuccess }) {
   const [estrelas, setEstrelas] = useState(0);
-  const [dialogaEja, setDialogaEja] = useState("");
+  const [contribui, setContribui] = useState("");
+  const [relevanteTexto, setRelevanteTexto] = useState("");
   const [sugestao, setSugestao] = useState("");
   const [anosEja, setAnosEja] = useState("");
   const [rede, setRede] = useState("");
@@ -167,7 +197,8 @@ function FormEducador({ onSuccess }) {
     await base44.entities.Avaliacao.create({
       perfil: "educador",
       estrelas,
-      dialoga_eja: dialogaEja || undefined,
+      dialoga_eja: contribui || undefined,
+      melhoria: relevanteTexto || undefined,
       sugestao: sugestao || undefined,
       anos_eja: anosEja || undefined,
       rede_ensino: rede || undefined,
@@ -188,20 +219,31 @@ function FormEducador({ onSuccess }) {
       </div>
 
       {/* Seção 2 */}
+      <div className="bg-card border border-border rounded-2xl p-5 space-y-3">
+        <h2 className="font-extrabold text-base">O aplicativo pode contribuir para orientar estudantes?</h2>
+        <p className="text-xs text-muted-foreground">Opcional</p>
+        <RadioGroup
+          options={["Sim", "Parcialmente", "Ainda não"]}
+          value={contribui}
+          onChange={setContribui}
+        />
+      </div>
+
+      {/* Seção 3 */}
       <div className="bg-card border border-border rounded-2xl p-5 space-y-2">
-        <h2 className="font-extrabold text-base">O app dialoga com a realidade da EJA-EPT?</h2>
+        <h2 className="font-extrabold text-base">O que considerou mais relevante?</h2>
         <p className="text-xs text-muted-foreground">Opcional</p>
         <Textarea
-          value={dialogaEja}
-          onChange={(e) => setDialogaEja(e.target.value.slice(0, 200))}
+          value={relevanteTexto}
+          onChange={(e) => setRelevanteTexto(e.target.value.slice(0, 200))}
           placeholder="Compartilhe sua percepção..."
           className="rounded-xl text-sm min-h-[90px] resize-none"
           maxLength={200}
         />
-        <CharCounter current={dialogaEja.length} max={200} />
+        <CharCounter current={relevanteTexto.length} max={200} />
       </div>
 
-      {/* Seção 3 */}
+      {/* Seção 4 */}
       <div className="bg-card border border-border rounded-2xl p-5 space-y-2">
         <h2 className="font-extrabold text-base">Que melhorias ou conteúdos você sugere?</h2>
         <p className="text-xs text-muted-foreground">Opcional</p>
@@ -215,7 +257,7 @@ function FormEducador({ onSuccess }) {
         <CharCounter current={sugestao.length} max={200} />
       </div>
 
-      {/* Seção 4 */}
+      {/* Seção 5 */}
       <div className="bg-card border border-border rounded-2xl p-5 space-y-4">
         <h2 className="font-extrabold text-base">Sobre você <span className="text-muted-foreground font-normal text-sm">(opcional)</span></h2>
         <div className="space-y-2">
