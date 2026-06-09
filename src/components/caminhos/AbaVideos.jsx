@@ -1,85 +1,114 @@
-const secoes = [
+import { useState } from "react";
+import { ChevronDown, ChevronUp } from "lucide-react";
+
+const blocos = [
   {
-    titulo: "Como Estudar com Pouco Tempo",
-    intro: "Para quem trabalha e precisa aproveitar cada momento.",
+    titulo: "📚 Continuar Estudando",
+    subtitulo: "Para quem quer manter o ritmo e não desistir",
     cards: [
       {
         titulo: "Como estudar trabalhando",
-        texto: "Técnicas reais para quem tem pouco tempo disponível.",
+        texto: "Técnicas para quem tem pouco tempo disponível.",
         url: "https://www.youtube.com/results?search_query=como+estudar+trabalhando+pouco+tempo",
       },
       {
-        titulo: "Técnica Pomodoro — como usar",
-        texto: "Aprenda a técnica de estudo mais usada no mundo.",
-        url: "https://www.youtube.com/results?search_query=tecnica+pomodoro+como+usar+estudar",
+        titulo: "Como voltar a estudar depois de adulto",
+        texto: "Orientações para quem ficou anos afastado da escola.",
+        url: "https://www.youtube.com/results?search_query=como+voltar+a+estudar+depois+de+adulto+dicas",
       },
       {
-        titulo: "Organização para estudar",
-        texto: "Como montar uma rotina de estudos mesmo com agenda cheia.",
-        url: "https://www.youtube.com/results?search_query=como+se+organizar+para+estudar+trabalhando",
+        titulo: "Como organizar uma rotina de estudos",
+        texto: "Como criar hábitos de estudo mesmo com agenda cheia.",
+        url: "https://www.youtube.com/results?search_query=como+organizar+rotina+de+estudos+trabalhando",
       },
     ],
   },
   {
-    titulo: "ENEM para Quem Trabalha",
-    intro: "Tudo sobre o ENEM explicado de forma simples e direta.",
+    titulo: "🎓 Caminhos para o Ensino Superior",
+    subtitulo: "Entenda como funciona o acesso à universidade pública",
     cards: [
       {
-        titulo: "ENEM do zero — o que é e como funciona",
-        texto: "Entenda tudo sobre o ENEM antes de se inscrever.",
+        titulo: "O que é o ENEM e como funciona",
+        texto: "Para quem nunca fez o ENEM e quer entender antes de se inscrever.",
         url: "https://www.youtube.com/results?search_query=enem+do+zero+o+que+e+como+funciona",
       },
       {
-        titulo: "Como se inscrever no ENEM",
-        texto: "Passo a passo da inscrição explicado de forma simples.",
-        url: "https://www.youtube.com/results?search_query=como+se+inscrever+enem+passo+a+passo",
+        titulo: "Como ingressar em uma universidade pública",
+        texto: "SISU, PROUNI e outros caminhos explicados de forma simples.",
+        url: "https://www.youtube.com/results?search_query=como+entrar+universidade+publica+sisu+prouni",
       },
       {
-        titulo: "ENEM para quem trabalha",
-        texto: "Dicas específicas para trabalhadores-estudantes.",
-        url: "https://www.youtube.com/results?search_query=enem+para+quem+trabalha+dicas+estudo",
+        titulo: "EJA e continuidade dos estudos",
+        texto: "Histórias e possibilidades de quem seguiu estudando após a EJA.",
+        url: "https://www.youtube.com/results?search_query=eja+continuidade+estudos+ensino+superior",
       },
     ],
   },
   {
-    titulo: "Estudar pelo Celular",
-    intro: "Seu celular pode ser sua maior ferramenta de aprendizado.",
+    titulo: "⚡ Formação Profissional",
+    subtitulo: "Conheça mais sobre a área elétrica e seus caminhos",
     cards: [
       {
-        titulo: "Melhores apps gratuitos para estudar",
-        texto: "Aplicativos que todo estudante deveria conhecer.",
-        url: "https://www.youtube.com/results?search_query=melhores+aplicativos+gratuitos+para+estudar+celular",
+        titulo: "O que faz um eletricista industrial",
+        texto: "Atividades, áreas de atuação e possibilidades profissionais.",
+        url: "https://www.youtube.com/results?search_query=o+que+faz+eletricista+industrial+areas+atuacao",
       },
       {
-        titulo: "Como usar o YouTube para estudar",
-        texto: "Dicas para aproveitar ao máximo as aulas gratuitas no YouTube.",
-        url: "https://www.youtube.com/results?search_query=como+usar+youtube+para+estudar+dicas",
+        titulo: "Segurança elétrica e NR-10",
+        texto: "A importância da segurança na profissão do eletricista.",
+        url: "https://www.youtube.com/results?search_query=seguranca+eletrica+nr10+eletricista+industrial",
       },
       {
-        titulo: "Khan Academy pelo celular",
-        texto: "Tutorial completo da plataforma mais usada para estudar de graça.",
-        url: "https://www.youtube.com/results?search_query=khan+academy+tutorial+celular+portugues",
+        titulo: "Cursos técnicos gratuitos na área elétrica",
+        texto: "Como encontrar cursos de qualificação gratuitos na área.",
+        url: "https://www.youtube.com/results?search_query=cursos+tecnicos+gratuitos+eletrica+eletricista",
+      },
+    ],
+  },
+  {
+    titulo: "💻 Aprendizagem Digital",
+    subtitulo: "Como usar a tecnologia a favor dos seus estudos",
+    cards: [
+      {
+        titulo: "Como usar inteligência artificial para estudar",
+        texto: "Dicas para usar IA como apoio ao aprendizado — sem substituir o esforço próprio.",
+        url: "https://www.youtube.com/results?search_query=como+usar+inteligencia+artificial+para+estudar+dicas",
+      },
+      {
+        titulo: "Como estudar pelo celular",
+        texto: "Ferramentas e estratégias para aprender usando o celular.",
+        url: "https://www.youtube.com/results?search_query=como+estudar+pelo+celular+dicas+ferramentas+gratuitas",
+      },
+      {
+        titulo: "Como encontrar informações confiáveis na internet",
+        texto: "Como identificar fontes seguras e evitar desinformação.",
+        url: "https://www.youtube.com/results?search_query=como+encontrar+informacoes+confiaveis+internet+dicas",
       },
     ],
   },
 ];
 
-export default function AbaVideos() {
-  return (
-    <div className="space-y-5">
-      <div className="text-center pb-1">
-        <h2 className="text-base font-extrabold">🎬 Vídeos para Te Ajudar a Estudar</h2>
-      </div>
+function BlocoVideos({ bloco }) {
+  const [aberto, setAberto] = useState(false);
 
-      {secoes.map((s) => (
-        <div key={s.titulo} className="space-y-2">
-          <div className="px-1">
-            <h3 className="font-extrabold text-sm">{s.titulo}</h3>
-            <p className="text-xs text-muted-foreground">{s.intro}</p>
-          </div>
-          {s.cards.map((c) => (
-            <div key={c.titulo} className="border border-border rounded-2xl p-4 bg-card flex items-start gap-3">
-              <span className="text-xl shrink-0 mt-0.5">🎬</span>
+  return (
+    <div className="border border-border rounded-2xl overflow-hidden bg-card">
+      <button
+        onClick={() => setAberto(!aberto)}
+        className="w-full flex items-center justify-between px-4 py-3 text-left hover:bg-muted/50 transition-colors active:scale-[0.99]"
+      >
+        <div>
+          <p className="font-extrabold text-sm">{bloco.titulo}</p>
+          <p className="text-xs text-muted-foreground mt-0.5">{bloco.subtitulo}</p>
+        </div>
+        {aberto ? <ChevronUp className="w-4 h-4 text-muted-foreground shrink-0" /> : <ChevronDown className="w-4 h-4 text-muted-foreground shrink-0" />}
+      </button>
+
+      {aberto && (
+        <div className="px-4 pb-4 space-y-3 border-t border-border pt-3">
+          {bloco.cards.map((c) => (
+            <div key={c.titulo} className="border border-border rounded-xl p-3 bg-background flex items-start gap-3">
+              <span className="text-lg shrink-0 mt-0.5">🎬</span>
               <div className="flex-1 min-w-0">
                 <h4 className="font-bold text-sm mb-1">{c.titulo}</h4>
                 <p className="text-xs text-muted-foreground leading-relaxed mb-3">{c.texto}</p>
@@ -95,6 +124,16 @@ export default function AbaVideos() {
             </div>
           ))}
         </div>
+      )}
+    </div>
+  );
+}
+
+export default function AbaVideos() {
+  return (
+    <div className="space-y-3">
+      {blocos.map((b) => (
+        <BlocoVideos key={b.titulo} bloco={b} />
       ))}
     </div>
   );
