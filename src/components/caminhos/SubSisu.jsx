@@ -1,40 +1,95 @@
 import PageHeader from "../PageHeader";
 
-const infos = [
-  { emoji: "🎓", titulo: "O que é?", texto: "O SISU usa a nota do ENEM para distribuir vagas em universidades federais e estaduais. É tudo gratuito!" },
-  { emoji: "📅", titulo: "Quando?", texto: "Logo após a divulgação das notas do ENEM, geralmente em janeiro/fevereiro." },
-  { emoji: "🔍", titulo: "Como funciona?", texto: "Você escolhe até 2 cursos. O sistema calcula se sua nota é suficiente. Funciona como um leilão." },
-  { emoji: "📊", titulo: "Notas de corte", texto: "Cada curso tem uma nota mínima. Cursos mais concorridos pedem notas maiores." },
-  { emoji: "🏷️", titulo: "Cotas", texto: "Há vagas reservadas para alunos de escola pública, negros, pardos, indígenas e baixa renda." },
-  { emoji: "✅", titulo: "Se passou!", texto: "Faça a matrícula na universidade com seus documentos. Não perca o prazo!" },
-];
-
 export default function SubSisu({ onBack }) {
   return (
     <div>
       <PageHeader title="SISU" subtitle="Sistema de Seleção Unificada" backTo="/" />
       <div className="max-w-lg mx-auto px-4 py-5 pb-10 space-y-3">
 
+        {/* Abertura */}
         <div className="bg-accent/10 border border-accent/20 rounded-2xl p-4">
-          <p className="text-sm leading-relaxed text-foreground">O <strong>SISU</strong> usa sua nota do ENEM para garantir uma vaga em universidade pública e gratuita. É tudo online e sem taxa.</p>
+          <p className="text-sm leading-relaxed text-foreground">O <strong>SISU</strong> permite usar sua nota do ENEM para concorrer a uma vaga em universidade pública e gratuita. É tudo online, sem taxa de inscrição.</p>
         </div>
 
-        {infos.map((i) => (
-          <div key={i.titulo} className="border border-border rounded-2xl p-4 bg-card flex items-start gap-3">
-            <span className="text-xl shrink-0 mt-0.5">{i.emoji}</span>
+        {/* Card 1 — O que é o SISU? */}
+        <div className="border border-border rounded-2xl p-4 bg-card flex items-start gap-3">
+          <span className="text-xl shrink-0 mt-0.5">🎓</span>
+          <div>
+            <p className="font-bold text-sm mb-1">O que é o SISU?</p>
+            <p className="text-xs text-muted-foreground leading-relaxed">O Sistema de Seleção Unificada distribui vagas em universidades federais e estaduais públicas usando a nota do ENEM. Você não precisa fazer outra prova — basta usar a nota que já tirou no ENEM.</p>
+          </div>
+        </div>
+
+        {/* Card 2 — Quando acontece? */}
+        <div className="border border-border rounded-2xl p-4 bg-card space-y-2">
+          <div className="flex items-start gap-3">
+            <span className="text-xl shrink-0 mt-0.5">📅</span>
             <div>
-              <p className="font-bold text-sm mb-0.5">{i.titulo}</p>
-              <p className="text-xs text-muted-foreground leading-relaxed">{i.texto}</p>
+              <p className="font-bold text-sm mb-1">Quando acontece?</p>
+              <p className="text-xs text-muted-foreground leading-relaxed">O SISU abre as inscrições logo após a divulgação das notas do ENEM. As datas exatas mudam a cada edição — fique atento ao site oficial do MEC.</p>
             </div>
           </div>
-        ))}
+          <div className="bg-blue-50 border border-blue-200 rounded-xl p-3">
+            <p className="text-xs leading-relaxed text-foreground">💡 Acompanhe as datas no site oficial: <strong>sisu.mec.gov.br</strong></p>
+          </div>
+        </div>
 
-        {/* Como funciona na prática */}
+        {/* Card 3 — Como funciona? */}
+        <div className="border border-border rounded-2xl p-4 bg-card flex items-start gap-3">
+          <span className="text-xl shrink-0 mt-0.5">🔍</span>
+          <div>
+            <p className="font-bold text-sm mb-1">Como funciona na prática?</p>
+            <p className="text-xs text-muted-foreground leading-relaxed">Após a divulgação das notas do ENEM, o SISU abre as inscrições. Você acessa o site, informa sua nota e escolhe até 2 opções de curso e instituição. O sistema verifica automaticamente se sua nota é suficiente para cada opção escolhida. É tudo online e gratuito.</p>
+          </div>
+        </div>
+
+        {/* Card 4 — Notas de corte */}
         <div className="border border-border rounded-2xl p-4 bg-card space-y-2">
-          <p className="font-bold text-sm">🔎 Como funciona na prática?</p>
-          <p className="text-xs text-muted-foreground leading-relaxed">
-            Após sair o resultado do ENEM, o SISU abre as inscrições. Você entra no site, coloca sua nota e escolhe até 2 cursos. O sistema calcula automaticamente se sua nota é suficiente. É tudo online e gratuito!
-          </p>
+          <div className="flex items-start gap-3">
+            <span className="text-xl shrink-0 mt-0.5">📊</span>
+            <div>
+              <p className="font-bold text-sm mb-1">Notas de corte</p>
+              <p className="text-xs text-muted-foreground leading-relaxed">Cada curso tem uma nota mínima necessária para aprovação — chamada nota de corte. Cursos mais concorridos exigem notas mais altas. Cursos menos concorridos podem ser acessíveis com notas menores.</p>
+              <p className="text-xs text-muted-foreground leading-relaxed mt-1.5">Pesquise as notas de edições anteriores para ter uma referência — elas ficam disponíveis no site oficial do SISU.</p>
+            </div>
+          </div>
+          <div className="bg-accent/10 border border-accent/20 rounded-xl p-3">
+            <p className="text-xs leading-relaxed text-foreground">💡 Não desanime antes de pesquisar. Muitos cursos têm notas de corte mais acessíveis do que você imagina.</p>
+          </div>
+        </div>
+
+        {/* Card 5 — Cotas e vagas reservadas */}
+        <div className="border border-border rounded-2xl p-4 bg-card flex items-start gap-3">
+          <span className="text-xl shrink-0 mt-0.5">🏷️</span>
+          <div>
+            <p className="font-bold text-sm mb-1">Cotas e vagas reservadas</p>
+            <p className="text-xs text-muted-foreground leading-relaxed">As universidades federais reservam vagas para estudantes de escola pública, pessoas negras, pardas, indígenas e de baixa renda. Verifique se você tem direito a concorrer pelas cotas — pode aumentar muito suas chances de aprovação.</p>
+          </div>
+        </div>
+
+        {/* Card 6 — E se não passar na primeira chamada? */}
+        <div className="border border-border rounded-2xl p-4 bg-card flex items-start gap-3">
+          <span className="text-xl shrink-0 mt-0.5">🔄</span>
+          <div>
+            <p className="font-bold text-sm mb-1">E se não passar na primeira chamada?</p>
+            <p className="text-xs text-muted-foreground leading-relaxed">Não desanime. O SISU tem chamadas e lista de espera. Muitos estudantes são chamados após a primeira divulgação.</p>
+            <p className="text-xs text-muted-foreground leading-relaxed mt-1.5">Além disso, você pode tentar o ENEM novamente no ano seguinte com mais preparo. Trajetórias não lineares são comuns e legítimas.</p>
+          </div>
+        </div>
+
+        {/* Card 7 — Se você for aprovado */}
+        <div className="border border-border rounded-2xl p-4 bg-card flex items-start gap-3">
+          <span className="text-xl shrink-0 mt-0.5">✅</span>
+          <div>
+            <p className="font-bold text-sm mb-1">Se você for aprovado</p>
+            <p className="text-xs text-muted-foreground leading-relaxed">Fique atento ao prazo de matrícula na universidade — ele é curto e não pode ser perdido. Separe seus documentos com antecedência:</p>
+            <ul className="mt-1.5 space-y-1 text-xs text-muted-foreground">
+              <li>• RG e CPF</li>
+              <li>• Histórico escolar</li>
+              <li>• Comprovante de residência</li>
+              <li>• Outros documentos que a instituição solicitar</li>
+            </ul>
+          </div>
         </div>
 
         {/* Link oficial */}
