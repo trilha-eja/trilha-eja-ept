@@ -1,49 +1,73 @@
 const dicas = [
   {
+    emoji: "🌱",
+    titulo: "Voltar a estudar leva tempo",
+    texto: "Se você ficou anos sem estudar, é normal que no início pareça difícil. A memória, a concentração e o ritmo de leitura se reconstroem com o tempo — e isso é esperado. Não compare seu ritmo com o de quem nunca parou. Você está recomeçando, não começando do zero.",
+    destaque: true,
+  },
+  {
     emoji: "⏱️",
     titulo: "Técnica Pomodoro",
-    texto: "Estude 25 minutos seguidos, descanse 5 minutos. Repita 4 vezes e faça uma pausa maior de 20 minutos. Simples e muito eficiente para quem tem pouco tempo.",
+    texto: "Estude 25 minutos seguidos e descanse 5 minutos. Depois de 4 ciclos, faça uma pausa maior. Funciona bem para quem tem dificuldade de manter o foco por longos períodos.",
   },
   {
     emoji: "📅",
     titulo: "Planeje sua semana de estudos",
-    texto: "Reserve horários fixos para estudar — mesmo que sejam apenas 30 minutos por dia. Consistência vale mais que longas sessões ocasionais. Anote no celular como compromisso.",
+    texto: "Reserve horários fixos para estudar — mesmo que sejam 20 ou 30 minutos. Consistência ao longo do tempo vale mais que longas sessões que raramente acontecem. Anote no celular como um compromisso com você mesmo(a).",
   },
   {
     emoji: "🚌",
     titulo: "Aproveite o tempo no transporte",
-    texto: "No ônibus ou trem, você pode ouvir podcasts educativos, rever anotações ou assistir videoaulas com fone de ouvido. Cada minuto conta!",
+    texto: "No ônibus ou trem, você pode ouvir podcasts educativos, rever anotações ou assistir videoaulas com fone de ouvido. Pequenos momentos aproveitados com regularidade fazem diferença ao longo do tempo.",
   },
   {
     emoji: "📝",
     titulo: "Como fazer um bom resumo",
-    texto: "Leia o conteúdo completo primeiro. Depois anote apenas as ideias principais com suas próprias palavras. Resumos curtos e escritos por você ficam muito mais na memória.",
+    texto: "Leia o conteúdo completo primeiro. Depois anote apenas as ideias principais com suas próprias palavras. Resumos escritos por você ficam mais na memória do que copiar textos prontos.",
   },
   {
     emoji: "👥",
     titulo: "Estude com um colega",
-    texto: "Combinar de estudar com um colega — mesmo por WhatsApp — aumenta o compromisso e torna o estudo mais leve. Explique o conteúdo para alguém: é a melhor forma de aprender.",
+    texto: "Combinar de estudar com um(a) colega — mesmo por WhatsApp — aumenta o compromisso e torna o estudo mais leve. Explicar um conteúdo para alguém é uma das formas mais eficientes de fixar o que você aprendeu.",
   },
   {
     emoji: "😴",
     titulo: "Durma bem — o sono é estudo",
     texto: "Dormir consolida o que você aprendeu. Estudar cansado demais tem pouco efeito. Às vezes descansar é a melhor decisão de estudo que você pode tomar.",
   },
+  {
+    emoji: "📱",
+    titulo: "Seu celular já é uma ferramenta de estudo",
+    texto: "Você não precisa de computador para aprender. Pelo celular é possível:\n• Assistir videoaulas\n• Ouvir podcasts educativos\n• Ler materiais em PDF\n• Acessar plataformas gratuitas\n• Usar o Moodle do curso\n\nExplore a seção Ferramentas Digitais neste aplicativo para conhecer opções gratuitas.",
+  },
+  {
+    emoji: "⏳",
+    titulo: "Estudar pouco também é estudar",
+    texto: "Não espere ter horas livres para começar. 10 minutos hoje valem mais do que 2 horas que nunca chegam. Períodos curtos e regulares de estudo constroem aprendizagem de verdade ao longo do tempo.",
+  },
+  {
+    emoji: "🎯",
+    titulo: "Não espere o momento perfeito",
+    texto: "Sempre vai ter cansaço, responsabilidades e imprevistos. O momento perfeito para estudar raramente aparece. Comece com o que você tem — o tempo disponível, o celular na mão, cinco minutos de silêncio. Isso já é suficiente para começar.",
+  },
 ];
 
 export default function AbaDicasEstudo() {
   return (
-    <div className="space-y-4">
-      <div className="text-center pb-1">
-        <h2 className="text-base font-extrabold">💡 Dicas para Estudar com Pouco Tempo</h2>
-      </div>
-
+    <div className="space-y-3">
       {dicas.map((d) => (
-        <div key={d.titulo} className="border border-border rounded-2xl p-4 bg-card flex items-start gap-3">
-          <span className="text-2xl shrink-0 mt-0.5">{d.emoji}</span>
+        <div
+          key={d.titulo}
+          className={`rounded-2xl p-4 flex items-start gap-3 ${
+            d.destaque
+              ? "bg-orange-50 border border-orange-200"
+              : "border border-border bg-card"
+          }`}
+        >
+          <span className="text-xl shrink-0 mt-0.5">{d.emoji}</span>
           <div className="flex-1 min-w-0">
-            <h3 className="font-bold text-sm mb-1">{d.titulo}</h3>
-            <p className="text-xs text-muted-foreground leading-relaxed">{d.texto}</p>
+            <h3 className="font-bold text-sm mb-1 leading-snug">{d.titulo}</h3>
+            <p className="text-xs text-muted-foreground leading-relaxed whitespace-pre-line">{d.texto}</p>
           </div>
         </div>
       ))}
