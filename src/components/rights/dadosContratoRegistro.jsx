@@ -2,8 +2,8 @@ export const cards = [
   {
     emoji: "📋",
     titulo: "Carteira Assinada (CTPS)",
-    texto: "O empregador é obrigado a assinar sua carteira em até 5 dias úteis após a admissão. Trabalhar sem carteira assinada é ilegal. Você pode denunciar ao Ministério do Trabalho.",
-    legal: "CLT Art. 29 e Art. 47",
+    texto: "O empregador é obrigado a registrar o(a) trabalhador(a) antes do início das atividades. Trabalhar sem registro é ilegal e o empregador está sujeito a multa. Você pode denunciar ao Ministério do Trabalho.",
+    legal: "📋 Base legal: CLT Art. 29 e Art. 47 (com redação atualizada pela Lei nº 13.874/2019)",
   },
   {
     emoji: "💰",
