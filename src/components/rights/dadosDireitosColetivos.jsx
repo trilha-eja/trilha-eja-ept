@@ -8,13 +8,13 @@ export const cards = [
   {
     emoji: "📜",
     titulo: "Convenção Coletiva",
-    texto: "É um acordo negociado entre o sindicato dos trabalhadores e o sindicato dos empregadores. Pode garantir direitos maiores que os previstos na CLT, como: salários maiores, mais dias de férias ou benefícios adicionais. Pergunte ao seu sindicato sobre a convenção coletiva da sua categoria.",
-    legal: "CLT Art. 611",
+    texto: "É um acordo negociado entre o sindicato dos trabalhadores e o sindicato dos empregadores. Pode garantir direitos maiores que os previstos na CLT — mas atenção: desde a Reforma Trabalhista de 2017, acordos coletivos também podem flexibilizar alguns direitos. Fique atento ao que é negociado e consulte o sindicato da sua categoria.",
+    legal: "CLT Art. 611 (com redação da Lei nº 13.467/2017)",
   },
   {
     emoji: "✊",
     titulo: "Direito de Greve",
-    texto: "Os trabalhadores têm direito de fazer greve para defender seus interesses profissionais. Durante a greve o trabalhador não pode ser demitido por justa causa apenas por participar. O sindicato deve comunicar o empregador com antecedência.",
+    texto: "Os trabalhadores têm direito de fazer greve para defender seus interesses profissionais. A participação em greve legítima não caracteriza abandono de emprego nem justa causa para demissão. O sindicato deve comunicar o empregador com antecedência.",
     legal: "CF/88 Art. 9º e Lei nº 7.783/1989",
   },
   {

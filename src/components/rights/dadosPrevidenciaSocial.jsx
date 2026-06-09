@@ -13,8 +13,8 @@ export const cards = [
   },
   {
     emoji: "🏥",
-    titulo: "Auxílio-doença",
-    texto: "Se você ficar doente e não puder trabalhar por mais de 15 dias, tem direito ao auxílio-doença pelo INSS. Os primeiros 15 dias são pagos pelo empregador. Do 16º dia em diante o INSS paga. Para receber é necessário ter pelo menos 12 meses de contribuição (salvo acidente de trabalho).",
+    titulo: "Auxílio por Incapacidade Temporária (Auxílio-doença)",
+    texto: "Se você ficar doente e não puder trabalhar por mais de 15 dias, tem direito ao auxílio-doença pelo INSS. Os primeiros 15 dias são pagos pelo empregador. Do 16º dia em diante o INSS paga. Para doença comum é necessário ter pelo menos 12 meses de contribuição. Para acidente de trabalho ou doenças graves não há carência — você tem direito desde o primeiro dia de contribuição.",
     legal: "Lei nº 8.213/1991 Art. 59 a 63",
   },
   {
