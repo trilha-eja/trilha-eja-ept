@@ -29,9 +29,6 @@ export default function SubSisu({ onBack }) {
               <p className="text-xs text-muted-foreground leading-relaxed">O SISU abre as inscrições logo após a divulgação das notas do ENEM. As datas exatas mudam a cada edição — fique atento ao site oficial do MEC.</p>
             </div>
           </div>
-          <div className="bg-blue-50 border border-blue-200 rounded-xl p-3">
-            <p className="text-xs leading-relaxed text-foreground">💡 Acompanhe as datas no site oficial: <strong>sisu.mec.gov.br</strong></p>
-          </div>
         </div>
 
         {/* Card 3 — Como funciona? */}
