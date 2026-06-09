@@ -8,7 +8,7 @@ export const cards = [
   {
     emoji: "🏥",
     titulo: "Seguro Desemprego",
-    texto: "Se for demitido sem justa causa, pode receber de 3 a 5 parcelas do seguro desemprego.",
+    texto: "Se for demitido sem justa causa, você pode ter direito ao seguro desemprego — entre 3 e 5 parcelas, conforme o tempo trabalhado e o número de vezes que já solicitou o benefício.\nSolicite entre 7 e 120 dias após a demissão — fora desse prazo o direito é perdido.",
     legal: "Lei nº 7.998/1990 e CF/88 Art. 7º, inciso II",
   },
   {
@@ -23,7 +23,7 @@ export const cards = [
   {
     emoji: "🏥",
     titulo: "Acidente de Trabalho",
-    texto: "Se você sofrer acidente durante o trabalho ou no trajeto casa-trabalho-casa, tem direito a:\n- Afastamento remunerado pelo INSS\n- Estabilidade de 12 meses após retornar ao trabalho\n- Não poder ser demitido durante o tratamento\nComunique imediatamente ao empregador e exija a CAT (Comunicação de Acidente de Trabalho).",
+    texto: "Se você sofrer acidente durante o trabalho ou no trajeto casa-trabalho-casa, tem direito a:\n- Afastamento remunerado pelo INSS\n- Estabilidade de 12 meses após retornar ao trabalho\n- Estabilidade de 12 meses após o retorno ao trabalho — não pode ser demitido nesse período\nComunique imediatamente ao empregador e exija a CAT (Comunicação de Acidente de Trabalho).",
     legal: "Lei nº 8.213/1991 Art. 19 a 23 e CLT Art. 118",
   },
   {
