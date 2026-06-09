@@ -79,31 +79,6 @@ export default function EletricistaIndustrial({ onBack, onNavigate }) {
           </div>
         </div>
 
-        {/* Card 3 — Segurança */}
-        <div className="bg-card border border-border rounded-2xl p-4 space-y-3">
-          <div className="flex items-center gap-2">
-            <span className="text-xl">🛡️</span>
-            <h2 className="font-bold text-sm">Segurança faz parte da profissão</h2>
-          </div>
-          <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">{`Trabalhar com eletricidade exige responsabilidade e respeito às normas de segurança. Por isso é importante:
-- Conhecer a NR-10
-- Utilizar EPIs adequados
-- Participar das capacitações obrigatórias
-- Seguir procedimentos seguros
-- Exercer o direito de recusa diante de situações de risco grave`}</p>
-          <div className="bg-yellow-50 rounded-xl p-3">
-            <p className="text-xs text-yellow-800 leading-relaxed">
-              Cuidar da segurança é uma forma de proteger a própria vida e a vida dos colegas de trabalho.
-            </p>
-          </div>
-          <button
-            onClick={() => onNavigate("rights")}
-            className="w-full bg-accent text-accent-foreground font-bold text-sm py-3 rounded-xl hover:bg-accent/90 transition-colors active:scale-95"
-          >
-            🛡️ Conhecer meus Direitos Trabalhistas
-          </button>
-        </div>
-
         {/* Card 4 — Aprender */}
         <div className="bg-card border border-border rounded-2xl p-4 space-y-3">
           <div className="flex items-center gap-2">
@@ -122,12 +97,6 @@ export default function EletricistaIndustrial({ onBack, onNavigate }) {
               Aprender ao longo da vida faz parte da construção profissional e pessoal.
             </p>
           </div>
-          <Link
-            to="/caminhos"
-            className="flex items-center justify-center w-full bg-primary text-primary-foreground font-bold text-sm py-3 rounded-xl hover:bg-primary/90 transition-colors active:scale-95"
-          >
-            🎓 Explorar Caminhos de Estudo
-          </Link>
         </div>
 
         {/* Card 5 — Trajetória tem valor */}
@@ -139,43 +108,6 @@ export default function EletricistaIndustrial({ onBack, onNavigate }) {
           <p className="text-sm text-green-800 leading-relaxed">
             Os conhecimentos adquiridos no trabalho, na família, na comunidade e na escola fazem parte da sua formação. A experiência de vida também produz saberes importantes.{"\n\n"}Cada estudante constrói seu projeto de vida de forma única. Não existe um único caminho correto — o importante é reconhecer suas possibilidades e seguir construindo seus próprios projetos.
           </p>
-          <button
-            onClick={() => onNavigate("skills")}
-            className="w-full bg-green-600 text-white font-bold text-sm py-3 rounded-xl hover:bg-green-700 transition-colors active:scale-95"
-          >
-            🌟 Valorizar minha Experiência
-          </button>
-        </div>
-
-        {/* Seção final — Continue sua jornada */}
-        <div className="pt-2">
-          <h3 className="font-bold text-sm text-center mb-3">🔗 Continue sua jornada</h3>
-          <div className="grid grid-cols-2 gap-3">
-            <button
-              onClick={() => onNavigate("resume")}
-              className="bg-card border border-border rounded-xl py-4 px-3 text-sm font-semibold text-center hover:bg-muted/50 transition-colors active:scale-95"
-            >
-              📄 Criar meu Currículo
-            </button>
-            <Link
-              to="/caminhos"
-              className="bg-card border border-border rounded-xl py-4 px-3 text-sm font-semibold text-center hover:bg-muted/50 transition-colors active:scale-95 flex items-center justify-center"
-            >
-              🎓 Caminhos de Estudo
-            </Link>
-            <button
-              onClick={() => onNavigate("jobs")}
-              className="bg-card border border-border rounded-xl py-4 px-3 text-sm font-semibold text-center hover:bg-muted/50 transition-colors active:scale-95"
-            >
-              💼 Central de Oportunidades
-            </button>
-            <Link
-              to="/vozes"
-              className="bg-card border border-border rounded-xl py-4 px-3 text-sm font-semibold text-center hover:bg-muted/50 transition-colors active:scale-95 flex items-center justify-center"
-            >
-              🗣️ Vozes da Trilha
-            </Link>
-          </div>
         </div>
 
       </div>
