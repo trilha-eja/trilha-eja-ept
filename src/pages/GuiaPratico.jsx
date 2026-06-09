@@ -67,8 +67,32 @@ export default function GuiaPratico() {
     <div>
       <PageHeader title="Guia Prático" subtitle="Aprenda fazendo, passo a passo" backTo="/" />
       <div className="max-w-lg mx-auto px-4 py-5 space-y-3">
-        <div className="bg-accent/10 rounded-2xl p-4 text-center mb-2">
-          <p className="text-sm font-semibold">🔧 O conhecimento técnico é seu — construído na prática e no dia a dia do trabalho. Aqui você encontra orientações para fortalecer ainda mais esse saber. Escolha um tema:</p>
+        {/* Card introdutório */}
+        <div className="bg-orange-50 border border-orange-200 rounded-2xl p-4">
+          <div className="flex items-center gap-2 mb-2">
+            <span className="text-xl">🔧</span>
+            <p className="font-bold text-sm text-orange-900">Aprendizagem Técnica Complementar</p>
+          </div>
+          <p className="text-sm text-orange-800 leading-relaxed">
+            O conhecimento é construído ao longo da vida — no trabalho, na escola e nas experiências do cotidiano.{"\n"}
+            Este espaço reúne orientações introdutórias e materiais complementares para apoiar sua aprendizagem na área elétrica.
+          </p>
+        </div>
+
+        {/* Aviso de segurança */}
+        <div className="bg-yellow-50 border border-yellow-300 rounded-2xl p-4">
+          <div className="flex items-center gap-2 mb-2">
+            <span className="text-xl">⚠️</span>
+            <p className="font-bold text-sm text-yellow-900">Atenção</p>
+          </div>
+          <p className="text-sm text-yellow-800 leading-relaxed whitespace-pre-line">{`As orientações apresentadas possuem finalidade educativa. Antes de realizar qualquer atividade envolvendo eletricidade, siga as normas de segurança aplicáveis e procure orientação profissional quando necessário.
+
+Este módulo NÃO substitui:
+- Aulas práticas e laboratórios
+- Treinamentos obrigatórios
+- Supervisão profissional
+- Certificações técnicas
+- Exigências legais da profissão`}</p>
         </div>
         {guides.map((g) => (
           <ContentCard
