@@ -23,7 +23,7 @@ const plataformasRegionais = [
 ];
 
 const dicasVagas = [
-  { emoji: "📝", titulo: "Cadastre e atualize seu currículo", texto: "Cadastre seu currículo nas plataformas e mantenha-o atualizado. Inclua cursos, experiências e habilidades adquiridas no trabalho, em casa e na escola." },
+  { emoji: "📝", titulo: "Cadastre e atualize seu currículo", texto: "Mantenha seu currículo atualizado nas plataformas. Use o módulo Criar Currículo deste aplicativo como ponto de partida." },
   { emoji: "🔑", titulo: "Use as palavras certas na busca", texto: "Experimente pesquisar com estas palavras-chave:\n- Eletricista Industrial\n- Auxiliar de Eletricista\n- Eletromecânico\n- Manutenção Industrial\n- Técnico em Eletrotécnica" },
   { emoji: "🔔", titulo: "Ative alertas de oportunidades", texto: "A maioria das plataformas permite ativar alertas por e-mail ou celular quando surgem novas vagas na sua área. Configure essa função — é gratuita e muito prática!" },
   { emoji: "📨", titulo: "Acompanhe suas candidaturas", texto: "Anote em quais vagas se candidatou e acompanhe os retornos. Candidate-se regularmente — cada processo seletivo é uma experiência de aprendizado." },
@@ -178,10 +178,7 @@ export default function JobSites({ onBack }) {
             <h3 className="font-bold text-sm">Valorizando sua Trajetória</h3>
           </div>
           <div className="space-y-2 text-sm leading-relaxed">
-            <p>Muitas pessoas acreditam que não possuem experiência suficiente para participar de processos seletivos. Mas os saberes construídos no trabalho, na família, na comunidade e na escola também desenvolvem habilidades importantes.</p>
-            <p>Como nos ensina Paulo Freire, o conhecimento não começa na escola — ele nasce da vida, da prática e da experiência de cada pessoa.</p>
-            <p>Como nos lembra Miguel Arroyo, os trabalhadores-estudantes chegam com histórias e trajetórias que precisam ser reconhecidas e valorizadas.</p>
-            <p>Sua trajetória tem valor. Sua história importa. Você não está começando do zero — você está chegando até aqui com tudo que construiu.</p>
+            <p>Sua trajetória tem valor — inclua no currículo tudo que você viveu e aprendeu, dentro e fora da escola.</p>
           </div>
         </div>
 
@@ -207,7 +204,7 @@ export default function JobSites({ onBack }) {
             <span className="text-xl">🎯</span>
           </div>
           <p className="text-sm leading-relaxed italic">
-            O mundo do trabalho oferece diferentes caminhos. Buscar oportunidades exige informação, preparação e persistência. Utilize estas ferramentas para conhecer possibilidades, ampliar seus horizontes e construir seus projetos de vida.
+            O mundo do trabalho oferece diferentes caminhos. Use estas ferramentas para conhecer suas possibilidades e construir seus projetos de vida.
           </p>
         </div>
 

@@ -1,4 +1,4 @@
-import { ArrowLeft, Heart, Users, Clock, Shield, Star, Lightbulb } from "lucide-react";
+import { ArrowLeft, Heart, Users, Clock, Star, Lightbulb } from "lucide-react";
 
 const tips = [
   {
@@ -15,15 +15,9 @@ const tips = [
   },
   {
     icon: Clock,
-    title: "Gestão do Tempo",
-    text: "Conciliar trabalho, família e estudos exige planejamento e organização desenvolvidos na prática da vida cotidiana. Essa capacidade é construída com experiência real.",
+    title: "Gestão do Tempo e Compromisso",
+    text: "Conciliar trabalho, família e estudos exige planejamento, organização e dedicação construídos na prática cotidiana. Permanecer estudando em meio a tantas responsabilidades demonstra força e determinação.",
     color: "bg-primary",
-  },
-  {
-    icon: Shield,
-    title: "Persistência e Compromisso",
-    text: "Conciliar trabalho, família e estudos exige dedicação, organização e compromisso com os próprios objetivos. Permanecer estudando em meio a tantas responsabilidades demonstra força e determinação.",
-    color: "bg-chart-4",
   },
   {
     icon: Star,
@@ -41,29 +35,14 @@ const tips = [
 
 const extraCards = [
   {
-    emoji: "🌱",
-    title: "Saberes de Experiência",
-    text: "Os conhecimentos adquiridos ao longo da vida também são formas de aprendizagem. Muitas habilidades são desenvolvidas no trabalho, na família, na comunidade, na participação social e nas experiências cotidianas.\n\nComo nos ensina Paulo Freire, o saber não começa na escola — ele nasce da vida e da prática de cada pessoa.",
-  },
-  {
     emoji: "🏠",
     title: "Experiências que também ensinam",
     text: "Muitas experiências frequentemente invisibilizadas também desenvolvem conhecimentos e habilidades importantes:\n\n- Cuidar de familiares\n- Organizar atividades da comunidade\n- Participar de grupos religiosos\n- Realizar trabalhos voluntários\n- Organizar finanças domésticas\n- Realizar pequenos serviços e reparos\n- Participar de associações ou grupos locais\n\nEssas experiências têm valor formativo e fazem parte da sua trajetória.",
   },
   {
-    emoji: "🎓",
-    title: "Você já aprendeu muito",
-    text: "Retornar à escola não significa começar do zero. Cada estudante chega à EJA trazendo conhecimentos construídos ao longo da vida. A escola amplia esses saberes e cria novas possibilidades de aprendizagem.\n\nComo nos lembra Miguel Arroyo, os trabalhadores-estudantes chegam com histórias e trajetórias que precisam ser reconhecidas e valorizadas.",
-  },
-  {
     emoji: "⚡",
     title: "Experiências na Área Elétrica Também Contam",
     text: "Muitas pessoas acreditam que não possuem experiência na área elétrica. Porém, diversas atividades do cotidiano já proporcionam conhecimentos importantes:\n\n- Pequenos reparos elétricos\n- Manutenção de equipamentos\n- Instalação de tomadas e iluminação\n- Uso de ferramentas\n- Apoio a profissionais da área\n- Atividades realizadas durante o curso\n- Experiências profissionais anteriores\n\nEsses conhecimentos têm valor e podem ser aproveitados na sua formação.",
-  },
-  {
-    emoji: "📖",
-    title: "O que a EJA Reconhece?",
-    text: "A Educação de Jovens e Adultos reconhece que os estudantes chegam à escola com conhecimentos construídos ao longo da vida. Esses saberes não substituem a formação escolar, mas dialogam com ela e ajudam na construção de novos aprendizados.",
   },
 ];
 

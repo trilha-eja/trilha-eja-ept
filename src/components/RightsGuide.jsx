@@ -47,7 +47,7 @@ const subpaginas = [
     titulo: "Previdência Social",
     descricao: "INSS, aposentadoria, auxílios e licenças",
     subtitulo: "O INSS protege você e sua família",
-    intro: <>O <strong>INSS</strong> existe para proteger o trabalhador em momentos difíceis — doença, acidente, maternidade e aposentadoria. Conheça seus direitos previdenciários.</>,
+    intro: <>Você contribui todo mês — conheça o que o <strong>INSS</strong> pode fazer por você e sua família.</>,
     cards: cardsPrevidencia,
     cor: "bg-purple-50 border-purple-200",
     introBg: "bg-purple-50 border-purple-200",

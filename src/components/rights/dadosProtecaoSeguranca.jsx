@@ -14,7 +14,7 @@ export const cards = [
   {
     emoji: "🦺",
     titulo: "Segurança e Saúde no Trabalho",
-    texto: "O empregador é obrigado a:\n- Fornecer EPIs gratuitamente\n- Manter ambiente de trabalho seguro\n- Realizar exames médicos periódicos\n- Treinar os trabalhadores para funções com risco\nVocê pode recusar trabalho em condições inseguras sem punição.",
+    texto: "O empregador é obrigado a:\n- Manter ambiente de trabalho seguro\n- Realizar exames médicos periódicos\nVocê pode recusar trabalho em condições inseguras sem punição.",
     legal: "CLT Art. 154 a 201 e Normas Regulamentadoras (NRs) do Ministério do Trabalho",
   },
   {

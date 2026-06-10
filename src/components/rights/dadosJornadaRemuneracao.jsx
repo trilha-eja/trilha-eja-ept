@@ -1,15 +1,9 @@
 export const cards = [
   {
     emoji: "⏰",
-    titulo: "Jornada de Trabalho",
-    texto: "Máximo de 8 horas por dia e 44 horas por semana. Hora extra paga pelo menos 50% a mais. Hora extra acima de 2h por dia é proibida. Você pode recusar horas extras acima do limite legal.",
-    legal: "CF/88 Art. 7º, inciso XIII e CLT Art. 58",
-  },
-  {
-    emoji: "⏰",
-    titulo: "Horas Extras",
-    texto: "Horas trabalhadas além da jornada normal devem ser pagas com adicional mínimo de 50%. Aos domingos e feriados o adicional é de 100%. O limite é de 2 horas extras por dia. Você pode recusar horas extras acima desse limite sem punição.",
-    legal: "CF/88 Art. 7º, inciso XVI e CLT Art. 59",
+    titulo: "Jornada de Trabalho e Horas Extras",
+    texto: "Máximo de 8 horas por dia e 44 horas por semana. Horas extras devem ser pagas com adicional mínimo de 50%. Aos domingos e feriados o adicional é de 100%. O limite é de 2 horas extras por dia. Você pode recusar horas extras acima desse limite sem punição.",
+    legal: "📋 CF/88 Art. 7º, XIII e XVI e CLT Art. 58 e Art. 59",
   },
   {
     emoji: "⚡",

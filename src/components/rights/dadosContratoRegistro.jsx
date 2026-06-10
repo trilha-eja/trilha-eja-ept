@@ -29,4 +29,11 @@ export const cards = [
     texto: "Ao ser demitido sem justa causa, você tem direito ao aviso prévio de no mínimo 30 dias. Para cada ano trabalhado na empresa são acrescidos 3 dias, até o máximo de 90 dias. O empregador pode pagar o valor em dinheiro em vez de cumprir o prazo (aviso indenizado).",
     legal: "CLT Art. 487 e Lei nº 12.506/2011",
   },
+  {
+    emoji: "📱",
+    titulo: "Carteira de Trabalho Digital",
+    texto: "Consulte todo seu histórico de empregos, contratos e anotações da carteira de trabalho pelo celular ou computador. Não precisa mais do documento físico.",
+    legal: null,
+    link: { url: "https://www.gov.br/pt-br/temas/carteira-de-trabalho-digital", label: "🔗 Acessar" },
+  },
 ];

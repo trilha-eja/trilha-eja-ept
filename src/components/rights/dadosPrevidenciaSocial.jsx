@@ -2,7 +2,7 @@ export const cards = [
   {
     emoji: "🏛️",
     titulo: "INSS — O que é?",
-    texto: "O INSS (Instituto Nacional do Seguro Social) é o órgão do governo que garante benefícios aos trabalhadores em situações como doença, acidente, maternidade e aposentadoria. A contribuição é descontada automaticamente do seu salário. Trabalhadores informais podem contribuir como autônomos para ter acesso aos benefícios.",
+    texto: "O INSS (Instituto Nacional do Seguro Social) é o órgão do governo que garante benefícios aos trabalhadores em situações como doença, acidente, maternidade e aposentadoria. A contribuição é descontada automaticamente do seu salário. Trabalhadores informais podem contribuir como autônomos para ter acesso aos benefícios. Você contribui todo mês — conheça o que o INSS pode fazer por você e sua família.",
     legal: "Lei nº 8.213/1991 e Lei nº 8.212/1991",
   },
   {
@@ -20,7 +20,7 @@ export const cards = [
   {
     emoji: "👶",
     titulo: "Salário-Maternidade",
-    texto: "A trabalhadora gestante tem direito ao salário-maternidade pago pelo INSS durante a licença-maternidade. O valor é equivalente ao salário normal. Também tem direito trabalhadoras que adotam crianças.",
+    texto: "A trabalhadora gestante tem direito ao salário-maternidade pago pelo INSS durante a licença-maternidade. O valor é equivalente ao salário normal. Também tem direito trabalhadoras que adotam crianças.\n\nO salário-maternidade é o benefício financeiro. A licença-maternidade é o direito ao afastamento. São direitos complementares.",
     legal: "Lei nº 8.213/1991 Art. 71 a 73",
   },
   {
@@ -34,5 +34,19 @@ export const cards = [
     titulo: "Licença-Paternidade",
     texto: "O trabalhador tem direito a 5 dias de licença-paternidade após o nascimento do filho. Empresas que participam do programa Empresa Cidadã concedem 20 dias. Válido também para adoção.",
     legal: "CF/88 Art. 7º, inciso XIX e ADCT Art. 10, §1º",
+  },
+  {
+    emoji: "📱",
+    titulo: "Meu INSS",
+    texto: "Consulte seus benefícios, contribuições e histórico previdenciário pelo celular ou computador. Acesse o site ou baixe o aplicativo Meu INSS.",
+    legal: null,
+    link: { url: "https://meu.inss.gov.br", label: "🔗 Acessar Meu INSS" },
+  },
+  {
+    emoji: "💰",
+    titulo: "App FGTS",
+    texto: "Consulte seu saldo do FGTS, extrato e movimentações diretamente pelo celular. Como baixar: abra a Play Store ou App Store, pesquise 'FGTS' e instale o aplicativo oficial da Caixa Econômica Federal. É gratuito e seguro.",
+    legal: null,
+    link: { url: "https://www.caixa.gov.br/beneficios-trabalhador/fgts/extrato-fgts/Paginas/default.aspx", label: "🔗 Saiba mais sobre o App FGTS" },
   },
 ];

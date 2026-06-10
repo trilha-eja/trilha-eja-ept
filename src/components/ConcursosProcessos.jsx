@@ -71,7 +71,7 @@ export default function ConcursosProcessos({ onBack }) {
         {/* Intro */}
         <div className="bg-orange-50 border border-orange-200 rounded-2xl p-4">
           <p className="text-sm leading-relaxed">
-            Além das vagas tradicionais, existem outros caminhos no mundo do trabalho que muitos trabalhadores-estudantes não conhecem. Concursos públicos e processos seletivos podem abrir portas importantes para sua trajetória profissional.
+            Conheça outros caminhos no mundo do trabalho além das vagas tradicionais.
           </p>
         </div>
 

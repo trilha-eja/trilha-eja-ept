@@ -7,11 +7,7 @@ export default function CardNR10() {
           <span className="text-xl">⚡</span>
           <h3 className="font-bold text-sm">Segurança Elétrica: Conheça seus Direitos</h3>
         </div>
-        <div className="bg-orange-50 border border-orange-200 rounded-xl p-3">
-          <p className="text-sm leading-relaxed text-foreground">
-            Se você trabalha ou pretende trabalhar com eletricidade, conhecer seus direitos é uma forma de proteger sua vida, sua saúde e a de seus colegas.
-          </p>
-        </div>
+
       </div>
 
       {/* Card 1 — Capacitação Obrigatória */}

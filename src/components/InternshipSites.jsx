@@ -14,22 +14,14 @@ const secoes = [
   },
   {
     titulo: "🔍 Busque vagas abertas",
-    subtitulo: "Pesquise vagas disponíveis agora e candidate-se diretamente",
+    subtitulo: "Pesquise vagas disponíveis agora e candidate-se diretamente. LinkedIn e Indeed também têm vagas de estágio — acesse pela Central de Oportunidades.",
     sites: [
       { emoji: "🏢", name: "Companhia de Estágios", url: "https://www.ciadeestagios.com.br", description: "Vagas em grandes empresas nacionais e multinacionais. Forte em programas de estágio remoto e presencial." },
       { emoji: "⭐", name: "Super Estágios", url: "https://www.superestagios.com.br", description: "Milhares de vagas de estágio distribuídas pelo Brasil. Busque por área, cidade e nível de escolaridade." },
       { emoji: "🔎", name: "Estagiar", url: "https://www.estagiar.com.br", description: "Portal com vagas de estágio em todo o Brasil. Busque por região e área de interesse." },
-      { emoji: "🔍", name: "Indeed — Estágios", url: "https://br.indeed.com/jobs?q=estagio", description: "Milhares de vagas de estágio em todo o Brasil. Muito fácil de usar pelo celular." },
-      { emoji: "💼", name: "LinkedIn — Estágios", url: "https://www.linkedin.com/jobs/search/?keywords=estagio", description: "Rede profissional com vagas de estágio em empresas de todo o Brasil. Crie seu perfil profissional e apareça para os recrutadores." },
     ],
   },
-  {
-    titulo: "🔄 Cadastre-se E busque vagas",
-    subtitulo: "Nesses sites você faz as duas coisas",
-    sites: [
-      { emoji: "🏛️", name: "Emprega Brasil", url: "https://servicos.mte.gov.br/spme-v2/#/login", description: "Portal oficial do governo federal. Cadastre seu perfil E busque vagas de estágio e emprego em todo o Brasil. Totalmente gratuito." },
-    ],
-  },
+
 ];
 
 export default function InternshipSites({ onBack }) {
@@ -111,10 +103,9 @@ export default function InternshipSites({ onBack }) {
             </p>
           </div>
           {[
-            { emoji: "👨‍🏫", titulo: "Coordenação do Curso", texto: "A coordenação do curso pode informar sobre:\n- Oportunidades de estágio\n- Empresas parceiras\n- Visitas técnicas\n- Projetos institucionais\n- Encaminhamentos profissionais\n- Eventos da área\n\nMantenha contato com a coordenação e fique atento aos avisos!" },
-            { emoji: "📢", titulo: "Murais e Canais Oficiais", texto: "Muitas oportunidades são divulgadas por meio de:\n- Site oficial do campus\n- Murais físicos\n- E-mails institucionais\n- Redes sociais oficiais\n- Comunicados da coordenação\n- Avisos em sala de aula\n\nNem todas as oportunidades aparecem nos grandes portais. Muitas são divulgadas diretamente pela instituição." },
+            { emoji: "📢", titulo: "Como acompanhar oportunidades no IFC", texto: "Muitas oportunidades não aparecem nos grandes portais — chegam diretamente pela escola.\nFique atento a:\n- Site oficial do campus\n- Murais físicos\n- E-mails institucionais\n- Redes sociais oficiais\n- Avisos em sala de aula\n- Comunicados da coordenação" },
+            { emoji: "👨‍🏫", titulo: "Coordenação e Professores", texto: "A coordenação do curso e os professores podem informar sobre:\n- Oportunidades de estágio\n- Empresas parceiras\n- Projetos institucionais\n- Processos seletivos\n- Programas de bolsas\n- Eventos da área\n\nNão hesite em conversar — eles podem abrir portas que você ainda não conhece!" },
             { emoji: "🔬", titulo: "Projetos de Ensino, Pesquisa e Extensão", texto: "Os Institutos Federais frequentemente oferecem:\n- Bolsas de pesquisa\n- Bolsas de extensão\n- Monitorias\n- Projetos comunitários\n- Atividades de formação complementar\n\nEssas experiências também contribuem para sua formação profissional e para o seu currículo!" },
-            { emoji: "🤝", titulo: "Converse com seus Professores", texto: "Muitos professores possuem contato com:\n- Empresas da região\n- Projetos institucionais\n- Oportunidades de estágio\n- Processos seletivos\n- Programas de bolsas\n\nNão hesite em conversar — eles podem abrir portas que você ainda não conhece!" },
           ].map((c, i) => (
             <div key={i} className="p-4 bg-card border border-border rounded-2xl">
               <div className="flex items-center gap-2 mb-1">
@@ -126,30 +117,7 @@ export default function InternshipSites({ onBack }) {
           ))}
         </div>
 
-        {/* ── Nova Seção 3 — Você Sabia? ── */}
-        <div className="bg-blue-50 border border-blue-200 rounded-2xl p-4">
-          <div className="flex items-center gap-2 mb-2">
-            <span className="text-xl">💡</span>
-            <h3 className="font-bold text-sm">Você Sabia?</h3>
-          </div>
-          <p className="text-sm leading-relaxed">
-            Muitas oportunidades de estágio, bolsas e projetos chegam primeiro à escola, aos professores ou à coordenação do curso.
-          </p>
-          <p className="text-sm leading-relaxed mt-2">
-            Por isso, acompanhar os canais institucionais e manter diálogo com a equipe do curso pode abrir novos caminhos.
-          </p>
-        </div>
 
-        {/* ── Nova Seção 4 — Como Acompanhar ── */}
-        <div className="space-y-3">
-          <h2 className="font-extrabold text-sm">🎯 Como Acompanhar Oportunidades</h2>
-          <div className="p-4 bg-card border border-border rounded-2xl">
-            <div className="flex items-center gap-2 mb-2">
-              <span className="text-xl">✅</span>
-            </div>
-            <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">{`• Verifique regularmente os murais da instituição\n- Leia os e-mails institucionais\n- Acompanhe o site oficial do campus\n- Participe de eventos e palestras\n- Converse com professores e coordenação\n- Atualize seu currículo periodicamente`}</p>
-          </div>
-        </div>
 
         {/* Mensagem final */}
         <div className="border border-orange-300 rounded-2xl p-4" style={{ background: "#FFF8F0" }}>

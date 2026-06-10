@@ -20,7 +20,7 @@ export const cards = [
   {
     emoji: "📞",
     titulo: "Onde Buscar Ajuda e Denunciar Violações?",
-    texto: "Se seus direitos forem violados ou precisar de orientação, acesse estes canais:",
+    texto: "Se seus direitos forem violados ou precisar de orientação, acesse estes canais:\n\n💡 Para consultar seus benefícios e documentos trabalhistas, acesse a subpágina Previdência Social e Contrato e Registro neste módulo.",
     legal: null,
     canais: [
       {
@@ -37,21 +37,6 @@ export const cards = [
         nome: "Ministério Público do Trabalho",
         descricao: "Defende os direitos coletivos dos trabalhadores.",
         link: { url: "https://mpt.mp.br", label: "🔗 Acessar" },
-      },
-      {
-        nome: "Meu INSS",
-        descricao: "Consulte seus benefícios, contribuições e histórico previdenciário pelo celular ou computador.",
-        link: { url: "https://meu.inss.gov.br", label: "🔗 Acessar Meu INSS" },
-      },
-      {
-        nome: "Carteira de Trabalho Digital",
-        descricao: "Consulte todo seu histórico de empregos, contratos e anotações da carteira de trabalho pelo celular ou computador. Não precisa mais do documento físico.",
-        link: { url: "https://www.gov.br/pt-br/temas/carteira-de-trabalho-digital", label: "🔗 Acessar" },
-      },
-      {
-        nome: "App FGTS",
-        descricao: "Consulte seu saldo do FGTS, extrato e movimentações diretamente pelo celular. Como baixar: abra a Play Store ou App Store, pesquise 'FGTS' e instale o aplicativo oficial da Caixa Econômica Federal. É gratuito e seguro.",
-        link: { url: "https://www.caixa.gov.br/beneficios-trabalhador/fgts/extrato-fgts/Paginas/default.aspx", label: "🔗 Saiba mais sobre o App FGTS" },
       },
       {
         nome: "Defensoria Pública",

@@ -33,10 +33,10 @@ export default function TrabalhoPrecarizado({ onBack }) {
               Isso significa assumir <strong>todos os riscos sozinho</strong>, perdendo direitos básicos como férias e auxílio-doença e enfrentando jornadas exaustivas para dar conta do sustento.
             </p>
             <p className="text-xs text-muted-foreground leading-relaxed mt-2">
-              Estudiosos do mundo do trabalho, como <strong>Ricardo Antunes</strong>, chamam isso de <strong>'precariado'</strong>: quando a perda de direitos sociais é disfarçada de empreendedorismo.
+              Estudiosos do mundo do trabalho chamam isso de <strong>'precariado'</strong>: quando a perda de direitos sociais é disfarçada de empreendedorismo.
             </p>
             <p className="text-xs text-muted-foreground leading-relaxed mt-2">
-              Quando a rotina incerta nos obriga a "sobreviver" ao dia de hoje, construir um <strong>projeto de vida</strong> parece distante — mas é exatamente aí que ele se torna mais necessário. Conhecer seus direitos é o primeiro passo para mudar essa realidade.
+              Quando a rotina incerta nos obriga a "sobreviver" ao dia de hoje, construir um <strong>projeto de vida</strong> parece distante — mas é exatamente aí que ele se torna mais necessário.
             </p>
           </div>
         </div>
@@ -47,7 +47,7 @@ export default function TrabalhoPrecarizado({ onBack }) {
           <div className="flex-1 min-w-0">
             <h3 className="font-extrabold text-sm mb-2">Proteja-se na prática!</h3>
             <p className="text-xs text-muted-foreground leading-relaxed">
-              A precarização é um problema estrutural do mercado, mas você tem ferramentas para não ficar desamparado:
+              A precarização é um problema estrutural do mundo do trabalho, mas você tem ferramentas para não ficar desamparado:
             </p>
           </div>
         </div>
