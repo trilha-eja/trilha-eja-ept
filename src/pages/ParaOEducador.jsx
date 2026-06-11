@@ -1,11 +1,207 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import PageHeader from "../components/PageHeader";
 import AccordionSection from "../components/AccordionSection";
 
 // Senha ofuscada em base64 para não expor em texto visível
 const _k = atob("cHJvZmVwdDIwMjY=");
 
+const conteudoPDF = [
+  { tipo: "abertura", titulo: "Para o Educador — Trilha EJA-EPT", subtitulo: "Orientações pedagógicas para o uso do Trilha EJA-EPT em sala", texto: `"Para educadores que compreendem que ensinar na EJA é um ato político de esperança ativa."
+
+Bem-vindo(a)! Este espaço reúne orientações fundamentadas na pesquisa Projeto de vida na EJA-EPT: perspectivas de continuidade dos estudos e inserção no mundo do trabalho, desenvolvida no ProfEPT/IFC Campus Blumenau.
+
+O objetivo é apoiar você no uso crítico e transformador do Trilha EJA-EPT em sala de aula, reconhecendo as especificidades do estudante-trabalhador e a dimensão política da educação de jovens e adultos.` },
+  { tipo: "bloco", titulo: "👤 Quem é o estudante da EJA-EPT?", subtitulo: "Um olhar que vai além da sala de aula", texto: `O estudante da EJA não é um "aluno com atraso". Ele é um trabalhador-estudante adulto cujas trajetórias foram interrompidas por desigualdades estruturais — de classe, raça, gênero, território e idade.
+
+Ao usar este aplicativo, lembre-se: você não está ensinando alguém que não sabe. Você está mediando o conhecimento de quem já sabe muito.
+
+Esses estudantes chegam à escola carregando saberes construídos no trabalho, na família, na comunidade e nas lutas cotidianas. Reconhecer esses saberes não é condescendência — é o ponto de partida de uma pedagogia comprometida com a formação humana integral.
+
+A interseccionalidade nos convida a olhar para cada estudante em sua complexidade: uma mulher negra trabalhadora que retorna à escola enfrenta barreiras que vão muito além do conteúdo escolar. Nomear essas barreiras em sala é um ato pedagógico.`, refs: "ARROYO, M. G. Passageiros da noite. Petrópolis: Vozes, 2012.\nAKOTIRENE, K. Interseccionalidade. São Paulo: Pólen, 2019." },
+  { tipo: "bloco", titulo: "🛑 EJA como Direito — não como oportunidade", subtitulo: "Atenção à linguagem que usamos", texto: `Muitas vezes, a sociedade trata a EJA como uma "segunda chance" ou um "favor" do Estado. Essa abordagem precisa ser questionada em sala.
+
+A EJA é a reparação de uma dívida histórica e a restituição de um direito constitucionalmente negado na idade própria. Não é benesse — é direito.
+
+Quando o educador muda esse vocabulário em sala, muda a postura do estudante: de grato e submisso para cidadão consciente de seus direitos.
+
+Evite: "Você teve uma segunda chance."
+Prefira: "Você está exercendo um direito que sempre foi seu."`, refs: "GADOTTI, M. Educação de adultos como direito humano. São Paulo: IPF, 2009." },
+  { tipo: "bloco", titulo: "⚖️ Mundo do Trabalho x Mercado de Trabalho", subtitulo: "Uma distinção que é política", texto: `Este aplicativo usa intencionalmente a expressão Mundo do Trabalho — e não mercado de trabalho. Essa escolha não é acidental.
+
+Formar para o mercado adapta o estudante às necessidades do capital, naturalizando a exploração e a precarização. Formar para o Mundo do Trabalho instrumentaliza o cidadão a compreender, questionar e transformar as relações de produção.
+
+Use essa distinção nas suas aulas. Quando um estudante pergunta "onde vou trabalhar?", amplie a pergunta: "em que condições? com quais direitos? para construir qual projeto de vida?"`, refs: "FRIGOTTO, G.; CIAVATTA, M.; RAMOS, M. (Orgs.). Ensino Médio Integrado. São Paulo: Cortez, 2005." },
+  { tipo: "bloco", titulo: "🗺️ Como mediar o Mapa da Vida sem cair na meritocracia", subtitulo: "O projeto de vida como ato político coletivo", texto: `A BNCC introduziu o "Projeto de Vida" no currículo — mas na EJA-EPT, ele não pode ser reduzido a um plano individualista de ascensão pessoal.
+
+✓ FAÇA:
+• Pergunte à turma quais barreiras estruturais — falta de transporte, cansaço do trabalho, cuidado de filhos — dificultam seus projetos. Debata soluções coletivas e direitos.
+• Conecte as metas individuais a direitos coletivos: moradia, educação, saúde, trabalho digno.
+• Valorize trajetórias não lineares — quem parou e voltou tem uma história que merece ser reconhecida.
+• Use os blocos "De onde venho?" e "Onde estou?" como ponto de partida para rodas de conversa.
+
+✗ EVITE:
+• Frases como "basta querer", "é só se esforçar" ou "depende só de você".
+• Culpar o estudante pelo cansaço — o esgotamento físico é reflexo da jornada de trabalho da classe trabalhadora.
+• Tratar o projeto de vida como plano de carreira individual.
+• Comparar trajetórias entre estudantes.
+
+O Mapa da Vida é um ato político de esperança coletiva — não um plano de ascensão individual.`, refs: "FREIRE, P. Pedagogia da Esperança. Rio de Janeiro: Paz e Terra, 1992." },
+  { tipo: "bloco", titulo: "💡 O educador como ponte contra o apagão informacional", subtitulo: "Mediação tecnológica como ato pedagógico", texto: `As entrevistas realizadas nesta pesquisa revelaram algo importante: muitos estudantes da EJA-EPT desconhecem informações fundamentais sobre continuidade dos estudos e mundo do trabalho — o que chamamos de apagão informacional.
+
+Muitos não sabem o que é ENEM, SISU ou PROUNI. Nunca formataram um currículo. Desconhecem seus direitos trabalhistas básicos. Não sabem que podem fazer uma graduação gratuita.
+
+O educador tem um papel insubstituível nesse processo:
+- Mediar o acesso às informações do aplicativo em sala
+- Desmistificar o ensino superior como algo inacessível
+- Conectar o conteúdo técnico do curso aos direitos trabalhistas
+- Usar o app como ponto de partida para rodas de conversa
+- Mostrar que existem caminhos possíveis — sem impor nenhum deles
+
+A mediação tecnológica não é apenas ensinar a usar um app. É ampliar horizontes e devolver ao estudante a consciência de suas possibilidades.` },
+];
+
+const encontrosPDF = [
+  { titulo: "Encontro 1 — Quem somos? De onde viemos?", modulos: "Mapa da Vida — Blocos 1 e 2", proposta: "Roda de conversa inicial. Cada estudante compartilha algo da sua trajetória. Mediação com as perguntas: Por que paramos de estudar? O que nos trouxe de volta? A EJA como direito — não como favor.", tempo: "1h30" },
+  { titulo: "Encontro 2 — Saberes, Trabalho e Direitos", modulos: "Valorize sua Experiência + Direitos Trabalhistas", proposta: "Levantamento coletivo dos saberes da turma. Quais experiências temos? O que já aprendemos fora da escola? Conexão com os direitos trabalhistas — carteira assinada, FGTS, segurança no trabalho. Discussão sobre trabalho formal x informal e precarização.", tempo: "1h30" },
+  { titulo: "Encontro 3 — Mundo do Trabalho e Projetos Profissionais", modulos: "O que faz um Eletricista + Central de Oportunidades + Criar Currículo", proposta: "O que faz um eletricista industrial? Onde pode atuar? Laboratório de elaboração do currículo — individual ou em duplas, com apoio do educador. Uso do módulo Valorize sua Experiência para traduzir saberes da vida em habilidades profissionais.", tempo: "2h" },
+  { titulo: "Encontro 4 — Caminhos de Estudo e Combate ao Apagão Informacional", modulos: "ENEM + SISU + PROUNI + Cursos Gratuitos", proposta: "Navegação guiada pelos módulos. Desmistificação do ensino superior. Roda de conversa: o que vocês sabiam sobre o ENEM antes de hoje? Quais caminhos parecem possíveis? Quais barreiras existem?", tempo: "1h30" },
+  { titulo: "Encontro 5 — Mapa da Vida", modulos: "Mapa da Vida — todos os blocos", proposta: "Preenchimento coletivo e individual do Mapa da Vida. Roda de conversa com compartilhamento voluntário. Uso das Vozes da Trilha como inspiração — depoimentos de egressos. Atenção: não comparar trajetórias, não usar linguagem meritocrática.", tempo: "2h" },
+  { titulo: "Encontro 6 — Síntese, Avaliação e Continuidade", modulos: "Sua Opinião Importa + Vozes da Trilha", proposta: "Avaliação coletiva do processo. O que aprendemos juntos? O que mudou na forma de ver nossos projetos de vida? Convite para deixar depoimento nas Vozes da Trilha. Avaliação do aplicativo pelo formulário Sua Opinião Importa.", tempo: "1h30" },
+];
+
+async function generatePDF() {
+  const { jsPDF } = window.jspdf;
+  const html2canvas = window.html2canvas;
+  if (!jsPDF || !html2canvas) { alert("PDF não disponível. Tente novamente."); return; }
+
+  const el = document.createElement("div");
+  el.style.cssText = "position:fixed;left:-9999px;top:0;z-index:-1;width:794px;background:#fff;font-family:Arial,sans-serif;padding:56px 56px 40px 56px;box-sizing:border-box;color:#000;";
+  document.body.appendChild(el);
+
+  // ── Título principal ──
+  const tituloEl = document.createElement("h1");
+  tituloEl.style.cssText = "font-size:16px;font-weight:bold;color:#E86826;text-align:center;margin:0 0 4px 0;";
+  tituloEl.textContent = "Guia do Educador — Trilha EJA-EPT";
+  el.appendChild(tituloEl);
+
+  const subtituloEl = document.createElement("p");
+  subtituloEl.style.cssText = "font-size:11px;color:#666;text-align:center;margin:0 0 16px 0;";
+  subtituloEl.textContent = "Orientações pedagógicas para o uso do Trilha EJA-EPT em sala";
+  el.appendChild(subtituloEl);
+
+  const hr = document.createElement("hr");
+  hr.style.cssText = "border:none;border-top:1px solid #ccc;margin-bottom:24px;";
+  el.appendChild(hr);
+
+  // ── Abertura ──
+  const aberturaTitulo = document.createElement("p");
+  aberturaTitulo.style.cssText = "font-size:12px;font-style:italic;color:#444;text-align:center;margin:0 0 10px 0;";
+  aberturaTitulo.textContent = '"Para educadores que compreendem que ensinar na EJA é um ato político de esperança ativa."';
+  el.appendChild(aberturaTitulo);
+
+  const aberturaTexto = document.createElement("p");
+  aberturaTexto.style.cssText = "font-size:11px;line-height:1.7;color:#222;margin:0 0 24px 0;";
+  aberturaTexto.textContent = "Bem-vindo(a)! Este espaço reúne orientações fundamentadas na pesquisa Projeto de vida na EJA-EPT: perspectivas de continuidade dos estudos e inserção no mundo do trabalho, desenvolvida no ProfEPT/IFC Campus Blumenau. O objetivo é apoiar você no uso crítico e transformador do Trilha EJA-EPT em sala de aula, reconhecendo as especificidades do estudante-trabalhador e a dimensão política da educação de jovens e adultos.";
+  el.appendChild(aberturaTexto);
+
+  // ── Blocos ──
+  for (const bloco of conteudoPDF.filter(c => c.tipo === "bloco")) {
+    const divisor = document.createElement("hr");
+    divisor.style.cssText = "border:none;border-top:1px dashed #ccc;margin:0 0 18px 0;";
+    el.appendChild(divisor);
+
+    const bTitulo = document.createElement("h2");
+    bTitulo.style.cssText = "font-size:13px;font-weight:bold;color:#222;margin:0 0 2px 0;";
+    bTitulo.textContent = bloco.titulo;
+    el.appendChild(bTitulo);
+
+    const bSubtitulo = document.createElement("p");
+    bSubtitulo.style.cssText = "font-size:10px;color:#888;margin:0 0 10px 0;";
+    bSubtitulo.textContent = bloco.subtitulo;
+    el.appendChild(bSubtitulo);
+
+    const paragrafos = bloco.texto.split("\n\n");
+    for (const p of paragrafos) {
+      const pEl = document.createElement("p");
+      pEl.style.cssText = "font-size:11px;line-height:1.7;color:#222;margin:0 0 6px 0;";
+      pEl.textContent = p.trim();
+      el.appendChild(pEl);
+    }
+
+    if (bloco.refs) {
+      const refEl = document.createElement("p");
+      refEl.style.cssText = "font-size:10px;font-style:italic;color:#555;margin:6px 0 0 0;";
+      refEl.textContent = "Referências: " + bloco.refs.replace(/\n/g, " | ");
+      el.appendChild(refEl);
+    }
+  }
+
+  // ── Roteiro ──
+  const divisorR = document.createElement("hr");
+  divisorR.style.cssText = "border:none;border-top:1px dashed #ccc;margin:18px 0;";
+  el.appendChild(divisorR);
+
+  const roteiroTitulo = document.createElement("h2");
+  roteiroTitulo.style.cssText = "font-size:13px;font-weight:bold;color:#222;margin:0 0 12px 0;";
+  roteiroTitulo.textContent = "📅 Roteiro Sugerido de 6 Encontros";
+  el.appendChild(roteiroTitulo);
+
+  for (const enc of encontrosPDF) {
+    const encDiv = document.createElement("div");
+    encDiv.style.cssText = "margin-bottom:12px;";
+    const encTitulo = document.createElement("p");
+    encTitulo.style.cssText = "font-size:11px;font-weight:bold;color:#222;margin:0 0 2px 0;";
+    encTitulo.textContent = enc.titulo;
+    encDiv.appendChild(encTitulo);
+
+    const encMod = document.createElement("p");
+    encMod.style.cssText = "font-size:10px;color:#555;margin:0;";
+    encMod.textContent = "Módulos: " + enc.modulos;
+    encDiv.appendChild(encMod);
+
+    const encProp = document.createElement("p");
+    encProp.style.cssText = "font-size:10px;color:#444;margin:0;";
+    encProp.textContent = "Proposta: " + enc.proposta;
+    encDiv.appendChild(encProp);
+
+    const encTempo = document.createElement("p");
+    encTempo.style.cssText = "font-size:10px;color:#666;margin:0;";
+    encTempo.textContent = "Tempo sugerido: " + enc.tempo;
+    encDiv.appendChild(encTempo);
+
+    el.appendChild(encDiv);
+  }
+
+  // ── Rodapé (será adicionado via jsPDF) ──
+
+  const canvas = await html2canvas(el, { scale: 2, useCORS: true, backgroundColor: "#ffffff" });
+  document.body.removeChild(el);
+
+  const doc = new jsPDF({ unit: "mm", format: "a4", orientation: "portrait" });
+  const pageW = 186; // 210 - 2*12 margins
+  const pageH = 257; // 297 - 2*20 margins
+  const imgW = pageW;
+  const imgH = (canvas.height * pageW) / canvas.width;
+
+  let position = 0;
+  let remaining = imgH;
+  const rodape = "Trilha EJA-EPT | ProfEPT | IFC Campus Blumenau";
+
+  while (remaining > 0) {
+    doc.addImage(canvas.toDataURL("image/png"), "PNG", 12, 20 - position, imgW, imgH);
+    doc.setFontSize(8);
+    doc.setTextColor(150);
+    doc.text(rodape, 105, 290, { align: "center" });
+    remaining -= pageH;
+    if (remaining > 0) { doc.addPage(); position += pageH; }
+  }
+
+  doc.save("guia-do-educador-trilha-eja-ept.pdf");
+}
+
 export default function ParaOEducador() {
+  const pdfRef = useRef(null);
+  const [loading, setLoading] = useState(false);
   const [acesso, setAcesso] = useState(() => sessionStorage.getItem("educador_acesso") === "1");
   const [senha, setSenha] = useState("");
   const [erro, setErro] = useState(false);
@@ -18,6 +214,12 @@ export default function ParaOEducador() {
     } else {
       setErro(true);
     }
+  };
+
+  const handleDownload = async () => {
+    setLoading(true);
+    await generatePDF();
+    setLoading(false);
   };
 
   if (!acesso) {
@@ -225,7 +427,20 @@ A mediação tecnológica não é apenas ensinar a usar um app. É ampliar horiz
             tempo="1h30"
           />
         </AccordionSection>
+
+        {/* Botão de download PDF */}
+        <div className="pt-2 pb-6">
+          <button
+            onClick={handleDownload}
+            disabled={loading}
+            className="w-full py-4 rounded-2xl bg-primary text-primary-foreground font-bold text-base flex items-center justify-center gap-2 active:scale-95 transition-all disabled:opacity-70"
+          >
+            ⬇️ {loading ? "Gerando PDF…" : "Baixar Guia do Educador em PDF"}
+          </button>
+        </div>
       </div>
+
+      <div ref={pdfRef} style={{ display: "none" }} />
     </div>
   );
 }
