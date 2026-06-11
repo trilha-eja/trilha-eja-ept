@@ -26,7 +26,7 @@ const dicasVagas = [
   { emoji: "📝", titulo: "Cadastre e atualize seu currículo", texto: "Mantenha seu currículo atualizado nas plataformas. Use o módulo Criar Currículo deste aplicativo como ponto de partida." },
   { emoji: "🔑", titulo: "Use as palavras certas na busca", texto: "Experimente pesquisar com estas palavras-chave:\n- Eletricista Industrial\n- Auxiliar de Eletricista\n- Eletromecânico\n- Manutenção Industrial\n- Técnico em Eletrotécnica" },
   { emoji: "🔔", titulo: "Ative alertas de oportunidades", texto: "A maioria das plataformas permite ativar alertas por e-mail ou celular quando surgem novas vagas na sua área. Configure essa função — é gratuita e muito prática!" },
-  { emoji: "📨", titulo: "Acompanhe suas candidaturas", texto: "Anote em quais vagas se candidatou\ne acompanhe os retornos.\nCandidate-se regularmente." },
+  { emoji: "📨", titulo: "Acompanhe suas candidaturas", texto: "Anote em quais vagas se candidatou e acompanhe os retornos. Candidate-se regularmente." },
   { emoji: "👁️", titulo: "Leia os requisitos com atenção", texto: "Antes de enviar seu currículo, leia atentamente o que a empresa pede. Isso aumenta suas chances e evita frustrações." },
 ];
 
