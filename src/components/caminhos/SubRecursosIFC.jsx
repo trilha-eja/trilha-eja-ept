@@ -40,6 +40,9 @@ export default function SubRecursosIFC({ onBack }) {
           <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">
             {`Procure o SISAE — Serviço Integrado de Suporte e Acompanhamento Educacional do seu campus.\nA equipe orienta sobre:\n- Auxílios financeiros\n- Bolsas\n- Programas de permanência\n- Outros serviços de apoio\n\nVocê também pode procurar:\n- Coordenação do Curso\n- Professores\n- Secretaria Acadêmica\n\nVocê não precisa enfrentar as dificuldades sozinho(a).`}
           </p>
+          <p className="text-xs text-muted-foreground leading-relaxed mt-2">
+            💡 Para acessar o Moodle consulte a seção Ferramentas Digitais neste aplicativo.
+          </p>
         </AccordionSection>
 
         {/* Portal de Ingresso */}
@@ -54,21 +57,6 @@ export default function SubRecursosIFC({ onBack }) {
             className="flex items-center justify-center text-xs font-bold px-4 py-2.5 rounded-xl bg-primary text-white hover:bg-primary/90 active:scale-95 transition-all"
           >
             🔗 Acessar Portal
-          </a>
-        </AccordionSection>
-
-        {/* Como acessar o Moodle */}
-        <AccordionSection titulo="🎥 Como acessar o Moodle">
-          <p className="text-sm text-muted-foreground leading-relaxed">
-            O Moodle é a plataforma de ensino online do IFC. Muitos materiais, atividades e comunicados são disponibilizados por lá. Assista a tutoriais para aprender a usar.
-          </p>
-          <a
-            href="https://www.youtube.com/results?search_query=como+acessar+moodle+tutorial"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center justify-center text-xs font-bold px-4 py-2.5 rounded-xl bg-chart-5 text-white hover:opacity-90 active:scale-95 transition-all"
-          >
-            ▶️ Ver tutoriais no YouTube
           </a>
         </AccordionSection>
 

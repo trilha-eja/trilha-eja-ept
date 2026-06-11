@@ -2,6 +2,13 @@ import AccordionSection from "../AccordionSection";
 
 const categoria1 = [
   {
+    emoji: "🎓",
+    titulo: "Moodle IFC",
+    texto: "Plataforma oficial de ensino online do IFC. Materiais, atividades e comunicados do curso são disponibilizados por lá.",
+    url: "https://www.youtube.com/results?search_query=como+acessar+moodle+tutorial",
+    botao: "▶️ Ver tutoriais",
+  },
+  {
     emoji: "📱",
     titulo: "Khan Academy",
     texto: "Plataforma totalmente gratuita com aulas de matemática, ciências, português e mais. Tem aplicativo para celular e você avança no seu próprio ritmo — sem pressão de tempo.",
