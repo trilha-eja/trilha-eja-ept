@@ -80,16 +80,16 @@ export default function EletricistaIndustrial({ onBack, onNavigate }) {
         </div>
 
         {/* Card 4 — Próximos passos */}
-        <div className="bg-card border border-border rounded-2xl p-4 space-y-3">
-          <div className="flex items-center gap-2">
+        <div className="bg-orange-50 border border-[#E86826] rounded-2xl p-4">
+          <div className="flex items-center gap-2 mb-2">
             <span className="text-xl">🔗</span>
-            <h2 className="font-bold text-sm">Próximos passos</h2>
+            <h3 className="font-bold text-sm">Próximos passos</h3>
           </div>
-          <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">{`Quer continuar crescendo profissionalmente?
+          <p className="text-sm leading-relaxed text-orange-900 whitespace-pre-line">{`Quer continuar crescendo profissionalmente?
 Explore outros módulos deste aplicativo:
-- Criar Currículo — apresente sua trajetória
-- Central de Oportunidades — onde buscar trabalho
-- Caminhos de Estudo — continue aprendendo`}</p>
+• Criar Currículo — apresente sua trajetória
+• Central de Oportunidades — onde buscar trabalho
+• Caminhos de Estudo — continue aprendendo`}</p>
         </div>
 
       </div>
