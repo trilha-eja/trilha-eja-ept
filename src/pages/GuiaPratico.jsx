@@ -79,21 +79,6 @@ export default function GuiaPratico() {
           </p>
         </div>
 
-        {/* Aviso de segurança */}
-        <div className="bg-yellow-50 border border-yellow-300 rounded-2xl p-4">
-          <div className="flex items-center gap-2 mb-2">
-            <span className="text-xl">⚠️</span>
-            <p className="font-bold text-sm text-yellow-900">Atenção</p>
-          </div>
-          <p className="text-sm text-yellow-800 leading-relaxed whitespace-pre-line">{`As orientações apresentadas possuem finalidade educativa. Antes de realizar qualquer atividade envolvendo eletricidade, siga as normas de segurança aplicáveis e procure orientação profissional quando necessário.
-
-Este módulo NÃO substitui:
-- Aulas práticas e laboratórios
-- Treinamentos obrigatórios
-- Supervisão profissional
-- Certificações técnicas
-- Exigências legais da profissão`}</p>
-        </div>
         {guides.map((g) => (
           <ContentCard
             key={g.id}

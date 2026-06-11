@@ -86,16 +86,6 @@ export default function PracticalGuideDetail({ guide, onBack }) {
               >
                 <Play className="w-5 h-5" /> Ver vídeos sobre o tema
               </a>
-              {/* Card de conexão com o app */}
-              <div className="rounded-2xl p-4 border border-orange-200" style={{ backgroundColor: "#FFF8F0" }}>
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="text-xl">🌱</span>
-                </div>
-                <p className="text-sm text-orange-900 leading-relaxed whitespace-pre-line">{`Quer continuar aprendendo? Explore os outros módulos do Trilha EJA-EPT:
-- Glossário do Eletricista — termos técnicos explicados
-- Caminhos de Estudo — cursos e formações na área
-- Mapa da Vida — construa seus projetos de futuro`}</p>
-              </div>
               <Button onClick={onBack} variant="outline" className="w-full h-14 rounded-xl text-base">
                 ← Voltar aos guias
               </Button>
