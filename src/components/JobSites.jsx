@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { ArrowLeft, ChevronDown, ChevronUp } from "lucide-react";
-import GridCard2x2 from "./GridCard2x2";
 import AccordionSection from "./AccordionSection";
 
 // ── Dados ──────────────────────────────────────────────────────────────────────
@@ -96,63 +95,54 @@ export default function JobSites({ onBack }) {
 
         {/* ── Seção 1 — Serviços Públicos Gratuitos ── */}
         <SecaoHeader titulo="🏛️ Serviços Públicos Gratuitos" subtitulo="Serviços do governo para apoiar o trabalhador(a)" />
-        <div className="grid grid-cols-2 gap-2">
-          <GridCard2x2
-            emoji="🏛️"
-            titulo="SINE"
-            texto="Serviço público gratuito para busca de trabalho e encaminhamento para entrevistas."
-            url="https://servicos.mte.gov.br/spme-v2/#/login"
-          />
-        </div>
+        <AccordionSection titulo="🏛️ SINE">
+          <p className="text-sm text-muted-foreground leading-relaxed">Serviço público gratuito para busca de trabalho e encaminhamento para entrevistas.</p>
+          <a href="https://servicos.mte.gov.br/spme-v2/#/login" target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all">🔗 Acessar</a>
+        </AccordionSection>
 
         {/* ── Seção 2 — Plataformas Nacionais ── */}
         <SecaoHeader titulo="🌎 Plataformas Nacionais" subtitulo="Portais com vagas em todo o Brasil" />
-        <div className="grid grid-cols-2 gap-2">
-          {plataformasNacionais.map((p, i) => <GridCard2x2 key={i} {...p} />)}
-        </div>
+        {plataformasNacionais.map((p, i) => (
+          <AccordionSection key={i} titulo={`${p.emoji} ${p.titulo}`}>
+            <p className="text-sm text-muted-foreground leading-relaxed">{p.texto}</p>
+            <a href={p.url} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all">🔗 Acessar</a>
+          </AccordionSection>
+        ))}
 
         {/* ── Seção 3 — Blumenau e Região ── */}
         <SecaoHeader titulo="📍 Oportunidades em Blumenau e Região" subtitulo="Plataformas com foco no Vale do Itajaí" />
-        <div className="grid grid-cols-2 gap-2">
-          {plataformasRegionais.map((p, i) => <GridCard2x2 key={i} {...p} />)}
-        </div>
+        {plataformasRegionais.map((p, i) => (
+          <AccordionSection key={i} titulo={`${p.emoji} ${p.titulo}`}>
+            <p className="text-sm text-muted-foreground leading-relaxed">{p.texto}</p>
+            <a href={p.url} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all">🔗 Acessar</a>
+          </AccordionSection>
+        ))}
 
         {/* ── Seção 4 — Como se Preparar (Acordeão) ── */}
         <SecaoHeader titulo="📋 Como se Preparar" subtitulo="Dicas práticas, entrevistas, documentos e segurança" />
 
-        <AccordionSection titulo="💡 Dicas para Procurar Oportunidades">
-          {dicasVagas.map((d, i) => (
-            <div key={i} className="p-3 bg-muted/30 rounded-xl">
-              <div className="flex items-center gap-2 mb-1">
-                <span className="text-lg">{d.emoji}</span>
-                <h4 className="font-bold text-xs">{d.titulo}</h4>
-              </div>
-              <p className="text-xs text-muted-foreground leading-relaxed whitespace-pre-line">{d.texto}</p>
-            </div>
-          ))}
+        {dicasVagas.map((d, i) => (
+          <AccordionSection key={i} titulo={`${d.emoji} ${d.titulo}`}>
+            <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">{d.texto}</p>
+          </AccordionSection>
+        ))}
+
+        <div className="bg-blue-50 border border-blue-200 rounded-xl p-3">
+          <p className="text-xs leading-relaxed">
+            A entrevista é uma conversa — não um interrogatório. Você tem uma história, saberes e experiências que têm valor.
+          </p>
+        </div>
+
+        <AccordionSection titulo="📋 Antes da Entrevista">
+          <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">{`• Pesquise sobre a empresa\n- Leia atentamente a descrição da vaga\n- Revise seu currículo\n- Organize seus documentos\n- Planeje seu deslocamento com antecedência`}</p>
         </AccordionSection>
 
-        <AccordionSection titulo="🎤 Participando de Processos Seletivos">
-          <div className="bg-blue-50 border border-blue-200 rounded-xl p-3">
-            <p className="text-xs leading-relaxed">
-              A entrevista é uma conversa — não um interrogatório. Você tem uma história, saberes e experiências que têm valor.
-            </p>
-          </div>
-          <div className="p-3 bg-muted/30 rounded-xl">
-            <h4 className="font-bold text-xs mb-1">📋 Antes da Entrevista</h4>
-            <p className="text-xs text-muted-foreground leading-relaxed whitespace-pre-line">{`• Pesquise sobre a empresa\n- Leia atentamente a descrição da vaga\n- Revise seu currículo\n- Organize seus documentos\n- Planeje seu deslocamento com antecedência`}</p>
-          </div>
-          <div className="p-3 bg-muted/30 rounded-xl">
-            <h4 className="font-bold text-xs mb-1">🎯 Durante a Entrevista</h4>
-            <p className="text-xs text-muted-foreground leading-relaxed whitespace-pre-line">{`• Fale com tranquilidade\n- Valorize sua trajetória de vida e trabalho\n- Seja sincero(a) sobre suas experiências\n- Demonstre interesse em aprender\n- Faça perguntas sobre a vaga — isso demonstra interesse`}</p>
-          </div>
-          <div className="bg-card border border-border rounded-xl p-3 space-y-1">
-            <div className="flex items-center gap-2 mb-1">
-              <span className="text-lg">💬</span>
-              <h4 className="font-bold text-xs">Perguntas Frequentes</h4>
-            </div>
-            {perguntasEntrevista.map((p, i) => <PerguntaCard key={i} {...p} />)}
-          </div>
+        <AccordionSection titulo="🎯 Durante a Entrevista">
+          <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">{`• Fale com tranquilidade\n- Valorize sua trajetória de vida e trabalho\n- Seja sincero(a) sobre suas experiências\n- Demonstre interesse em aprender\n- Faça perguntas sobre a vaga — isso demonstra interesse`}</p>
+        </AccordionSection>
+
+        <AccordionSection titulo="💬 Perguntas Frequentes">
+          {perguntasEntrevista.map((p, i) => <PerguntaCard key={i} {...p} />)}
         </AccordionSection>
 
         <AccordionSection titulo="📄 Documentos Necessários">

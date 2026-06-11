@@ -1,5 +1,4 @@
 import { ArrowLeft } from "lucide-react";
-import GridCard2x2 from "./GridCard2x2";
 import AccordionSection from "./AccordionSection";
 
 const todosSites = [
@@ -63,15 +62,16 @@ export default function InternshipSites({ onBack }) {
         {/* ── Grade de Sites ── */}
         <div>
           <h2 className="font-extrabold text-sm mb-3">🌐 Plataformas de Estágio</h2>
-          <div className="grid grid-cols-2 gap-2">
-            {todosSites.map((s, i) => <GridCard2x2 key={i} {...s} />)}
-            <GridCard2x2
-              emoji="🏛️"
-              titulo="Emprega Brasil"
-              texto="Portal oficial do governo federal. Cadastre seu perfil e busque vagas de estágio e emprego em todo o Brasil. Totalmente gratuito."
-              url="https://servicos.mte.gov.br/spme-v2/#/login"
-            />
-          </div>
+          {todosSites.map((s, i) => (
+            <AccordionSection key={i} titulo={`${s.emoji} ${s.titulo}`}>
+              <p className="text-sm text-muted-foreground leading-relaxed">{s.texto}</p>
+              <a href={s.url} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all">🔗 Acessar</a>
+            </AccordionSection>
+          ))}
+          <AccordionSection titulo="🏛️ Emprega Brasil">
+            <p className="text-sm text-muted-foreground leading-relaxed">Portal oficial do governo federal. Cadastre seu perfil e busque vagas de estágio e emprego em todo o Brasil. Totalmente gratuito.</p>
+            <a href="https://servicos.mte.gov.br/spme-v2/#/login" target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all">🔗 Acessar</a>
+          </AccordionSection>
         </div>
 
         {/* ── IFC e Rede Federal (Acordeão) ── */}

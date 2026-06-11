@@ -1,4 +1,4 @@
-import GridCard2x2 from "../GridCard2x2";
+import AccordionSection from "../AccordionSection";
 
 const categoria1 = [
   {
@@ -84,11 +84,12 @@ export default function AbaFerramentasDigitais() {
       {/* Categoria 1 */}
       <div className="pt-1">
         <h2 className="font-extrabold text-sm mb-3">📚 Para Aprender e Estudar</h2>
-        <div className="grid grid-cols-2 gap-2">
-          {categoria1.map((f) => (
-            <GridCard2x2 key={f.titulo} emoji={f.emoji} titulo={f.titulo} texto={f.texto} url={f.url} />
-          ))}
-        </div>
+        {categoria1.map((f) => (
+          <AccordionSection key={f.titulo} titulo={`${f.emoji} ${f.titulo}`}>
+            <p className="text-sm text-muted-foreground leading-relaxed">{f.texto}</p>
+            <a href={f.url} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all">{f.botao || "🔗 Acessar"}</a>
+          </AccordionSection>
+        ))}
       </div>
 
       {/* Categoria 2 */}
@@ -99,11 +100,12 @@ export default function AbaFerramentasDigitais() {
             💡 Organizar os estudos é tão importante quanto estudar. Estas ferramentas ajudam a planejar sua semana, guardar materiais e fazer anotações rápidas — tudo pelo celular.
           </p>
         </div>
-        <div className="grid grid-cols-2 gap-2">
-          {categoria2.map((f) => (
-            <GridCard2x2 key={f.titulo} emoji={f.emoji} titulo={f.titulo} texto={f.texto} url={f.url} />
-          ))}
-        </div>
+        {categoria2.map((f) => (
+          <AccordionSection key={f.titulo} titulo={`${f.emoji} ${f.titulo}`}>
+            <p className="text-sm text-muted-foreground leading-relaxed">{f.texto}</p>
+            <a href={f.url} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all">{f.botao || "🔗 Acessar"}</a>
+          </AccordionSection>
+        ))}
       </div>
     </div>
   );
