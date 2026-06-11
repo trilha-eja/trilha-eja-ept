@@ -26,49 +26,35 @@ export default function SubEnem({ onBack, onNavigate }) {
         </div>
 
         {/* Card 1 — O que é o ENEM? */}
-        <div className="border border-border rounded-2xl p-4 bg-card flex items-start gap-3">
-          <span className="text-xl shrink-0 mt-0.5">🎓</span>
-          <div>
-            <p className="font-bold text-sm mb-1">O que é o ENEM?</p>
-            <p className="text-xs text-muted-foreground leading-relaxed">O Exame Nacional do Ensino Médio avalia o desempenho escolar ao final da educação básica. A nota pode ser usada para:</p>
-            <ul className="mt-1.5 space-y-1 text-xs text-muted-foreground">
-              <li>• Ingressar em universidades públicas gratuitas pelo SISU</li>
-              <li>• Concorrer a bolsas em faculdades particulares pelo PROUNI</li>
-              <li>• Solicitar financiamento estudantil pelo FIES</li>
-              <li>• Ingressar diretamente em algumas instituições de ensino</li>
-            </ul>
-          </div>
-        </div>
+        <AccordionSection titulo="🎓 O que é o ENEM?">
+          <p className="text-sm text-muted-foreground leading-relaxed">O Exame Nacional do Ensino Médio avalia o desempenho escolar ao final da educação básica. A nota pode ser usada para:</p>
+          <ul className="mt-1.5 space-y-1 text-sm text-muted-foreground">
+            <li>• Ingressar em universidades públicas gratuitas pelo SISU</li>
+            <li>• Concorrer a bolsas em faculdades particulares pelo PROUNI</li>
+            <li>• Solicitar financiamento estudantil pelo FIES</li>
+            <li>• Ingressar diretamente em algumas instituições de ensino</li>
+          </ul>
+        </AccordionSection>
 
         {/* Card 2 — Quem pode participar? */}
-        <div className="border border-border rounded-2xl p-4 bg-card space-y-2">
-          <div className="flex items-start gap-3">
-            <span className="text-xl shrink-0 mt-0.5">👥</span>
-            <div>
-              <p className="font-bold text-sm mb-1">Quem pode participar?</p>
-              <p className="text-xs text-muted-foreground leading-relaxed">Qualquer pessoa pode fazer o ENEM, independentemente da idade ou do ano em que concluiu o Ensino Médio. Estudantes da EJA também podem participar normalmente.</p>
-            </div>
+        <AccordionSection titulo="👥 Quem pode participar?">
+          <p className="text-sm text-muted-foreground leading-relaxed">Qualquer pessoa pode fazer o ENEM, independentemente da idade ou do ano em que concluiu o Ensino Médio. Estudantes da EJA também podem participar normalmente.</p>
+          <div className="mt-2 bg-accent/10 border border-accent/20 rounded-xl p-3">
+            <p className="text-sm leading-relaxed text-foreground">💡 Estudantes de escola pública e pessoas de baixa renda podem solicitar isenção da taxa de inscrição. Verifique as condições no site oficial do INEP.</p>
           </div>
-          <div className="bg-accent/10 border border-accent/20 rounded-xl p-3">
-            <p className="text-xs leading-relaxed text-foreground">💡 Estudantes de escola pública e pessoas de baixa renda podem solicitar isenção da taxa de inscrição. Verifique as condições no site oficial do INEP.</p>
-          </div>
-        </div>
+        </AccordionSection>
 
         {/* Card 3 — Como se inscrever? */}
-        <div className="border border-border rounded-2xl p-4 bg-card space-y-2">
-          <div className="flex items-start gap-3">
-            <span className="text-xl shrink-0 mt-0.5">📝</span>
-            <div>
-              <p className="font-bold text-sm mb-1">Como se inscrever?</p>
-              <p className="text-xs text-muted-foreground leading-relaxed">As inscrições são feitas pelo site oficial do INEP, totalmente online. É necessário criar uma conta com seus dados pessoais.</p>
-              <p className="text-xs text-muted-foreground leading-relaxed mt-1">Fique atento às datas de inscrição divulgadas anualmente no site oficial — elas mudam a cada edição.</p>
-            </div>
+        <AccordionSection titulo="📝 Como se inscrever?">
+          <p className="text-sm text-muted-foreground leading-relaxed">As inscrições são feitas pelo site oficial do INEP, totalmente online. É necessário criar uma conta com seus dados pessoais.</p>
+          <p className="text-sm text-muted-foreground leading-relaxed mt-1">Fique atento às datas de inscrição divulgadas anualmente no site oficial — elas mudam a cada edição.</p>
+          <div className="mt-3">
+            <a href="https://enem.inep.gov.br" target="_blank" rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all">
+              🔗 Acessar site oficial do ENEM
+            </a>
           </div>
-          <a href="https://enem.inep.gov.br" target="_blank" rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all">
-            🔗 Acessar site oficial do ENEM
-          </a>
-        </div>
+        </AccordionSection>
 
         {/* Card 4 — O que é avaliado? */}
         <AccordionSection titulo="📚 O que é avaliado?">

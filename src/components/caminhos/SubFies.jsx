@@ -16,13 +16,9 @@ export default function SubFies({ onBack }) {
         </div>
 
         {/* Card — O que é o FIES? */}
-        <div className="border border-border rounded-2xl p-4 bg-card flex items-start gap-3">
-          <span className="text-xl shrink-0 mt-0.5">🎓</span>
-          <div>
-            <p className="font-bold text-sm mb-1">O que é o FIES?</p>
-            <p className="text-xs text-muted-foreground leading-relaxed">O FIES (Fundo de Financiamento Estudantil) é um programa do governo federal que financia parte ou a totalidade das mensalidades de faculdades privadas. Durante o curso você paga uma parcela mínima. Após se formar, tem um prazo para quitar o restante com juros. É um empréstimo — não uma bolsa.</p>
-          </div>
-        </div>
+        <AccordionSection titulo="🎓 O que é o FIES?">
+          <p className="text-sm text-muted-foreground leading-relaxed">O FIES (Fundo de Financiamento Estudantil) é um programa do governo federal que financia parte ou a totalidade das mensalidades de faculdades privadas. Durante o curso você paga uma parcela mínima. Após se formar, tem um prazo para quitar o restante com juros. É um empréstimo — não uma bolsa.</p>
+        </AccordionSection>
 
         {/* Card — Quem pode participar? */}
         <AccordionSection titulo="📋 Quem pode participar?">
@@ -74,13 +70,9 @@ export default function SubFies({ onBack }) {
         </AccordionSection>
 
         {/* Card — FIES x PROUNI — manter exatamente */}
-        <div className="border border-border rounded-2xl p-4 bg-card flex items-start gap-3">
-          <span className="text-xl shrink-0 mt-0.5">🔄</span>
-          <div>
-            <p className="font-bold text-sm mb-1">FIES x PROUNI — qual escolher?</p>
-            <p className="text-xs text-muted-foreground leading-relaxed">Se você tem renda familiar de até 3 salários mínimos por pessoa, tente primeiro o PROUNI — é bolsa, não empréstimo. Use o FIES apenas se não conseguir o PROUNI ou o SISU, e se tiver certeza que conseguirá pagar a dívida depois de formado(a).</p>
-          </div>
-        </div>
+        <AccordionSection titulo="🔄 FIES x PROUNI — qual escolher?">
+          <p className="text-sm text-muted-foreground leading-relaxed">Se você tem renda familiar de até 3 salários mínimos por pessoa, tente primeiro o PROUNI — é bolsa, não empréstimo. Use o FIES apenas se não conseguir o PROUNI ou o SISU, e se tiver certeza que conseguirá pagar a dívida depois de formado(a).</p>
+        </AccordionSection>
 
         {/* Card — Como se inscrever? */}
         <AccordionSection titulo="📝 Como se inscrever?">

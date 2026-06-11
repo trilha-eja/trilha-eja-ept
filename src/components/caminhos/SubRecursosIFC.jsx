@@ -30,11 +30,7 @@ export default function SubRecursosIFC({ onBack }) {
         </div>
 
         {/* Portal do Estudante */}
-        <div className="bg-card border border-border rounded-2xl p-4 space-y-3">
-          <div className="flex items-center gap-2">
-            <span className="text-2xl">🏫</span>
-            <h2 className="font-bold text-sm">Portal do Estudante IFC</h2>
-          </div>
+        <AccordionSection titulo="🏫 Portal do Estudante IFC">
           <p className="text-sm text-muted-foreground leading-relaxed">
             Acesse informações sobre auxílios estudantis, programas de permanência, bolsas, editais, apoio estudantil e outras oportunidades oferecidas pelo IFC.
           </p>
@@ -42,22 +38,18 @@ export default function SubRecursosIFC({ onBack }) {
             href="https://estudante.ifc.edu.br"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center text-xs font-bold px-4 py-2.5 rounded-xl bg-primary text-white hover:bg-primary/90 active:scale-95 transition-all"
+            className="mt-3 inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all"
           >
             🔗 Acessar Portal
           </a>
-        </div>
+        </AccordionSection>
 
         {/* Auxílios e Apoio */}
-        <div className="bg-card border border-border rounded-2xl p-4">
-          <div className="flex items-center gap-2 mb-2">
-            <span className="text-2xl">💰</span>
-            <h2 className="font-bold text-sm">Auxílios e Apoio Estudantil</h2>
-          </div>
+        <AccordionSection titulo="💰 Auxílios e Apoio Estudantil">
           <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">
             {`Procure o SISAE — Serviço Integrado de Suporte e Acompanhamento Educacional do seu campus.\nA equipe orienta sobre:\n- Auxílios financeiros\n- Bolsas\n- Programas de permanência\n- Outros serviços de apoio\n\nVocê também pode procurar:\n- Coordenação do Curso\n- Professores\n- Secretaria Acadêmica\n\nVocê não precisa enfrentar as dificuldades sozinho(a).`}
           </p>
-        </div>
+        </AccordionSection>
 
         {/* Portal de Ingresso */}
         <AccordionSection titulo="📋 Portal de Ingresso IFC">

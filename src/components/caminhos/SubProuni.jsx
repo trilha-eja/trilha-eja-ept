@@ -13,53 +13,39 @@ export default function SubProuni({ onBack }) {
         </div>
 
         {/* Card 1 — O que é o PROUNI? */}
-        <div className="border border-border rounded-2xl p-4 bg-card flex items-start gap-3">
-          <span className="text-xl shrink-0 mt-0.5">🎁</span>
-          <div>
-            <p className="font-bold text-sm mb-1">O que é o PROUNI?</p>
-            <p className="text-xs text-muted-foreground leading-relaxed">O Programa Universidade para Todos oferece bolsas de estudo em faculdades particulares. Existem dois tipos:</p>
-            <ul className="mt-1.5 space-y-1 text-xs text-muted-foreground">
-              <li>• <strong>Bolsa integral</strong> — cobre 100% da mensalidade</li>
-              <li>• <strong>Bolsa parcial</strong> — cobre 50% da mensalidade</li>
-            </ul>
-            <p className="text-xs text-muted-foreground leading-relaxed mt-1.5">Diferente do FIES, o PROUNI é uma bolsa — não um empréstimo. Você não precisa devolver nada.</p>
-          </div>
-        </div>
+        <AccordionSection titulo="🎁 O que é o PROUNI?">
+          <p className="text-sm text-muted-foreground leading-relaxed">O Programa Universidade para Todos oferece bolsas de estudo em faculdades particulares. Existem dois tipos:</p>
+          <ul className="mt-1.5 space-y-1 text-sm text-muted-foreground">
+            <li>• <strong>Bolsa integral</strong> — cobre 100% da mensalidade</li>
+            <li>• <strong>Bolsa parcial</strong> — cobre 50% da mensalidade</li>
+          </ul>
+          <p className="text-sm text-muted-foreground leading-relaxed mt-1.5">Diferente do FIES, o PROUNI é uma bolsa — não um empréstimo. Você não precisa devolver nada.</p>
+        </AccordionSection>
 
         {/* Card 2 — Quem pode participar? */}
-        <div className="border border-border rounded-2xl p-4 bg-card space-y-2">
-          <div className="flex items-start gap-3">
-            <span className="text-xl shrink-0 mt-0.5">👥</span>
-            <div>
-              <p className="font-bold text-sm mb-1">Quem pode participar?</p>
-              <p className="text-xs text-muted-foreground leading-relaxed">Para concorrer ao PROUNI você precisa:</p>
-              <ul className="mt-1.5 space-y-1 text-xs text-muted-foreground">
-                <li>• Ter feito o ENEM</li>
-                <li>• Ter atingido a pontuação mínima exigida (exceto na redação nota zero)</li>
-                <li>• Não ter diploma de curso superior</li>
-                <li>• Atender aos critérios de renda familiar</li>
-              </ul>
-              <p className="text-xs text-muted-foreground leading-relaxed mt-1.5">Verifique os critérios atualizados no site oficial do PROUNI — as regras podem mudar a cada edição.</p>
-            </div>
+        <AccordionSection titulo="👥 Quem pode participar?">
+          <p className="text-sm text-muted-foreground leading-relaxed">Para concorrer ao PROUNI você precisa:</p>
+          <ul className="mt-1.5 space-y-1 text-sm text-muted-foreground">
+            <li>• Ter feito o ENEM</li>
+            <li>• Ter atingido a pontuação mínima exigida (exceto na redação nota zero)</li>
+            <li>• Não ter diploma de curso superior</li>
+            <li>• Atender aos critérios de renda familiar</li>
+          </ul>
+          <p className="text-sm text-muted-foreground leading-relaxed mt-1.5">Verifique os critérios atualizados no site oficial do PROUNI — as regras podem mudar a cada edição.</p>
+          <div className="mt-2 bg-blue-50 border border-blue-200 rounded-xl p-3">
+            <p className="text-sm leading-relaxed text-foreground">💡 Há vagas reservadas para professores da rede pública, pessoas com deficiência e indígenas — mesmo que não atendam aos critérios de renda.</p>
           </div>
-          <div className="bg-blue-50 border border-blue-200 rounded-xl p-3">
-            <p className="text-xs leading-relaxed text-foreground">💡 Há vagas reservadas para professores da rede pública, pessoas com deficiência e indígenas — mesmo que não atendam aos critérios de renda.</p>
-          </div>
-        </div>
+        </AccordionSection>
 
         {/* Card 3 — Critério de renda */}
-        <div className="border border-border rounded-2xl p-4 bg-card flex items-start gap-3">
-          <span className="text-xl shrink-0 mt-0.5">💰</span>
-          <div>
-            <p className="font-bold text-sm mb-1">Critério de renda</p>
-            <p className="text-xs text-muted-foreground leading-relaxed">O PROUNI tem critérios de renda familiar por pessoa. Os valores são atualizados anualmente e variam conforme o tipo de bolsa:</p>
-            <ul className="mt-1.5 space-y-1 text-xs text-muted-foreground">
-              <li>• <strong>Bolsa integral:</strong> renda menor</li>
-              <li>• <strong>Bolsa parcial:</strong> renda um pouco maior</li>
-            </ul>
-            <p className="text-xs text-muted-foreground leading-relaxed mt-1.5">Consulte os valores exatos no site oficial do PROUNI — eles mudam a cada edição.</p>
-          </div>
-        </div>
+        <AccordionSection titulo="💰 Critério de renda">
+          <p className="text-sm text-muted-foreground leading-relaxed">O PROUNI tem critérios de renda familiar por pessoa. Os valores são atualizados anualmente e variam conforme o tipo de bolsa:</p>
+          <ul className="mt-1.5 space-y-1 text-sm text-muted-foreground">
+            <li>• <strong>Bolsa integral:</strong> renda menor</li>
+            <li>• <strong>Bolsa parcial:</strong> renda um pouco maior</li>
+          </ul>
+          <p className="text-sm text-muted-foreground leading-relaxed mt-1.5">Consulte os valores exatos no site oficial do PROUNI — eles mudam a cada edição.</p>
+        </AccordionSection>
 
         {/* Card 4 — Cursos disponíveis */}
         <AccordionSection titulo="🏫 Quais cursos disponíveis?">

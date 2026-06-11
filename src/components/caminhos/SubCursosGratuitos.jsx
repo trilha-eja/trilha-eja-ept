@@ -1,27 +1,5 @@
 import PageHeader from "../PageHeader";
-import GridCard2x2 from "../GridCard2x2";
 import AccordionSection from "../AccordionSection";
-
-function CardCurso({ emoji, titulo, texto, url, urlLabel, children }) {
-  return (
-    <div className="border border-border rounded-2xl p-4 bg-card flex items-start gap-3">
-      <span className="text-xl shrink-0 mt-0.5">{emoji}</span>
-      <div className="flex-1 min-w-0">
-        <h3 className="font-bold text-sm mb-1 leading-snug">{titulo}</h3>
-        <p className="text-xs text-muted-foreground leading-relaxed">{texto}</p>
-        {children}
-        {url && (
-          <div className="mt-3">
-            <a href={url} target="_blank" rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all">
-              {urlLabel || "🔗 Acessar"}
-            </a>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-}
 
 function CategoriaHeader({ titulo, subtitulo }) {
   return (
@@ -65,29 +43,34 @@ export default function SubCursosGratuitos({ onBack }) {
           subtitulo="Plataformas gratuitas para aprender no seu tempo"
         />
 
-        <div className="grid grid-cols-2 gap-2">
-          <GridCard2x2 emoji="🏛️" titulo="Escola Virtual do Governo"
-            texto="Cursos gratuitos e certificados do governo federal. Informática, gestão, cidadania e muito mais."
-            url="https://www.escolavirtual.gov.br" />
-          <GridCard2x2 emoji="🏛️" titulo="ENAP"
-            texto="Escola Nacional de Administração Pública. Cursos gratuitos em gestão, liderança, tecnologia e cidadania."
-            url="https://www.enap.gov.br" />
-          <GridCard2x2 emoji="🌐" titulo="Fundação Bradesco"
-            texto="Cursos online gratuitos de informática, administração, contabilidade e mais. Certificado gratuito."
-            url="https://www.ev.org.br" />
-          <GridCard2x2 emoji="💼" titulo="SEBRAE"
-            texto="Cursos gratuitos para quem quer empreender ou desenvolver habilidades profissionais."
-            url="https://sc.loja.sebrae.com.br" />
-          <GridCard2x2 emoji="🚛" titulo="SEST SENAT"
-            texto="Cursos gratuitos para trabalhadores do transporte e outras áreas. Certificado gratuito."
-            url="https://digital.sestsenat.org.br" />
-          <GridCard2x2 emoji="📖" titulo="Aprenda Mais — MEC"
-            texto="Portal oficial do MEC com recursos educacionais gratuitos para estudantes e professores."
-            url="https://aprendamais.mec.gov.br" />
-          <GridCard2x2 emoji="📚" titulo="MEC Livros"
-            texto="Biblioteca digital gratuita do governo federal com livros didáticos e de literatura."
-            url="https://meclivros.mec.gov.br" />
-        </div>
+        <AccordionSection titulo="🏛️ Escola Virtual do Governo">
+          <p className="text-sm text-muted-foreground leading-relaxed">Cursos gratuitos e certificados do governo federal. Informática, gestão, cidadania e muito mais.</p>
+          <a href="https://www.escolavirtual.gov.br" target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all">🔗 Acessar</a>
+        </AccordionSection>
+        <AccordionSection titulo="🏛️ ENAP">
+          <p className="text-sm text-muted-foreground leading-relaxed">Escola Nacional de Administração Pública. Cursos gratuitos em gestão, liderança, tecnologia e cidadania.</p>
+          <a href="https://www.enap.gov.br" target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all">🔗 Acessar</a>
+        </AccordionSection>
+        <AccordionSection titulo="🌐 Fundação Bradesco">
+          <p className="text-sm text-muted-foreground leading-relaxed">Cursos online gratuitos de informática, administração, contabilidade e mais. Certificado gratuito.</p>
+          <a href="https://www.ev.org.br" target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all">🔗 Acessar</a>
+        </AccordionSection>
+        <AccordionSection titulo="💼 SEBRAE">
+          <p className="text-sm text-muted-foreground leading-relaxed">Cursos gratuitos para quem quer empreender ou desenvolver habilidades profissionais.</p>
+          <a href="https://sc.loja.sebrae.com.br" target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all">🔗 Acessar</a>
+        </AccordionSection>
+        <AccordionSection titulo="🚛 SEST SENAT">
+          <p className="text-sm text-muted-foreground leading-relaxed">Cursos gratuitos para trabalhadores do transporte e outras áreas. Certificado gratuito.</p>
+          <a href="https://digital.sestsenat.org.br" target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all">🔗 Acessar</a>
+        </AccordionSection>
+        <AccordionSection titulo="📖 Aprenda Mais — MEC">
+          <p className="text-sm text-muted-foreground leading-relaxed">Portal oficial do MEC com recursos educacionais gratuitos para estudantes e professores.</p>
+          <a href="https://aprendamais.mec.gov.br" target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all">🔗 Acessar</a>
+        </AccordionSection>
+        <AccordionSection titulo="📚 MEC Livros">
+          <p className="text-sm text-muted-foreground leading-relaxed">Biblioteca digital gratuita do governo federal com livros didáticos e de literatura.</p>
+          <a href="https://meclivros.mec.gov.br" target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all">🔗 Acessar</a>
+        </AccordionSection>
 
         {/* CATEGORIA 2 — Formação Técnica e Superior */}
         <CategoriaHeader
@@ -99,43 +82,47 @@ export default function SubCursosGratuitos({ onBack }) {
           <p className="text-xs leading-relaxed text-foreground">💡 Os Institutos Federais e as Universidades Federais oferecem educação pública, gratuita e de qualidade. O ingresso é por processo seletivo — acompanhe os editais e inscrições.</p>
         </div>
 
-        <div className="grid grid-cols-2 gap-2">
-          <GridCard2x2 emoji="🎓" titulo="IFC"
-            texto="O IFC oferece cursos técnicos, de graduação e pós-graduação gratuitos em Santa Catarina."
-            url="https://ingresso.ifc.edu.br/guia-de-cursos" />
-          <GridCard2x2 emoji="🎓" titulo="IFSC"
-            texto="O IFSC oferece cursos técnicos e superiores gratuitos em todo o estado de SC."
-            url="https://www.ifsc.edu.br/cursos" />
-          <GridCard2x2 emoji="🏫" titulo="Institutos Federais"
-            texto="Cursos técnicos e superiores 100% gratuitos em todo o Brasil. Pesquise: 'Instituto Federal + sua cidade'." />
-          <GridCard2x2 emoji="🎓" titulo="Universidades Federais"
-            texto="Graduação gratuita em diversas áreas em todo o Brasil. Ingresso principal pelo SISU com nota do ENEM." />
-          <GridCard2x2 emoji="💻" titulo="UAB"
-            texto="Graduação a distância gratuita em universidades públicas. Ideal para estudar de casa."
-            url="https://www.gov.br/capes/pt-br/acesso-a-informacao/acoes-e-programas/articulacao-e-inovacao-em-educacao-aberta/sistema-universidade-aberta-do-brasil" />
-        </div>
+        <AccordionSection titulo="🎓 IFC">
+          <p className="text-sm text-muted-foreground leading-relaxed">O IFC oferece cursos técnicos, de graduação e pós-graduação gratuitos em Santa Catarina.</p>
+          <a href="https://ingresso.ifc.edu.br/guia-de-cursos" target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all">🔗 Acessar</a>
+        </AccordionSection>
+        <AccordionSection titulo="🎓 IFSC">
+          <p className="text-sm text-muted-foreground leading-relaxed">O IFSC oferece cursos técnicos e superiores gratuitos em todo o estado de SC.</p>
+          <a href="https://www.ifsc.edu.br/cursos" target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all">🔗 Acessar</a>
+        </AccordionSection>
+        <AccordionSection titulo="🏫 Institutos Federais">
+          <p className="text-sm text-muted-foreground leading-relaxed">Cursos técnicos e superiores 100% gratuitos em todo o Brasil. Pesquise: "Instituto Federal + sua cidade".</p>
+        </AccordionSection>
+        <AccordionSection titulo="🎓 Universidades Federais">
+          <p className="text-sm text-muted-foreground leading-relaxed">Graduação gratuita em diversas áreas em todo o Brasil. Ingresso principal pelo SISU com nota do ENEM.</p>
+        </AccordionSection>
+        <AccordionSection titulo="💻 UAB">
+          <p className="text-sm text-muted-foreground leading-relaxed">Graduação a distância gratuita em universidades públicas. Ideal para estudar de casa.</p>
+          <a href="https://www.gov.br/capes/pt-br/acesso-a-informacao/acoes-e-programas/articulacao-e-inovacao-em-educacao-aberta/sistema-universidade-aberta-do-brasil" target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all">🔗 Acessar</a>
+        </AccordionSection>
 
         {/* SENAI e SENAC em acordeão */}
         <AccordionSection titulo="⚠️ SENAI e SENAC — Cursos com vagas gratuitas periódicas">
           <div className="bg-yellow-50 border border-yellow-300 rounded-xl p-3">
             <p className="text-xs leading-relaxed text-foreground">⚠️ <strong>Atenção:</strong> a maioria dos cursos é paga. Porém, periodicamente são abertas vagas gratuitas por editais e programas especiais. Fique atento e candidate-se quando abrirem.</p>
           </div>
-          <div className="grid grid-cols-2 gap-2">
-            <GridCard2x2 emoji="⚙️" titulo="SENAI"
-              texto="Cursos técnicos na área industrial, incluindo eletricidade. Acompanhe os editais de vagas gratuitas."
-              url="https://sc.senai.br/pt-br/editais-gratuidade-senai" />
-            <GridCard2x2 emoji="🛎️" titulo="SENAC"
-              texto="Cursos em comércio, gastronomia, beleza, informática e mais. Acompanhe as vagas gratuitas."
-              url="https://portal.sc.senac.br/cursos-gratuitos" />
-          </div>
+          <AccordionSection titulo="⚙️ SENAI">
+            <p className="text-sm text-muted-foreground leading-relaxed">Cursos técnicos na área industrial, incluindo eletricidade. Acompanhe os editais de vagas gratuitas.</p>
+            <a href="https://sc.senai.br/pt-br/editais-gratuidade-senai" target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all">🔗 Acessar</a>
+          </AccordionSection>
+          <AccordionSection titulo="🛎️ SENAC">
+            <p className="text-sm text-muted-foreground leading-relaxed">Cursos em comércio, gastronomia, beleza, informática e mais. Acompanhe as vagas gratuitas.</p>
+            <a href="https://portal.sc.senac.br/cursos-gratuitos" target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all">🔗 Acessar</a>
+          </AccordionSection>
         </AccordionSection>
 
         {/* Certificação da Educação Básica */}
         <CategoriaHeader titulo="📋 Certificação da Educação Básica" />
 
-        <CardCurso emoji="📋" titulo="ENCCEJA"
-          texto="O ENCCEJA é um exame gratuito do governo para quem não concluiu o Ensino Fundamental ou Médio e deseja obter a certificação. Ter o certificado do Ensino Médio amplia suas possibilidades de acesso a cursos, concursos e processos seletivos."
-          url="https://encceja.inep.gov.br" urlLabel="🔗 Acessar site oficial" />
+        <AccordionSection titulo="📋 ENCCEJA">
+          <p className="text-sm text-muted-foreground leading-relaxed">O ENCCEJA é um exame gratuito do governo para quem não concluiu o Ensino Fundamental ou Médio e deseja obter a certificação. Ter o certificado do Ensino Médio amplia suas possibilidades de acesso a cursos, concursos e processos seletivos.</p>
+          <a href="https://encceja.inep.gov.br" target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all">🔗 Acessar site oficial</a>
+        </AccordionSection>
 
         <button onClick={onBack} className="w-full text-sm text-muted-foreground underline underline-offset-4 py-2">
           ← Voltar para Caminhos de Estudo

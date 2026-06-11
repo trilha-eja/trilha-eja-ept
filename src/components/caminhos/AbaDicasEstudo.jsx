@@ -1,3 +1,5 @@
+import AccordionSection from "../AccordionSection";
+
 const dicas = [
   {
     emoji: "🌱",
@@ -47,28 +49,17 @@ export default function AbaDicasEstudo({ onNavigate }) {
   return (
     <div className="space-y-3">
       {dicas.map((d) => (
-        <div
-          key={d.titulo}
-          className={`rounded-2xl p-4 flex items-start gap-3 ${
-            d.destaque
-              ? "bg-orange-50 border border-orange-200"
-              : "border border-border bg-card"
-          }`}
-        >
-          <span className="text-xl shrink-0 mt-0.5">{d.emoji}</span>
-          <div className="flex-1 min-w-0">
-            <h3 className="font-bold text-sm mb-1 leading-snug">{d.titulo}</h3>
-            <p className="text-xs text-muted-foreground leading-relaxed whitespace-pre-line">{d.texto}</p>
-            {d.linkFerramentas && onNavigate && (
-              <button
-                onClick={() => onNavigate("ferramentas")}
-                className="mt-3 inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all"
-              >
-                📱 Ver Ferramentas Digitais
-              </button>
-            )}
-          </div>
-        </div>
+        <AccordionSection key={d.titulo} titulo={`${d.emoji} ${d.titulo}`}>
+          <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">{d.texto}</p>
+          {d.linkFerramentas && onNavigate && (
+            <button
+              onClick={() => onNavigate("ferramentas")}
+              className="mt-3 inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all"
+            >
+              📱 Ver Ferramentas Digitais
+            </button>
+          )}
+        </AccordionSection>
       ))}
     </div>
   );

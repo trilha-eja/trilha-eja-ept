@@ -13,22 +13,14 @@ export default function SubSisu({ onBack }) {
         </div>
 
         {/* Card 1 — O que é o SISU? */}
-        <div className="border border-border rounded-2xl p-4 bg-card flex items-start gap-3">
-          <span className="text-xl shrink-0 mt-0.5">🎓</span>
-          <div>
-            <p className="font-bold text-sm mb-1">O que é o SISU?</p>
-            <p className="text-xs text-muted-foreground leading-relaxed">O Sistema de Seleção Unificada distribui vagas em universidades federais e estaduais públicas usando a nota do ENEM. Você não precisa fazer outra prova — basta usar a nota que já tirou no ENEM.</p>
-          </div>
-        </div>
+        <AccordionSection titulo="🎓 O que é o SISU?">
+          <p className="text-sm text-muted-foreground leading-relaxed">O Sistema de Seleção Unificada distribui vagas em universidades federais e estaduais públicas usando a nota do ENEM. Você não precisa fazer outra prova — basta usar a nota que já tirou no ENEM.</p>
+        </AccordionSection>
 
         {/* Card 2 — Como funciona na prática? */}
-        <div className="border border-border rounded-2xl p-4 bg-card flex items-start gap-3">
-          <span className="text-xl shrink-0 mt-0.5">🔍</span>
-          <div>
-            <p className="font-bold text-sm mb-1">Como funciona na prática?</p>
-            <p className="text-xs text-muted-foreground leading-relaxed">Após a divulgação das notas do ENEM, o SISU abre as inscrições. As datas mudam a cada edição — fique atento ao site oficial. Você acessa o site, informa sua nota e escolhe até 2 opções de curso e instituição. O sistema verifica automaticamente se sua nota é suficiente. É tudo online e gratuito.</p>
-          </div>
-        </div>
+        <AccordionSection titulo="🔍 Como funciona na prática?">
+          <p className="text-sm text-muted-foreground leading-relaxed">Após a divulgação das notas do ENEM, o SISU abre as inscrições. As datas mudam a cada edição — fique atento ao site oficial. Você acessa o site, informa sua nota e escolhe até 2 opções de curso e instituição. O sistema verifica automaticamente se sua nota é suficiente. É tudo online e gratuito.</p>
+        </AccordionSection>
 
         {/* Card 4 — Notas de corte */}
         <AccordionSection titulo="📊 Notas de corte">
@@ -45,13 +37,9 @@ export default function SubSisu({ onBack }) {
         </AccordionSection>
 
         {/* Card 5 — Cotas e vagas reservadas */}
-        <div className="border border-border rounded-2xl p-4 bg-card flex items-start gap-3">
-          <span className="text-xl shrink-0 mt-0.5">🏷️</span>
-          <div>
-            <p className="font-bold text-sm mb-1">Cotas e vagas reservadas</p>
-            <p className="text-xs text-muted-foreground leading-relaxed">As universidades federais reservam vagas para estudantes de escola pública, pessoas negras, pardas, indígenas e de baixa renda. Verifique se você tem direito a concorrer pelas cotas — pode aumentar muito suas chances de aprovação.</p>
-          </div>
-        </div>
+        <AccordionSection titulo="🏷️ Cotas e vagas reservadas">
+          <p className="text-sm text-muted-foreground leading-relaxed">As universidades federais reservam vagas para estudantes de escola pública, pessoas negras, pardas, indígenas e de baixa renda. Verifique se você tem direito a concorrer pelas cotas — pode aumentar muito suas chances de aprovação.</p>
+        </AccordionSection>
 
         {/* Card 6 — E se não passar na primeira chamada? */}
         <AccordionSection titulo="🔄 E se não passar?">
