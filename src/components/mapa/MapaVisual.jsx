@@ -212,6 +212,18 @@ export default function MapaVisual({ data, nome, onEdit }) {
   const mes = new Date().toLocaleDateString("pt-BR", { month: "long", year: "numeric" });
   const forca = data.hoje_forca || "";
 
+  function sanitizarTexto(texto) {
+    if (!texto) return "";
+    let t = String(texto);
+    t = t.replace(/<[^>]*>/g, "");
+    t = t.replace(/(\*{1,3}|_{1,3}|#{1,6}\s?|`{1,3})/g, "");
+    t = t.replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F-\x9F]/g, "");
+    t = t.replace(/[^\p{L}\p{N}\p{P}\p{Z}\n\r]/gu, "");
+    t = t.replace(/[ \t]+/g, " ");
+    t = t.replace(/\n{3,}/g, "\n\n");
+    return t.trim();
+  }
+
   async function gerarReflexao() {
     setLoadingReflexao(true);
     setErroReflexao(false);
@@ -219,7 +231,7 @@ export default function MapaVisual({ data, nome, onEdit }) {
     try {
       const result = await base44.integrations.Core.InvokeLLM({
         model: "claude_sonnet_4_6",
-        prompt: `SYSTEM: Você é um(a) educador(a) da EJA-EPT comprometido(a) com a formação humana integral e com a perspectiva freireana. Sua tarefa é escrever um texto reflexivo personalizado para um(a) estudante trabalhador(a) da EJA-EPT que acabou de preencher seu Mapa da Vida. O texto deve: ter entre 150 e 200 palavras; valorizar a trajetória do estudante; reconhecer suas conquistas e desafios; fortalecer a esperança sem cair em meritocracia ou autoajuda; reconhecer as desigualdades sociais como estruturais, não individuais; usar linguagem acolhedora e próxima; terminar com uma frase de encorajamento coletivo (não individual); nunca usar frases como "basta querer", "você pode tudo", "depende só de você"; sempre reconhecer que os projetos de vida são processos coletivos e em constante construção.
+        prompt: `SYSTEM: Você é um(a) educador(a) da EJA-EPT comprometido(a) com a formação humana integral e com a perspectiva freireana. Sua tarefa é escrever um texto reflexivo personalizado para um(a) estudante trabalhador(a) da EJA-EPT que acabou de preencher seu Mapa da Vida. O texto deve: ter entre 150 e 200 palavras; valorizar a trajetória do estudante; reconhecer suas conquistas e desafios; fortalecer a esperança sem cair em meritocracia ou autoajuda; reconhecer as desigualdades sociais como estruturais, não individuais; usar linguagem acolhedora e próxima; terminar com uma frase de encorajamento coletivo (não individual); nunca usar frases como "basta querer", "você pode tudo", "depende só de você"; sempre reconhecer que os projetos de vida são processos coletivos e em constante construção. IMPORTANTE: Responda APENAS com o texto puro, sem markdown, sem negrito, sem itálico, sem HTML. Use apenas texto simples em português com pontuação normal. Não use nenhum símbolo especial.
 
 USER: Escreva um texto reflexivo para ${nomeDisplay}.
 
@@ -239,7 +251,8 @@ Seus sonhos:
 - Projeto de vida em uma frase: ${data.sintese_projeto || "não informado"}
 - Mensagem para si mesmo(a): ${data.sintese_mensagem || "não informado"}`,
       });
-      setReflexao(typeof result === "string" ? result : result?.text || String(result));
+      const rawResult = typeof result === "string" ? result : result?.text || String(result);
+      setReflexao(sanitizarTexto(rawResult));
     } catch {
       setErroReflexao(true);
     } finally {
