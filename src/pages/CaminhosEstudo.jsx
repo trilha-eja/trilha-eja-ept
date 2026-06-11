@@ -27,7 +27,7 @@ const sections = [
 ];
 
 const subMap = {
-  enem:        (back) => <SubEnem onBack={back} />,
+  enem:        (back, nav) => <SubEnem onBack={back} onNavigate={nav} />,
   sisu:        (back) => <SubSisu onBack={back} />,
   prouni:      (back) => <SubProuni onBack={back} />,
   fies:        (back) => <SubFies onBack={back} />,

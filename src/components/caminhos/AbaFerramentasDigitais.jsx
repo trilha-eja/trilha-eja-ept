@@ -16,10 +16,9 @@ const categoria1 = [
   {
     emoji: "🤖",
     titulo: "ChatGPT — IA para estudar",
-    texto: "Ferramenta de inteligência artificial que pode ajudar a explicar conteúdos, tirar dúvidas e revisar materiais. Use para entender melhor — não para copiar respostas prontas. A versão gratuita já é bastante útil.",
+    texto: "Ferramenta de inteligência artificial que pode ajudar a explicar conteúdos, tirar dúvidas e revisar materiais. Use para entender melhor — não para copiar respostas prontas. A versão gratuita já é útil.",
     url: "https://chat.openai.com",
     botao: "🔗 Acessar",
-    dicaIA: true,
   },
   {
     emoji: "📓",
@@ -82,13 +81,6 @@ function CardFerramenta({ f }) {
       <div className="flex-1 min-w-0">
         <h3 className="font-bold text-sm mb-1">{f.titulo}</h3>
         <p className="text-xs text-muted-foreground leading-relaxed mb-3">{f.texto}</p>
-        {f.dicaIA && (
-          <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-3 mb-3">
-            <p className="text-xs leading-relaxed text-foreground">
-              <strong>💡 Dica de uso responsável:</strong> Use o ChatGPT para pedir explicações e exemplos — não para fazer seu trabalho por você. Aprender com ajuda da IA é diferente de deixar a IA aprender por você.
-            </p>
-          </div>
-        )}
         <a
           href={f.url}
           target="_blank"

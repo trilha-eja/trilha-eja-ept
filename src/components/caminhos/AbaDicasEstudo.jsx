@@ -2,7 +2,7 @@ const dicas = [
   {
     emoji: "🌱",
     titulo: "Voltar a estudar leva tempo",
-    texto: "Se você ficou anos sem estudar, é normal que no início pareça difícil. A memória, a concentração e o ritmo de leitura se reconstroem com o tempo — e isso é esperado. Não compare seu ritmo com o de quem nunca parou. Você está recomeçando, não começando do zero.",
+    texto: "Se você ficou anos sem estudar, é normal que no início pareça difícil. A memória, a concentração e o ritmo de leitura se reconstroem com o tempo — e isso é esperado. Não compare seu ritmo com o de quem nunca parou.",
     destaque: true,
   },
   {
@@ -16,9 +16,9 @@ const dicas = [
     texto: "Reserve horários fixos para estudar — mesmo que sejam 20 ou 30 minutos. Consistência ao longo do tempo vale mais que longas sessões que raramente acontecem. Anote no celular como um compromisso com você mesmo(a).",
   },
   {
-    emoji: "🚌",
-    titulo: "Aproveite o tempo no transporte",
-    texto: "No ônibus ou trem, você pode ouvir podcasts educativos, rever anotações ou assistir videoaulas com fone de ouvido. Pequenos momentos aproveitados com regularidade fazem diferença ao longo do tempo.",
+    emoji: "⏳",
+    titulo: "Aproveite os pequenos momentos",
+    texto: "Não espere ter horas livres para começar. No ônibus, no intervalo, em cinco minutos de silêncio — qualquer momento conta. Períodos curtos e regulares constroem aprendizagem de verdade ao longo do tempo.",
   },
   {
     emoji: "📝",
@@ -38,18 +38,8 @@ const dicas = [
   {
     emoji: "📱",
     titulo: "Seu celular já é uma ferramenta de estudo",
-    texto: "Você não precisa de computador para aprender. Pelo celular é possível:\n• Assistir videoaulas\n• Ouvir podcasts educativos\n• Ler materiais em PDF\n• Acessar plataformas gratuitas\n• Usar o Moodle do curso",
+    texto: "Pelo celular é possível estudar de várias formas gratuitas.",
     linkFerramentas: true,
-  },
-  {
-    emoji: "⏳",
-    titulo: "Estudar pouco também é estudar",
-    texto: "Não espere ter horas livres para começar. 10 minutos hoje valem mais do que 2 horas que nunca chegam. Períodos curtos e regulares de estudo constroem aprendizagem de verdade ao longo do tempo.",
-  },
-  {
-    emoji: "🎯",
-    titulo: "Não espere o momento perfeito",
-    texto: "Sempre vai ter cansaço, responsabilidades e imprevistos. O momento perfeito para estudar raramente aparece. Comece com o que você tem — o tempo disponível, o celular na mão, cinco minutos de silêncio. Isso já é suficiente para começar.",
   },
 ];
 

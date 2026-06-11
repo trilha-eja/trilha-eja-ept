@@ -1,24 +1,6 @@
 import PageHeader from "../PageHeader";
 
-const apps = [
-  {
-    nome: "Khan Academy",
-    descricao: "Totalmente gratuito. Conteúdo de qualidade para todas as áreas do ENEM.",
-    url: "https://play.google.com/store/apps/details?id=org.khanacademy.android",
-  },
-  {
-    nome: "Descomplica",
-    descricao: "Tem conteúdo gratuito limitado. A versão completa é paga. Use o gratuito para revisões rápidas.",
-    url: "https://play.google.com/store/apps/details?id=com.descomplica.app",
-  },
-  {
-    nome: "Me Salva",
-    descricao: "Tem aulas gratuitas e pagas. O conteúdo gratuito já é muito útil para revisar para o ENEM.",
-    url: "https://play.google.com/store/apps/details?id=br.com.mesalva.app",
-  },
-];
-
-export default function SubEnem({ onBack }) {
+export default function SubEnem({ onBack, onNavigate }) {
   return (
     <div>
       <PageHeader title="ENEM" subtitle="Exame Nacional do Ensino Médio" backTo="/" />
@@ -124,18 +106,17 @@ export default function SubEnem({ onBack }) {
         </div>
 
         {/* Card 7 — Aplicativos */}
-        <div className="border border-border rounded-2xl p-4 bg-card space-y-4">
-          <p className="font-bold text-sm">📱 Aplicativos para estudar</p>
-          {apps.map((a, idx) => (
-            <div key={a.nome} className={`space-y-2 pb-3 ${idx < apps.length - 1 ? "border-b border-border" : ""}`}>
-              <p className="font-bold text-sm">{a.nome}</p>
-              <p className="text-xs text-muted-foreground leading-relaxed">{a.descricao}</p>
-              <a href={a.url} target="_blank" rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all">
-                📱 Baixar {a.nome}
-              </a>
-            </div>
-          ))}
+        <div className="border border-border rounded-2xl p-4 bg-card">
+          <p className="font-bold text-sm mb-2">📱 Aplicativos para estudar</p>
+          <p className="text-xs text-muted-foreground leading-relaxed mb-3">
+            Para conhecer mais aplicativos e ferramentas gratuitas de estudo, acesse a seção Ferramentas Digitais neste módulo.
+          </p>
+          <button
+            onClick={() => onNavigate("ferramentas")}
+            className="inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all"
+          >
+            📱 Ver Ferramentas Digitais
+          </button>
         </div>
 
         <button onClick={onBack} className="w-full text-sm text-muted-foreground underline underline-offset-4 py-2">

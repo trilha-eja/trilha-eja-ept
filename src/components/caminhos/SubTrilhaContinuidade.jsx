@@ -177,32 +177,8 @@ export default function SubTrilhaContinuidade({ onBack, onNavigate }) {
         {/* Mensagem motivacional */}
         <div className="rounded-2xl p-4 border border-orange-300" style={{ backgroundColor: "#FFF8F0" }}>
           <p className="text-xs text-orange-900 leading-relaxed">
-            🌱 Você já deu um passo importante voltando a estudar. Cada um dos caminhos desta trilha é uma possibilidade real — não uma obrigação. Vá no seu ritmo, no seu tempo, construindo seus próprios projetos de vida.
+            🌱 Cada caminho desta trilha é uma possibilidade real — não uma obrigação.
           </p>
-        </div>
-
-        {/* Cards de ação rápida */}
-        <div className="space-y-2">
-          <p className="text-sm font-extrabold px-1">Por onde quer começar?</p>
-
-          {[
-            { emoji: "📝", titulo: "Quero fazer o ENEM", botao: "Ver como funciona", nav: "enem" },
-            { emoji: "🎁", titulo: "Quero uma bolsa de estudos", botao: "Ver PROUNI", nav: "prouni" },
-            { emoji: "📚", titulo: "Quero estudar de graça agora", botao: "Ver cursos gratuitos", nav: "cursos" },
-          ].map((a) => (
-            <div key={a.nav} className="border border-border rounded-2xl p-4 bg-card flex items-center gap-3">
-              <span className="text-2xl shrink-0">{a.emoji}</span>
-              <div className="flex-1 min-w-0">
-                <p className="font-bold text-sm mb-2">{a.titulo}</p>
-                <button
-                  onClick={() => onNavigate(a.nav)}
-                  className="inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all"
-                >
-                  {a.botao} →
-                </button>
-              </div>
-            </div>
-          ))}
         </div>
 
         <button onClick={onBack} className="w-full text-sm text-muted-foreground underline underline-offset-4 py-2">

@@ -1,5 +1,4 @@
 import { ArrowLeft } from "lucide-react";
-import CardAjuda from "../CardAjuda";
 
 export default function SubRecursosIFC({ onBack }) {
   return (
@@ -55,7 +54,7 @@ export default function SubRecursosIFC({ onBack }) {
             <h2 className="font-bold text-sm">Auxílios e Apoio Estudantil</h2>
           </div>
           <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">
-            {`Procure o SISAE — Serviço Integrado de Suporte e Acompanhamento Educacional do seu campus.\nA equipe pode orientar sobre:\n- Auxílios financeiros\n- Bolsas\n- Programas de permanência\n- Outros serviços de apoio ao estudante\n\nVocê não precisa enfrentar as dificuldades sozinho(a).`}
+            {`Procure o SISAE — Serviço Integrado de Suporte e Acompanhamento Educacional do seu campus.\nA equipe orienta sobre:\n- Auxílios financeiros\n- Bolsas\n- Programas de permanência\n- Outros serviços de apoio\n\nVocê também pode procurar:\n- Coordenação do Curso\n- Professores\n- Secretaria Acadêmica\n\nVocê não precisa enfrentar as dificuldades sozinho(a).`}
           </p>
         </div>
 
@@ -96,9 +95,6 @@ export default function SubRecursosIFC({ onBack }) {
             ▶️ Ver tutoriais no YouTube
           </a>
         </div>
-
-        {/* Card Global de Ajuda */}
-        <CardAjuda />
 
       </div>
     </div>

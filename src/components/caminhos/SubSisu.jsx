@@ -20,23 +20,12 @@ export default function SubSisu({ onBack }) {
           </div>
         </div>
 
-        {/* Card 2 — Quando acontece? */}
-        <div className="border border-border rounded-2xl p-4 bg-card space-y-2">
-          <div className="flex items-start gap-3">
-            <span className="text-xl shrink-0 mt-0.5">📅</span>
-            <div>
-              <p className="font-bold text-sm mb-1">Quando acontece?</p>
-              <p className="text-xs text-muted-foreground leading-relaxed">O SISU abre as inscrições logo após a divulgação das notas do ENEM. As datas exatas mudam a cada edição — fique atento ao site oficial do MEC.</p>
-            </div>
-          </div>
-        </div>
-
-        {/* Card 3 — Como funciona? */}
+        {/* Card 2 — Como funciona na prática? */}
         <div className="border border-border rounded-2xl p-4 bg-card flex items-start gap-3">
           <span className="text-xl shrink-0 mt-0.5">🔍</span>
           <div>
             <p className="font-bold text-sm mb-1">Como funciona na prática?</p>
-            <p className="text-xs text-muted-foreground leading-relaxed">Após a divulgação das notas do ENEM, o SISU abre as inscrições. Você acessa o site, informa sua nota e escolhe até 2 opções de curso e instituição. O sistema verifica automaticamente se sua nota é suficiente para cada opção escolhida. É tudo online e gratuito.</p>
+            <p className="text-xs text-muted-foreground leading-relaxed">Após a divulgação das notas do ENEM, o SISU abre as inscrições. As datas mudam a cada edição — fique atento ao site oficial. Você acessa o site, informa sua nota e escolhe até 2 opções de curso e instituição. O sistema verifica automaticamente se sua nota é suficiente. É tudo online e gratuito.</p>
           </div>
         </div>
 

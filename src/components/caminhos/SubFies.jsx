@@ -65,7 +65,6 @@ export default function SubFies({ onBack }) {
               <li>• Calcule se a renda esperada na sua profissão vai cobrir as parcelas</li>
               <li>• Pesquise se o curso é reconhecido pelo MEC — cursos não reconhecidos não têm validade no mercado</li>
               <li>• Guarde todos os comprovantes de pagamento</li>
-              <li>• Nunca pague para se inscrever no FIES — a inscrição é sempre gratuita pelo site oficial</li>
             </ul>
           </div>
         </div>
