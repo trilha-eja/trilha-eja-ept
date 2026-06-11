@@ -502,16 +502,7 @@ A mediação tecnológica não é apenas ensinar a usar um app. É ampliar horiz
           />
         </AccordionSection>
 
-        {/* Botão de download PDF */}
-        <div className="pt-2 pb-6">
-          <button
-            onClick={handleDownload}
-            disabled={loading}
-            className="w-full py-4 rounded-2xl bg-primary text-primary-foreground font-bold text-base flex items-center justify-center gap-2 active:scale-95 transition-all disabled:opacity-70"
-          >
-            ⬇️ {loading ? "Gerando PDF…" : "Baixar Guia do Educador em PDF"}
-          </button>
-        </div>
+
       </div>
 
       <div ref={pdfRef} style={{ display: "none" }} />
