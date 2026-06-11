@@ -42,11 +42,4 @@ export const cards = [
     legal: null,
     link: { url: "https://meu.inss.gov.br", label: "🔗 Acessar Meu INSS" },
   },
-  {
-    emoji: "💰",
-    titulo: "App FGTS",
-    texto: "Consulte seu saldo do FGTS, extrato e movimentações diretamente pelo celular. Como baixar: abra a Play Store ou App Store, pesquise 'FGTS' e instale o aplicativo oficial da Caixa Econômica Federal. É gratuito e seguro.",
-    legal: null,
-    link: { url: "https://www.caixa.gov.br/beneficios-trabalhador/fgts/extrato-fgts/Paginas/default.aspx", label: "🔗 Saiba mais sobre o App FGTS" },
-  },
 ];
