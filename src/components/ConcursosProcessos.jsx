@@ -10,18 +10,6 @@ function SecaoHeader({ titulo, subtitulo }) {
   );
 }
 
-function InfoCard({ emoji, titulo, texto }) {
-  return (
-    <div className="p-4 bg-card border border-border rounded-2xl">
-      <div className="flex items-center gap-2 mb-1">
-        <span className="text-xl">{emoji}</span>
-        <h3 className="font-bold text-sm">{titulo}</h3>
-      </div>
-      <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">{texto}</p>
-    </div>
-  );
-}
-
 function VideoCard({ titulo, texto, url }) {
   return (
     <div className="p-3 bg-muted/30 rounded-xl space-y-2">
@@ -86,12 +74,16 @@ export default function ConcursosProcessos({ onBack }) {
         {/* ── Seção 1 — O que são? ── */}
         <SecaoHeader titulo="🏛️ O que são Concursos e Processos Seletivos?" />
 
-        <InfoCard emoji="📋" titulo="Concurso Público"
-          texto={"É uma seleção realizada pelo governo para contratar servidores públicos.\nAs vagas são abertas por edital, as regras são claras e públicas, e quem passa tem estabilidade no emprego.\nQualquer pessoa pode participar se atender aos requisitos do edital."}
-        />
-        <InfoCard emoji="📝" titulo="Processo Seletivo Simplificado"
-          texto={"É uma seleção mais rápida, geralmente para contratos temporários em órgãos públicos.\nPode ser por análise de currículo, prova ou entrevista.\nTambém é divulgado por edital e segue regras públicas."}
-        />
+        <AccordionSection titulo="📋 Concurso Público">
+          <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">É uma seleção realizada pelo governo para contratar servidores públicos.
+As vagas são abertas por edital, as regras são claras e públicas, e quem passa tem estabilidade no emprego.
+Qualquer pessoa pode participar se atender aos requisitos do edital.</p>
+        </AccordionSection>
+        <AccordionSection titulo="📝 Processo Seletivo Simplificado">
+          <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">É uma seleção mais rápida, geralmente para contratos temporários em órgãos públicos.
+Pode ser por análise de currículo, prova ou entrevista.
+Também é divulgado por edital e segue regras públicas.</p>
+        </AccordionSection>
 
         <div className="bg-blue-50 border border-blue-200 rounded-2xl p-4">
           <div className="flex items-center gap-2 mb-2">
