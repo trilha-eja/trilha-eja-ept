@@ -51,7 +51,7 @@ export default function RightsSubPage({ titulo, subtitulo, intro, introBg, cards
               </div>
             )}
             {r.legal && (
-              <p className="text-xs text-muted-foreground/70 mt-2 border-t border-border pt-2">
+              <p className="text-xs text-muted-foreground/70 mt-2 border-t border-border pt-2 whitespace-pre-line">
                 📋 <span className="font-semibold">Base legal:</span> {r.legal}
               </p>
             )}

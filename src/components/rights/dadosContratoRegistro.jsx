@@ -3,7 +3,7 @@ export const cards = [
     emoji: "📋",
     titulo: "Carteira Assinada (CTPS)",
     texto: "O empregador é obrigado a registrar o(a) trabalhador(a) antes do início das atividades. Trabalhar sem registro é ilegal e o empregador está sujeito a multa. Você pode denunciar ao Ministério do Trabalho.",
-    legal: "📋 Base legal: CLT Art. 29 e Art. 47 (com redação atualizada pela Lei nº 13.874/2019)",
+    legal: "CLT Art. 29 e Art. 47\n(com redação atualizada pela\nLei nº 13.874/2019)",
   },
   {
     emoji: "💰",
