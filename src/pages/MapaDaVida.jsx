@@ -381,6 +381,21 @@ export default function MapaDaVida() {
         {/* Caixinha intro colorida por bloco */}
         <BlocoIntro bloco={bloco} emoji={blocoAtual.emoji} titulo={blocoAtual.titulo} intro={blocoAtual.intro} />
 
+        {/* Caixinha extra — Saúde e Bem-Estar (apenas Bloco 5) */}
+        {bloco === 4 && (
+          <div style={{ background: "#F3E5F5", border: "2px solid #9B59B6", borderRadius: 16, padding: 16 }}>
+            <div className="flex items-center gap-2 mb-2">
+              <span className="text-xl">💜</span>
+              <h3 className="font-bold text-sm">Cuidar de si também é parte do projeto de vida</h3>
+            </div>
+            <p className="text-sm leading-relaxed whitespace-pre-line">{`Dormir bem, movimentar o corpo, ter momentos de lazer com a família e amigos — tudo isso faz parte de quem você é e de quem quer ser.
+
+Cuidar da saúde física e mental não é um luxo — é uma necessidade de quem trabalha, estuda e ainda cuida de tantas outras responsabilidades.
+
+💡 Baixe o infográfico gratuito 'Saúde e Bem-Estar do Trabalhador(a)' na seção Baixar Materiais.`}</p>
+          </div>
+        )}
+
         {/* Campo nome — apenas no bloco 0 */}
         {blocoAtual.temNome && (
           <div className="space-y-1">
