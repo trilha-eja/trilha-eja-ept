@@ -21,23 +21,6 @@ function CardCurso({ emoji, titulo, texto, url, urlLabel, children }) {
   );
 }
 
-function CardCursoGrid({ emoji, titulo, texto, url, urlLabel }) {
-  return (
-    <div className="border border-border rounded-2xl p-3 bg-card flex flex-col items-center text-center gap-2">
-      <span className="text-2xl">{emoji}</span>
-      <h3 className="font-bold text-xs leading-snug">{titulo}</h3>
-      <p className="text-[11px] text-muted-foreground leading-relaxed flex-1">{texto}</p>
-      {url && (
-        <a href={url} target="_blank" rel="noopener noreferrer"
-          className="inline-flex items-center gap-1 text-[11px] font-bold px-3 py-1.5 rounded-xl text-white hover:opacity-90 active:scale-95 transition-all"
-          style={{ background: "#E86826" }}>
-          {urlLabel || "Acessar"}
-        </a>
-      )}
-    </div>
-  );
-}
-
 function CategoriaHeader({ titulo, subtitulo }) {
   return (
     <div className="pt-2">
@@ -80,28 +63,28 @@ export default function SubCursosGratuitos({ onBack }) {
           subtitulo="Plataformas gratuitas para aprender no seu tempo"
         />
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 max-[320px]:grid-cols-1">
-          <CardCursoGrid emoji="🏛️" titulo="Escola Virtual do Governo"
+        <div className="space-y-3">
+          <CardCurso emoji="🏛️" titulo="Escola Virtual do Governo"
             texto="Cursos gratuitos e certificados do governo federal. Informática, gestão, cidadania e muito mais."
             url="https://www.escolavirtual.gov.br" />
-          <CardCursoGrid emoji="🏛️" titulo="ENAP"
+          <CardCurso emoji="🏛️" titulo="ENAP"
             texto="Escola Nacional de Administração Pública. Cursos gratuitos em gestão, liderança, tecnologia e cidadania."
             url="https://www.enap.gov.br" />
-          <CardCursoGrid emoji="🌐" titulo="Fundação Bradesco"
+          <CardCurso emoji="🌐" titulo="Fundação Bradesco"
             texto="Cursos online gratuitos de informática, administração, contabilidade e mais. Certificado gratuito."
             url="https://www.ev.org.br" />
-          <CardCursoGrid emoji="💼" titulo="SEBRAE"
+          <CardCurso emoji="💼" titulo="SEBRAE"
             texto="Cursos gratuitos para quem quer empreender ou desenvolver habilidades profissionais."
             url="https://sc.loja.sebrae.com.br" />
-          <CardCursoGrid emoji="🚛" titulo="SEST SENAT"
+          <CardCurso emoji="🚛" titulo="SEST SENAT"
             texto="Cursos gratuitos para trabalhadores do transporte e outras áreas. Certificado gratuito."
             url="https://digital.sestsenat.org.br" />
-          <CardCursoGrid emoji="📖" titulo="Aprenda Mais — MEC"
+          <CardCurso emoji="📖" titulo="Aprenda Mais — MEC"
             texto="Portal oficial do MEC com recursos educacionais gratuitos para estudantes e professores."
             url="https://aprendamais.mec.gov.br" />
-          <CardCursoGrid emoji="📚" titulo="MEC Livros"
+          <CardCurso emoji="📚" titulo="MEC Livros"
             texto="Biblioteca digital gratuita do governo federal com livros didáticos e de literatura."
-            url="https://meclivros.mec.gov.br" urlLabel="Acessar" />
+            url="https://meclivros.mec.gov.br" urlLabel="🔗 Acessar" />
         </div>
 
         {/* CATEGORIA 2 — Formação Técnica e Superior */}
@@ -114,27 +97,27 @@ export default function SubCursosGratuitos({ onBack }) {
           <p className="text-xs leading-relaxed text-foreground">💡 Os Institutos Federais e as Universidades Federais oferecem educação pública, gratuita e de qualidade. O ingresso é por processo seletivo — acompanhe os editais e inscrições.</p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 max-[320px]:grid-cols-1">
-          <CardCursoGrid emoji="🎓" titulo="IFC"
+        <div className="space-y-3">
+          <CardCurso emoji="🎓" titulo="IFC"
             texto="O IFC oferece cursos técnicos, de graduação e pós-graduação gratuitos em Santa Catarina."
-            url="https://ingresso.ifc.edu.br/guia-de-cursos" urlLabel="Acessar" />
-          <CardCursoGrid emoji="🎓" titulo="IFSC"
+            url="https://ingresso.ifc.edu.br/guia-de-cursos" urlLabel="🔗 Acessar" />
+          <CardCurso emoji="🎓" titulo="IFSC"
             texto="O IFSC oferece cursos técnicos e superiores gratuitos em todo o estado de SC."
-            url="https://www.ifsc.edu.br/cursos" urlLabel="Acessar" />
-          <CardCursoGrid emoji="🏫" titulo="Institutos Federais"
+            url="https://www.ifsc.edu.br/cursos" urlLabel="🔗 Acessar" />
+          <CardCurso emoji="🏫" titulo="Institutos Federais"
             texto="Cursos técnicos e superiores 100% gratuitos em todo o Brasil. Pesquise: 'Instituto Federal + sua cidade'." />
-          <CardCursoGrid emoji="🎓" titulo="Universidades Federais"
+          <CardCurso emoji="🎓" titulo="Universidades Federais"
             texto="Graduação gratuita em diversas áreas em todo o Brasil. Ingresso principal pelo SISU com nota do ENEM." />
-          <CardCursoGrid emoji="💻" titulo="UAB"
+          <CardCurso emoji="💻" titulo="UAB"
             texto="Graduação a distância gratuita em universidades públicas. Ideal para estudar de casa."
             url="https://www.gov.br/capes/pt-br/acesso-a-informacao/acoes-e-programas/articulacao-e-inovacao-em-educacao-aberta/sistema-universidade-aberta-do-brasil"
-            urlLabel="Acessar" />
-          <CardCursoGrid emoji="⚙️" titulo="SENAI"
+            urlLabel="🔗 Acessar" />
+          <CardCurso emoji="⚙️" titulo="SENAI"
             texto="Cursos técnicos na área industrial, incluindo eletricidade. Acompanhe os editais de vagas gratuitas."
-            url="https://sc.senai.br/pt-br/editais-gratuidade-senai" urlLabel="Acessar" />
-          <CardCursoGrid emoji="🛎️" titulo="SENAC"
+            url="https://sc.senai.br/pt-br/editais-gratuidade-senai" urlLabel="🔗 Acessar" />
+          <CardCurso emoji="🛎️" titulo="SENAC"
             texto="Cursos em comércio, gastronomia, beleza, informática e mais. Acompanhe as vagas gratuitas."
-            url="https://portal.sc.senac.br/cursos-gratuitos" urlLabel="Acessar" />
+            url="https://portal.sc.senac.br/cursos-gratuitos" urlLabel="🔗 Acessar" />
         </div>
 
         {/* Aviso SENAI/SENAC */}

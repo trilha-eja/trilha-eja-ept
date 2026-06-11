@@ -94,33 +94,14 @@ function CardFerramenta({ f }) {
   );
 }
 
-function CardFerramentaGrid({ f }) {
-  return (
-    <div className="border border-border rounded-2xl p-3 bg-card flex flex-col items-center text-center gap-2">
-      <span className="text-2xl">{f.emoji}</span>
-      <h3 className="font-bold text-xs leading-snug">{f.titulo}</h3>
-      <p className="text-[11px] text-muted-foreground leading-relaxed flex-1">{f.texto}</p>
-      <a
-        href={f.url}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="inline-flex items-center gap-1 text-[11px] font-bold px-3 py-1.5 rounded-xl text-white hover:opacity-90 active:scale-95 transition-all"
-        style={{ background: "#E86826" }}
-      >
-        {f.botao}
-      </a>
-    </div>
-  );
-}
-
 export default function AbaFerramentasDigitais() {
   return (
     <div className="space-y-3">
       {/* Categoria 1 */}
       <div className="pt-1">
         <h2 className="font-extrabold text-sm mb-3">📚 Para Aprender e Estudar</h2>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 max-[320px]:grid-cols-1">
-          {categoria1.map((f) => <CardFerramentaGrid key={f.titulo} f={f} />)}
+        <div className="space-y-3">
+          {categoria1.map((f) => <CardFerramenta key={f.titulo} f={f} />)}
         </div>
       </div>
 
@@ -132,8 +113,8 @@ export default function AbaFerramentasDigitais() {
             💡 Organizar os estudos é tão importante quanto estudar. Estas ferramentas ajudam a planejar sua semana, guardar materiais e fazer anotações rápidas — tudo pelo celular.
           </p>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 max-[320px]:grid-cols-1">
-          {categoria2.map((f) => <CardFerramentaGrid key={f.titulo} f={f} />)}
+        <div className="space-y-3">
+          {categoria2.map((f) => <CardFerramenta key={f.titulo} f={f} />)}
         </div>
       </div>
     </div>
