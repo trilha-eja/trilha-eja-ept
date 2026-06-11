@@ -1,6 +1,7 @@
 import { useRef, useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Download, Printer, Edit, RefreshCw } from "lucide-react";
+import NavigationBar from "../NavigationBar";
 import { base44 } from "@/api/base44Client";
 
 // ── Dimensões ─────────────────────────────────────────────────────────────────
@@ -347,14 +348,10 @@ Seus sonhos:
 
   return (
     <div className="flex flex-col min-h-screen bg-background">
+      <NavigationBar onBack={onEdit} />
       {/* Header */}
-      <div className="sticky top-0 bg-background/95 backdrop-blur-sm z-40 border-b border-border">
-        <div className="max-w-5xl mx-auto px-4 py-3 flex items-center gap-3">
-          <button onClick={onEdit} className="w-10 h-10 rounded-xl bg-muted flex items-center justify-center shrink-0">
-            <ArrowLeft className="w-5 h-5" />
-          </button>
-          <h1 className="font-extrabold text-base">Meu Mapa da Vida</h1>
-        </div>
+      <div className="max-w-5xl mx-auto px-4 pt-1 pb-3">
+        <h1 className="font-extrabold text-base">Meu Mapa da Vida</h1>
       </div>
 
       {/* SVG Trilha */}

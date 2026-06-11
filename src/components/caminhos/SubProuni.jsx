@@ -4,7 +4,7 @@ import AccordionSection from "../AccordionSection";
 export default function SubProuni({ onBack }) {
   return (
     <div>
-      <PageHeader title="PROUNI" subtitle="Programa Universidade para Todos" backTo="/" />
+      <PageHeader title="PROUNI" subtitle="Programa Universidade para Todos" onBack={onBack} />
       <div className="max-w-lg mx-auto px-4 py-5 pb-10 space-y-3">
 
         {/* Abertura */}

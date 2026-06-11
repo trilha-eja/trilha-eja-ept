@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ArrowLeft, ChevronRight } from "lucide-react";
+import NavigationBar from "./NavigationBar";
 import RightsSubPage from "./rights/RightsSubPage";
 import { cards as cardsContrato } from "./rights/dadosContratoRegistro";
 import { cards as cardsJornada } from "./rights/dadosJornadaRemuneracao";
@@ -85,15 +86,11 @@ export default function RightsGuide({ onBack }) {
 
   return (
     <div>
-      <div className="sticky top-0 bg-background/95 backdrop-blur-sm z-40 border-b border-border">
-        <div className="max-w-lg mx-auto px-4 py-4 flex items-center gap-3">
-          <button onClick={onBack} className="w-10 h-10 rounded-xl bg-muted flex items-center justify-center">
-            <ArrowLeft className="w-5 h-5" />
-          </button>
-          <div>
+      <NavigationBar onBack={onBack} />
+      <div className="max-w-lg mx-auto px-4 pt-1 pb-3">
+        <div>
             <h1 className="font-extrabold text-lg leading-tight">Direitos Trabalhistas</h1>
             <p className="text-sm text-muted-foreground">Conheça seus direitos e faça valer</p>
-          </div>
         </div>
       </div>
       <div className="max-w-lg mx-auto px-4 py-5 space-y-3 pb-10">

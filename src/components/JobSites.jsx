@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ArrowLeft, ChevronDown, ChevronUp } from "lucide-react";
 import AccordionSection from "./AccordionSection";
+import NavigationBar from "./NavigationBar";
 
 // ── Dados ──────────────────────────────────────────────────────────────────────
 
@@ -71,16 +72,12 @@ function PerguntaCard({ pergunta, dica }) {
 export default function JobSites({ onBack }) {
   return (
     <div>
+      <NavigationBar onBack={onBack} />
       {/* Header */}
-      <div className="sticky top-0 bg-background/95 backdrop-blur-sm z-40 border-b border-border">
-        <div className="max-w-lg mx-auto px-4 py-4 flex items-center gap-3">
-          <button onClick={onBack} className="w-10 h-10 rounded-xl bg-muted flex items-center justify-center">
-            <ArrowLeft className="w-5 h-5" />
-          </button>
-          <div>
+      <div className="max-w-lg mx-auto px-4 pt-1 pb-3">
+        <div>
             <h1 className="font-extrabold text-lg leading-tight">Central de Oportunidades</h1>
             <p className="text-sm text-muted-foreground leading-snug">Plataformas, dicas e orientações para o mundo do trabalho</p>
-          </div>
         </div>
       </div>
 

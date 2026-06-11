@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Star, ArrowLeft } from "lucide-react";
+import NavigationBar from "../components/NavigationBar";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { base44 } from "@/api/base44Client";
@@ -321,17 +322,11 @@ export default function SuaOpiniao() {
   if (!perfil) {
     return (
       <div>
+        <NavigationBar />
         {/* Header */}
-        <div className="sticky top-0 bg-background/95 backdrop-blur-sm z-40 border-b border-border">
-          <div className="max-w-lg mx-auto px-4 py-4 flex items-center gap-3">
-            <Link to="/" className="w-10 h-10 rounded-xl bg-muted flex items-center justify-center">
-              <ArrowLeft className="w-5 h-5" />
-            </Link>
-            <div>
-              <h1 className="font-extrabold text-lg leading-tight">Sua Opinião Importa</h1>
-              <p className="text-sm text-muted-foreground">Sua voz transforma este aplicativo.</p>
-            </div>
-          </div>
+        <div className="max-w-lg mx-auto px-4 pt-1 pb-3">
+          <h1 className="font-extrabold text-lg leading-tight">Sua Opinião Importa</h1>
+          <p className="text-sm text-muted-foreground">Sua voz transforma este aplicativo.</p>
         </div>
 
         <div className="max-w-lg mx-auto px-4 py-8 flex flex-col items-center gap-6">
@@ -383,17 +378,11 @@ export default function SuaOpiniao() {
   // Formulário
   return (
     <div>
+      <NavigationBar onBack={() => setPerfil(null)} />
       {/* Header */}
-      <div className="sticky top-0 bg-background/95 backdrop-blur-sm z-40 border-b border-border">
-        <div className="max-w-lg mx-auto px-4 py-4 flex items-center gap-3">
-          <button onClick={() => setPerfil(null)} className="w-10 h-10 rounded-xl bg-muted flex items-center justify-center">
-            <ArrowLeft className="w-5 h-5" />
-          </button>
-          <div>
-            <h1 className="font-extrabold text-base">Sua Opinião Importa</h1>
-            <p className="text-xs text-muted-foreground">{perfil === "estudante" ? "Formulário do Estudante" : "Formulário do Educador"}</p>
-          </div>
-        </div>
+      <div className="max-w-lg mx-auto px-4 pt-1 pb-3">
+        <h1 className="font-extrabold text-base">Sua Opinião Importa</h1>
+        <p className="text-xs text-muted-foreground">{perfil === "estudante" ? "Formulário do Estudante" : "Formulário do Educador"}</p>
       </div>
 
       <div className="max-w-lg mx-auto px-4 py-6 pb-10">

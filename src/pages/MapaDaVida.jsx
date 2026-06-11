@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { ArrowLeft, ArrowRight, Sparkles } from "lucide-react";
 import PageHeader from "../components/PageHeader";
+import NavigationBar from "../components/NavigationBar";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
@@ -338,15 +339,10 @@ export default function MapaDaVida() {
   // ── Formulário ──
   return (
     <div>
+      <NavigationBar onBack={handlePrev} />
       {/* Header com progresso */}
-      <div className="sticky top-0 bg-background/95 backdrop-blur-sm z-40 border-b border-border">
-        <div className="max-w-lg mx-auto px-4 py-3 flex items-center gap-3">
-          <button
-            onClick={handlePrev}
-            className="w-10 h-10 rounded-xl bg-muted flex items-center justify-center shrink-0"
-          >
-            <ArrowLeft className="w-5 h-5" />
-          </button>
+      <div className="max-w-lg mx-auto px-4 pt-1 pb-3">
+        <div className="flex items-center gap-3">
           <div className="flex-1 min-w-0">
             <h1 className="font-extrabold text-base leading-tight truncate">Mapa da Vida</h1>
             <p className="text-xs text-muted-foreground">Bloco {bloco + 1} de {total}</p>

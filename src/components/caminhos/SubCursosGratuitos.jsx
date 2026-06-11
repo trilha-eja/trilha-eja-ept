@@ -13,7 +13,7 @@ function CategoriaHeader({ titulo, subtitulo }) {
 export default function SubCursosGratuitos({ onBack }) {
   return (
     <div>
-      <PageHeader title="Cursos Gratuitos" subtitle="Conheça caminhos de aprendizado ao seu alcance" backTo="/" />
+      <PageHeader title="Cursos Gratuitos" subtitle="Conheça caminhos de aprendizado ao seu alcance" onBack={onBack} />
       <div className="max-w-lg mx-auto px-4 py-5 pb-10 space-y-3">
 
         {/* Abertura */}

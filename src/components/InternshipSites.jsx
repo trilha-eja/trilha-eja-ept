@@ -1,5 +1,6 @@
 import { ArrowLeft } from "lucide-react";
 import AccordionSection from "./AccordionSection";
+import NavigationBar from "./NavigationBar";
 
 const todosSites = [
   { emoji: "🎓", titulo: "CIEE Nacional", texto: "Principal portal do país para estágios e jovem aprendiz.", url: "https://portal.ciee.org.br" },
@@ -15,15 +16,11 @@ const todosSites = [
 export default function InternshipSites({ onBack }) {
   return (
     <div>
-      <div className="sticky top-0 bg-background/95 backdrop-blur-sm z-40 border-b border-border">
-        <div className="max-w-lg mx-auto px-4 py-4 flex items-center gap-3">
-          <button onClick={onBack} className="w-10 h-10 rounded-xl bg-muted flex items-center justify-center">
-            <ArrowLeft className="w-5 h-5" />
-          </button>
-          <div>
+      <NavigationBar onBack={onBack} />
+      <div className="max-w-lg mx-auto px-4 pt-1 pb-3">
+        <div>
             <h1 className="font-extrabold text-lg leading-tight">Sites de Estágio</h1>
             <p className="text-sm text-muted-foreground">Onde encontrar e se cadastrar para estágios</p>
-          </div>
         </div>
       </div>
 

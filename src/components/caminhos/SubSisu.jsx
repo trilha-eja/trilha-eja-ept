@@ -4,7 +4,7 @@ import AccordionSection from "../AccordionSection";
 export default function SubSisu({ onBack }) {
   return (
     <div>
-      <PageHeader title="SISU" subtitle="Sistema de Seleção Unificada" backTo="/" />
+      <PageHeader title="SISU" subtitle="Sistema de Seleção Unificada" onBack={onBack} />
       <div className="max-w-lg mx-auto px-4 py-5 pb-10 space-y-3">
 
         {/* Abertura */}

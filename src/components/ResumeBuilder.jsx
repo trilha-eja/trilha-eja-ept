@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { ArrowLeft, Eye, Save, Info, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import NavigationBar from "./NavigationBar";
 import ResumePreviewModal, { generateResumePDF } from "./ResumePreviewModal";
 
 const STORAGE_KEY = "curriculo_rascunho";
@@ -91,9 +92,10 @@ export default function ResumeBuilder({ onBack }) {
 
   return (
     <div>
+      <NavigationBar onBack={onBack} />
       {/* Header */}
-      <div className="sticky top-0 bg-background/95 backdrop-blur-sm z-40 border-b border-border">
-        <div className="max-w-lg mx-auto px-4 py-4 flex items-center gap-3">
+      <div className="max-w-lg mx-auto px-4 pt-1 pb-3">
+        <div className="flex items-center gap-3">
           <button onClick={onBack} className="w-10 h-10 rounded-xl bg-muted flex items-center justify-center shrink-0">
             <ArrowLeft className="w-5 h-5" />
           </button>

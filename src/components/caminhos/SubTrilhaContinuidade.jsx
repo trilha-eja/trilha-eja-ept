@@ -91,7 +91,7 @@ function Nivel({ cor, emoji, titulo, subtexto, tags }) {
 export default function SubTrilhaContinuidade({ onBack, onNavigate }) {
   return (
     <div>
-      <PageHeader title="Trilha de Continuidade" subtitle="Veja os caminhos possíveis após a EJA-EPT" backTo="/" />
+      <PageHeader title="Trilha de Continuidade" subtitle="Veja os caminhos possíveis após a EJA-EPT" onBack={onBack} />
       <div className="max-w-lg mx-auto px-4 py-5 pb-10 space-y-4">
 
         {/* Intro */}

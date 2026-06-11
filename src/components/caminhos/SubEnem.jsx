@@ -17,7 +17,7 @@ const apps = [
 export default function SubEnem({ onBack, onNavigate }) {
   return (
     <div>
-      <PageHeader title="ENEM" subtitle="Exame Nacional do Ensino Médio" backTo="/" />
+      <PageHeader title="ENEM" subtitle="Exame Nacional do Ensino Médio" onBack={onBack} />
       <div className="max-w-lg mx-auto px-4 py-5 pb-10 space-y-3">
 
         {/* Abertura */}

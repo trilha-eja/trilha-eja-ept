@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ArrowLeft, ArrowRight, AlertTriangle, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import NavigationBar from "./NavigationBar";
 
 export default function PracticalGuideDetail({ guide, onBack }) {
   const [step, setStep] = useState(0);
@@ -9,8 +10,9 @@ export default function PracticalGuideDetail({ guide, onBack }) {
 
   return (
     <div>
-      <div className="sticky top-0 bg-background/95 backdrop-blur-sm z-40 border-b border-border">
-        <div className="max-w-lg mx-auto px-4 py-4 flex items-center gap-3">
+      <NavigationBar onBack={onBack} />
+      <div className="max-w-lg mx-auto px-4 pt-1 pb-3">
+        <div className="flex items-center gap-3">
           <button
             onClick={() => step === 0 ? onBack() : setStep(step - 1)}
             className="w-10 h-10 rounded-xl bg-muted flex items-center justify-center"

@@ -1,23 +1,14 @@
-import { ArrowLeft } from "lucide-react";
+import NavigationBar from "../NavigationBar";
 import AccordionSection from "../AccordionSection";
 
 export default function SubRecursosIFC({ onBack }) {
   return (
     <div>
+      <NavigationBar onBack={onBack} />
       {/* Header */}
-      <div className="sticky top-0 bg-background/95 backdrop-blur-sm z-40 border-b border-border">
-        <div className="max-w-lg mx-auto px-4 py-4 flex items-center gap-3">
-          <button
-            onClick={onBack}
-            className="w-10 h-10 rounded-xl bg-muted flex items-center justify-center active:scale-95 transition-all"
-          >
-            <ArrowLeft className="w-5 h-5" />
-          </button>
-          <div>
-            <h1 className="font-extrabold text-lg leading-tight">Recursos do IFC</h1>
-            <p className="text-sm text-muted-foreground">Auxílios, bolsas e apoio estudantil</p>
-          </div>
-        </div>
+      <div className="max-w-lg mx-auto px-4 pt-2 pb-3">
+        <h1 className="font-extrabold text-lg leading-tight">Recursos do IFC</h1>
+        <p className="text-sm text-muted-foreground">Auxílios, bolsas e apoio estudantil</p>
       </div>
 
       <div className="max-w-lg mx-auto px-4 py-5 space-y-4 pb-10">

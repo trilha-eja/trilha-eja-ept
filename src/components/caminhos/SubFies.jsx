@@ -4,7 +4,7 @@ import AccordionSection from "../AccordionSection";
 export default function SubFies({ onBack }) {
   return (
     <div>
-      <PageHeader title="FIES" subtitle="Financiamento Estudantil do Governo Federal" backTo="/" />
+      <PageHeader title="FIES" subtitle="Financiamento Estudantil do Governo Federal" onBack={onBack} />
       <div className="max-w-lg mx-auto px-4 py-5 pb-10 space-y-3">
 
         {/* Aviso em destaque — manter exatamente */}
