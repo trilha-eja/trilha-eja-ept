@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import PageHeader from "../components/PageHeader";
+import AccordionSection from "../components/AccordionSection";
 import { Download } from "lucide-react";
 
 // ── Utilitário: html2canvas → jsPDF ─────────────────────────────────────────
@@ -589,36 +590,32 @@ export default function BaixarMateriais() {
           </p>
         </div>
 
-        {/* Cards */}
+        {/* Cards em acordeão */}
         <div className="space-y-3">
           {materiais.map((m) => (
-            <div key={m.id} className={`border rounded-2xl p-4 flex items-start gap-4 ${m.cor}`}>
-              <span className="text-3xl shrink-0 mt-0.5">{m.emoji}</span>
-              <div className="flex-1 min-w-0">
-                <h3 className="font-bold text-sm leading-snug mb-1">{m.titulo}</h3>
-                <p className="text-xs text-muted-foreground leading-relaxed mb-3">{m.descricao}</p>
-                {m.link ? (
-                  <a
-                    href={m.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all"
-                  >
-                    <Download className="w-3.5 h-3.5" />
-                    ⬇️ Baixar e Imprimir
-                  </a>
-                ) : (
-                  <button
-                    onClick={() => handleGerar(m)}
-                    disabled={loading === m.id}
-                    className="flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all disabled:opacity-60"
-                  >
-                    <Download className="w-3.5 h-3.5" />
-                    {loading === m.id ? "Gerando…" : "⬇️ Baixar e Imprimir"}
-                  </button>
-                )}
-              </div>
-            </div>
+            <AccordionSection key={m.id} titulo={`${m.emoji} ${m.titulo}`}>
+              <p className="text-sm text-muted-foreground leading-relaxed">{m.descricao}</p>
+              {m.link ? (
+                <a
+                  href={m.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all"
+                >
+                  <Download className="w-3.5 h-3.5" />
+                  ⬇️ Baixar e Imprimir
+                </a>
+              ) : (
+                <button
+                  onClick={() => handleGerar(m)}
+                  disabled={loading === m.id}
+                  className="inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all disabled:opacity-60"
+                >
+                  <Download className="w-3.5 h-3.5" />
+                  {loading === m.id ? "Gerando…" : "⬇️ Baixar e Imprimir"}
+                </button>
+              )}
+            </AccordionSection>
           ))}
         </div>
 
