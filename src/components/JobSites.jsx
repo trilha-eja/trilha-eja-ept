@@ -171,18 +171,7 @@ export default function JobSites({ onBack }) {
 
         <DicaCard emoji="📄" titulo="Documentos Frequentemente Solicitados" texto={"• Documento de identidade\n- CPF\n- Carteira de Trabalho\n- Comprovante de residência\n- Certificados de cursos"} />
 
-        {/* ── Seção 6 — Valorizando sua Trajetória ── */}
-        <div className="bg-orange-50 border border-orange-300 rounded-2xl p-4">
-          <div className="flex items-center gap-2 mb-2">
-            <span className="text-xl">🌱</span>
-            <h3 className="font-bold text-sm">Valorizando sua Trajetória</h3>
-          </div>
-          <div className="space-y-2 text-sm leading-relaxed">
-            <p>Sua trajetória tem valor — inclua no currículo tudo que você viveu e aprendeu, dentro e fora da escola.</p>
-          </div>
-        </div>
-
-        {/* ── Seção 7 — Segurança Digital ── */}
+        {/* ── Seção 6 — Segurança Digital ── */}
         <div className="bg-red-50 border border-red-300 rounded-2xl p-4 space-y-3">
           <div className="flex items-center gap-2">
             <span className="text-xl">🛡️</span>

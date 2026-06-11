@@ -119,20 +119,6 @@ export default function InternshipSites({ onBack }) {
 
 
 
-        {/* Mensagem final */}
-        <div className="border border-orange-300 rounded-2xl p-4" style={{ background: "#FFF8F0" }}>
-          <div className="flex items-center gap-2 mb-2">
-            <span className="text-xl">🌱</span>
-            <h3 className="font-bold text-sm">Conexão com seu Projeto de Vida</h3>
-          </div>
-          <p className="text-sm leading-relaxed">
-            As oportunidades de estágio, pesquisa, extensão e formação complementar podem contribuir para a construção dos seus projetos de vida.
-          </p>
-          <p className="text-sm leading-relaxed mt-2">
-            Além de desenvolver conhecimentos técnicos, essas experiências ajudam a conhecer novas possibilidades de estudo, trabalho e participação social.
-          </p>
-        </div>
-
       </div>
     </div>
   );

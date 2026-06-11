@@ -114,7 +114,7 @@ export default function ResumeBuilder({ onBack }) {
         {/* Mensagem de abertura */}
         <div className="bg-primary/10 border border-primary/20 rounded-2xl p-4">
           <p className="text-sm leading-relaxed text-foreground">
-            ✨ <strong>Sua história vale muito!</strong> Preencha com calma. Tudo o que você viveu — no trabalho, em casa, na comunidade ou nos estudos — também é experiência e pode contribuir para sua trajetória profissional.
+            ✨ <strong>Preencha com calma</strong> e inclua tudo que você sabe fazer — dentro e fora da escola.
           </p>
         </div>
 
@@ -233,17 +233,6 @@ export default function ResumeBuilder({ onBack }) {
             className={inputClass}
           />
           <p className={hintClass}>Você pode incluir conhecimentos técnicos, habilidades de convivência, organização, responsabilidade, trabalho em equipe e outras capacidades desenvolvidas ao longo da vida.</p>
-        </div>
-
-        {/* Card de valorização */}
-        <div className="bg-orange-50 border border-orange-300 rounded-2xl p-4">
-          <div className="flex items-center gap-2 mb-2">
-            <span className="text-xl">💡</span>
-            <h3 className="font-bold text-sm">Reconhecendo sua trajetória</h3>
-          </div>
-          <p className="text-sm leading-relaxed text-orange-900">
-            Muitas pessoas acreditam que possuem pouca experiência profissional. Porém, conhecimentos adquiridos no trabalho, na família, na comunidade e na escola também geram aprendizados importantes. Sua trajetória tem valor.
-          </p>
         </div>
 
         {/* Actions */}

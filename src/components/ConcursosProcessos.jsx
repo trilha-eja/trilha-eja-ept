@@ -164,7 +164,7 @@ export default function ConcursosProcessos({ onBack }) {
           <div className="flex items-center gap-2 mb-2">
             <span className="text-xl">✅</span>
           </div>
-          <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">{`• Leia os editais com calma — não precisa entender tudo de uma vez\n- Acompanhe os sites de concursos regularmente\n- Organize um plano simples de estudos\n- Mantenha seus documentos pessoais atualizados\n- Nunca pague taxas fora dos canais oficiais`}</p>
+          <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">{`• Leia os editais com calma — não precisa entender tudo de uma vez\n- Acompanhe os sites de concursos regularmente\n- Organize um plano simples de estudos`}</p>
         </div>
 
         {/* Mensagem final */}
@@ -173,7 +173,7 @@ export default function ConcursosProcessos({ onBack }) {
             <span className="text-xl">🎯</span>
           </div>
           <p className="text-sm leading-relaxed italic">
-            Muitos caminhos podem ser construídos após a conclusão da EJA-EPT. Concursos públicos e processos seletivos são algumas das possibilidades que podem ampliar suas oportunidades de atuação profissional e continuidade dos estudos.
+            Concursos e processos seletivos são caminhos reais — e você já tem qualificação para concorrer.
           </p>
         </div>
 
