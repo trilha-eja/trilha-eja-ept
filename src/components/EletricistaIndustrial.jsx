@@ -28,7 +28,7 @@ export default function EletricistaIndustrial({ onBack, onNavigate }) {
             <span className="text-xl">⚡</span>
           </div>
           <p className="text-sm text-orange-900 leading-relaxed">
-            O(a) eletricista industrial é um(a) profissional importante para o funcionamento seguro e eficiente de indústrias, empresas e diversos ambientes de trabalho. Seu trabalho envolve conhecimentos técnicos, responsabilidade, atenção à segurança e aprendizagem contínua. A formação recebida na EJA-EPT é uma etapa importante dessa trajetória.
+            O(a) eletricista industrial é um(a) profissional importante para o funcionamento seguro e eficiente de indústrias, empresas e diversos ambientes de trabalho. Seu trabalho envolve conhecimentos técnicos, responsabilidade, atenção à segurança e aprendizagem contínua. A formação recebida na EJA-EPT é uma etapa importante dessa trajetória.{"\n\n"}A área elétrica é exercida por homens e mulheres — e sua diversidade a fortalece.
           </p>
         </div>
 
@@ -79,35 +79,17 @@ export default function EletricistaIndustrial({ onBack, onNavigate }) {
           </div>
         </div>
 
-        {/* Card 4 — Aprender */}
+        {/* Card 4 — Próximos passos */}
         <div className="bg-card border border-border rounded-2xl p-4 space-y-3">
           <div className="flex items-center gap-2">
-            <span className="text-xl">📚</span>
-            <h2 className="font-bold text-sm">Aprender continua fazendo parte da caminhada</h2>
+            <span className="text-xl">🔗</span>
+            <h2 className="font-bold text-sm">Próximos passos</h2>
           </div>
-          <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">{`Concluir um curso é apenas uma etapa da formação. Muitos profissionais continuam aprendendo por meio de:
-- Cursos de aperfeiçoamento
-- Qualificações profissionais
-- Cursos técnicos
-- Graduação
-- Especializações
-- Experiências construídas no trabalho`}</p>
-          <div className="bg-muted rounded-xl p-3">
-            <p className="text-xs text-muted-foreground leading-relaxed">
-              Aprender ao longo da vida faz parte da construção profissional e pessoal.
-            </p>
-          </div>
-        </div>
-
-        {/* Card 5 — Trajetória tem valor */}
-        <div className="bg-green-50 border border-green-200 rounded-2xl p-4 space-y-3">
-          <div className="flex items-center gap-2">
-            <span className="text-xl">🌱</span>
-            <h2 className="font-bold text-sm text-green-900">Sua trajetória tem valor</h2>
-          </div>
-          <p className="text-sm text-green-800 leading-relaxed">
-            Os conhecimentos adquiridos no trabalho, na família, na comunidade e na escola fazem parte da sua formação. A experiência de vida também produz saberes importantes.{"\n\n"}Cada estudante constrói seu projeto de vida de forma única. Não existe um único caminho correto — o importante é reconhecer suas possibilidades e seguir construindo seus próprios projetos.
-          </p>
+          <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">{`Quer continuar crescendo profissionalmente?
+Explore outros módulos deste aplicativo:
+- Criar Currículo — apresente sua trajetória
+- Central de Oportunidades — onde buscar trabalho
+- Caminhos de Estudo — continue aprendendo`}</p>
         </div>
 
       </div>

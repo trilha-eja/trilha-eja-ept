@@ -6,6 +6,13 @@ export const cards = [
     legal: "Lei nº 8.036/1990, Art. 15 e CF/88 Art. 7º, inciso III",
   },
   {
+    emoji: "💰",
+    titulo: "App FGTS",
+    texto: "Consulte seu saldo do FGTS, extrato e movimentações diretamente pelo celular. Como baixar: abra a Play Store ou App Store, pesquise 'FGTS' e instale o aplicativo oficial da Caixa Econômica Federal. É gratuito e seguro.",
+    legal: null,
+    link: { url: "https://www.caixa.gov.br/beneficios-trabalhador/fgts/extrato-fgts/Paginas/default.aspx", label: "🔗 Saiba mais sobre o App FGTS" },
+  },
+  {
     emoji: "🏥",
     titulo: "Seguro Desemprego",
     texto: "Se for demitido sem justa causa, você pode ter direito ao seguro desemprego — entre 3 e 5 parcelas, conforme o tempo trabalhado e o número de vezes que já solicitou o benefício.\nSolicite entre 7 e 120 dias após a demissão — fora desse prazo o direito é perdido.",

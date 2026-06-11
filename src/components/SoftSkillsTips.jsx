@@ -4,7 +4,7 @@ const tips = [
   {
     icon: Heart,
     title: "Responsabilidade",
-    text: "Cuidar da casa, dos filhos, trabalhar e estudar ao mesmo tempo exige organização e senso de responsabilidade construídos na prática cotidiana. Essas experiências têm valor e fazem parte da sua formação.",
+    text: "Cuidar da casa, dos filhos, trabalhar e estudar ao mesmo tempo exige organização e senso de responsabilidade construídos na prática cotidiana. Essas experiências têm valor e fazem parte da sua formação.\n\nPara muitas mulheres, essa responsabilidade é ainda maior — cuidar da casa, dos filhos e ainda estudar e trabalhar é uma conquista que merece ser reconhecida.",
     color: "bg-chart-5",
   },
   {

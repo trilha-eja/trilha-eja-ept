@@ -20,7 +20,7 @@ export const cards = [
   {
     emoji: "🤝",
     titulo: "Igualdade e Não Discriminação",
-    texto: "É proibida qualquer forma de discriminação por raça, cor, sexo, religião, idade, origem ou deficiência no trabalho. O empregador não pode exigir teste de gravidez nem certidão de casamento para contratar ou demitir.",
+    texto: "É proibida qualquer forma de discriminação por raça, cor, sexo, religião, idade, origem ou deficiência no trabalho. O empregador não pode exigir teste de gravidez nem certidão de casamento para contratar ou demitir.\n\nA presença de mulheres em cursos técnicos como Eletricista Industrial ainda enfrenta barreiras históricas. Discriminação por gênero no trabalho é ilegal — e sua presença nesta área já é uma conquista importante.",
     legal: "CF/88 Art. 5º e Lei nº 9.029/1995",
   },
   {
