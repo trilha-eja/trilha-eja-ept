@@ -1,27 +1,16 @@
-import { ArrowLeft, ExternalLink } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
+import GridCard2x2 from "./GridCard2x2";
+import AccordionSection from "./AccordionSection";
 
-const secoes = [
-  {
-    titulo: "📋 Cadastre-se e receba vagas",
-    subtitulo: "Crie seu perfil nesses sites e as empresas entram em contato com você",
-    sites: [
-      { emoji: "🎓", name: "CIEE — Nacional", url: "https://portal.ciee.org.br", description: "Principal portal do país para estágios e jovem aprendiz. Cadastre seu perfil e receba indicações de vagas." },
-      { emoji: "🎓", name: "CIEE — Santa Catarina", url: "https://cieesc.org.br", description: "Portal dedicado a SC com vagas presenciais na região de Blumenau e Vale do Itajaí. Ideal para quem mora na região." },
-      { emoji: "💼", name: "Nube", url: "https://www.nube.com.br", description: "Portal com foco em estudantes de ensino médio, técnico e superior. Cadastre seu perfil, faça testes gratuitos e receba vagas." },
-      { emoji: "🏭", name: "IEL — Estágios na Indústria", url: "https://www.iel.org.br", description: "Instituto Euvaldo Lodi — especializado em estágios na área industrial. Ideal para quem busca estágio na área técnica e elétrica." },
-      { emoji: "🌱", name: "Jovem Aprendiz", url: "https://www.gov.br/trabalho/pt-br/assuntos/aprendizagem-profissional", description: "Programa do governo federal para jovens de 14 a 24 anos. Trabalho com carteira assinada, salário e aprendizagem profissional. Cadastre-se pelo portal oficial." },
-    ],
-  },
-  {
-    titulo: "🔍 Busque vagas abertas",
-    subtitulo: "Pesquise vagas disponíveis agora e candidate-se diretamente. LinkedIn e Indeed também têm vagas de estágio — acesse pela Central de Oportunidades.",
-    sites: [
-      { emoji: "🏢", name: "Companhia de Estágios", url: "https://www.ciadeestagios.com.br", description: "Vagas em grandes empresas nacionais e multinacionais. Forte em programas de estágio remoto e presencial." },
-      { emoji: "⭐", name: "Super Estágios", url: "https://www.superestagios.com.br", description: "Milhares de vagas de estágio distribuídas pelo Brasil. Busque por área, cidade e nível de escolaridade." },
-      { emoji: "🔎", name: "Estagiar", url: "https://www.estagiar.com.br", description: "Portal com vagas de estágio em todo o Brasil. Busque por região e área de interesse." },
-    ],
-  },
-
+const todosSites = [
+  { emoji: "🎓", titulo: "CIEE Nacional", texto: "Principal portal do país para estágios e jovem aprendiz.", url: "https://portal.ciee.org.br" },
+  { emoji: "🎓", titulo: "CIEE Santa Catarina", texto: "Portal dedicado a SC com vagas na região de Blumenau.", url: "https://cieesc.org.br" },
+  { emoji: "💼", titulo: "Nube", texto: "Portal com foco em estudantes de ensino médio, técnico e superior.", url: "https://www.nube.com.br" },
+  { emoji: "🏭", titulo: "IEL", texto: "Estágios na indústria — ideal para área técnica e elétrica.", url: "https://www.iel.org.br" },
+  { emoji: "🌱", titulo: "Jovem Aprendiz", texto: "Programa federal para jovens de 14 a 24 anos.", url: "https://www.gov.br/trabalho/pt-br/assuntos/aprendizagem-profissional" },
+  { emoji: "🏢", titulo: "Companhia de Estágios", texto: "Vagas em grandes empresas nacionais e multinacionais.", url: "https://www.ciadeestagios.com.br" },
+  { emoji: "⭐", titulo: "Super Estágios", texto: "Milhares de vagas distribuídas pelo Brasil.", url: "https://www.superestagios.com.br" },
+  { emoji: "🔎", titulo: "Estagiar", texto: "Portal com vagas de estágio em todo o Brasil.", url: "https://www.estagiar.com.br" },
 ];
 
 export default function InternshipSites({ onBack }) {
@@ -41,19 +30,14 @@ export default function InternshipSites({ onBack }) {
 
       <div className="max-w-lg mx-auto px-4 py-5 space-y-5 pb-12">
 
-        {/* Intro atualizado */}
+        {/* Intro */}
         <div className="bg-chart-5/10 border border-chart-5/20 rounded-2xl p-4">
           <p className="text-sm leading-relaxed text-foreground">
-            O estágio pode ser uma oportunidade de aprendizagem, desenvolvimento profissional e aproximação com o mundo do trabalho. Nesta seção você encontrará plataformas confiáveis, programas institucionais e orientações para acompanhar oportunidades.
-          </p>
-        </div>
-        <div className="bg-orange-50 border border-orange-200 rounded-2xl p-4">
-          <p className="text-xs text-orange-800 leading-relaxed">
-            💡 Alguns sites servem para você se <strong>CADASTRAR</strong> e receber indicações de vagas. Outros servem para <strong>BUSCAR</strong> vagas abertas e se candidatar. Veja a diferença em cada um!
+            O estágio pode ser uma oportunidade de aprendizagem, desenvolvimento profissional e aproximação com o mundo do trabalho.
           </p>
         </div>
 
-        {/* ── Nova Seção 1 — O que é estágio? ── */}
+        {/* O que é estágio */}
         <div>
           <h2 className="font-extrabold text-sm mb-3">❓ O que é Estágio?</h2>
           <div className="p-4 bg-card border border-border rounded-2xl space-y-3">
@@ -73,51 +57,40 @@ export default function InternshipSites({ onBack }) {
           </div>
         </div>
 
-        {/* ── Seções existentes ── */}
-        {secoes.map((s) => (
-          <div key={s.titulo} className="space-y-3">
-            <div>
-              <h2 className="font-extrabold text-sm">{s.titulo}</h2>
-              <p className="text-xs text-muted-foreground mt-0.5">{s.subtitulo}</p>
-            </div>
-            {s.sites.map((site, i) => (
-              <a key={i} href={site.url} target="_blank" rel="noopener noreferrer"
-                className="flex items-center gap-4 p-4 bg-card border border-border rounded-2xl hover:shadow-md transition-all active:scale-[0.98]">
-                <span className="text-2xl">{site.emoji}</span>
-                <div className="flex-1 min-w-0">
-                  <h3 className="font-bold text-sm">{site.name}</h3>
-                  <p className="text-xs text-muted-foreground mt-0.5">{site.description}</p>
-                </div>
-                <ExternalLink className="w-4 h-4 text-muted-foreground shrink-0" />
-              </a>
-            ))}
-          </div>
-        ))}
-
-        {/* ── Nova Seção 2 — IFC e Rede Federal ── */}
-        <div className="space-y-3">
-          <h2 className="font-extrabold text-sm">🏫 Oportunidades no IFC e na Rede Federal</h2>
-          <div className="bg-orange-50 border border-orange-200 rounded-2xl p-4">
-            <p className="text-sm leading-relaxed">
-              Além dos sites de estágio, muitas oportunidades podem surgir dentro do próprio IFC. Algumas são divulgadas por meio de editais, outras pelos professores, coordenação do curso ou setores institucionais. Fique atento às informações compartilhadas pela escola.
-            </p>
-          </div>
-          {[
-            { emoji: "📢", titulo: "Como acompanhar oportunidades no IFC", texto: "Muitas oportunidades não aparecem nos grandes portais — chegam diretamente pela escola.\nFique atento a:\n- Site oficial do campus\n- Murais físicos\n- E-mails institucionais\n- Redes sociais oficiais\n- Avisos em sala de aula\n- Comunicados da coordenação" },
-            { emoji: "👨‍🏫", titulo: "Coordenação e Professores", texto: "A coordenação do curso e os professores podem informar sobre:\n- Oportunidades de estágio\n- Empresas parceiras\n- Projetos institucionais\n- Processos seletivos\n- Programas de bolsas\n- Eventos da área\n\nNão hesite em conversar — eles podem abrir portas que você ainda não conhece!" },
-            { emoji: "🔬", titulo: "Projetos de Ensino, Pesquisa e Extensão", texto: "Os Institutos Federais frequentemente oferecem:\n- Bolsas de pesquisa\n- Bolsas de extensão\n- Monitorias\n- Projetos comunitários\n- Atividades de formação complementar\n\nEssas experiências também contribuem para sua formação profissional e para o seu currículo!" },
-          ].map((c, i) => (
-            <div key={i} className="p-4 bg-card border border-border rounded-2xl">
-              <div className="flex items-center gap-2 mb-1">
-                <span className="text-xl">{c.emoji}</span>
-                <h3 className="font-bold text-sm">{c.titulo}</h3>
-              </div>
-              <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">{c.texto}</p>
-            </div>
-          ))}
+        <div className="bg-orange-50 border border-orange-200 rounded-2xl p-4">
+          <p className="text-xs text-orange-800 leading-relaxed">
+            💡 Alguns sites servem para você se <strong>CADASTRAR</strong> e receber indicações de vagas. Outros servem para <strong>BUSCAR</strong> vagas abertas e se candidatar.
+          </p>
         </div>
 
+        {/* ── Grade de Sites ── */}
+        <div>
+          <h2 className="font-extrabold text-sm mb-3">🌐 Plataformas de Estágio</h2>
+          <div className="grid grid-cols-2 gap-2">
+            {todosSites.map((s, i) => <GridCard2x2 key={i} {...s} />)}
+          </div>
+        </div>
 
+        {/* ── IFC e Rede Federal (Acordeão) ── */}
+        <h2 className="font-extrabold text-sm">🏫 Oportunidades no IFC e na Rede Federal</h2>
+
+        <div className="bg-orange-50 border border-orange-200 rounded-2xl p-4">
+          <p className="text-sm leading-relaxed">
+            Além dos sites de estágio, muitas oportunidades podem surgir dentro do próprio IFC. Fique atento às informações compartilhadas pela escola.
+          </p>
+        </div>
+
+        <AccordionSection titulo="📢 Como acompanhar oportunidades no IFC">
+          <p className="text-xs text-muted-foreground leading-relaxed whitespace-pre-line">{`Muitas oportunidades não aparecem nos grandes portais — chegam diretamente pela escola.\nFique atento a:\n- Site oficial do campus\n- Murais físicos\n- E-mails institucionais\n- Redes sociais oficiais\n- Avisos em sala de aula\n- Comunicados da coordenação`}</p>
+        </AccordionSection>
+
+        <AccordionSection titulo="👨‍🏫 Coordenação e Professores">
+          <p className="text-xs text-muted-foreground leading-relaxed whitespace-pre-line">{`A coordenação do curso e os professores podem informar sobre:\n- Oportunidades de estágio\n- Empresas parceiras\n- Projetos institucionais\n- Processos seletivos\n- Programas de bolsas\n- Eventos da área\n\nNão hesite em conversar — eles podem abrir portas que você ainda não conhece!`}</p>
+        </AccordionSection>
+
+        <AccordionSection titulo="🔬 Projetos de Ensino, Pesquisa e Extensão">
+          <p className="text-xs text-muted-foreground leading-relaxed whitespace-pre-line">{`Os Institutos Federais frequentemente oferecem:\n- Bolsas de pesquisa\n- Bolsas de extensão\n- Monitorias\n- Projetos comunitários\n- Atividades de formação complementar\n\nEssas experiências também contribuem para sua formação profissional e para o seu currículo!`}</p>
+        </AccordionSection>
 
       </div>
     </div>

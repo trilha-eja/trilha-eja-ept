@@ -1,4 +1,6 @@
 import { ArrowLeft } from "lucide-react";
+import GridCard2x2 from "./GridCard2x2";
+import AccordionSection from "./AccordionSection";
 
 function SecaoHeader({ titulo, subtitulo }) {
   return (
@@ -21,34 +23,41 @@ function InfoCard({ emoji, titulo, texto }) {
   );
 }
 
-function LinkCard({ emoji, titulo, texto, url }) {
-  return (
-    <div className="p-4 bg-card border border-border rounded-2xl space-y-3">
-      <div className="flex items-center gap-2">
-        <span className="text-2xl">{emoji}</span>
-        <h3 className="font-bold text-sm">{titulo}</h3>
-      </div>
-      <p className="text-sm text-muted-foreground leading-relaxed">{texto}</p>
-      <a href={url} target="_blank" rel="noopener noreferrer"
-        className="flex items-center justify-center text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all">
-        🔗 Acessar
-      </a>
-    </div>
-  );
-}
-
 function VideoCard({ titulo, texto, url }) {
   return (
-    <div className="p-4 bg-card border border-border rounded-2xl space-y-3">
-      <h3 className="font-bold text-sm">{titulo}</h3>
-      <p className="text-sm text-muted-foreground leading-relaxed">{texto}</p>
+    <div className="p-3 bg-muted/30 rounded-xl space-y-2">
+      <h4 className="font-bold text-xs">{titulo}</h4>
+      <p className="text-xs text-muted-foreground leading-relaxed">{texto}</p>
       <a href={url} target="_blank" rel="noopener noreferrer"
-        className="flex items-center justify-center text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all">
+        className="flex items-center justify-center text-xs font-bold px-3 py-1.5 rounded-lg text-white hover:opacity-90 active:scale-95 transition-all"
+        style={{ background: "#E86826" }}>
         ▶️ Ver vídeos
       </a>
     </div>
   );
 }
+
+const sitesEditais = [
+  { emoji: "🏆", titulo: "PCI Concursos", texto: "Um dos maiores portais de concursos do país.", url: "https://www.pciconcursos.com.br" },
+  { emoji: "📰", titulo: "Concursos no Brasil", texto: "Portal de notícias e acompanhamento de concursos.", url: "https://concursosnobrasil.com" },
+  { emoji: "🏛️", titulo: "Portal Gov.br", texto: "Portal oficial do Governo Federal para editais.", url: "https://www.gov.br" },
+];
+
+const videosConcursos = [
+  { titulo: "Como estudar para concursos públicos", texto: "Dicas práticas para quem está começando.", url: "https://www.youtube.com/results?search_query=como+estudar+para+concursos+publicos+iniciantes" },
+  { titulo: "Como ler um edital", texto: "Aprenda a entender os documentos oficiais.", url: "https://www.youtube.com/results?search_query=como+ler+edital+concurso+publico" },
+  { titulo: "Concursos para Ensino Médio", texto: "Oportunidades acessíveis para quem concluiu a EJA.", url: "https://www.youtube.com/results?search_query=concursos+publicos+ensino+medio+2025" },
+  { titulo: "Dicas para o primeiro concurso", texto: "Orientações para quem vai participar pela primeira vez.", url: "https://www.youtube.com/results?search_query=dicas+primeiro+concurso+publico" },
+];
+
+const passosEdital = [
+  { emoji: "👔", titulo: "1. Cargo", texto: "Verifique o nome do cargo e suas atribuições. Confira se tem relação com sua formação e experiência." },
+  { emoji: "🎓", titulo: "2. Escolaridade Exigida", texto: "Cada cargo exige um nível de escolaridade. Verifique se você já atende ou está prestes a atender o requisito." },
+  { emoji: "💰", titulo: "3. Salário", texto: "O edital informa o salário inicial do cargo. Compare com suas necessidades e expectativas." },
+  { emoji: "📅", titulo: "4. Inscrição", texto: "Fique atento ao prazo e ao link para inscrição. A maioria das inscrições é online e gratuita para candidatos de baixa renda." },
+  { emoji: "🗓️", titulo: "5. Data da Prova", texto: "Anote a data da prova no celular e planeje com antecedência." },
+  { emoji: "📚", titulo: "6. Conteúdo Programático", texto: "É a lista de assuntos que podem ser cobrados na prova. Use essa lista para organizar seus estudos." },
+];
 
 export default function ConcursosProcessos({ onBack }) {
   return (
@@ -78,14 +87,10 @@ export default function ConcursosProcessos({ onBack }) {
         {/* ── Seção 1 — O que são? ── */}
         <SecaoHeader titulo="🏛️ O que são Concursos e Processos Seletivos?" />
 
-        <InfoCard
-          emoji="📋"
-          titulo="Concurso Público"
+        <InfoCard emoji="📋" titulo="Concurso Público"
           texto={"É uma seleção realizada pelo governo para contratar servidores públicos.\nAs vagas são abertas por edital, as regras são claras e públicas, e quem passa tem estabilidade no emprego.\nQualquer pessoa pode participar se atender aos requisitos do edital."}
         />
-        <InfoCard
-          emoji="📝"
-          titulo="Processo Seletivo Simplificado"
+        <InfoCard emoji="📝" titulo="Processo Seletivo Simplificado"
           texto={"É uma seleção mais rápida, geralmente para contratos temporários em órgãos públicos.\nPode ser por análise de currículo, prova ou entrevista.\nTambém é divulgado por edital e segue regras públicas."}
         />
 
@@ -94,9 +99,7 @@ export default function ConcursosProcessos({ onBack }) {
             <span className="text-xl">💡</span>
             <h3 className="font-bold text-sm">Você Sabia?</h3>
           </div>
-          <p className="text-sm leading-relaxed">
-            Muitos concursos e processos seletivos exigem apenas:
-          </p>
+          <p className="text-sm leading-relaxed">Muitos concursos e processos seletivos exigem apenas:</p>
           <ul className="text-sm leading-relaxed mt-1 space-y-0.5 ml-2">
             <li>- Ensino Fundamental</li>
             <li>- Ensino Médio</li>
@@ -110,62 +113,51 @@ export default function ConcursosProcessos({ onBack }) {
         {/* ── Seção 2 — Onde Procurar ── */}
         <SecaoHeader titulo="🔍 Onde Procurar Oportunidades?" />
 
-        <InfoCard
-          emoji="⚡"
-          titulo="Empresas Públicas e de Economia Mista"
+        <InfoCard emoji="⚡" titulo="Empresas Públicas e de Economia Mista"
           texto={"Empresas como as de energia elétrica, saneamento, Correios, bancos públicos e cooperativas mistas frequentemente abrem processos seletivos para eletricistas e técnicos.\nFique de olho nos portais de concursos!"}
         />
-        <InfoCard
-          emoji="🎓"
-          titulo="Institutos Federais e Universidades Públicas"
+        <InfoCard emoji="🎓" titulo="Institutos Federais e Universidades Públicas"
           texto={"Os Institutos Federais e as Universidades Públicas frequentemente abrem processos seletivos para técnicos e assistentes administrativos.\n\n💡 Fique de olho nos portais de concursos listados nesta página e nas redes sociais dessas instituições — os editais são divulgados assim que abrem!"}
         />
-        <InfoCard
-          emoji="🏙️"
-          titulo="Prefeituras e Câmaras Municipais"
+        <InfoCard emoji="🏙️" titulo="Prefeituras e Câmaras Municipais"
           texto={"Municípios realizam concursos e processos seletivos para diversas áreas, incluindo manutenção elétrica e infraestrutura.\nAcompanhe os editais da sua cidade e região."}
         />
 
-        {/* ── Seção 3 — Sites ── */}
+        {/* ── Seção 3 — Sites (Grade 2x2) ── */}
         <SecaoHeader titulo="🌐 Sites Confiáveis para Acompanhar Editais" subtitulo="Clique para abrir diretamente 👇" />
-
-        <LinkCard emoji="🏆" titulo="PCI Concursos" texto="Um dos maiores portais de divulgação de concursos públicos do país. Fácil de usar e atualizado diariamente." url="https://www.pciconcursos.com.br" />
-        <LinkCard emoji="📰" titulo="Concursos no Brasil" texto="Portal de notícias e acompanhamento de concursos e processos seletivos em todo o país." url="https://concursosnobrasil.com" />
-        <LinkCard emoji="🏛️" titulo="Portal Gov.br" texto="Portal oficial do Governo Federal onde órgãos públicos divulgam seus editais e processos seletivos." url="https://www.gov.br" />
-
-        {/* ── Seção 4 — Como ler um edital ── */}
-        <SecaoHeader titulo="📖 Como Ler um Edital?" subtitulo="Um guia simples para quem está começando" />
-
-        <div className="bg-green-50 border border-green-200 rounded-2xl p-4">
-          <p className="text-sm leading-relaxed">
-            O edital é o documento oficial que explica tudo sobre o concurso. Parece complicado, mas seguindo estes passos fica mais fácil!
-          </p>
+        <div className="grid grid-cols-2 gap-2">
+          {sitesEditais.map((s, i) => <GridCard2x2 key={i} {...s} />)}
         </div>
 
-        <InfoCard emoji="👔" titulo="1. Cargo" texto="Verifique o nome do cargo e suas atribuições. Confira se tem relação com sua formação e experiência." />
-        <InfoCard emoji="🎓" titulo="2. Escolaridade Exigida" texto="Cada cargo exige um nível de escolaridade. Verifique se você já atende ou está prestes a atender o requisito." />
-        <InfoCard emoji="💰" titulo="3. Salário" texto="O edital informa o salário inicial do cargo. Compare com suas necessidades e expectativas." />
-        <InfoCard emoji="📅" titulo="4. Inscrição" texto="Fique atento ao prazo e ao link para inscrição. A maioria das inscrições é online e gratuita para candidatos de baixa renda." />
-        <InfoCard emoji="🗓️" titulo="5. Data da Prova" texto="Anote a data da prova no celular e planeje com antecedência." />
-        <InfoCard emoji="📚" titulo="6. Conteúdo Programático" texto="É a lista de assuntos que podem ser cobrados na prova. Use essa lista para organizar seus estudos." />
+        {/* ── Seção 4 — Como se Preparar (Acordeão) ── */}
+        <SecaoHeader titulo="📋 Como se Preparar" subtitulo="Editais, vídeos e dicas práticas" />
 
-        {/* ── Seção 5 — Vídeos ── */}
-        <SecaoHeader titulo="🎬 Vídeos para te Ajudar" subtitulo="Clique para buscar vídeos no YouTube 👇" />
-
-        <VideoCard titulo="Como estudar para concursos públicos" texto="Dicas práticas para quem está começando." url="https://www.youtube.com/results?search_query=como+estudar+para+concursos+publicos+iniciantes" />
-        <VideoCard titulo="Como ler um edital" texto="Aprenda a entender os documentos oficiais." url="https://www.youtube.com/results?search_query=como+ler+edital+concurso+publico" />
-        <VideoCard titulo="Concursos para Ensino Médio" texto="Oportunidades acessíveis para quem concluiu a EJA." url="https://www.youtube.com/results?search_query=concursos+publicos+ensino+medio+2025" />
-        <VideoCard titulo="Dicas para o primeiro concurso" texto="Orientações para quem vai participar pela primeira vez." url="https://www.youtube.com/results?search_query=dicas+primeiro+concurso+publico" />
-
-        {/* ── Seção 6 — Dicas Práticas ── */}
-        <SecaoHeader titulo="💡 Dicas para Começar" />
-
-        <div className="p-4 bg-card border border-border rounded-2xl">
-          <div className="flex items-center gap-2 mb-2">
-            <span className="text-xl">✅</span>
+        <AccordionSection titulo="📖 Como Ler um Edital?">
+          <div className="bg-green-50 border border-green-200 rounded-xl p-3">
+            <p className="text-xs leading-relaxed">
+              O edital é o documento oficial que explica tudo sobre o concurso. Parece complicado, mas seguindo estes passos fica mais fácil!
+            </p>
           </div>
-          <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">{`• Leia os editais com calma — não precisa entender tudo de uma vez\n- Acompanhe os sites de concursos regularmente\n- Organize um plano simples de estudos`}</p>
-        </div>
+          {passosEdital.map((p, i) => (
+            <div key={i} className="p-3 bg-muted/30 rounded-xl">
+              <div className="flex items-center gap-2 mb-1">
+                <span className="text-lg">{p.emoji}</span>
+                <h4 className="font-bold text-xs">{p.titulo}</h4>
+              </div>
+              <p className="text-xs text-muted-foreground leading-relaxed">{p.texto}</p>
+            </div>
+          ))}
+        </AccordionSection>
+
+        <AccordionSection titulo="🎬 Vídeos para te Ajudar">
+          {videosConcursos.map((v, i) => <VideoCard key={i} {...v} />)}
+        </AccordionSection>
+
+        <AccordionSection titulo="💡 Dicas para Começar">
+          <div className="p-3 bg-muted/30 rounded-xl">
+            <p className="text-xs text-muted-foreground leading-relaxed whitespace-pre-line">{`• Leia os editais com calma — não precisa entender tudo de uma vez\n- Acompanhe os sites de concursos regularmente\n- Organize um plano simples de estudos`}</p>
+          </div>
+        </AccordionSection>
 
         {/* Mensagem final */}
         <div className="border border-orange-300 rounded-2xl p-4" style={{ background: "#FFF8F0" }}>

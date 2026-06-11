@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { ArrowLeft, ChevronDown, ChevronUp } from "lucide-react";
+import GridCard2x2 from "./GridCard2x2";
+import AccordionSection from "./AccordionSection";
 
 // ── Dados ──────────────────────────────────────────────────────────────────────
 
@@ -16,10 +18,10 @@ const plataformasNacionais = [
 ];
 
 const plataformasRegionais = [
-  { emoji: "🎯", titulo: "RH Genial", texto: "Empresa de recrutamento e seleção com forte atuação em Blumenau e região. Especializada em vagas industriais e técnicas.", url: "https://www.rhgenial.com.br" },
+  { emoji: "🎯", titulo: "RH Genial", texto: "Empresa de recrutamento e seleção com forte atuação em Blumenau e região.", url: "https://www.rhgenial.com.br" },
   { emoji: "🤝", titulo: "Recrutar RH", texto: "Consultoria especializada em recrutamento para diversos segmentos da região.", url: "https://www.recrutarrh.com.br" },
   { emoji: "🌟", titulo: "Talento do Vale SC", texto: "Portal regional com oportunidades para diferentes perfis profissionais do Vale do Itajaí.", url: "https://talentodovalesc.com.br/vagas" },
-  { emoji: "💼", titulo: "BluVagas", texto: "Portal de empregos focado em Blumenau e cidades próximas. Vagas para diferentes áreas e níveis de experiência.", url: "https://www.bluvagas.com.br" },
+  { emoji: "💼", titulo: "BluVagas", texto: "Portal de empregos focado em Blumenau e cidades próximas.", url: "https://www.bluvagas.com.br" },
 ];
 
 const dicasVagas = [
@@ -44,34 +46,6 @@ function SecaoHeader({ titulo, subtitulo }) {
     <div className="pt-2">
       <h2 className="font-extrabold text-base leading-tight">{titulo}</h2>
       {subtitulo && <p className="text-xs text-muted-foreground mt-0.5">{subtitulo}</p>}
-    </div>
-  );
-}
-
-function PlataformaCard({ emoji, titulo, texto, url }) {
-  return (
-    <div className="p-4 bg-card border border-border rounded-2xl space-y-3">
-      <div className="flex items-center gap-2">
-        <span className="text-2xl">{emoji}</span>
-        <h3 className="font-bold text-sm">{titulo}</h3>
-      </div>
-      <p className="text-sm text-muted-foreground leading-relaxed">{texto}</p>
-      <a href={url} target="_blank" rel="noopener noreferrer"
-        className="flex items-center justify-center text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all">
-        🔗 Acessar Plataforma
-      </a>
-    </div>
-  );
-}
-
-function DicaCard({ emoji, titulo, texto }) {
-  return (
-    <div className="p-4 bg-card border border-border rounded-2xl">
-      <div className="flex items-center gap-2 mb-1">
-        <span className="text-xl">{emoji}</span>
-        <h3 className="font-bold text-sm">{titulo}</h3>
-      </div>
-      <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">{texto}</p>
     </div>
   );
 }
@@ -122,63 +96,76 @@ export default function JobSites({ onBack }) {
 
         {/* ── Seção 1 — Serviços Públicos Gratuitos ── */}
         <SecaoHeader titulo="🏛️ Serviços Públicos Gratuitos" subtitulo="Serviços do governo para apoiar o trabalhador(a)" />
-        <div className="p-4 bg-card border border-border rounded-2xl space-y-3">
-          <div className="flex items-center gap-2">
-            <span className="text-2xl">🏛️</span>
-            <h3 className="font-bold text-sm">SINE — Sistema Nacional de Emprego</h3>
-          </div>
-          <p className="text-sm text-muted-foreground leading-relaxed">
-            Serviço público e gratuito que auxilia trabalhadores(as) na busca por oportunidades de trabalho, encaminhamento para entrevistas e acesso a informações sobre qualificação profissional.
-          </p>
-          <a href="https://servicos.mte.gov.br/spme-v2/#/login" target="_blank" rel="noopener noreferrer"
-            className="flex items-center justify-center text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all">
-            🔗 Acessar Plataforma
-          </a>
+        <div className="grid grid-cols-2 gap-2">
+          <GridCard2x2
+            emoji="🏛️"
+            titulo="SINE"
+            texto="Serviço público gratuito para busca de trabalho e encaminhamento para entrevistas."
+            url="https://servicos.mte.gov.br/spme-v2/#/login"
+          />
         </div>
 
         {/* ── Seção 2 — Plataformas Nacionais ── */}
         <SecaoHeader titulo="🌎 Plataformas Nacionais" subtitulo="Portais com vagas em todo o Brasil" />
-        {plataformasNacionais.map((p, i) => <PlataformaCard key={i} {...p} />)}
+        <div className="grid grid-cols-2 gap-2">
+          {plataformasNacionais.map((p, i) => <GridCard2x2 key={i} {...p} />)}
+        </div>
 
         {/* ── Seção 3 — Blumenau e Região ── */}
-        <SecaoHeader titulo="📍 Oportunidades em Blumenau e Região" subtitulo="Plataformas com foco no Vale do Itajaí e Santa Catarina" />
-        {plataformasRegionais.map((p, i) => <PlataformaCard key={i} {...p} />)}
-
-        {/* ── Seção 4 — Dicas ── */}
-        <SecaoHeader titulo="💡 Dicas para Procurar Oportunidades" subtitulo="Pequenos passos que fazem grande diferença" />
-        {dicasVagas.map((d, i) => <DicaCard key={i} {...d} />)}
-
-        {/* ── Seção 5 — Processos Seletivos ── */}
-        <SecaoHeader titulo="🎤 Participando de Processos Seletivos" subtitulo="Orientações para quem está retornando ao mundo do trabalho ou participando das primeiras entrevistas" />
-
-        <div className="bg-blue-50 border border-blue-200 rounded-2xl p-4">
-          <p className="text-sm leading-relaxed">
-            A entrevista é uma conversa — não um interrogatório. Você tem uma história, saberes e experiências que têm valor. Chegue preparado(a) e confie no que você construiu até aqui.
-          </p>
+        <SecaoHeader titulo="📍 Oportunidades em Blumenau e Região" subtitulo="Plataformas com foco no Vale do Itajaí" />
+        <div className="grid grid-cols-2 gap-2">
+          {plataformasRegionais.map((p, i) => <GridCard2x2 key={i} {...p} />)}
         </div>
 
-        <DicaCard emoji="📋" titulo="Antes da Entrevista" texto={"• Pesquise sobre a empresa\n- Leia atentamente a descrição da vaga\n- Revise seu currículo\n- Organize seus documentos\n- Planeje seu deslocamento com antecedência"} />
-        <DicaCard emoji="🎯" titulo="Durante a Entrevista" texto={"• Fale com tranquilidade\n- Valorize sua trajetória de vida e trabalho\n- Seja sincero(a) sobre suas experiências\n- Demonstre interesse em aprender\n- Faça perguntas sobre a vaga — isso demonstra interesse"} />
+        {/* ── Seção 4 — Como se Preparar (Acordeão) ── */}
+        <SecaoHeader titulo="📋 Como se Preparar" subtitulo="Dicas práticas, entrevistas, documentos e segurança" />
 
-        {/* Perguntas frequentes */}
-        <div className="p-4 bg-card border border-border rounded-2xl space-y-2">
-          <div className="flex items-center gap-2 mb-2">
-            <span className="text-xl">💬</span>
-            <h3 className="font-bold text-sm">Perguntas Frequentes nos Processos Seletivos</h3>
+        <AccordionSection titulo="💡 Dicas para Procurar Oportunidades">
+          {dicasVagas.map((d, i) => (
+            <div key={i} className="p-3 bg-muted/30 rounded-xl">
+              <div className="flex items-center gap-2 mb-1">
+                <span className="text-lg">{d.emoji}</span>
+                <h4 className="font-bold text-xs">{d.titulo}</h4>
+              </div>
+              <p className="text-xs text-muted-foreground leading-relaxed whitespace-pre-line">{d.texto}</p>
+            </div>
+          ))}
+        </AccordionSection>
+
+        <AccordionSection titulo="🎤 Participando de Processos Seletivos">
+          <div className="bg-blue-50 border border-blue-200 rounded-xl p-3">
+            <p className="text-xs leading-relaxed">
+              A entrevista é uma conversa — não um interrogatório. Você tem uma história, saberes e experiências que têm valor.
+            </p>
           </div>
-          {perguntasEntrevista.map((p, i) => <PerguntaCard key={i} {...p} />)}
-        </div>
-
-        <DicaCard emoji="📄" titulo="Documentos Frequentemente Solicitados" texto={"• Documento de identidade\n- CPF\n- Carteira de Trabalho\n- Comprovante de residência\n- Certificados de cursos"} />
-
-        {/* ── Seção 6 — Segurança Digital ── */}
-        <div className="bg-red-50 border border-red-300 rounded-2xl p-4 space-y-3">
-          <div className="flex items-center gap-2">
-            <span className="text-xl">🛡️</span>
-            <h3 className="font-bold text-sm text-red-700">Segurança Digital e Prevenção de Golpes</h3>
+          <div className="p-3 bg-muted/30 rounded-xl">
+            <h4 className="font-bold text-xs mb-1">📋 Antes da Entrevista</h4>
+            <p className="text-xs text-muted-foreground leading-relaxed whitespace-pre-line">{`• Pesquise sobre a empresa\n- Leia atentamente a descrição da vaga\n- Revise seu currículo\n- Organize seus documentos\n- Planeje seu deslocamento com antecedência`}</p>
           </div>
-          <p className="text-sm leading-relaxed text-red-700 whitespace-pre-line">{`⚠️ Nunca pague para participar de processos seletivos ou para concorrer a vagas de trabalho.\n\n⚠️ Desconfie de promessas de contratação imediata mediante pagamento.\n\n⚠️ Verifique sempre se a vaga foi divulgada por canais confiáveis.\n\nEm caso de violação de direitos, consulte a seção Direitos Coletivos neste aplicativo.`}</p>
-        </div>
+          <div className="p-3 bg-muted/30 rounded-xl">
+            <h4 className="font-bold text-xs mb-1">🎯 Durante a Entrevista</h4>
+            <p className="text-xs text-muted-foreground leading-relaxed whitespace-pre-line">{`• Fale com tranquilidade\n- Valorize sua trajetória de vida e trabalho\n- Seja sincero(a) sobre suas experiências\n- Demonstre interesse em aprender\n- Faça perguntas sobre a vaga — isso demonstra interesse`}</p>
+          </div>
+          <div className="bg-card border border-border rounded-xl p-3 space-y-1">
+            <div className="flex items-center gap-2 mb-1">
+              <span className="text-lg">💬</span>
+              <h4 className="font-bold text-xs">Perguntas Frequentes</h4>
+            </div>
+            {perguntasEntrevista.map((p, i) => <PerguntaCard key={i} {...p} />)}
+          </div>
+        </AccordionSection>
+
+        <AccordionSection titulo="📄 Documentos Necessários">
+          <div className="p-3 bg-muted/30 rounded-xl">
+            <p className="text-xs text-muted-foreground leading-relaxed whitespace-pre-line">{`• Documento de identidade\n- CPF\n- Carteira de Trabalho\n- Comprovante de residência\n- Certificados de cursos`}</p>
+          </div>
+        </AccordionSection>
+
+        <AccordionSection titulo="🛡️ Segurança Digital e Prevenção de Golpes">
+          <div className="bg-red-50 border border-red-300 rounded-xl p-3">
+            <p className="text-xs leading-relaxed text-red-700 whitespace-pre-line">{`⚠️ Nunca pague para participar de processos seletivos ou para concorrer a vagas de trabalho.\n\n⚠️ Desconfie de promessas de contratação imediata mediante pagamento.\n\n⚠️ Verifique sempre se a vaga foi divulgada por canais confiáveis.\n\nEm caso de violação de direitos, consulte a seção Direitos Coletivos neste aplicativo.`}</p>
+          </div>
+        </AccordionSection>
 
         {/* Mensagem final */}
         <div className="border border-orange-300 rounded-2xl p-4" style={{ background: "#FFF8F0" }}>
