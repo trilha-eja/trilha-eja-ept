@@ -1,4 +1,5 @@
 import { ArrowLeft } from "lucide-react";
+import AccordionSection from "../AccordionSection";
 
 export default function SubRecursosIFC({ onBack }) {
   return (
@@ -59,11 +60,7 @@ export default function SubRecursosIFC({ onBack }) {
         </div>
 
         {/* Portal de Ingresso */}
-        <div className="bg-card border border-border rounded-2xl p-4 space-y-3">
-          <div className="flex items-center gap-2">
-            <span className="text-2xl">📋</span>
-            <h2 className="font-bold text-sm">Portal de Ingresso IFC</h2>
-          </div>
+        <AccordionSection titulo="📋 Portal de Ingresso IFC">
           <p className="text-sm text-muted-foreground leading-relaxed">
             Acompanhe processos seletivos, editais e oportunidades de ingresso nos cursos do IFC.
           </p>
@@ -75,14 +72,10 @@ export default function SubRecursosIFC({ onBack }) {
           >
             🔗 Acessar Portal
           </a>
-        </div>
+        </AccordionSection>
 
         {/* Como acessar o Moodle */}
-        <div className="bg-card border border-border rounded-2xl p-4 space-y-3">
-          <div className="flex items-center gap-2">
-            <span className="text-2xl">🎥</span>
-            <h2 className="font-bold text-sm">Como acessar o Moodle</h2>
-          </div>
+        <AccordionSection titulo="🎥 Como acessar o Moodle">
           <p className="text-sm text-muted-foreground leading-relaxed">
             O Moodle é a plataforma de ensino online do IFC. Muitos materiais, atividades e comunicados são disponibilizados por lá. Assista a tutoriais para aprender a usar.
           </p>
@@ -94,7 +87,7 @@ export default function SubRecursosIFC({ onBack }) {
           >
             ▶️ Ver tutoriais no YouTube
           </a>
-        </div>
+        </AccordionSection>
 
       </div>
     </div>

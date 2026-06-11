@@ -1,4 +1,5 @@
 import PageHeader from "../PageHeader";
+import AccordionSection from "../AccordionSection";
 
 export default function SubSisu({ onBack }) {
   return (
@@ -30,11 +31,10 @@ export default function SubSisu({ onBack }) {
         </div>
 
         {/* Card 4 — Notas de corte */}
-        <div className="border border-border rounded-2xl p-4 bg-card space-y-2">
+        <AccordionSection titulo="📊 Notas de corte">
           <div className="flex items-start gap-3">
             <span className="text-xl shrink-0 mt-0.5">📊</span>
             <div>
-              <p className="font-bold text-sm mb-1">Notas de corte</p>
               <p className="text-xs text-muted-foreground leading-relaxed">Cada curso tem uma nota mínima necessária para aprovação — chamada nota de corte. Cursos mais concorridos exigem notas mais altas. Cursos menos concorridos podem ser acessíveis com notas menores.</p>
               <p className="text-xs text-muted-foreground leading-relaxed mt-1.5">Pesquise as notas de edições anteriores para ter uma referência — elas ficam disponíveis no site oficial do SISU.</p>
             </div>
@@ -42,7 +42,7 @@ export default function SubSisu({ onBack }) {
           <div className="bg-accent/10 border border-accent/20 rounded-xl p-3">
             <p className="text-xs leading-relaxed text-foreground">💡 Não desanime antes de pesquisar. Muitos cursos têm notas de corte mais acessíveis do que você imagina.</p>
           </div>
-        </div>
+        </AccordionSection>
 
         {/* Card 5 — Cotas e vagas reservadas */}
         <div className="border border-border rounded-2xl p-4 bg-card flex items-start gap-3">
@@ -54,29 +54,31 @@ export default function SubSisu({ onBack }) {
         </div>
 
         {/* Card 6 — E se não passar na primeira chamada? */}
-        <div className="border border-border rounded-2xl p-4 bg-card flex items-start gap-3">
-          <span className="text-xl shrink-0 mt-0.5">🔄</span>
-          <div>
-            <p className="font-bold text-sm mb-1">E se não passar na primeira chamada?</p>
-            <p className="text-xs text-muted-foreground leading-relaxed">Não desanime. O SISU tem chamadas e lista de espera. Muitos estudantes são chamados após a primeira divulgação.</p>
-            <p className="text-xs text-muted-foreground leading-relaxed mt-1.5">Além disso, você pode tentar o ENEM novamente no ano seguinte com mais preparo. Trajetórias não lineares são comuns e legítimas.</p>
+        <AccordionSection titulo="🔄 E se não passar?">
+          <div className="flex items-start gap-3">
+            <span className="text-xl shrink-0 mt-0.5">🔄</span>
+            <div>
+              <p className="text-xs text-muted-foreground leading-relaxed">Não desanime. O SISU tem chamadas e lista de espera. Muitos estudantes são chamados após a primeira divulgação.</p>
+              <p className="text-xs text-muted-foreground leading-relaxed mt-1.5">Além disso, você pode tentar o ENEM novamente no ano seguinte com mais preparo. Trajetórias não lineares são comuns e legítimas.</p>
+            </div>
           </div>
-        </div>
+        </AccordionSection>
 
         {/* Card 7 — Se você for aprovado */}
-        <div className="border border-border rounded-2xl p-4 bg-card flex items-start gap-3">
-          <span className="text-xl shrink-0 mt-0.5">✅</span>
-          <div>
-            <p className="font-bold text-sm mb-1">Se você for aprovado</p>
-            <p className="text-xs text-muted-foreground leading-relaxed">Fique atento ao prazo de matrícula na universidade — ele é curto e não pode ser perdido. Separe seus documentos com antecedência:</p>
-            <ul className="mt-1.5 space-y-1 text-xs text-muted-foreground">
-              <li>• RG e CPF</li>
-              <li>• Histórico escolar</li>
-              <li>• Comprovante de residência</li>
-              <li>• Outros documentos que a instituição solicitar</li>
-            </ul>
+        <AccordionSection titulo="✅ Se você for aprovado">
+          <div className="flex items-start gap-3">
+            <span className="text-xl shrink-0 mt-0.5">✅</span>
+            <div>
+              <p className="text-xs text-muted-foreground leading-relaxed">Fique atento ao prazo de matrícula na universidade — ele é curto e não pode ser perdido. Separe seus documentos com antecedência:</p>
+              <ul className="mt-1.5 space-y-1 text-xs text-muted-foreground">
+                <li>• RG e CPF</li>
+                <li>• Histórico escolar</li>
+                <li>• Comprovante de residência</li>
+                <li>• Outros documentos que a instituição solicitar</li>
+              </ul>
+            </div>
           </div>
-        </div>
+        </AccordionSection>
 
         {/* Link oficial */}
         <div className="border border-border rounded-2xl p-4 bg-card space-y-2">

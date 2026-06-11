@@ -1,3 +1,5 @@
+import GridCard2x2 from "../GridCard2x2";
+
 const categoria1 = [
   {
     emoji: "📱",
@@ -74,25 +76,7 @@ const categoria2 = [
   },
 ];
 
-function CardFerramenta({ f }) {
-  return (
-    <div className="border border-border rounded-2xl p-4 bg-card flex items-start gap-3">
-      <span className="text-xl shrink-0 mt-0.5">{f.emoji}</span>
-      <div className="flex-1 min-w-0">
-        <h3 className="font-bold text-sm mb-1">{f.titulo}</h3>
-        <p className="text-xs text-muted-foreground leading-relaxed mb-3">{f.texto}</p>
-        <a
-          href={f.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-1 text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all"
-        >
-          {f.botao}
-        </a>
-      </div>
-    </div>
-  );
-}
+
 
 export default function AbaFerramentasDigitais() {
   return (
@@ -100,8 +84,10 @@ export default function AbaFerramentasDigitais() {
       {/* Categoria 1 */}
       <div className="pt-1">
         <h2 className="font-extrabold text-sm mb-3">📚 Para Aprender e Estudar</h2>
-        <div className="space-y-3">
-          {categoria1.map((f) => <CardFerramenta key={f.titulo} f={f} />)}
+        <div className="grid grid-cols-2 gap-2">
+          {categoria1.map((f) => (
+            <GridCard2x2 key={f.titulo} emoji={f.emoji} titulo={f.titulo} texto={f.texto} url={f.url} />
+          ))}
         </div>
       </div>
 
@@ -113,8 +99,10 @@ export default function AbaFerramentasDigitais() {
             💡 Organizar os estudos é tão importante quanto estudar. Estas ferramentas ajudam a planejar sua semana, guardar materiais e fazer anotações rápidas — tudo pelo celular.
           </p>
         </div>
-        <div className="space-y-3">
-          {categoria2.map((f) => <CardFerramenta key={f.titulo} f={f} />)}
+        <div className="grid grid-cols-2 gap-2">
+          {categoria2.map((f) => (
+            <GridCard2x2 key={f.titulo} emoji={f.emoji} titulo={f.titulo} texto={f.texto} url={f.url} />
+          ))}
         </div>
       </div>
     </div>

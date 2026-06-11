@@ -1,4 +1,6 @@
 import PageHeader from "../PageHeader";
+import GridCard2x2 from "../GridCard2x2";
+import AccordionSection from "../AccordionSection";
 
 function CardCurso({ emoji, titulo, texto, url, urlLabel, children }) {
   return (
@@ -63,28 +65,28 @@ export default function SubCursosGratuitos({ onBack }) {
           subtitulo="Plataformas gratuitas para aprender no seu tempo"
         />
 
-        <div className="space-y-3">
-          <CardCurso emoji="🏛️" titulo="Escola Virtual do Governo"
+        <div className="grid grid-cols-2 gap-2">
+          <GridCard2x2 emoji="🏛️" titulo="Escola Virtual do Governo"
             texto="Cursos gratuitos e certificados do governo federal. Informática, gestão, cidadania e muito mais."
             url="https://www.escolavirtual.gov.br" />
-          <CardCurso emoji="🏛️" titulo="ENAP"
+          <GridCard2x2 emoji="🏛️" titulo="ENAP"
             texto="Escola Nacional de Administração Pública. Cursos gratuitos em gestão, liderança, tecnologia e cidadania."
             url="https://www.enap.gov.br" />
-          <CardCurso emoji="🌐" titulo="Fundação Bradesco"
+          <GridCard2x2 emoji="🌐" titulo="Fundação Bradesco"
             texto="Cursos online gratuitos de informática, administração, contabilidade e mais. Certificado gratuito."
             url="https://www.ev.org.br" />
-          <CardCurso emoji="💼" titulo="SEBRAE"
+          <GridCard2x2 emoji="💼" titulo="SEBRAE"
             texto="Cursos gratuitos para quem quer empreender ou desenvolver habilidades profissionais."
             url="https://sc.loja.sebrae.com.br" />
-          <CardCurso emoji="🚛" titulo="SEST SENAT"
+          <GridCard2x2 emoji="🚛" titulo="SEST SENAT"
             texto="Cursos gratuitos para trabalhadores do transporte e outras áreas. Certificado gratuito."
             url="https://digital.sestsenat.org.br" />
-          <CardCurso emoji="📖" titulo="Aprenda Mais — MEC"
+          <GridCard2x2 emoji="📖" titulo="Aprenda Mais — MEC"
             texto="Portal oficial do MEC com recursos educacionais gratuitos para estudantes e professores."
             url="https://aprendamais.mec.gov.br" />
-          <CardCurso emoji="📚" titulo="MEC Livros"
+          <GridCard2x2 emoji="📚" titulo="MEC Livros"
             texto="Biblioteca digital gratuita do governo federal com livros didáticos e de literatura."
-            url="https://meclivros.mec.gov.br" urlLabel="🔗 Acessar" />
+            url="https://meclivros.mec.gov.br" />
         </div>
 
         {/* CATEGORIA 2 — Formação Técnica e Superior */}
@@ -97,33 +99,36 @@ export default function SubCursosGratuitos({ onBack }) {
           <p className="text-xs leading-relaxed text-foreground">💡 Os Institutos Federais e as Universidades Federais oferecem educação pública, gratuita e de qualidade. O ingresso é por processo seletivo — acompanhe os editais e inscrições.</p>
         </div>
 
-        <div className="space-y-3">
-          <CardCurso emoji="🎓" titulo="IFC"
+        <div className="grid grid-cols-2 gap-2">
+          <GridCard2x2 emoji="🎓" titulo="IFC"
             texto="O IFC oferece cursos técnicos, de graduação e pós-graduação gratuitos em Santa Catarina."
-            url="https://ingresso.ifc.edu.br/guia-de-cursos" urlLabel="🔗 Acessar" />
-          <CardCurso emoji="🎓" titulo="IFSC"
+            url="https://ingresso.ifc.edu.br/guia-de-cursos" />
+          <GridCard2x2 emoji="🎓" titulo="IFSC"
             texto="O IFSC oferece cursos técnicos e superiores gratuitos em todo o estado de SC."
-            url="https://www.ifsc.edu.br/cursos" urlLabel="🔗 Acessar" />
-          <CardCurso emoji="🏫" titulo="Institutos Federais"
+            url="https://www.ifsc.edu.br/cursos" />
+          <GridCard2x2 emoji="🏫" titulo="Institutos Federais"
             texto="Cursos técnicos e superiores 100% gratuitos em todo o Brasil. Pesquise: 'Instituto Federal + sua cidade'." />
-          <CardCurso emoji="🎓" titulo="Universidades Federais"
+          <GridCard2x2 emoji="🎓" titulo="Universidades Federais"
             texto="Graduação gratuita em diversas áreas em todo o Brasil. Ingresso principal pelo SISU com nota do ENEM." />
-          <CardCurso emoji="💻" titulo="UAB"
+          <GridCard2x2 emoji="💻" titulo="UAB"
             texto="Graduação a distância gratuita em universidades públicas. Ideal para estudar de casa."
-            url="https://www.gov.br/capes/pt-br/acesso-a-informacao/acoes-e-programas/articulacao-e-inovacao-em-educacao-aberta/sistema-universidade-aberta-do-brasil"
-            urlLabel="🔗 Acessar" />
-          <CardCurso emoji="⚙️" titulo="SENAI"
-            texto="Cursos técnicos na área industrial, incluindo eletricidade. Acompanhe os editais de vagas gratuitas."
-            url="https://sc.senai.br/pt-br/editais-gratuidade-senai" urlLabel="🔗 Acessar" />
-          <CardCurso emoji="🛎️" titulo="SENAC"
-            texto="Cursos em comércio, gastronomia, beleza, informática e mais. Acompanhe as vagas gratuitas."
-            url="https://portal.sc.senac.br/cursos-gratuitos" urlLabel="🔗 Acessar" />
+            url="https://www.gov.br/capes/pt-br/acesso-a-informacao/acoes-e-programas/articulacao-e-inovacao-em-educacao-aberta/sistema-universidade-aberta-do-brasil" />
         </div>
 
-        {/* Aviso SENAI/SENAC */}
-        <div className="bg-yellow-50 border border-yellow-300 rounded-xl p-3">
-          <p className="text-xs leading-relaxed text-foreground">⚠️ <strong>SENAI e SENAC — Atenção:</strong> a maioria dos cursos é paga. Porém, periodicamente são abertas vagas gratuitas por editais e programas especiais. Fique atento e candidate-se quando abrirem.</p>
-        </div>
+        {/* SENAI e SENAC em acordeão */}
+        <AccordionSection titulo="⚠️ SENAI e SENAC — Cursos com vagas gratuitas periódicas">
+          <div className="bg-yellow-50 border border-yellow-300 rounded-xl p-3">
+            <p className="text-xs leading-relaxed text-foreground">⚠️ <strong>Atenção:</strong> a maioria dos cursos é paga. Porém, periodicamente são abertas vagas gratuitas por editais e programas especiais. Fique atento e candidate-se quando abrirem.</p>
+          </div>
+          <div className="grid grid-cols-2 gap-2">
+            <GridCard2x2 emoji="⚙️" titulo="SENAI"
+              texto="Cursos técnicos na área industrial, incluindo eletricidade. Acompanhe os editais de vagas gratuitas."
+              url="https://sc.senai.br/pt-br/editais-gratuidade-senai" />
+            <GridCard2x2 emoji="🛎️" titulo="SENAC"
+              texto="Cursos em comércio, gastronomia, beleza, informática e mais. Acompanhe as vagas gratuitas."
+              url="https://portal.sc.senac.br/cursos-gratuitos" />
+          </div>
+        </AccordionSection>
 
         {/* Certificação da Educação Básica */}
         <CategoriaHeader titulo="📋 Certificação da Educação Básica" />

@@ -1,4 +1,5 @@
 import PageHeader from "../PageHeader";
+import AccordionSection from "../AccordionSection";
 
 export default function SubFies({ onBack }) {
   return (
@@ -24,50 +25,53 @@ export default function SubFies({ onBack }) {
         </div>
 
         {/* Card — Quem pode participar? */}
-        <div className="border border-border rounded-2xl p-4 bg-card flex items-start gap-3">
-          <span className="text-xl shrink-0 mt-0.5">📋</span>
-          <div>
-            <p className="font-bold text-sm mb-1">Quem pode participar?</p>
-            <p className="text-xs text-muted-foreground leading-relaxed">Para se candidatar ao FIES você precisa:</p>
-            <ul className="mt-1.5 space-y-1 text-xs text-muted-foreground">
-              <li>• Ter feito o ENEM com pontuação mínima exigida (exceto nota zero na redação)</li>
-              <li>• Atender aos critérios de renda familiar estabelecidos para cada edição</li>
-              <li>• Não ter diploma de curso superior</li>
-            </ul>
-            <p className="text-xs text-muted-foreground leading-relaxed mt-1.5">Os critérios de pontuação e renda mudam a cada edição — consulte sempre o site oficial antes de se inscrever.</p>
+        <AccordionSection titulo="📋 Quem pode participar?">
+          <div className="flex items-start gap-3">
+            <span className="text-xl shrink-0 mt-0.5">📋</span>
+            <div>
+              <p className="text-xs text-muted-foreground leading-relaxed">Para se candidatar ao FIES você precisa:</p>
+              <ul className="mt-1.5 space-y-1 text-xs text-muted-foreground">
+                <li>• Ter feito o ENEM com pontuação mínima exigida (exceto nota zero na redação)</li>
+                <li>• Atender aos critérios de renda familiar estabelecidos para cada edição</li>
+                <li>• Não ter diploma de curso superior</li>
+              </ul>
+              <p className="text-xs text-muted-foreground leading-relaxed mt-1.5">Os critérios de pontuação e renda mudam a cada edição — consulte sempre o site oficial antes de se inscrever.</p>
+            </div>
           </div>
-        </div>
+        </AccordionSection>
 
         {/* Card — Como funciona o pagamento? */}
-        <div className="border border-border rounded-2xl p-4 bg-card flex items-start gap-3">
-          <span className="text-xl shrink-0 mt-0.5">💰</span>
-          <div>
-            <p className="font-bold text-sm mb-1">Como funciona o pagamento?</p>
-            <p className="text-xs text-muted-foreground leading-relaxed">Durante o curso você paga uma parcela mínima mensal. Após se formar, você tem um prazo para quitar o restante com juros — conforme as regras vigentes no momento da contratação.</p>
-            <p className="text-xs text-muted-foreground leading-relaxed mt-1.5">Antes de assinar, verifique no site oficial:</p>
-            <ul className="mt-1 space-y-1 text-xs text-muted-foreground">
-              <li>• O valor das parcelas durante o curso</li>
-              <li>• O prazo total para quitação</li>
-              <li>• A taxa de juros atual</li>
-            </ul>
-            <p className="text-xs text-muted-foreground leading-relaxed mt-1.5">As condições podem mudar a cada edição do programa.</p>
+        <AccordionSection titulo="💰 Como funciona o pagamento?">
+          <div className="flex items-start gap-3">
+            <span className="text-xl shrink-0 mt-0.5">💰</span>
+            <div>
+              <p className="text-xs text-muted-foreground leading-relaxed">Durante o curso você paga uma parcela mínima mensal. Após se formar, você tem um prazo para quitar o restante com juros — conforme as regras vigentes no momento da contratação.</p>
+              <p className="text-xs text-muted-foreground leading-relaxed mt-1.5">Antes de assinar, verifique no site oficial:</p>
+              <ul className="mt-1 space-y-1 text-xs text-muted-foreground">
+                <li>• O valor das parcelas durante o curso</li>
+                <li>• O prazo total para quitação</li>
+                <li>• A taxa de juros atual</li>
+              </ul>
+              <p className="text-xs text-muted-foreground leading-relaxed mt-1.5">As condições podem mudar a cada edição do programa.</p>
+            </div>
           </div>
-        </div>
+        </AccordionSection>
 
         {/* Card — Cuidados importantes */}
-        <div className="border border-border rounded-2xl p-4 bg-card flex items-start gap-3">
-          <span className="text-xl shrink-0 mt-0.5">⚠️</span>
-          <div>
-            <p className="font-bold text-sm mb-1">Cuidados importantes</p>
-            <p className="text-xs text-muted-foreground leading-relaxed">Antes de assinar o contrato do FIES, considere:</p>
-            <ul className="mt-1.5 space-y-1 text-xs text-muted-foreground">
-              <li>• Você terá uma dívida real para pagar após se formar(a)</li>
-              <li>• Calcule se a renda esperada na sua profissão vai cobrir as parcelas</li>
-              <li>• Pesquise se o curso é reconhecido pelo MEC — cursos não reconhecidos não têm validade no mercado</li>
-              <li>• Guarde todos os comprovantes de pagamento</li>
-            </ul>
+        <AccordionSection titulo="⚠️ Cuidados importantes">
+          <div className="flex items-start gap-3">
+            <span className="text-xl shrink-0 mt-0.5">⚠️</span>
+            <div>
+              <p className="text-xs text-muted-foreground leading-relaxed">Antes de assinar o contrato do FIES, considere:</p>
+              <ul className="mt-1.5 space-y-1 text-xs text-muted-foreground">
+                <li>• Você terá uma dívida real para pagar após se formar(a)</li>
+                <li>• Calcule se a renda esperada na sua profissão vai cobrir as parcelas</li>
+                <li>• Pesquise se o curso é reconhecido pelo MEC — cursos não reconhecidos não têm validade no mercado</li>
+                <li>• Guarde todos os comprovantes de pagamento</li>
+              </ul>
+            </div>
           </div>
-        </div>
+        </AccordionSection>
 
         {/* Card — FIES x PROUNI — manter exatamente */}
         <div className="border border-border rounded-2xl p-4 bg-card flex items-start gap-3">
@@ -79,11 +83,10 @@ export default function SubFies({ onBack }) {
         </div>
 
         {/* Card — Como se inscrever? */}
-        <div className="border border-border rounded-2xl p-4 bg-card space-y-3">
+        <AccordionSection titulo="📝 Como se inscrever?">
           <div className="flex items-start gap-3">
             <span className="text-xl shrink-0 mt-0.5">📝</span>
             <div>
-              <p className="font-bold text-sm mb-1">Como se inscrever?</p>
               <p className="text-xs text-muted-foreground leading-relaxed">As inscrições são feitas pelo site oficial do FIES, totalmente online e gratuitas. Tenha em mãos:</p>
               <ul className="mt-1.5 space-y-1 text-xs text-muted-foreground">
                 <li>• RG e CPF</li>
@@ -104,7 +107,7 @@ export default function SubFies({ onBack }) {
           >
             🔗 Acessar site oficial do FIES
           </a>
-        </div>
+        </AccordionSection>
 
         {/* Mensagem de encorajamento — manter exatamente */}
         <div className="rounded-2xl p-4 bg-orange-50 border border-orange-200">

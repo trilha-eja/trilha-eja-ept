@@ -1,4 +1,5 @@
 import PageHeader from "../PageHeader";
+import AccordionSection from "../AccordionSection";
 
 export default function SubProuni({ onBack }) {
   return (
@@ -61,54 +62,58 @@ export default function SubProuni({ onBack }) {
         </div>
 
         {/* Card 4 — Cursos disponíveis */}
-        <div className="border border-border rounded-2xl p-4 bg-card flex items-start gap-3">
-          <span className="text-xl shrink-0 mt-0.5">🏫</span>
-          <div>
-            <p className="font-bold text-sm mb-1">Quais cursos estão disponíveis?</p>
-            <p className="text-xs text-muted-foreground leading-relaxed">O PROUNI oferece bolsas em centenas de cursos diferentes: engenharia, tecnologia, saúde, educação, administração e muito mais. A disponibilidade varia conforme a instituição e a região. Pesquise no site oficial os cursos disponíveis na sua cidade.</p>
+        <AccordionSection titulo="🏫 Quais cursos disponíveis?">
+          <div className="flex items-start gap-3">
+            <span className="text-xl shrink-0 mt-0.5">🏫</span>
+            <div>
+              <p className="text-xs text-muted-foreground leading-relaxed">O PROUNI oferece bolsas em centenas de cursos diferentes: engenharia, tecnologia, saúde, educação, administração e muito mais. A disponibilidade varia conforme a instituição e a região. Pesquise no site oficial os cursos disponíveis na sua cidade.</p>
+            </div>
           </div>
-        </div>
+        </AccordionSection>
 
         {/* Card 5 — Como se inscrever? */}
-        <div className="border border-border rounded-2xl p-4 bg-card flex items-start gap-3">
-          <span className="text-xl shrink-0 mt-0.5">📝</span>
-          <div>
-            <p className="font-bold text-sm mb-1">Como se inscrever?</p>
-            <p className="text-xs text-muted-foreground leading-relaxed">As inscrições são feitas pelo site oficial do PROUNI, totalmente online e gratuitas. Você pode escolher até 2 opções de curso e instituição. As datas de inscrição mudam a cada edição — fique atento ao site oficial.</p>
+        <AccordionSection titulo="📝 Como se inscrever?">
+          <div className="flex items-start gap-3">
+            <span className="text-xl shrink-0 mt-0.5">📝</span>
+            <div>
+              <p className="text-xs text-muted-foreground leading-relaxed">As inscrições são feitas pelo site oficial do PROUNI, totalmente online e gratuitas. Você pode escolher até 2 opções de curso e instituição. As datas de inscrição mudam a cada edição — fique atento ao site oficial.</p>
+            </div>
           </div>
-        </div>
+        </AccordionSection>
 
         {/* Card 6 — Documentos necessários */}
-        <div className="border border-border rounded-2xl p-4 bg-card flex items-start gap-3">
-          <span className="text-xl shrink-0 mt-0.5">📄</span>
-          <div>
-            <p className="font-bold text-sm mb-1">Documentos necessários</p>
-            <p className="text-xs text-muted-foreground leading-relaxed">Separe com antecedência:</p>
-            <ul className="mt-1.5 space-y-1 text-xs text-muted-foreground">
-              <li>• RG e CPF</li>
-              <li>• Comprovante de renda familiar</li>
-              <li>• Comprovante de residência</li>
-              <li>• Histórico escolar</li>
-              <li>• Outros documentos que a instituição solicitar</li>
-            </ul>
-            <p className="text-xs text-muted-foreground leading-relaxed mt-1.5">Guarde cópias de tudo — podem ser solicitados em diferentes etapas.</p>
+        <AccordionSection titulo="📄 Documentos necessários">
+          <div className="flex items-start gap-3">
+            <span className="text-xl shrink-0 mt-0.5">📄</span>
+            <div>
+              <p className="text-xs text-muted-foreground leading-relaxed">Separe com antecedência:</p>
+              <ul className="mt-1.5 space-y-1 text-xs text-muted-foreground">
+                <li>• RG e CPF</li>
+                <li>• Comprovante de renda familiar</li>
+                <li>• Comprovante de residência</li>
+                <li>• Histórico escolar</li>
+                <li>• Outros documentos que a instituição solicitar</li>
+              </ul>
+              <p className="text-xs text-muted-foreground leading-relaxed mt-1.5">Guarde cópias de tudo — podem ser solicitados em diferentes etapas.</p>
+            </div>
           </div>
-        </div>
+        </AccordionSection>
 
         {/* Card 7 — E se a bolsa for parcial? */}
-        <div className="border border-border rounded-2xl p-4 bg-card flex items-start gap-3">
-          <span className="text-xl shrink-0 mt-0.5">🔄</span>
-          <div>
-            <p className="font-bold text-sm mb-1">E se a bolsa for parcial?</p>
-            <p className="text-xs text-muted-foreground leading-relaxed">A bolsa parcial cobre 50% da mensalidade. Para o restante, algumas opções são:</p>
-            <ul className="mt-1.5 space-y-1 text-xs text-muted-foreground">
-              <li>• Solicitar o FIES para financiar a parte não coberta</li>
-              <li>• Verificar se a instituição oferece bolsas complementares</li>
-              <li>• Negociar diretamente com a faculdade</li>
-            </ul>
-            <p className="text-xs text-muted-foreground leading-relaxed mt-1.5">Pesquise todas as possibilidades antes de desistir.</p>
+        <AccordionSection titulo="🔄 E se a bolsa for parcial?">
+          <div className="flex items-start gap-3">
+            <span className="text-xl shrink-0 mt-0.5">🔄</span>
+            <div>
+              <p className="text-xs text-muted-foreground leading-relaxed">A bolsa parcial cobre 50% da mensalidade. Para o restante, algumas opções são:</p>
+              <ul className="mt-1.5 space-y-1 text-xs text-muted-foreground">
+                <li>• Solicitar o FIES para financiar a parte não coberta</li>
+                <li>• Verificar se a instituição oferece bolsas complementares</li>
+                <li>• Negociar diretamente com a faculdade</li>
+              </ul>
+              <p className="text-xs text-muted-foreground leading-relaxed mt-1.5">Pesquise todas as possibilidades antes de desistir.</p>
+            </div>
           </div>
-        </div>
+        </AccordionSection>
 
         {/* Aviso de segurança */}
         <div className="rounded-2xl p-4 bg-orange-50 border border-orange-200 space-y-2">

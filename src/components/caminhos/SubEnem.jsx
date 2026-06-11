@@ -1,4 +1,5 @@
 import PageHeader from "../PageHeader";
+import AccordionSection from "../AccordionSection";
 
 const apps = [
   {
@@ -70,20 +71,21 @@ export default function SubEnem({ onBack, onNavigate }) {
         </div>
 
         {/* Card 4 — O que é avaliado? */}
-        <div className="border border-border rounded-2xl p-4 bg-card flex items-start gap-3">
-          <span className="text-xl shrink-0 mt-0.5">📚</span>
-          <div>
-            <p className="font-bold text-sm mb-1">O que é avaliado?</p>
-            <p className="text-xs text-muted-foreground leading-relaxed">O ENEM avalia 4 áreas do conhecimento:</p>
-            <ul className="mt-1.5 space-y-1 text-xs text-muted-foreground">
-              <li>• Linguagens e Códigos</li>
-              <li>• Ciências Humanas</li>
-              <li>• Ciências da Natureza</li>
-              <li>• Matemática e suas Tecnologias</li>
-            </ul>
-            <p className="text-xs text-muted-foreground leading-relaxed mt-1.5">Além de uma Redação, que tem peso muito importante na nota final. Comece pelos conteúdos básicos e consulte as matrizes de referência no site do INEP.</p>
+        <AccordionSection titulo="📚 O que é avaliado?">
+          <div className="flex items-start gap-3">
+            <span className="text-xl shrink-0 mt-0.5">📚</span>
+            <div>
+              <p className="text-xs text-muted-foreground leading-relaxed">O ENEM avalia 4 áreas do conhecimento:</p>
+              <ul className="mt-1.5 space-y-1 text-xs text-muted-foreground">
+                <li>• Linguagens e Códigos</li>
+                <li>• Ciências Humanas</li>
+                <li>• Ciências da Natureza</li>
+                <li>• Matemática e suas Tecnologias</li>
+              </ul>
+              <p className="text-xs text-muted-foreground leading-relaxed mt-1.5">Além de uma Redação, que tem peso muito importante na nota final. Comece pelos conteúdos básicos e consulte as matrizes de referência no site do INEP.</p>
+            </div>
           </div>
-        </div>
+        </AccordionSection>
 
         {/* Card 5 — Você não precisa de nota máxima */}
         <div className="rounded-2xl border-2 p-4" style={{ backgroundColor: "#FFF3E0", borderColor: "#E86826" }}>
@@ -97,11 +99,10 @@ export default function SubEnem({ onBack, onNavigate }) {
         </div>
 
         {/* Card 6 — Como estudar mesmo trabalhando */}
-        <div className="border border-border rounded-2xl p-4 bg-card space-y-2">
+        <AccordionSection titulo="⏱️ Como estudar mesmo trabalhando">
           <div className="flex items-start gap-3">
             <span className="text-xl shrink-0 mt-0.5">⏱️</span>
             <div>
-              <p className="font-bold text-sm mb-1">Como estudar mesmo trabalhando</p>
               <p className="text-xs text-muted-foreground leading-relaxed">Você não precisa de horas livres para se preparar. Pequenos momentos já ajudam:</p>
               <ul className="mt-1.5 space-y-1 text-xs text-muted-foreground">
                 <li>• Resolva uma questão por dia</li>
@@ -116,11 +117,10 @@ export default function SubEnem({ onBack, onNavigate }) {
             className="inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all">
             🔗 Provas anteriores — INEP
           </a>
-        </div>
+        </AccordionSection>
 
         {/* Card 7 — Aplicativos */}
-        <div className="border border-border rounded-2xl p-4 bg-card space-y-4">
-          <p className="font-bold text-sm">📱 Aplicativos para estudar</p>
+        <AccordionSection titulo="📱 Aplicativos para estudar">
           {apps.map((a, idx) => (
             <div key={a.nome} className={`space-y-2 pb-3 ${idx < apps.length - 1 ? "border-b border-border" : ""}`}>
               <p className="font-bold text-sm">{a.nome}</p>
@@ -142,7 +142,7 @@ export default function SubEnem({ onBack, onNavigate }) {
               📱 Ver Ferramentas Digitais
             </button>
           </div>
-        </div>
+        </AccordionSection>
 
         <button onClick={onBack} className="w-full text-sm text-muted-foreground underline underline-offset-4 py-2">
           ← Voltar para Caminhos de Estudo
