@@ -12,14 +12,14 @@ import ConcursosProcessos from "../components/ConcursosProcessos";
 import EletricistaIndustrial from "../components/EletricistaIndustrial";
 
 const sections = [
-  { id: "resume", icon: FileText, title: "Criar meu Currículo", description: "Passo a passo simples", color: "bg-primary" },
-  { id: "skills", icon: Star, title: "Valorize sua Experiência", description: "Suas habilidades de vida contam!", color: "bg-secondary" },
   { id: "eletricista", icon: Zap, title: "O que faz um Eletricista Industrial?", description: "Conheça sua profissão e seus caminhos", color: "bg-chart-3" },
-  { id: "precario", icon: AlertTriangle, title: "Trabalho Precarizado", description: "Autonomia ou armadilha? Conheça os riscos", color: "bg-destructive" },
-  { id: "rights", icon: Shield, title: "Seus Direitos Trabalhistas", description: "Conheça seus direitos e faça valer", color: "bg-accent" },
+  { id: "skills", icon: Star, title: "Valorize sua Experiência", description: "Suas habilidades de vida contam!", color: "bg-secondary" },
+  { id: "resume", icon: FileText, title: "Criar meu Currículo", description: "Passo a passo simples", color: "bg-primary" },
   { id: "jobs", icon: ExternalLink, title: "Central de Oportunidades", description: "Plataformas, dicas e orientações para o mundo do trabalho", color: "bg-chart-4" },
   { id: "internship", icon: ExternalLink, title: "Sites de Estágio", description: "Onde encontrar e se cadastrar para estágios", color: "bg-chart-5" },
   { id: "concursos", icon: ExternalLink, title: "Concursos e Processos Seletivos", description: "Oportunidades além das vagas tradicionais", color: "bg-chart-3" },
+  { id: "precario", icon: AlertTriangle, title: "Trabalho Precarizado", description: "Autonomia ou armadilha? Conheça os riscos", color: "bg-destructive" },
+  { id: "rights", icon: Shield, title: "Seus Direitos Trabalhistas", description: "Conheça seus direitos e faça valer", color: "bg-accent" },
 ];
 
 export default function Empregabilidade() {
