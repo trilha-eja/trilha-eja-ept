@@ -69,86 +69,75 @@ const encontrosPDF = [
   { titulo: "Encontro 6 — Síntese, Avaliação e Continuidade", modulos: "Sua Opinião Importa + Vozes da Trilha", proposta: "Avaliação coletiva do processo. O que aprendemos juntos? O que mudou na forma de ver nossos projetos de vida? Convite para deixar depoimento nas Vozes da Trilha. Avaliação do aplicativo pelo formulário Sua Opinião Importa.", tempo: "1h30" },
 ];
 
-async function generatePDF() {
-  const { jsPDF } = window.jspdf;
-  const html2canvas = window.html2canvas;
-  if (!jsPDF || !html2canvas) { alert("PDF não disponível. Tente novamente."); return; }
+const HC_OPTS = {
+  scale: 2,
+  useCORS: true,
+  allowTaint: true,
+  backgroundColor: "#FFFFFF",
+  logging: false,
+  scrollX: 0,
+  scrollY: 0,
+  windowWidth: document.documentElement.scrollWidth,
+  windowHeight: document.documentElement.scrollHeight,
+};
 
+function criarContainerHTML() {
   const el = document.createElement("div");
-  el.style.cssText = "position:fixed;left:-9999px;top:0;z-index:-1;width:794px;background:#fff;font-family:Arial,sans-serif;padding:56px 56px 40px 56px;box-sizing:border-box;color:#000;";
-  document.body.appendChild(el);
+  el.style.cssText = "position:fixed;left:-9999px;top:0;z-index:-1;width:794px;background:#fff;font-family:Arial,sans-serif;box-sizing:border-box;color:#000;line-height:1.6;";
+  return el;
+}
 
-  // ── Título principal ──
-  const tituloEl = document.createElement("h1");
-  tituloEl.style.cssText = "font-size:16px;font-weight:bold;color:#E86826;text-align:center;margin:0 0 4px 0;";
-  tituloEl.textContent = "Guia do Educador — Trilha EJA-EPT";
-  el.appendChild(tituloEl);
+function blocoParaHTML(bloco) {
+  const wrapper = document.createElement("div");
+  wrapper.style.cssText = "padding:0;margin:0;";
 
-  const subtituloEl = document.createElement("p");
-  subtituloEl.style.cssText = "font-size:11px;color:#666;text-align:center;margin:0 0 16px 0;";
-  subtituloEl.textContent = "Orientações pedagógicas para o uso do Trilha EJA-EPT em sala";
-  el.appendChild(subtituloEl);
+  const divisor = document.createElement("hr");
+  divisor.style.cssText = "border:none;border-top:1px dashed #ccc;margin:0 0 10px 0;";
+  wrapper.appendChild(divisor);
 
-  const hr = document.createElement("hr");
-  hr.style.cssText = "border:none;border-top:1px solid #ccc;margin-bottom:24px;";
-  el.appendChild(hr);
+  const bTitulo = document.createElement("h2");
+  bTitulo.style.cssText = "font-size:13px;font-weight:bold;color:#222;margin:0 0 2px 0;";
+  bTitulo.textContent = bloco.titulo;
+  wrapper.appendChild(bTitulo);
 
-  // ── Abertura ──
-  const aberturaTitulo = document.createElement("p");
-  aberturaTitulo.style.cssText = "font-size:12px;font-style:italic;color:#444;text-align:center;margin:0 0 10px 0;";
-  aberturaTitulo.textContent = '"Para educadores que compreendem que ensinar na EJA é um ato político de esperança ativa."';
-  el.appendChild(aberturaTitulo);
+  const bSubtitulo = document.createElement("p");
+  bSubtitulo.style.cssText = "font-size:10px;color:#888;margin:0 0 8px 0;";
+  bSubtitulo.textContent = bloco.subtitulo;
+  wrapper.appendChild(bSubtitulo);
 
-  const aberturaTexto = document.createElement("p");
-  aberturaTexto.style.cssText = "font-size:11px;line-height:1.7;color:#222;margin:0 0 24px 0;";
-  aberturaTexto.textContent = "Bem-vindo(a)! Este espaço reúne orientações fundamentadas na pesquisa Projeto de vida na EJA-EPT: perspectivas de continuidade dos estudos e inserção no mundo do trabalho, desenvolvida no ProfEPT/IFC Campus Blumenau. O objetivo é apoiar você no uso crítico e transformador do Trilha EJA-EPT em sala de aula, reconhecendo as especificidades do estudante-trabalhador e a dimensão política da educação de jovens e adultos.";
-  el.appendChild(aberturaTexto);
-
-  // ── Blocos ──
-  for (const bloco of conteudoPDF.filter(c => c.tipo === "bloco")) {
-    const divisor = document.createElement("hr");
-    divisor.style.cssText = "border:none;border-top:1px dashed #ccc;margin:0 0 18px 0;";
-    el.appendChild(divisor);
-
-    const bTitulo = document.createElement("h2");
-    bTitulo.style.cssText = "font-size:13px;font-weight:bold;color:#222;margin:0 0 2px 0;";
-    bTitulo.textContent = bloco.titulo;
-    el.appendChild(bTitulo);
-
-    const bSubtitulo = document.createElement("p");
-    bSubtitulo.style.cssText = "font-size:10px;color:#888;margin:0 0 10px 0;";
-    bSubtitulo.textContent = bloco.subtitulo;
-    el.appendChild(bSubtitulo);
-
-    const paragrafos = bloco.texto.split("\n\n");
-    for (const p of paragrafos) {
-      const pEl = document.createElement("p");
-      pEl.style.cssText = "font-size:11px;line-height:1.7;color:#222;margin:0 0 6px 0;";
-      pEl.textContent = p.trim();
-      el.appendChild(pEl);
-    }
-
-    if (bloco.refs) {
-      const refEl = document.createElement("p");
-      refEl.style.cssText = "font-size:10px;font-style:italic;color:#555;margin:6px 0 0 0;";
-      refEl.textContent = "Referências: " + bloco.refs.replace(/\n/g, " | ");
-      el.appendChild(refEl);
-    }
+  for (const p of bloco.texto.split("\n\n")) {
+    const pEl = document.createElement("p");
+    pEl.style.cssText = "font-size:11px;color:#222;margin:0 0 5px 0;";
+    pEl.textContent = p.trim();
+    wrapper.appendChild(pEl);
   }
 
-  // ── Roteiro ──
-  const divisorR = document.createElement("hr");
-  divisorR.style.cssText = "border:none;border-top:1px dashed #ccc;margin:18px 0;";
-  el.appendChild(divisorR);
+  if (bloco.refs) {
+    const refEl = document.createElement("p");
+    refEl.style.cssText = "font-size:10px;font-style:italic;color:#555;margin:4px 0 0 0;";
+    refEl.textContent = "Referências: " + bloco.refs.replace(/\n/g, " | ");
+    wrapper.appendChild(refEl);
+  }
+  return wrapper;
+}
 
-  const roteiroTitulo = document.createElement("h2");
-  roteiroTitulo.style.cssText = "font-size:13px;font-weight:bold;color:#222;margin:0 0 12px 0;";
-  roteiroTitulo.textContent = "📅 Roteiro Sugerido de 6 Encontros";
-  el.appendChild(roteiroTitulo);
+function roteiroParaHTML() {
+  const wrapper = document.createElement("div");
+  wrapper.style.cssText = "padding:0;margin:0;";
+
+  const divisor = document.createElement("hr");
+  divisor.style.cssText = "border:none;border-top:1px dashed #ccc;margin:0 0 10px 0;";
+  wrapper.appendChild(divisor);
+
+  const titulo = document.createElement("h2");
+  titulo.style.cssText = "font-size:13px;font-weight:bold;color:#222;margin:0 0 10px 0;";
+  titulo.textContent = "📅 Roteiro Sugerido de 6 Encontros";
+  wrapper.appendChild(titulo);
 
   for (const enc of encontrosPDF) {
     const encDiv = document.createElement("div");
-    encDiv.style.cssText = "margin-bottom:12px;";
+    encDiv.style.cssText = "margin-bottom:10px;";
+
     const encTitulo = document.createElement("p");
     encTitulo.style.cssText = "font-size:11px;font-weight:bold;color:#222;margin:0 0 2px 0;";
     encTitulo.textContent = enc.titulo;
@@ -169,32 +158,117 @@ async function generatePDF() {
     encTempo.textContent = "Tempo sugerido: " + enc.tempo;
     encDiv.appendChild(encTempo);
 
-    el.appendChild(encDiv);
+    wrapper.appendChild(encDiv);
   }
+  return wrapper;
+}
 
-  // ── Rodapé (será adicionado via jsPDF) ──
+async function renderizarBloco(wrapperEl) {
+  const container = criarContainerHTML();
+  container.appendChild(wrapperEl);
+  document.body.appendChild(container);
 
-  const canvas = await html2canvas(el, { scale: 2, useCORS: true, backgroundColor: "#ffffff" });
-  document.body.removeChild(el);
+  // força layout antes de capturar
+  container.offsetHeight;
+
+  const canvas = await window.html2canvas(container, HC_OPTS);
+  document.body.removeChild(container);
+  return canvas;
+}
+
+const MARGEM_MM = 20;
+const PAGE_W_MM = 210;
+const PAGE_H_MM = 297;
+const USABLE_W_MM = PAGE_W_MM - 2 * MARGEM_MM;
+const USABLE_H_MM = PAGE_H_MM - 2 * MARGEM_MM;
+const RENDER_W_PX = 794;
+
+function canvasHeightToMM(canvas) {
+  return (canvas.height / canvas.width) * USABLE_W_MM;
+}
+
+function adicionarRodape(doc) {
+  doc.setFontSize(8);
+  doc.setTextColor(150);
+  doc.text("Trilha EJA-EPT | ProfEPT | IFC Campus Blumenau", PAGE_W_MM / 2, PAGE_H_MM - 12, { align: "center" });
+}
+
+async function generatePDF() {
+  const { jsPDF } = window.jspdf;
+  const html2canvas = window.html2canvas;
+  if (!jsPDF || !html2canvas) { alert("PDF não disponível. Tente novamente."); return; }
 
   const doc = new jsPDF({ unit: "mm", format: "a4", orientation: "portrait" });
-  const pageW = 186; // 210 - 2*12 margins
-  const pageH = 257; // 297 - 2*20 margins
-  const imgW = pageW;
-  const imgH = (canvas.height * pageW) / canvas.width;
 
-  let position = 0;
-  let remaining = imgH;
-  const rodape = "Trilha EJA-EPT | ProfEPT | IFC Campus Blumenau";
+  // ── Cabeçalho (página 1) ──
+  const headerEl = criarContainerHTML();
+  const tituloEl = document.createElement("h1");
+  tituloEl.style.cssText = "font-size:16px;font-weight:bold;color:#E86826;text-align:center;margin:0 0 4px 0;padding:0;";
+  tituloEl.textContent = "Guia do Educador — Trilha EJA-EPT";
+  headerEl.appendChild(tituloEl);
 
-  while (remaining > 0) {
-    doc.addImage(canvas.toDataURL("image/png"), "PNG", 12, 20 - position, imgW, imgH);
-    doc.setFontSize(8);
-    doc.setTextColor(150);
-    doc.text(rodape, 105, 290, { align: "center" });
-    remaining -= pageH;
-    if (remaining > 0) { doc.addPage(); position += pageH; }
+  const subtituloP = document.createElement("p");
+  subtituloP.style.cssText = "font-size:11px;color:#666;text-align:center;margin:0 0 16px 0;padding:0;";
+  subtituloP.textContent = "Orientações pedagógicas para o uso do Trilha EJA-EPT em sala";
+  headerEl.appendChild(subtituloP);
+
+  const hrEl = document.createElement("hr");
+  hrEl.style.cssText = "border:none;border-top:1px solid #ccc;margin:0 0 16px 0;";
+  headerEl.appendChild(hrEl);
+
+  const citacaoEl = document.createElement("p");
+  citacaoEl.style.cssText = "font-size:12px;font-style:italic;color:#444;text-align:center;margin:0 0 10px 0;padding:0;";
+  citacaoEl.textContent = '"Para educadores que compreendem que ensinar na EJA é um ato político de esperança ativa."';
+  headerEl.appendChild(citacaoEl);
+
+  const aberturaEl = document.createElement("p");
+  aberturaEl.style.cssText = "font-size:11px;color:#222;margin:0 0 0 0;padding:0;";
+  aberturaEl.textContent = "Bem-vindo(a)! Este espaço reúne orientações fundamentadas na pesquisa Projeto de vida na EJA-EPT: perspectivas de continuidade dos estudos e inserção no mundo do trabalho, desenvolvida no ProfEPT/IFC Campus Blumenau. O objetivo é apoiar você no uso crítico e transformador do Trilha EJA-EPT em sala de aula, reconhecendo as especificidades do estudante-trabalhador e a dimensão política da educação de jovens e adultos.";
+  headerEl.appendChild(aberturaEl);
+
+  document.body.appendChild(headerEl);
+  headerEl.offsetHeight;
+  const headerCanvas = await html2canvas(headerEl, HC_OPTS);
+  document.body.removeChild(headerEl);
+
+  // Posiciona cabeçalho na página 1
+  const headerH = canvasHeightToMM(headerCanvas);
+  doc.addImage(headerCanvas.toDataURL("image/png"), "PNG", MARGEM_MM, MARGEM_MM, USABLE_W_MM, headerH);
+  adicionarRodape(doc);
+
+  let cursorY = MARGEM_MM + headerH + 6; // 6mm de espaço após cabeçalho
+
+  // ── Blocos (unidades indivisíveis) ──
+  const blocos = conteudoPDF.filter(c => c.tipo === "bloco");
+  for (const bloco of blocos) {
+    const wrapper = blocoParaHTML(bloco);
+    const canvas = await renderizarBloco(wrapper);
+    const blocoH = canvasHeightToMM(canvas);
+
+    // Se não couber na página atual, vai para a próxima
+    if (cursorY + blocoH > MARGEM_MM + USABLE_H_MM) {
+      doc.addPage();
+      adicionarRodape(doc);
+      cursorY = MARGEM_MM;
+    }
+
+    doc.addImage(canvas.toDataURL("image/png"), "PNG", MARGEM_MM, cursorY, USABLE_W_MM, blocoH);
+    cursorY += blocoH + 2; // 2mm entre blocos
   }
+
+  // ── Roteiro ──
+  const roteiroWrapper = roteiroParaHTML();
+  const roteiroCanvas = await renderizarBloco(roteiroWrapper);
+  const roteiroH = canvasHeightToMM(roteiroCanvas);
+
+  if (cursorY + roteiroH > MARGEM_MM + USABLE_H_MM) {
+    doc.addPage();
+    adicionarRodape(doc);
+    cursorY = MARGEM_MM;
+  }
+
+  doc.addImage(roteiroCanvas.toDataURL("image/png"), "PNG", MARGEM_MM, cursorY, USABLE_W_MM, roteiroH);
+  adicionarRodape(doc);
 
   doc.save("guia-do-educador-trilha-eja-ept.pdf");
 }
