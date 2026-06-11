@@ -66,9 +66,9 @@ const BLOCOS = [
   },
   {
     emoji: "🌟",
-    titulo: "Eu Mesmo(a)",
+    titulo: "Cuidar de si mesmo(a) não é egoísmo — é condição para continuar caminhando e ajudando quem você ama.",
     subtitulo: "Seu crescimento pessoal, sua saúde e seu bem-estar.",
-    intro: "Cuidar de si mesmo(a) não é egoísmo — é condição para continuar caminhando e ajudando quem você ama.",
+    intro: "",
     campos: [
       { field: "eu_semana",  label: "Esta semana, o que posso fazer por mim mesmo(a)?",                           placeholder: "Ex: dormir melhor...", max: 30 },
       { field: "eu_1ano",    label: "Em 1 ano, que versão de mim quero ser?",                                    placeholder: "Ex: mais confiante...", max: 30 },

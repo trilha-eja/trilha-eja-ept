@@ -475,7 +475,6 @@ export default function BaixarMateriais() {
   const refDireitos = useRef(null);
   const refChecklist = useRef(null);
   const refGlossario = useRef(null);
-  const refGuia = useRef(null);
   const [loading, setLoading] = useState(null);
 
   const materiais = [
@@ -506,19 +505,12 @@ export default function BaixarMateriais() {
     {
       id: "glossario",
       emoji: "⚡",
-      titulo: "Glossário do Eletricista — Versão para Imprimir",
-      descricao: "Todos os termos técnicos em linguagem simples, formatados para colar no caderno ou na parede da oficina.",
+      titulo: "Glossário do Eletricista",
+      descricao: "25 termos técnicos organizados em 4 categorias — para consulta rápida e estudo",
       cor: "bg-yellow-50 border-yellow-200",
       gerar: () => htmlToPDF(refGlossario.current, "glossario-eletricista.pdf", "portrait"),
     },
-    {
-      id: "guia",
-      emoji: "📚",
-      titulo: "Guia do Educador (PDF Completo)",
-      descricao: "Para professores: orientações pedagógicas para uso do Trilha EJA-EPT em perspectiva emancipatória.",
-      cor: "bg-purple-50 border-purple-200",
-      gerar: () => htmlToPDF(refGuia.current, "guia-do-educador-trilha-eja-ept.pdf", "portrait"),
-    },
+
   ];
 
   const handleGerar = async (m) => {
@@ -536,7 +528,6 @@ export default function BaixarMateriais() {
       <TemplateDireitos refEl={refDireitos} />
       <TemplateChecklist refEl={refChecklist} />
       <TemplateGlossario refEl={refGlossario} />
-      <TemplateGuiaEducador refEl={refGuia} />
 
       <div className="max-w-lg mx-auto px-4 py-6 space-y-6">
         {/* Hero */}
