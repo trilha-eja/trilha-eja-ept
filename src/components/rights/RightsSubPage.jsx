@@ -1,5 +1,6 @@
 import { ArrowLeft } from "lucide-react";
 import CardNR10 from "./CardNR10";
+import AccordionSection from "../AccordionSection";
 
 export default function RightsSubPage({ titulo, subtitulo, intro, introBg, cards, onBack }) {
   return (
@@ -22,13 +23,15 @@ export default function RightsSubPage({ titulo, subtitulo, intro, introBg, cards
           </div>
         )}
         {cards.map((r, i) => {
-          if (r.customComponent === "CardNR10") return <CardNR10 key={i} />;
+          if (r.customComponent === "CardNR10") {
+            return (
+              <AccordionSection key={i} titulo="⚡ Segurança Elétrica: Conheça seus Direitos">
+                <CardNR10 />
+              </AccordionSection>
+            );
+          }
           return (
-          <div key={i} className="p-4 bg-card border border-border rounded-2xl">
-            <div className="flex items-center gap-2 mb-1">
-              <span className="text-xl">{r.emoji}</span>
-              <h3 className="font-bold text-sm">{r.titulo}</h3>
-            </div>
+          <AccordionSection key={i} titulo={`${r.emoji} ${r.titulo}`}>
             <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">{r.texto}</p>
             {r.canais && (
               <div className="mt-3 space-y-3">
@@ -65,7 +68,7 @@ export default function RightsSubPage({ titulo, subtitulo, intro, introBg, cards
                 {r.link.label}
               </a>
             )}
-          </div>
+          </AccordionSection>
           );
         })}
       </div>

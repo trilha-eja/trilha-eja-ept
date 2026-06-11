@@ -1,5 +1,4 @@
 import { ArrowLeft } from "lucide-react";
-import GridCard2x2 from "./GridCard2x2";
 import AccordionSection from "./AccordionSection";
 
 function SecaoHeader({ titulo, subtitulo }) {
@@ -113,41 +112,49 @@ export default function ConcursosProcessos({ onBack }) {
         {/* ── Seção 2 — Onde Procurar ── */}
         <SecaoHeader titulo="🔍 Onde Procurar Oportunidades?" />
 
-        <InfoCard emoji="⚡" titulo="Empresas Públicas e de Economia Mista"
-          texto={"Empresas como as de energia elétrica, saneamento, Correios, bancos públicos e cooperativas mistas frequentemente abrem processos seletivos para eletricistas e técnicos.\nFique de olho nos portais de concursos!"}
-        />
-        <InfoCard emoji="🎓" titulo="Institutos Federais e Universidades Públicas"
-          texto={"Os Institutos Federais e as Universidades Públicas frequentemente abrem processos seletivos para técnicos e assistentes administrativos.\n\n💡 Fique de olho nos portais de concursos listados nesta página e nas redes sociais dessas instituições — os editais são divulgados assim que abrem!"}
-        />
-        <InfoCard emoji="🏙️" titulo="Prefeituras e Câmaras Municipais"
-          texto={"Municípios realizam concursos e processos seletivos para diversas áreas, incluindo manutenção elétrica e infraestrutura.\nAcompanhe os editais da sua cidade e região."}
-        />
+        <AccordionSection titulo="⚡ Empresas Públicas e de Economia Mista">
+          <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">Empresas como as de energia elétrica, saneamento, Correios, bancos públicos e cooperativas mistas frequentemente abrem processos seletivos para eletricistas e técnicos.
+Fique de olho nos portais de concursos!</p>
+        </AccordionSection>
+        <AccordionSection titulo="🎓 Institutos Federais e Universidades Públicas">
+          <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">Os Institutos Federais e as Universidades Públicas frequentemente abrem processos seletivos para técnicos e assistentes administrativos.
 
-        {/* ── Seção 3 — Sites (Grade 2x2) ── */}
+💡 Fique de olho nos portais de concursos listados nesta página e nas redes sociais dessas instituições — os editais são divulgados assim que abrem!</p>
+        </AccordionSection>
+        <AccordionSection titulo="🏙️ Prefeituras e Câmaras Municipais">
+          <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">Municípios realizam concursos e processos seletivos para diversas áreas, incluindo manutenção elétrica e infraestrutura.
+Acompanhe os editais da sua cidade e região.</p>
+        </AccordionSection>
+
+        {/* ── Seção 3 — Sites ── */}
         <SecaoHeader titulo="🌐 Sites Confiáveis para Acompanhar Editais" subtitulo="Clique para abrir diretamente 👇" />
-        <div className="grid grid-cols-2 gap-2">
-          {sitesEditais.map((s, i) => <GridCard2x2 key={i} {...s} />)}
-        </div>
+        {sitesEditais.map((s, i) => (
+          <AccordionSection key={i} titulo={`${s.emoji} ${s.titulo}`}>
+            <p className="text-sm text-muted-foreground leading-relaxed">{s.texto}</p>
+            <a
+              href={s.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-3 inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all"
+            >
+              🔗 Acessar
+            </a>
+          </AccordionSection>
+        ))}
 
         {/* ── Seção 4 — Como se Preparar (Acordeão) ── */}
         <SecaoHeader titulo="📋 Como se Preparar" subtitulo="Editais, vídeos e dicas práticas" />
 
-        <AccordionSection titulo="📖 Como Ler um Edital?">
-          <div className="bg-green-50 border border-green-200 rounded-xl p-3">
-            <p className="text-xs leading-relaxed">
-              O edital é o documento oficial que explica tudo sobre o concurso. Parece complicado, mas seguindo estes passos fica mais fácil!
-            </p>
-          </div>
-          {passosEdital.map((p, i) => (
-            <div key={i} className="p-3 bg-muted/30 rounded-xl">
-              <div className="flex items-center gap-2 mb-1">
-                <span className="text-lg">{p.emoji}</span>
-                <h4 className="font-bold text-xs">{p.titulo}</h4>
-              </div>
-              <p className="text-xs text-muted-foreground leading-relaxed">{p.texto}</p>
-            </div>
-          ))}
-        </AccordionSection>
+        <div className="bg-green-50 border border-green-200 rounded-xl p-3">
+          <p className="text-xs leading-relaxed">
+            O edital é o documento oficial que explica tudo sobre o concurso. Parece complicado, mas seguindo estes passos fica mais fácil!
+          </p>
+        </div>
+        {passosEdital.map((p, i) => (
+          <AccordionSection key={i} titulo={`${p.emoji} ${p.titulo}`}>
+            <p className="text-sm text-muted-foreground leading-relaxed">{p.texto}</p>
+          </AccordionSection>
+        ))}
 
         <AccordionSection titulo="🎬 Vídeos para te Ajudar">
           {videosConcursos.map((v, i) => <VideoCard key={i} {...v} />)}
