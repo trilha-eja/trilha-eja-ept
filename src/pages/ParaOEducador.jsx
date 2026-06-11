@@ -1,114 +1,11 @@
-import { useRef, useState } from "react";
-import { BookOpen, Download } from "lucide-react";
+import { useState } from "react";
 import PageHeader from "../components/PageHeader";
-import EducatorCard from "../components/educator/EducatorCard";
-
-const cards = [
-  {
-    title: "Quem é o estudante da EJA-EPT?",
-    emoji: "👤",
-    text: `O estudante da EJA-EPT é um trabalhador-estudante adulto que carrega saberes construídos na vida, no trabalho e nas lutas cotidianas. Como disse Miguel Arroyo, ele é um "passageiro da noite" — não por falta de esforço, mas porque as condições estruturais da sociedade o afastaram da escola.
-
-Ao usar este aplicativo, lembre-se: você não está ensinando alguém que não sabe. Você está reconhecendo quem já sabe muito.`,
-    reference: "ARROYO, M. G. Passageiros da noite. Petrópolis: Vozes, 2012.",
-  },
-  {
-    title: "Mundo do Trabalho x Mercado de Trabalho",
-    emoji: "⚖️",
-    text: `Este aplicativo usa intencionalmente "Mundo do Trabalho", não "mercado de trabalho". A diferença é política: formar para o mercado adapta o estudante às necessidades do capital. Formar para o mundo do trabalho instrumentaliza o cidadão a compreender, questionar e transformar as relações de produção.
-
-Use essa distinção em suas aulas.`,
-    reference: "FRIGOTTO, G.; CIAVATTA, M.; RAMOS, M. (Orgs.). Ensino Médio Integrado. São Paulo: Cortez, 2005.",
-  },
-  {
-    title: "Como usar o Mapa da Vida sem cair na meritocracia",
-    emoji: "🗺️",
-    text: `✓ FAÇA: Pergunte à turma quais barreiras estruturais (falta de transporte, cansaço, cuidado de filhos) dificultam seus projetos — e debata soluções coletivas.
-✓ FAÇA: Conecte as metas individuais a direitos coletivos (moradia, educação, saúde).
-✗ EVITE: Frases como "basta querer" ou "quem se esforça chega lá".
-✗ EVITE: Tratar o projeto de vida como plano individual de ascensão.
-
-O Mapa da Vida é um ato político de esperança coletiva, não um plano de carreira.`,
-    reference: "FREIRE, P. Pedagogia da Esperança. Rio de Janeiro: Paz e Terra, 1992.",
-  },
-  {
-    title: "Roteiro Sugerido de 4 Encontros",
-    emoji: "📅",
-    encounters: [
-      {
-        label: "Encontro 1",
-        desc: "Mundo do Trabalho + Direitos",
-        detail: "Módulos de direitos trabalhistas + NR-10",
-      },
-      {
-        label: "Encontro 2",
-        desc: "Empregabilidade Crítica",
-        detail: "Gerador de currículo em grupo + Valorize sua Experiência",
-      },
-      {
-        label: "Encontro 3",
-        desc: "Mapa da Vida",
-        detail: "Em roda de conversa, com relatos de egressos — Vozes da Trilha",
-      },
-      {
-        label: "Encontro 4",
-        desc: "Caminhos de Estudo",
-        detail: "Use os módulos ENEM/SISU/PROUNI como ponto de partida para uma roda de conversa sobre os projetos de futuro da turma — individual e coletivamente.",
-      },
-    ],
-  },
-];
-
-async function generatePDF(containerRef) {
-  const { jsPDF } = window.jspdf;
-  const html2canvas = window.html2canvas;
-  if (!jsPDF || !html2canvas) { alert("PDF não disponível. Tente novamente."); return; }
-
-  const el = containerRef.current;
-  el.style.display = "block";
-
-  const A4_W_PX = 794; // ~210mm at 96dpi
-  const A4_H_PX = 1123; // ~297mm at 96dpi
-
-  const canvas = await html2canvas(el, {
-    scale: 2,
-    useCORS: true,
-    backgroundColor: "#ffffff",
-    width: A4_W_PX,
-    windowWidth: A4_W_PX,
-  });
-
-  el.style.display = "none";
-
-  const imgData = canvas.toDataURL("image/png");
-  const doc = new jsPDF({ unit: "mm", format: "a4", orientation: "portrait" });
-
-  const pageW = 210;
-  const pageH = 297;
-  const imgW = pageW;
-  const imgH = (canvas.height * pageW) / canvas.width;
-
-  let position = 0;
-  let remaining = imgH;
-
-  while (remaining > 0) {
-    doc.addImage(imgData, "PNG", 0, position, imgW, imgH);
-    remaining -= pageH;
-    if (remaining > 0) {
-      doc.addPage();
-      position -= pageH;
-    }
-  }
-
-  doc.save("guia-do-educador-trilha-eja-ept.pdf");
-}
+import AccordionSection from "../components/AccordionSection";
 
 // Senha ofuscada em base64 para não expor em texto visível
 const _k = atob("cHJvZmVwdDIwMjY=");
 
 export default function ParaOEducador() {
-  const pdfRef = useRef(null);
-  const [loading, setLoading] = useState(false);
   const [acesso, setAcesso] = useState(() => sessionStorage.getItem("educador_acesso") === "1");
   const [senha, setSenha] = useState("");
   const [erro, setErro] = useState(false);
@@ -121,12 +18,6 @@ export default function ParaOEducador() {
     } else {
       setErro(true);
     }
-  };
-
-  const handleDownload = async () => {
-    setLoading(true);
-    await generatePDF(pdfRef);
-    setLoading(false);
   };
 
   if (!acesso) {
@@ -179,126 +70,173 @@ export default function ParaOEducador() {
     <div>
       <PageHeader title="Para o Educador" subtitle="Orientações pedagógicas para o uso do Trilha EJA-EPT em sala" backTo="/" />
 
-      <div className="max-w-lg mx-auto px-4 py-5 space-y-4">
-        {/* Intro banner */}
-        <div className="bg-chart-4/10 border border-chart-4/20 rounded-2xl p-4">
-          <div className="flex items-center gap-2 mb-1">
-            <BookOpen className="w-5 h-5 text-chart-4" />
-            <p className="font-bold text-sm">Para educadores que compreendem que ensinar na EJA é um ato político de esperança</p>
-          </div>
-          <p className="text-sm text-muted-foreground leading-relaxed">
-            Este espaço reúne orientações pedagógicas fundamentadas para apoiar educadores da EJA-EPT no uso crítico e transformador deste aplicativo.
+      <div className="max-w-lg mx-auto px-4 py-5 space-y-4 pb-10">
+        {/* Texto de abertura — sempre visível */}
+        <div className="space-y-3">
+          <p className="text-sm italic text-muted-foreground leading-relaxed text-center">
+            "Para educadores que compreendem que ensinar na EJA é um ato político de esperança ativa."
           </p>
-        </div>
-
-        {/* Cards */}
-        {cards.map((card, i) => (
-          <EducatorCard key={i} card={card} />
-        ))}
-
-        {/* Download button */}
-        <div className="pb-6 pt-2">
-          <button
-            onClick={handleDownload}
-            disabled={loading}
-            className="w-full py-4 rounded-2xl bg-chart-4 text-white font-bold text-base flex items-center justify-center gap-2 active:scale-95 transition-all disabled:opacity-70"
-          >
-            <Download className="w-5 h-5" />
-            {loading ? "Gerando PDF…" : "Baixar Guia do Educador em PDF"}
-          </button>
-        </div>
-      </div>
-
-      {/* Hidden PDF template */}
-      <div ref={pdfRef} style={{ display: "none", position: "fixed", left: "-9999px", top: 0, zIndex: -1 }}>
-        <div style={{
-          width: "794px",
-          backgroundColor: "#ffffff",
-          color: "#000000",
-          fontFamily: "Arial, sans-serif",
-          padding: "75px 76px",
-          boxSizing: "border-box",
-        }}>
-          {/* Header */}
-          <h1 style={{ fontSize: "22px", fontWeight: "bold", textAlign: "center", margin: "0 0 8px 0" }}>
-            Guia do Educador — Trilha EJA-EPT
-          </h1>
-          <p style={{ fontSize: "13px", color: "#666", textAlign: "center", margin: "0 0 16px 0" }}>
-            Orientações pedagógicas para uso em sala
-          </p>
-          <hr style={{ border: "none", borderTop: "1px solid #ccc", marginBottom: "28px" }} />
-
-          {/* Seção 1 */}
-          <h2 style={{ fontSize: "16px", fontWeight: "bold", margin: "0 0 8px 0" }}>
-            1. Quem é o estudante da EJA-EPT?
-          </h2>
-          <p style={{ fontSize: "12px", lineHeight: "1.7", margin: "0 0 8px 0" }}>
-            O estudante da EJA-EPT é um trabalhador-estudante adulto que carrega saberes construídos na vida, no trabalho e nas lutas cotidianas. Como disse Miguel Arroyo, ele é um passageiro da noite — não por falta de esforço, mas porque as condições estruturais da sociedade o afastaram da escola. Ao usar este aplicativo, lembre-se: você não está ensinando alguém que não sabe. Você está reconhecendo quem já sabe muito.
-          </p>
-          <p style={{ fontSize: "11px", fontStyle: "italic", color: "#555", margin: "0 0 32px 0" }}>
-            Referência: ARROYO, M. G. Passageiros da noite. Petrópolis: Vozes, 2012.
-          </p>
-
-          {/* Seção 2 */}
-          <h2 style={{ fontSize: "16px", fontWeight: "bold", margin: "0 0 8px 0" }}>
-            2. Mundo do Trabalho x Mercado de Trabalho
-          </h2>
-          <p style={{ fontSize: "12px", lineHeight: "1.7", margin: "0 0 8px 0" }}>
-            Este aplicativo usa intencionalmente Mundo do Trabalho, não mercado de trabalho. A diferença é política: formar para o mercado adapta o estudante às necessidades do capital. Formar para o mundo do trabalho instrumentaliza o cidadão a compreender, questionar e transformar as relações de produção. Use essa distinção em suas aulas.
-          </p>
-          <p style={{ fontSize: "11px", fontStyle: "italic", color: "#555", margin: "0 0 32px 0" }}>
-            Referência: FRIGOTTO, G.; CIAVATTA, M.; RAMOS, M. (Orgs.). Ensino Médio Integrado. São Paulo: Cortez, 2005.
-          </p>
-
-          {/* Seção 3 */}
-          <h2 style={{ fontSize: "16px", fontWeight: "bold", margin: "0 0 12px 0" }}>
-            3. Como usar o Mapa da Vida sem cair na meritocracia
-          </h2>
-          <p style={{ fontSize: "12px", fontWeight: "bold", color: "#2a7a2a", margin: "0 0 4px 0" }}>FAÇA:</p>
-          <p style={{ fontSize: "12px", lineHeight: "1.7", margin: "0 0 4px 8px" }}>
-            — Pergunte à turma quais barreiras estruturais (falta de transporte, cansaço, cuidado de filhos) dificultam seus projetos e debata soluções coletivas.
-          </p>
-          <p style={{ fontSize: "12px", lineHeight: "1.7", margin: "0 0 14px 8px" }}>
-            — Conecte as metas individuais a direitos coletivos (moradia, educação, saúde).
-          </p>
-          <p style={{ fontSize: "12px", fontWeight: "bold", color: "#b02020", margin: "0 0 4px 0" }}>EVITE:</p>
-          <p style={{ fontSize: "12px", lineHeight: "1.7", margin: "0 0 4px 8px" }}>
-            — Frases como "basta querer" ou "quem se esforça chega lá".
-          </p>
-          <p style={{ fontSize: "12px", lineHeight: "1.7", margin: "0 0 14px 8px" }}>
-            — Tratar o projeto de vida como plano individual de ascensão.
-          </p>
-          <p style={{ fontSize: "12px", fontStyle: "italic", lineHeight: "1.7", margin: "0 0 8px 0" }}>
-            O Mapa da Vida é um ato político de esperança coletiva, não um plano de carreira.
-          </p>
-          <p style={{ fontSize: "11px", fontStyle: "italic", color: "#555", margin: "0 0 32px 0" }}>
-            Referência: FREIRE, P. Pedagogia da Esperança. Rio de Janeiro: Paz e Terra, 1992.
-          </p>
-
-          {/* Seção 4 */}
-          <h2 style={{ fontSize: "16px", fontWeight: "bold", margin: "0 0 12px 0" }}>
-            4. Roteiro Sugerido de 4 Encontros
-          </h2>
-          {[
-            { label: "Encontro 1 — Mundo do Trabalho + Direitos", detail: "Módulos de direitos trabalhistas + NR-10" },
-            { label: "Encontro 2 — Empregabilidade Crítica", detail: "Gerador de currículo em grupo + Valorize sua Experiência" },
-            { label: "Encontro 3 — Mapa da Vida", detail: "Em roda de conversa, com relatos de egressos — Vozes da Trilha" },
-            { label: "Encontro 4 — Caminhos de Estudo", detail: "Use os módulos ENEM/SISU/PROUNI como ponto de partida para uma roda de conversa sobre os projetos de futuro da turma — individual e coletivamente." },
-          ].map((enc, i) => (
-            <div key={i} style={{ marginBottom: "14px" }}>
-              <p style={{ fontSize: "12px", fontWeight: "bold", margin: "0 0 2px 0" }}>{enc.label}</p>
-              <p style={{ fontSize: "12px", color: "#444", margin: 0 }}>{enc.detail}</p>
-            </div>
-          ))}
-
-          {/* Rodapé */}
-          <div style={{ marginTop: "40px", borderTop: "1px solid #ccc", paddingTop: "12px", textAlign: "center" }}>
-            <p style={{ fontSize: "10px", color: "#888", margin: 0 }}>
-              Trilha EJA-EPT | Produto Educacional — ProfEPT | IFC
+          <div className="bg-muted/60 border border-border rounded-2xl p-4">
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              Bem-vindo(a)! Este espaço reúne orientações fundamentadas na pesquisa <strong>Projeto de vida na EJA-EPT: perspectivas de continuidade dos estudos e inserção no mundo do trabalho</strong>, desenvolvida no ProfEPT/IFC Campus Blumenau.
+            </p>
+            <p className="text-sm text-muted-foreground leading-relaxed mt-2">
+              O objetivo é apoiar você no uso crítico e transformador do Trilha EJA-EPT em sala de aula, reconhecendo as especificidades do estudante-trabalhador e a dimensão política da educação de jovens e adultos.
             </p>
           </div>
         </div>
+
+        {/* Bloco 1 — Quem é o estudante da EJA-EPT? */}
+        <AccordionSection titulo="👤 Quem é o estudante da EJA-EPT?">
+          <p className="text-xs text-muted-foreground font-semibold">Um olhar que vai além da sala de aula</p>
+          <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">{`O estudante da EJA não é um "aluno com atraso". Ele é um trabalhador-estudante adulto cujas trajetórias foram interrompidas por desigualdades estruturais — de classe, raça, gênero, território e idade.
+
+Ao usar este aplicativo, lembre-se: você não está ensinando alguém que não sabe. Você está mediando o conhecimento de quem já sabe muito.
+
+Esses estudantes chegam à escola carregando saberes construídos no trabalho, na família, na comunidade e nas lutas cotidianas. Reconhecer esses saberes não é condescendência — é o ponto de partida de uma pedagogia comprometida com a formação humana integral.
+
+A interseccionalidade nos convida a olhar para cada estudante em sua complexidade: uma mulher negra trabalhadora que retorna à escola enfrenta barreiras que vão muito além do conteúdo escolar. Nomear essas barreiras em sala é um ato pedagógico.`}</p>
+          <div className="bg-muted/50 rounded-xl p-3">
+            <p className="text-xs font-bold mb-1">📋 Referências:</p>
+            <p className="text-xs text-muted-foreground">ARROYO, M. G. Passageiros da noite. Petrópolis: Vozes, 2012.</p>
+            <p className="text-xs text-muted-foreground">AKOTIRENE, K. Interseccionalidade. São Paulo: Pólen, 2019.</p>
+          </div>
+        </AccordionSection>
+
+        {/* Bloco 2 — EJA como Direito */}
+        <AccordionSection titulo="🛑 EJA como Direito — não como oportunidade">
+          <p className="text-xs text-muted-foreground font-semibold">Atenção à linguagem que usamos</p>
+          <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">{`Muitas vezes, a sociedade trata a EJA como uma "segunda chance" ou um "favor" do Estado. Essa abordagem precisa ser questionada em sala.
+
+A EJA é a reparação de uma dívida histórica e a restituição de um direito constitucionalmente negado na idade própria. Não é benesse — é direito.
+
+Quando o educador muda esse vocabulário em sala, muda a postura do estudante: de grato e submisso para cidadão consciente de seus direitos.
+
+Evite: "Você teve uma segunda chance."
+Prefira: "Você está exercendo um direito que sempre foi seu."`}</p>
+          <div className="bg-muted/50 rounded-xl p-3">
+            <p className="text-xs font-bold mb-1">📋 Referência:</p>
+            <p className="text-xs text-muted-foreground">GADOTTI, M. Educação de adultos como direito humano. São Paulo: IPF, 2009.</p>
+          </div>
+        </AccordionSection>
+
+        {/* Bloco 3 — Mundo do Trabalho x Mercado de Trabalho */}
+        <AccordionSection titulo="⚖️ Mundo do Trabalho x Mercado de Trabalho">
+          <p className="text-xs text-muted-foreground font-semibold">Uma distinção que é política</p>
+          <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">{`Este aplicativo usa intencionalmente a expressão Mundo do Trabalho — e não mercado de trabalho. Essa escolha não é acidental.
+
+Formar para o mercado adapta o estudante às necessidades do capital, naturalizando a exploração e a precarização. Formar para o Mundo do Trabalho instrumentaliza o cidadão a compreender, questionar e transformar as relações de produção.
+
+Use essa distinção nas suas aulas. Quando um estudante pergunta "onde vou trabalhar?", amplie a pergunta: "em que condições? com quais direitos? para construir qual projeto de vida?"`}</p>
+          <div className="bg-muted/50 rounded-xl p-3">
+            <p className="text-xs font-bold mb-1">📋 Referência:</p>
+            <p className="text-xs text-muted-foreground">FRIGOTTO, G.; CIAVATTA, M.; RAMOS, M. (Orgs.). Ensino Médio Integrado. São Paulo: Cortez, 2005.</p>
+          </div>
+        </AccordionSection>
+
+        {/* Bloco 4 — Como mediar o Mapa da Vida */}
+        <AccordionSection titulo="🗺️ Como mediar o Mapa da Vida sem cair na meritocracia">
+          <p className="text-xs text-muted-foreground font-semibold">O projeto de vida como ato político coletivo</p>
+          <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">{`A BNCC introduziu o "Projeto de Vida" no currículo — mas na EJA-EPT, ele não pode ser reduzido a um plano individualista de ascensão pessoal.`}</p>
+          <div className="bg-green-50 border border-green-200 rounded-xl p-3">
+            <p className="text-xs font-bold text-green-800 mb-1">✓ FAÇA:</p>
+            <ul className="text-xs text-green-800 space-y-1">
+              <li>• Pergunte à turma quais barreiras estruturais — falta de transporte, cansaço do trabalho, cuidado de filhos — dificultam seus projetos. Debata soluções coletivas e direitos.</li>
+              <li>• Conecte as metas individuais a direitos coletivos: moradia, educação, saúde, trabalho digno.</li>
+              <li>• Valorize trajetórias não lineares — quem parou e voltou tem uma história que merece ser reconhecida.</li>
+              <li>• Use os blocos "De onde venho?" e "Onde estou?" como ponto de partida para rodas de conversa.</li>
+            </ul>
+          </div>
+          <div className="bg-red-50 border border-red-200 rounded-xl p-3">
+            <p className="text-xs font-bold text-red-800 mb-1">✗ EVITE:</p>
+            <ul className="text-xs text-red-800 space-y-1">
+              <li>• Frases como "basta querer", "é só se esforçar" ou "depende só de você".</li>
+              <li>• Culpar o estudante pelo cansaço — o esgotamento físico é reflexo da jornada de trabalho da classe trabalhadora.</li>
+              <li>• Tratar o projeto de vida como plano de carreira individual.</li>
+              <li>• Comparar trajetórias entre estudantes.</li>
+            </ul>
+          </div>
+          <p className="text-sm text-muted-foreground leading-relaxed italic">O Mapa da Vida é um ato político de esperança coletiva — não um plano de ascensão individual.</p>
+          <div className="bg-muted/50 rounded-xl p-3">
+            <p className="text-xs font-bold mb-1">📋 Referência:</p>
+            <p className="text-xs text-muted-foreground">FREIRE, P. Pedagogia da Esperança. Rio de Janeiro: Paz e Terra, 1992.</p>
+          </div>
+        </AccordionSection>
+
+        {/* Bloco 5 — O educador como ponte */}
+        <AccordionSection titulo="💡 O educador como ponte contra o apagão informacional">
+          <p className="text-xs text-muted-foreground font-semibold">Mediação tecnológica como ato pedagógico</p>
+          <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">{`As entrevistas realizadas nesta pesquisa revelaram algo importante: muitos estudantes da EJA-EPT desconhecem informações fundamentais sobre continuidade dos estudos e mundo do trabalho — o que chamamos de apagão informacional.
+
+Muitos não sabem o que é ENEM, SISU ou PROUNI. Nunca formataram um currículo. Desconhecem seus direitos trabalhistas básicos. Não sabem que podem fazer uma graduação gratuita.
+
+O educador tem um papel insubstituível nesse processo:
+- Mediar o acesso às informações do aplicativo em sala
+- Desmistificar o ensino superior como algo inacessível
+- Conectar o conteúdo técnico do curso aos direitos trabalhistas
+- Usar o app como ponto de partida para rodas de conversa
+- Mostrar que existem caminhos possíveis — sem impor nenhum deles
+
+A mediação tecnológica não é apenas ensinar a usar um app. É ampliar horizontes e devolver ao estudante a consciência de suas possibilidades.`}</p>
+        </AccordionSection>
+
+        {/* Bloco 6 — Roteiro Sugerido de 6 Encontros */}
+        <AccordionSection titulo="📅 Roteiro Sugerido de 6 Encontros">
+          <p className="text-xs text-muted-foreground font-semibold">Adaptável à sua realidade e à da turma</p>
+          <div className="bg-orange-50 border border-orange-200 rounded-xl p-3">
+            <p className="text-xs leading-relaxed text-foreground">
+              Este roteiro é uma sugestão — não uma prescrição. Adapte conforme o tempo disponível, o perfil da turma e o contexto institucional. O importante é garantir espaço para a fala, a escuta e a reflexão coletiva.
+            </p>
+          </div>
+          <EncontroCard
+            titulo="Encontro 1 — Quem somos? De onde viemos?"
+            modulos="Mapa da Vida — Blocos 1 e 2"
+            proposta="Roda de conversa inicial. Cada estudante compartilha algo da sua trajetória. Mediação com as perguntas: Por que paramos de estudar? O que nos trouxe de volta? A EJA como direito — não como favor."
+            tempo="1h30"
+          />
+          <EncontroCard
+            titulo="Encontro 2 — Saberes, Trabalho e Direitos"
+            modulos="Valorize sua Experiência + Direitos Trabalhistas"
+            proposta="Levantamento coletivo dos saberes da turma. Quais experiências temos? O que já aprendemos fora da escola? Conexão com os direitos trabalhistas — carteira assinada, FGTS, segurança no trabalho. Discussão sobre trabalho formal x informal e precarização."
+            tempo="1h30"
+          />
+          <EncontroCard
+            titulo="Encontro 3 — Mundo do Trabalho e Projetos Profissionais"
+            modulos="O que faz um Eletricista + Central de Oportunidades + Criar Currículo"
+            proposta="O que faz um eletricista industrial? Onde pode atuar? Laboratório de elaboração do currículo — individual ou em duplas, com apoio do educador. Uso do módulo Valorize sua Experiência para traduzir saberes da vida em habilidades profissionais."
+            tempo="2h"
+          />
+          <EncontroCard
+            titulo="Encontro 4 — Caminhos de Estudo e Combate ao Apagão Informacional"
+            modulos="ENEM + SISU + PROUNI + Cursos Gratuitos"
+            proposta="Navegação guiada pelos módulos. Desmistificação do ensino superior. Roda de conversa: o que vocês sabiam sobre o ENEM antes de hoje? Quais caminhos parecem possíveis? Quais barreiras existem?"
+            tempo="1h30"
+          />
+          <EncontroCard
+            titulo="Encontro 5 — Mapa da Vida"
+            modulos="Mapa da Vida — todos os blocos"
+            proposta="Preenchimento coletivo e individual do Mapa da Vida. Roda de conversa com compartilhamento voluntário. Uso das Vozes da Trilha como inspiração — depoimentos de egressos. Atenção: não comparar trajetórias, não usar linguagem meritocrática."
+            tempo="2h"
+          />
+          <EncontroCard
+            titulo="Encontro 6 — Síntese, Avaliação e Continuidade"
+            modulos="Sua Opinião Importa + Vozes da Trilha"
+            proposta="Avaliação coletiva do processo. O que aprendemos juntos? O que mudou na forma de ver nossos projetos de vida? Convite para deixar depoimento nas Vozes da Trilha. Avaliação do aplicativo pelo formulário Sua Opinião Importa."
+            tempo="1h30"
+          />
+        </AccordionSection>
       </div>
+    </div>
+  );
+}
+
+function EncontroCard({ titulo, modulos, proposta, tempo }) {
+  return (
+    <div className="bg-card border border-border rounded-xl p-3 space-y-2">
+      <h3 className="font-bold text-sm">{titulo}</h3>
+      <p className="text-xs text-muted-foreground"><span className="font-semibold">Módulos:</span> {modulos}</p>
+      <p className="text-xs text-muted-foreground leading-relaxed"><span className="font-semibold">Proposta:</span> {proposta}</p>
+      <p className="text-xs text-muted-foreground"><span className="font-semibold">Tempo sugerido:</span> {tempo}</p>
     </div>
   );
 }
