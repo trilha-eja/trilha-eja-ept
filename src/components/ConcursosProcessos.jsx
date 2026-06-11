@@ -12,14 +12,16 @@ function SecaoHeader({ titulo, subtitulo }) {
 
 function VideoCard({ titulo, texto, url }) {
   return (
-    <div className="p-3 bg-muted/30 rounded-xl space-y-2">
-      <h4 className="font-bold text-xs">{titulo}</h4>
-      <p className="text-xs text-muted-foreground leading-relaxed">{texto}</p>
-      <a href={url} target="_blank" rel="noopener noreferrer"
-        className="flex items-center justify-center text-xs font-bold px-3 py-1.5 rounded-lg text-white hover:opacity-90 active:scale-95 transition-all"
-        style={{ background: "#E86826" }}>
-        ▶️ Ver vídeos
-      </a>
+    <div className="border border-border rounded-xl p-3 bg-background flex items-start gap-3">
+      <span className="text-lg shrink-0 mt-0.5">🎬</span>
+      <div className="flex-1 min-w-0">
+        <h4 className="font-bold text-sm mb-1">{titulo}</h4>
+        <p className="text-xs text-muted-foreground leading-relaxed mb-3">{texto}</p>
+        <a href={url} target="_blank" rel="noopener noreferrer"
+          className="inline-flex items-center gap-1 text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all">
+          ▶️ Ver vídeos
+        </a>
+      </div>
     </div>
   );
 }
