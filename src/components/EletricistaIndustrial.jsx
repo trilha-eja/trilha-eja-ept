@@ -1,5 +1,6 @@
 import { ArrowLeft, Zap } from "lucide-react";
 import { Link } from "react-router-dom";
+import AccordionSection from "./AccordionSection";
 
 export default function EletricistaIndustrial({ onBack, onNavigate }) {
   return (
@@ -32,12 +33,8 @@ export default function EletricistaIndustrial({ onBack, onNavigate }) {
           </p>
         </div>
 
-        {/* Card 1 — Principais atividades */}
-        <div className="bg-card border border-border rounded-2xl p-4 space-y-3">
-          <div className="flex items-center gap-2">
-            <span className="text-xl">🔧</span>
-            <h2 className="font-bold text-sm">Principais atividades</h2>
-          </div>
+        {/* Card 1 — Principais atividades (Acordeão) */}
+        <AccordionSection titulo="🔧 Principais atividades">
           <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">{`O(a) eletricista industrial pode atuar em atividades como:
 - Instalação de equipamentos elétricos
 - Manutenção preventiva
@@ -49,19 +46,15 @@ export default function EletricistaIndustrial({ onBack, onNavigate }) {
 - Medições e testes elétricos
 - Identificação de falhas
 - Apoio a equipes de manutenção`}</p>
-          <div className="bg-muted rounded-xl p-3">
+          <div className="bg-muted rounded-xl p-3 mt-3">
             <p className="text-xs text-muted-foreground leading-relaxed">
               Nem todas as empresas realizam as mesmas atividades. As funções podem variar conforme o local de trabalho e a experiência profissional.
             </p>
           </div>
-        </div>
+        </AccordionSection>
 
-        {/* Card 2 — Onde posso atuar */}
-        <div className="bg-card border border-border rounded-2xl p-4 space-y-3">
-          <div className="flex items-center gap-2">
-            <span className="text-xl">🏭</span>
-            <h2 className="font-bold text-sm">Onde posso atuar?</h2>
-          </div>
+        {/* Card 2 — Onde posso atuar (Acordeão) */}
+        <AccordionSection titulo="🏭 Onde posso atuar?">
           <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">{`A formação em Eletricista Industrial pode abrir oportunidades em diferentes espaços:
 - Indústrias
 - Empresas de manutenção elétrica
@@ -72,12 +65,12 @@ export default function EletricistaIndustrial({ onBack, onNavigate }) {
 - Órgãos públicos
 - Pequenas empresas
 - Trabalho autônomo`}</p>
-          <div className="bg-muted rounded-xl p-3">
+          <div className="bg-muted rounded-xl p-3 mt-3">
             <p className="text-xs text-muted-foreground leading-relaxed">
               Cada trajetória é única. Algumas pessoas ingressam diretamente na área elétrica. Outras conciliam diferentes atividades profissionais ao longo da vida.
             </p>
           </div>
-        </div>
+        </AccordionSection>
 
         {/* Card 4 — Próximos passos */}
         <div className="bg-orange-50 border border-[#E86826] rounded-2xl p-4">

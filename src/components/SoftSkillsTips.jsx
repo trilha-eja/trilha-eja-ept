@@ -1,4 +1,5 @@
 import { ArrowLeft, Heart, Users, Clock, Star, Lightbulb } from "lucide-react";
+import AccordionSection from "./AccordionSection";
 
 const tips = [
   {
@@ -70,31 +71,26 @@ export default function SoftSkillsTips({ onBack }) {
           </p>
         </div>
 
-        {/* Cards existentes */}
+        {/* Cards existentes — Acordeão */}
         {tips.map((tip, i) => {
           const Icon = tip.icon;
           return (
-            <div key={i} className="flex items-start gap-4 p-4 bg-card border border-border rounded-2xl">
-              <div className={`w-11 h-11 rounded-xl flex items-center justify-center shrink-0 ${tip.color}`}>
-                <Icon className="w-5 h-5 text-white" />
+            <AccordionSection key={i} titulo={tip.title}>
+              <div className="flex items-start gap-4">
+                <div className={`w-11 h-11 rounded-xl flex items-center justify-center shrink-0 ${tip.color}`}>
+                  <Icon className="w-5 h-5 text-white" />
+                </div>
+                <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">{tip.text}</p>
               </div>
-              <div>
-                <h3 className="font-bold text-sm">{tip.title}</h3>
-                <p className="text-sm text-muted-foreground mt-0.5 leading-relaxed whitespace-pre-line">{tip.text}</p>
-              </div>
-            </div>
+            </AccordionSection>
           );
         })}
 
-        {/* Novas seções */}
+        {/* Novas seções — Acordeão */}
         {extraCards.map((card, i) => (
-          <div key={i} className="p-4 bg-card border border-border rounded-2xl">
-            <div className="flex items-center gap-2 mb-2">
-              <span className="text-2xl">{card.emoji}</span>
-              <h3 className="font-bold text-sm">{card.title}</h3>
-            </div>
+          <AccordionSection key={i} titulo={`${card.emoji} ${card.title}`}>
             <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">{card.text}</p>
-          </div>
+          </AccordionSection>
         ))}
 
         {/* Card final de encerramento */}

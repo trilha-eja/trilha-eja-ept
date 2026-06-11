@@ -37,25 +37,22 @@ export default function InternshipSites({ onBack }) {
           </p>
         </div>
 
-        {/* O que é estágio */}
-        <div>
-          <h2 className="font-extrabold text-sm mb-3">❓ O que é Estágio?</h2>
-          <div className="p-4 bg-card border border-border rounded-2xl space-y-3">
-            <div className="flex items-center gap-2">
-              <span className="text-xl">📚</span>
-              <h3 className="font-bold text-sm">Entenda o que é estágio</h3>
-            </div>
-            <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">{`O estágio é uma atividade educativa supervisionada que faz parte do processo de formação profissional.\n\n- Permite desenvolver conhecimentos e experiências práticas\n- Pode ser obrigatório (previsto no curso) ou não obrigatório\n- Possui direitos e regras definidos em lei\n- O(a) estudante tem direito a bolsa-auxílio, seguro e condições dignas`}</p>
-            <div className="bg-muted/40 rounded-xl px-3 py-2 flex items-center gap-2">
-              <span className="text-base">📋</span>
-              <span className="text-xs font-semibold">Lei nº 11.788/2008 — Lei do Estágio</span>
-            </div>
-            <a href="https://www.planalto.gov.br/ccivil_03/_ato2007-2010/2008/lei/l11788.htm" target="_blank" rel="noopener noreferrer"
-              className="flex items-center justify-center text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all">
-              🔗 Conhecer a Lei do Estágio
-            </a>
+        {/* O que é estágio — Acordeão */}
+        <AccordionSection titulo="❓ O que é Estágio?">
+          <div className="flex items-center gap-2 mb-3">
+            <span className="text-xl">📚</span>
+            <h3 className="font-bold text-sm">Entenda o que é estágio</h3>
           </div>
-        </div>
+          <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">{`O estágio é uma atividade educativa supervisionada que faz parte do processo de formação profissional.\n\n- Permite desenvolver conhecimentos e experiências práticas\n- Pode ser obrigatório (previsto no curso) ou não obrigatório\n- Possui direitos e regras definidos em lei\n- O(a) estudante tem direito a bolsa-auxílio, seguro e condições dignas`}</p>
+          <div className="bg-muted/40 rounded-xl px-3 py-2 flex items-center gap-2 mt-3">
+            <span className="text-base">📋</span>
+            <span className="text-xs font-semibold">Lei nº 11.788/2008 — Lei do Estágio</span>
+          </div>
+          <a href="https://www.planalto.gov.br/ccivil_03/_ato2007-2010/2008/lei/l11788.htm" target="_blank" rel="noopener noreferrer"
+            className="flex items-center justify-center text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all mt-3">
+            🔗 Conhecer a Lei do Estágio
+          </a>
+        </AccordionSection>
 
         <div className="bg-orange-50 border border-orange-200 rounded-2xl p-4">
           <p className="text-xs text-orange-800 leading-relaxed">
@@ -68,6 +65,12 @@ export default function InternshipSites({ onBack }) {
           <h2 className="font-extrabold text-sm mb-3">🌐 Plataformas de Estágio</h2>
           <div className="grid grid-cols-2 gap-2">
             {todosSites.map((s, i) => <GridCard2x2 key={i} {...s} />)}
+            <GridCard2x2
+              emoji="🏛️"
+              titulo="Emprega Brasil"
+              texto="Portal oficial do governo federal. Cadastre seu perfil e busque vagas de estágio e emprego em todo o Brasil. Totalmente gratuito."
+              url="https://servicos.mte.gov.br/spme-v2/#/login"
+            />
           </div>
         </div>
 
