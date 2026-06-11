@@ -412,9 +412,9 @@ function TemplateGlossario({ refEl }) {
           <h1 style={{ fontSize: "22px", fontWeight: "bold", color: "white", margin: "0 0 6px 0" }}>Glossário do Eletricista</h1>
           <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.85)", margin: 0 }}>Trilha EJA-EPT</p>
         </div>
-        <div style={{ padding: "20px 32px 40px" }}>
+        <div style={{ padding: "56px 56px 40px" }}>
           {categorias.map((cat, ci) => (
-            <div key={ci} style={{ marginBottom: "24px" }}>
+            <div key={ci} style={{ marginBottom: "24px", pageBreakInside: "avoid" }}>
               {/* Category header */}
               <div style={{
                 backgroundColor: cat.cor,
@@ -434,14 +434,15 @@ function TemplateGlossario({ refEl }) {
                     borderRadius: "8px",
                     padding: "10px 12px",
                     boxSizing: "border-box",
+                    pageBreakInside: "avoid",
                   }}>
                     <div style={{ display: "flex", alignItems: "center", gap: "6px", marginBottom: "4px" }}>
                       <span style={{ fontSize: "16px" }}>{t.emoji}</span>
                       <span style={{ fontSize: "11px", fontWeight: "bold", color: "#4A90D9" }}>{t.term}</span>
                     </div>
-                    <p style={{ fontSize: "10px", fontWeight: "bold", color: "#333", margin: "0 0 4px 0" }}>{t.simple}</p>
-                    <p style={{ fontSize: "9.5px", color: "#666", lineHeight: "1.5", margin: "0 0 5px 0" }}>{t.detail}</p>
-                    <p style={{ fontSize: "9px", fontStyle: "italic", color: "#888", margin: 0 }}>💡 Dia a dia: {t.tip}</p>
+                    <p style={{ fontSize: "11px", fontWeight: "bold", color: "#333", margin: "0 0 4px 0" }}>{t.simple}</p>
+                    <p style={{ fontSize: "10px", color: "#666", lineHeight: "1.5", margin: "0 0 5px 0" }}>{t.detail}</p>
+                    <p style={{ fontSize: "10px", fontStyle: "italic", color: "#888", margin: 0 }}>💡 Dia a dia: {t.tip}</p>
                   </div>
                 ))}
               </div>
