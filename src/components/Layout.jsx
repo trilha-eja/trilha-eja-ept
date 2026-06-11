@@ -88,7 +88,12 @@ export default function Layout() {
           <div className="relative ml-auto w-72 max-w-[85vw] h-full bg-card shadow-xl flex flex-col overflow-y-auto">
             <div className="px-5 py-4 border-b border-border flex items-center justify-between">
               <span className="font-extrabold text-base">Menu</span>
-              <button onClick={() => setMenuOpen(false)} className="text-muted-foreground hover:text-foreground">
+              <button
+                onClick={() => setMenuOpen(false)}
+                className="min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg text-muted-foreground hover:text-foreground transition-colors"
+                aria-label="Fechar menu"
+                style={{ touchAction: 'manipulation', WebkitTapHighlightColor: 'transparent' }}
+              >
                 <X className="w-5 h-5" />
               </button>
             </div>
