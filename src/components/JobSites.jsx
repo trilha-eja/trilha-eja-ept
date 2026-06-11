@@ -26,7 +26,7 @@ const dicasVagas = [
   { emoji: "📝", titulo: "Cadastre e atualize seu currículo", texto: "Mantenha seu currículo atualizado nas plataformas. Use o módulo Criar Currículo deste aplicativo como ponto de partida." },
   { emoji: "🔑", titulo: "Use as palavras certas na busca", texto: "Experimente pesquisar com estas palavras-chave:\n- Eletricista Industrial\n- Auxiliar de Eletricista\n- Eletromecânico\n- Manutenção Industrial\n- Técnico em Eletrotécnica" },
   { emoji: "🔔", titulo: "Ative alertas de oportunidades", texto: "A maioria das plataformas permite ativar alertas por e-mail ou celular quando surgem novas vagas na sua área. Configure essa função — é gratuita e muito prática!" },
-  { emoji: "📨", titulo: "Acompanhe suas candidaturas", texto: "Anote em quais vagas se candidatou e acompanhe os retornos. Candidate-se regularmente — cada processo seletivo é uma experiência de aprendizado." },
+  { emoji: "📨", titulo: "Acompanhe suas candidaturas", texto: "Anote em quais vagas se candidatou e acompanhe os retornos. Candidate-se regularmente e acompanhe os retornos." },
   { emoji: "👁️", titulo: "Leia os requisitos com atenção", texto: "Antes de enviar seu currículo, leia atentamente o que a empresa pede. Isso aumenta suas chances e evita frustrações." },
 ];
 
@@ -188,14 +188,7 @@ export default function JobSites({ onBack }) {
             <span className="text-xl">🛡️</span>
             <h3 className="font-bold text-sm text-red-700">Segurança Digital e Prevenção de Golpes</h3>
           </div>
-          <p className="text-sm leading-relaxed text-red-700 whitespace-pre-line">{`⚠️ Nunca pague para participar de processos seletivos ou para concorrer a vagas de trabalho.\n\n⚠️ Desconfie de promessas de contratação imediata mediante pagamento.\n\n⚠️ Verifique sempre se a vaga foi divulgada por canais confiáveis.\n\nEm caso de dúvida ou violação de direitos, acesse os canais oficiais:`}</p>
-          <a href="https://www.gov.br/trabalho-e-emprego" target="_blank" rel="noopener noreferrer"
-            className="flex items-center justify-center text-xs font-bold px-4 py-2 rounded-xl bg-red-600 text-white hover:bg-red-700 active:scale-95 transition-all">
-            🔗 Ministério do Trabalho
-          </a>
-          <div className="flex items-center justify-center text-xs font-bold px-4 py-2 rounded-xl bg-red-100 text-red-700 border border-red-300">
-            📞 Alô Trabalho — Ligue 158
-          </div>
+          <p className="text-sm leading-relaxed text-red-700 whitespace-pre-line">{`⚠️ Nunca pague para participar de processos seletivos ou para concorrer a vagas de trabalho.\n\n⚠️ Desconfie de promessas de contratação imediata mediante pagamento.\n\n⚠️ Verifique sempre se a vaga foi divulgada por canais confiáveis.\n\nEm caso de violação de direitos, consulte a seção Direitos Coletivos neste aplicativo.`}</p>
         </div>
 
         {/* Mensagem final */}
