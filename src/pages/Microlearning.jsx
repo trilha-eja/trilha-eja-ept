@@ -123,17 +123,11 @@ export default function Microlearning() {
             <span className="text-2xl">📚</span>
             <p className="font-extrabold text-base leading-tight text-foreground">Aprender no seu tempo, do seu jeito</p>
           </div>
-          <p className="text-sm italic leading-relaxed text-foreground">
-            Você trabalha, cuida da família e ainda encontra tempo para estudar. Isso já diz muito sobre quem você é.
+          <p className="text-sm leading-relaxed text-foreground">
+            Conteúdos rápidos para quem tem pouco tempo mas não abre mão de aprender. Cada card cabe em cerca de 1 minuto — no intervalo, no transporte ou onde for possível.
           </p>
           <p className="text-sm leading-relaxed text-foreground">
-            Os cards desta seção foram pensados para quem tem pouco tempo mas não abre mão de aprender. Cada conteúdo cabe em aproximadamente 1 minuto de leitura — no intervalo, no transporte ou onde for possível.
-          </p>
-          <p className="text-sm leading-relaxed text-foreground">
-            Estes conteúdos são introdutórios e complementares. Para aprofundar, converse com seus professores e consulte materiais técnicos confiáveis.
-          </p>
-          <p className="text-sm leading-relaxed text-foreground">
-            <strong>Lembre-se:</strong> na área elétrica, o conhecimento protege vidas. A formação adequada, os treinamentos obrigatórios e a supervisão profissional são insubstituíveis.
+            ⚠️ Estes conteúdos são complementares e não substituem aulas, treinamentos obrigatórios ou supervisão profissional.
           </p>
         </div>
         <div className="flex items-center justify-center gap-2 mb-4">
