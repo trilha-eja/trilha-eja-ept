@@ -348,57 +348,106 @@ function TemplateChecklist({ refEl }) {
 }
 
 function TemplateGlossario({ refEl }) {
-  const termos = [
-    { term: "FASE", emoji: "⚡", simple: "O fio que carrega a eletricidade", detail: "É o fio 'vivo' do circuito. Geralmente preto, vermelho ou marrom. Nunca toque sem desligar o disjuntor! Tensão: 127V ou 220V.", tip: "Fio vermelho ou preto = PERIGO, é o fase!" },
-    { term: "NEUTRO", emoji: "🔵", simple: "O fio de retorno da energia", detail: "Ele completa o circuito, permitindo que a corrente 'volte' após passar pela carga. Geralmente azul. Sem tensão, mas ainda perigoso!", tip: "Fio azul = NEUTRO. Cuidado!" },
-    { term: "TERRA", emoji: "🌱", simple: "O fio de segurança que protege você", detail: "Conectado ao chão. Se houver vazamento de energia, conduz a corrente para o solo, evitando choque. Obrigatório (NBR 5410).", tip: "Fio verde = TERRA. Sua proteção!" },
-    { term: "DISJUNTOR", emoji: "🔲", simple: "O 'guarda-costas' do circuito", detail: "Quando passa corrente demais ou há curto-circuito, desliga automaticamente para proteger a fiação e evitar incêndios.", tip: "Se o disjuntor caiu: descubra o porquê antes de religar!" },
-    { term: "CURTO-CIRCUITO", emoji: "💥", simple: "Quando a eletricidade toma um atalho perigoso", detail: "Acontece quando o fio fase toca o neutro sem passar por nenhuma carga. Gera calor, faísca e risco de incêndio.", tip: "Faísca + disjuntor caindo = sinal de curto! Chame um técnico." },
-    { term: "TENSÃO (VOLTAGEM)", emoji: "🌊", simple: "A 'pressão' que empurra a eletricidade", detail: "Medida em Volts (V). No Brasil: 127V ou 220V. Sempre confira a tensão antes de ligar um aparelho!", tip: "127V ou 220V — sempre confira!" },
-    { term: "CORRENTE (AMPERAGEM)", emoji: "🌊", simple: "A quantidade de eletricidade que flui", detail: "Medida em Ampères (A). Fios têm limite de corrente — passar mais do que isso aquece e pode causar incêndio.", tip: "Amperagem alta = fio mais grosso necessário!" },
-    { term: "RESISTÊNCIA", emoji: "🌀", simple: "O quanto algo 'dificulta' a passagem da eletricidade", detail: "Medida em Ohms (Ω). Quando a corrente passa por uma resistência, gera calor — é assim que chuveiros funcionam!", tip: "Quanto mais fio, mais resistência. Use o mínimo!" },
-    { term: "POTÊNCIA", emoji: "💪", simple: "Quanto de energia um aparelho usa ou produz", detail: "Medida em Watts (W). A conta de luz é em kWh. Um chuveiro elétrico usa ~5.500W!", tip: "W = V × A. Quanto maior o W, mais energia consome!" },
-    { term: "ATERRAMENTO", emoji: "⏚", simple: "Ligar a instalação à terra para segurança", detail: "Conecta partes metálicas ao solo. Se houver falha elétrica, a energia vai para a terra, não para você.", tip: "Sem aterramento = risco de choque. Exija aterramento!" },
-    { term: "DISJUNTOR DR", emoji: "🛡️", simple: "O protetor que salva vidas de choques", detail: "Detecta pequenas fugas de corrente — inclusive pelo corpo humano — e desliga em milissegundos.", tip: "DR no banheiro e cozinha = proteção essencial!" },
-    { term: "SOBRECARGA", emoji: "🔥", simple: "Quando passa mais energia do que o fio aguenta", detail: "Ocorre com aparelhos demais num mesmo circuito. O fio esquenta, pode derreter o isolamento e causar incêndio.", tip: "Não use benjamins! Distribua os aparelhos." },
-    { term: "MULTÍMETRO", emoji: "🔬", simple: "O instrumento que 'lê' a eletricidade", detail: "Mede tensão (V), corrente (A) e resistência (Ω). É a ferramenta mais importante do eletricista.", tip: "Todo eletricista tem um multímetro. É o seu melhor amigo!" },
-    { term: "EPI", emoji: "🧤", simple: "Equipamento que protege seu corpo no trabalho", detail: "EPI = Equipamento de Proteção Individual. Luvas isolantes, óculos, capacete, botina isolante e roupa anti-chama. A empresa DEVE fornecer gratuitamente.", tip: "Sem EPI, não trabalhe. É seu direito e é sua vida!" },
+  const categorias = [
+    {
+      titulo: "Fundamentos Elétricos",
+      emoji: "⚡",
+      cor: "#E8B020",
+      termos: [
+        { term: "FASE", emoji: "⚡", simple: "O condutor energizado do circuito elétrico", detail: "É o condutor energizado do circuito elétrico — por onde a energia chega até o equipamento. É o fio que oferece maior risco de choque elétrico. A cor do fio pode variar conforme a instalação.", tip: "Presente em toda instalação elétrica — tomadas, interruptores e quadros." },
+        { term: "NEUTRO", emoji: "🔵", simple: "Condutor que fecha o circuito elétrico", detail: "Condutor que participa do fechamento do circuito elétrico, permitindo a passagem da corrente. Normalmente identificado pela cor azul-claro.", tip: "Presente em toda instalação elétrica junto com o fio fase." },
+        { term: "TERRA", emoji: "🌱", simple: "Condutor de proteção contra falhas elétricas", detail: "Condutor de proteção que ajuda a proteger pessoas e equipamentos em caso de falha elétrica. Normalmente identificado pelas cores verde ou verde/amarelo.", tip: "Presente em tomadas modernas com três pinos e em equipamentos industriais." },
+        { term: "TENSÃO", emoji: "🌊", simple: "A força que impulsiona a corrente elétrica", detail: "É a força que impulsiona a corrente elétrica pelo circuito — como a pressão da água em um cano. No Brasil, as tensões mais comuns são 127V e 220V.", tip: "Verifique sempre a tensão indicada no equipamento antes de ligá-lo. Ligar um equipamento na tensão errada pode danificá-lo." },
+        { term: "CORRENTE ELÉTRICA", emoji: "🌊", simple: "O fluxo de elétrons pelo condutor", detail: "É o fluxo de elétrons pelo condutor — como a água que corre por uma tubulação. Correntes maiores exigem instalações e cabos adequados para evitar aquecimento.", tip: "Medida em Ampères (A) — presente em qualquer equipamento elétrico." },
+        { term: "RESISTÊNCIA", emoji: "🌀", simple: "A oposição à passagem da corrente elétrica", detail: "É a oposição que um material oferece à passagem da corrente elétrica. Quanto maior a resistência, maior o calor gerado no condutor.", tip: "Fios muito finos para uma carga alta aumentam a resistência e podem superaquecer." },
+        { term: "POTÊNCIA", emoji: "💪", simple: "Energia consumida ou transformada por segundo", detail: "Indica a quantidade de energia que um equipamento consome ou transforma por segundo. Medida em Watts (W) ou Quilowatts (kW). Relaciona tensão, corrente e consumo de energia.", tip: "Presente nas etiquetas de chuveiros, motores, lâmpadas e eletrodomésticos." },
+      ],
+    },
+    {
+      titulo: "Proteção e Segurança",
+      emoji: "🛡️",
+      cor: "#C0392B",
+      termos: [
+        { term: "DISJUNTOR", emoji: "🔲", simple: "Dispositivo que protege o circuito elétrico", detail: "Dispositivo de proteção que interrompe automaticamente o circuito em caso de sobrecarga ou curto-circuito, protegendo a instalação e os equipamentos. Diferente do DR, que protege contra choques elétricos, o disjuntor protege principalmente os fios e equipamentos.", tip: "Encontrado no quadro elétrico de casas, empresas e indústrias." },
+        { term: "DISPOSITIVO DR", emoji: "🛡️", simple: "Protetor que reduz riscos de choque elétrico", detail: "Dispositivo Diferencial Residual — ajuda a reduzir riscos de choques elétricos ao detectar vazamentos de corrente e desligar o circuito automaticamente em milissegundos. Complementa o aterramento e os disjuntores, mas não garante proteção absoluta.", tip: "Obrigatório em banheiros, cozinhas, áreas externas e piscinas." },
+        { term: "ATERRAMENTO", emoji: "⏚", simple: "Sistema que direciona correntes de fuga ao solo", detail: "Sistema de proteção que direciona correntes de fuga para o solo, ajudando a proteger pessoas e equipamentos. O aterramento reduz riscos mas não elimina completamente o perigo elétrico. (NBR 5410)", tip: "Tomadas com três pinos e equipamentos industriais utilizam aterramento." },
+        { term: "CURTO-CIRCUITO", emoji: "💥", simple: "Conexão não intencional entre pontos de potenciais diferentes", detail: "Ocorre quando dois pontos de diferentes potenciais elétricos se conectam de forma não intencional, permitindo a passagem de uma corrente muito elevada. Pode causar aquecimento intenso, danos à instalação e risco de incêndio.", tip: "Pode acontecer por fios pelados, ligações incorretas ou falhas em equipamentos." },
+        { term: "SOBRECARGA", emoji: "🔥", simple: "Excesso de corrente além da capacidade do circuito", detail: "Ocorre quando um circuito recebe mais corrente elétrica do que foi projetado para suportar, causando aquecimento dos condutores e risco de danos ou incêndio. Diferente do curto-circuito, a sobrecarga ocorre gradualmente.", tip: "Ligar muitos equipamentos numa mesma tomada pode causar sobrecarga no circuito." },
+        { term: "EPI", emoji: "🧤", simple: "Equipamentos que protegem o trabalhador", detail: "Equipamento de Proteção Individual — equipamentos utilizados para proteger o(a) trabalhador(a) durante atividades de risco. Na área elétrica incluem: luvas isolantes, capacete, óculos de proteção, calçados adequados e vestimentas. A empresa é obrigada a fornecer gratuitamente. (NR-06 e NR-10)", tip: "Obrigatório em qualquer atividade com risco elétrico." },
+        { term: "NR-10", emoji: "📋", simple: "Norma de segurança para trabalhos elétricos", detail: "Norma Regulamentadora que estabelece os requisitos mínimos de segurança para instalação, operação e manutenção de sistemas elétricos. Define treinamentos obrigatórios, EPIs e procedimentos seguros para quem trabalha com eletricidade.", tip: "Todo(a) profissional que trabalha com eletricidade precisa conhecer e seguir a NR-10." },
+        { term: "LOTO (Bloqueio e Etiquetagem)", emoji: "🔒", simple: "Procedimento que garante segurança na manutenção", detail: "Procedimento de segurança que garante que máquinas e equipamentos sejam desligados e bloqueados antes de qualquer manutenção, evitando acionamentos acidentais.", tip: "Utilizado em manutenção industrial para proteger quem trabalha em equipamentos elétricos." },
+        { term: "ARCO ELÉTRICO", emoji: "⚠️", simple: "Descarga elétrica intensa entre dois pontos", detail: "Descarga elétrica intensa que ocorre quando a corrente elétrica ioniza o ar entre dois pontos de diferentes potenciais elétricos. Pode atingir temperaturas superiores a 20.000°C e causar queimaduras graves, danos à visão e incêndios.", tip: "Risco presente em manutenções em painéis elétricos energizados e em equipamentos de alta tensão." },
+      ],
+    },
+    {
+      titulo: "Equipamentos Industriais",
+      emoji: "🔧",
+      cor: "#2C3E50",
+      termos: [
+        { term: "MULTÍMETRO", emoji: "🔬", simple: "Instrumento para medir tensão, corrente e resistência", detail: "Instrumento de medição utilizado para medir tensão, corrente e resistência elétrica. Essencial para testes, diagnósticos e manutenção de instalações e equipamentos.", tip: "Utilizado em manutenção elétrica industrial e testes de continuidade." },
+        { term: "CONTATOR", emoji: "🔌", simple: "Liga e desliga circuitos elétricos de forma controlada", detail: "Dispositivo eletromecânico usado para ligar e desligar circuitos elétricos de forma controlada, especialmente em motores e equipamentos industriais.", tip: "Encontrado em painéis elétricos industriais para acionamento de motores e máquinas." },
+        { term: "RELÉ", emoji: "🔄", simple: "Interruptor automático comandado por outro circuito", detail: "Dispositivo que abre ou fecha um circuito elétrico a partir de um sinal de controle. Funciona como um interruptor automático comandado por outro circuito.", tip: "Utilizado em automação industrial e sistemas de proteção de motores." },
+        { term: "MOTOR ELÉTRICO", emoji: "⚙️", simple: "Transforma energia elétrica em movimento", detail: "Máquina que transforma energia elétrica em energia mecânica (movimento). É um dos equipamentos mais comuns na indústria.", tip: "Presente em máquinas industriais, bombas, compressores, esteiras e ventiladores." },
+        { term: "INVERSOR DE FREQUÊNCIA", emoji: "📊", simple: "Controla a velocidade de motores elétricos", detail: "Equipamento eletrônico que controla a velocidade de motores elétricos variando a frequência e a tensão da energia fornecida ao motor.", tip: "Utilizado em esteiras, bombas e ventiladores industriais que precisam de velocidade variável." },
+        { term: "QD (Quadro de Distribuição)", emoji: "🗂️", simple: "Painel que distribui energia pelos circuitos", detail: "Painel onde os disjuntores e outros dispositivos de proteção são instalados para distribuir a energia elétrica pelos circuitos de uma instalação.", tip: "Presente em indústrias, empresas e residências — é onde ficam os disjuntores de cada circuito." },
+        { term: "PAINEL ELÉTRICO", emoji: "🖥️", simple: "Estrutura para controlar e distribuir energia", detail: "Conjunto de componentes elétricos montados em uma estrutura para controlar, proteger e distribuir energia elétrica em indústrias e instalações.", tip: "Presente em fábricas e indústrias para comando e proteção de máquinas e equipamentos." },
+      ],
+    },
+    {
+      titulo: "Sistemas Elétricos",
+      emoji: "🏭",
+      cor: "#2471A3",
+      termos: [
+        { term: "SEC (Sistema Elétrico de Consumo)", emoji: "🏢", simple: "Sistema elétrico interno de indústrias e empresas", detail: "Sistema elétrico interno de indústrias, empresas e residências — onde a energia já chega distribuída e é utilizada pelos equipamentos. É o sistema onde o(a) eletricista industrial mais atua.", tip: "É o sistema elétrico dentro das fábricas, empresas e casas." },
+        { term: "SEP (Sistema Elétrico de Potência)", emoji: "🏭", simple: "Geração, transmissão e distribuição em larga escala", detail: "Sistema responsável pela geração, transmissão e distribuição de energia elétrica em grande escala — como torres de transmissão e subestações.", tip: "É o sistema que leva energia das usinas até cidades e indústrias." },
+      ],
+    },
   ];
-
-  // dois por linha
-  const pares = [];
-  for (let i = 0; i < termos.length; i += 2) pares.push(termos.slice(i, i + 2));
 
   return (
     <div ref={refEl} style={{ display: "none", position: "fixed", left: "-9999px", top: 0, zIndex: -1 }}>
       <div style={{ width: "794px", backgroundColor: "#ffffff", fontFamily: "Arial, sans-serif", boxSizing: "border-box" }}>
+        {/* Header */}
         <div style={{ backgroundColor: "#4A90D9", padding: "28px 40px 20px", textAlign: "center" }}>
           <h1 style={{ fontSize: "22px", fontWeight: "bold", color: "white", margin: "0 0 6px 0" }}>Glossário do Eletricista</h1>
-          <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.85)", margin: 0 }}>Termos técnicos em linguagem simples</p>
+          <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.85)", margin: 0 }}>Trilha EJA-EPT</p>
         </div>
         <div style={{ padding: "20px 32px 40px" }}>
-          {pares.map((par, pi) => (
-            <div key={pi} style={{ display: "flex", gap: "12px", marginBottom: "12px" }}>
-              {par.map((t, ti) => (
-                <div key={ti} style={{
-                  flex: 1,
-                  backgroundColor: "#F5F8FF",
-                  border: "1px solid #B4C8E6",
-                  borderRadius: "8px",
-                  padding: "10px 12px",
-                }}>
-                  <div style={{ display: "flex", alignItems: "center", gap: "6px", marginBottom: "4px" }}>
-                    <span style={{ fontSize: "16px" }}>{t.emoji}</span>
-                    <span style={{ fontSize: "11px", fontWeight: "bold", color: "#4A90D9" }}>{t.term}</span>
+          {categorias.map((cat, ci) => (
+            <div key={ci} style={{ marginBottom: "24px" }}>
+              {/* Category header */}
+              <div style={{
+                backgroundColor: cat.cor,
+                borderRadius: "8px",
+                padding: "8px 16px",
+                marginBottom: "12px",
+              }}>
+                <h2 style={{ fontSize: "15px", fontWeight: "bold", color: "white", margin: 0 }}>{cat.emoji} {cat.titulo}</h2>
+              </div>
+              {/* Terms */}
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
+                {cat.termos.map((t, ti) => (
+                  <div key={ti} style={{
+                    width: "calc(50% - 5px)",
+                    backgroundColor: "#F5F8FF",
+                    border: "1px solid #B4C8E6",
+                    borderRadius: "8px",
+                    padding: "10px 12px",
+                    boxSizing: "border-box",
+                  }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: "6px", marginBottom: "4px" }}>
+                      <span style={{ fontSize: "16px" }}>{t.emoji}</span>
+                      <span style={{ fontSize: "11px", fontWeight: "bold", color: "#4A90D9" }}>{t.term}</span>
+                    </div>
+                    <p style={{ fontSize: "10px", fontWeight: "bold", color: "#333", margin: "0 0 4px 0" }}>{t.simple}</p>
+                    <p style={{ fontSize: "9.5px", color: "#666", lineHeight: "1.5", margin: "0 0 5px 0" }}>{t.detail}</p>
+                    <p style={{ fontSize: "9px", fontStyle: "italic", color: "#888", margin: 0 }}>💡 Dia a dia: {t.tip}</p>
                   </div>
-                  <p style={{ fontSize: "10px", fontWeight: "bold", color: "#333", margin: "0 0 4px 0" }}>{t.simple}</p>
-                  <p style={{ fontSize: "9.5px", color: "#666", lineHeight: "1.5", margin: "0 0 5px 0" }}>{t.detail}</p>
-                  <p style={{ fontSize: "9px", fontStyle: "italic", color: "#888", margin: 0 }}>💡 {t.tip}</p>
-                </div>
-              ))}
-              {par.length === 1 && <div style={{ flex: 1 }} />}
+                ))}
+              </div>
             </div>
           ))}
+          {/* Footer */}
           <div style={{ borderTop: "1px solid #ddd", paddingTop: "12px", textAlign: "center", marginTop: "8px" }}>
             <p style={{ fontSize: "10px", color: "#aaa", margin: 0 }}>Trilha EJA-EPT | ProfEPT</p>
           </div>
