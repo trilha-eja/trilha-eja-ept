@@ -2,11 +2,6 @@ import PageHeader from "../PageHeader";
 
 const apps = [
   {
-    nome: "Khan Academy",
-    descricao: "Totalmente gratuito. Conteúdo de qualidade para todas as áreas do ENEM.",
-    url: "https://play.google.com/store/apps/details?id=org.khanacademy.android",
-  },
-  {
     nome: "Descomplica",
     descricao: "Tem conteúdo gratuito limitado. A versão completa é paga. Use o gratuito para revisões rápidas.",
     url: "https://play.google.com/store/apps/details?id=com.descomplica.app",
