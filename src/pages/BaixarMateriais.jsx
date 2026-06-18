@@ -61,6 +61,13 @@ export default function BaixarMateriais() {
       descricao: "ENEM, SISU, PROUNI e FIES — organize sua continuidade nos estudos.",
       link: "https://trilha-eja.github.io/materiais/ChecklistCaminhosdeEstudo.pdf",
     },
+    {
+      id: "informatica",
+      emoji: "💻",
+      titulo: "Informática Básica para o Dia a Dia do Curso",
+      descricao: "Primeiros passos para usar o computador, celular, e-mail, Moodle e QR Code — passo a passo e sem pressa.",
+      link: "https://trilha-eja.github.io/materiais/InformaticaBasica.pdf",
+    },
   ];
 
   return (
