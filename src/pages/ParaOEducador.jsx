@@ -566,6 +566,25 @@ A mediação tecnológica não é apenas ensinar a usar um app. É ampliar horiz
             </a>
           </div>
 
+          {/* Card 4 — Cartilha de Segurança */}
+          <div className="bg-card border border-border rounded-2xl p-4 mb-3 space-y-3">
+            <div className="flex items-center gap-3">
+              <span className="text-2xl">🔒</span>
+              <div>
+                <h3 className="font-bold text-sm">Cartilha de Segurança para Internet — CERT.br</h3>
+                <p className="text-xs text-muted-foreground leading-relaxed">Fascículos gratuitos sobre segurança digital com slides prontos para usar em aula — senhas, golpes, privacidade, redes sociais e muito mais.</p>
+              </div>
+            </div>
+            <a
+              href="https://cartilha.cert.br/fasciculos/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all"
+            >
+              🔗 Acessar Fascículos
+            </a>
+          </div>
+
           <p className="text-xs text-muted-foreground italic mt-1">
             💡 Os dois materiais acima foram pensados para uso conjunto.
           </p>
