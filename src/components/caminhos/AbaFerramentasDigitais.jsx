@@ -119,6 +119,13 @@ const categoria3 = [
     url: "https://www.youtube.com/results?search_query=seguranca+digital+golpes+internet+como+se+proteger",
     botao: "▶️ Ver vídeos",
   },
+  {
+    emoji: "📷",
+    titulo: "Como usar QR Code",
+    texto: "Aprenda a baixar um leitor de QR Code gratuito e usar para acessar sites e aplicativos pelo celular.",
+    url: "https://www.youtube.com/results?search_query=como+usar+qr+code+celular+android+iniciantes",
+    botao: "▶️ Ver vídeos",
+  },
 ];
 
 
