@@ -60,6 +60,21 @@ export default function SubRecursosIFC({ onBack }) {
           </a>
         </AccordionSection>
 
+        {/* Manual do SIGAA */}
+        <AccordionSection titulo="📋 Manual do SIGAA — Orientações Iniciais">
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            O SIGAA é o sistema acadêmico do IFC. Acesse o manual oficial com orientações iniciais para usar o sistema — consultas de notas, faltas, histórico e muito mais.
+          </p>
+          <a
+            href="https://manuais.dti.ifc.edu.br/lib/exe/fetch.php?media=wiki:suporte_tecnico:sigaa:sistema_academico_orientacoes_iniciais.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-3 inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all"
+          >
+            🔗 Acessar Manual
+          </a>
+        </AccordionSection>
+
       </div>
     </div>
   );

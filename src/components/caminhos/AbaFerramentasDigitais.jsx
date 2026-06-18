@@ -126,6 +126,13 @@ const categoria3 = [
     url: "https://www.youtube.com/results?search_query=como+usar+qr+code+celular+android+iniciantes",
     botao: "▶️ Ver vídeos",
   },
+  {
+    emoji: "🎓",
+    titulo: "Como usar o SIGAA",
+    texto: "Vídeos explicando como usar o SIGAA — consultar notas, faltas, histórico e emitir documentos acadêmicos. Usado em Institutos Federais e Universidades Federais.",
+    url: "https://www.youtube.com/results?search_query=como+usar+sigaa+aluno+tutorial+passo+a+passo",
+    botao: "▶️ Ver vídeos",
+  },
 ];
 
 
