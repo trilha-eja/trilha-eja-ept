@@ -125,6 +125,17 @@ export default function Home() {
           <Settings className="w-3.5 h-3.5" /> Configurações
         </Link>
       </div>
+
+      {/* Fale Conosco */}
+      <div className="mt-4 bg-muted/40 border border-border/50 rounded-2xl p-3 text-center">
+        <p className="text-xs font-semibold mb-1">🔧 Encontrou algum problema?</p>
+        <p className="text-xs text-muted-foreground leading-relaxed">
+          Se encontrar um link que não abre, um conteúdo desatualizado ou qualquer erro no aplicativo, nos avise — sua mensagem ajuda a melhorar o Trilha EJA-EPT.
+        </p>
+        <p className="text-xs text-muted-foreground mt-1.5">
+          📧 marileia.hillesheim@ifc.edu.br
+        </p>
+      </div>
     </div>
   );
 }
