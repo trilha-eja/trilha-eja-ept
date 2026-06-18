@@ -454,6 +454,23 @@ O educador tem um papel insubstituível nesse processo:
 - Mostrar que existem caminhos possíveis — sem impor nenhum deles
 
 A mediação tecnológica não é apenas ensinar a usar um app. É ampliar horizontes e devolver ao estudante a consciência de suas possibilidades.`}</p>
+          <div className="bg-card border border-border rounded-xl p-3 space-y-2 mt-2">
+            <div className="flex items-center gap-3">
+              <span className="text-2xl">🔒</span>
+              <div>
+                <h3 className="font-bold text-sm">Cartilha de Segurança para Internet — CERT.br</h3>
+                <p className="text-xs text-muted-foreground leading-relaxed">Fascículos gratuitos sobre segurança digital com slides prontos para usar em aula — senhas, golpes, privacidade e redes sociais.</p>
+              </div>
+            </div>
+            <a
+              href="https://cartilha.cert.br/fasciculos/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all"
+            >
+              🔗 Acessar Fascículos
+            </a>
+          </div>
         </AccordionSection>
 
         {/* Bloco 6 — Roteiro Sugerido de 6 Encontros */}
@@ -547,6 +564,13 @@ A mediação tecnológica não é apenas ensinar a usar um app. É ampliar horiz
             </a>
           </div>
 
+          {/* Nota de uso conjunto */}
+          <div className="bg-orange-50 border border-orange-200 rounded-2xl p-4 mb-3">
+            <p className="text-xs leading-relaxed text-foreground">
+              💡 Estes dois materiais foram pensados para uso conjunto: o Arco de Maguerez apresenta o estudo de caso e a fundamentação teórica, enquanto o Plano de Aula traz o roteiro prático para aplicar em sala. Recomenda-se ler os dois antes de usar.
+            </p>
+          </div>
+
           {/* Card 3 — Plano de Aula */}
           <div className="bg-card border border-border rounded-2xl p-4 mb-3 space-y-3">
             <div className="flex items-center gap-3">
@@ -566,28 +590,7 @@ A mediação tecnológica não é apenas ensinar a usar um app. É ampliar horiz
             </a>
           </div>
 
-          {/* Card 4 — Cartilha de Segurança */}
-          <div className="bg-card border border-border rounded-2xl p-4 mb-3 space-y-3">
-            <div className="flex items-center gap-3">
-              <span className="text-2xl">🔒</span>
-              <div>
-                <h3 className="font-bold text-sm">Cartilha de Segurança para Internet — CERT.br</h3>
-                <p className="text-xs text-muted-foreground leading-relaxed">Fascículos gratuitos sobre segurança digital com slides prontos para usar em aula — senhas, golpes, privacidade, redes sociais e muito mais.</p>
-              </div>
-            </div>
-            <a
-              href="https://cartilha.cert.br/fasciculos/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all"
-            >
-              🔗 Acessar Fascículos
-            </a>
-          </div>
 
-          <p className="text-xs text-muted-foreground italic mt-1">
-            💡 Os dois materiais acima foram pensados para uso conjunto.
-          </p>
         </div>
 
       </div>
