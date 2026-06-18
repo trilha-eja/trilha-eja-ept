@@ -83,6 +83,43 @@ const categoria2 = [
   },
 ];
 
+const categoria3 = [
+  {
+    emoji: "📱",
+    titulo: "Celular e WhatsApp para Iniciantes",
+    texto: "Aprenda a usar o celular Android, configurar o WhatsApp, fazer chamadas de vídeo e salvar contatos.",
+    url: "https://www.youtube.com/results?search_query=como+usar+celular+android+iniciantes+passo+a+passo",
+    botao: "▶️ Ver vídeos",
+  },
+  {
+    emoji: "💻",
+    titulo: "Computador do Zero",
+    texto: "Como usar o mouse, o teclado, ligar o computador e organizar arquivos e pastas.",
+    url: "https://www.youtube.com/results?search_query=informatica+basica+iniciantes+adultos+passo+a+passo",
+    botao: "▶️ Ver vídeos",
+  },
+  {
+    emoji: "🌐",
+    titulo: "Internet e Navegador",
+    texto: "Como acessar sites, pesquisar no Google e navegar com segurança.",
+    url: "https://www.youtube.com/results?search_query=como+usar+internet+navegador+iniciantes+adultos",
+    botao: "▶️ Ver vídeos",
+  },
+  {
+    emoji: "📸",
+    titulo: "Redes Sociais",
+    texto: "Como usar Instagram e Facebook — criar conta, postar fotos e recuperar senha.",
+    url: "https://www.youtube.com/results?search_query=como+usar+instagram+facebook+iniciantes+tutorial",
+    botao: "▶️ Ver vídeos",
+  },
+  {
+    emoji: "🔒",
+    titulo: "Segurança Digital e Privacidade",
+    texto: "Como se proteger de golpes na internet, identificar links falsos e proteger suas contas.",
+    url: "https://www.youtube.com/results?search_query=seguranca+digital+golpes+internet+como+se+proteger",
+    botao: "▶️ Ver vídeos",
+  },
+];
 
 
 export default function AbaFerramentasDigitais() {
@@ -108,6 +145,23 @@ export default function AbaFerramentasDigitais() {
           </p>
         </div>
         {categoria2.map((f) => (
+          <AccordionSection key={f.titulo} titulo={`${f.emoji} ${f.titulo}`}>
+            <p className="text-sm text-muted-foreground leading-relaxed">{f.texto}</p>
+            <a href={f.url} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all">{f.botao || "🔗 Acessar"}</a>
+          </AccordionSection>
+        ))}
+      </div>
+
+      {/* Categoria 3 — Vídeos para Aprender Tecnologia */}
+      <div className="pt-2">
+        <h2 className="font-extrabold text-sm mb-1">📺 Canais para Aprender Tecnologia</h2>
+        <p className="text-xs text-muted-foreground mb-3">Busque pelo nome do canal no YouTube</p>
+        <div className="bg-purple-50 border border-purple-200 rounded-2xl p-3 mb-3">
+          <p className="text-xs leading-relaxed text-foreground">
+            O YouTube tem canais gratuitos com explicações simples e pausadas sobre celular, computador, redes sociais e segurança digital. Clique em 'Ver vídeos' para abrir a busca diretamente.
+          </p>
+        </div>
+        {categoria3.map((f) => (
           <AccordionSection key={f.titulo} titulo={`${f.emoji} ${f.titulo}`}>
             <p className="text-sm text-muted-foreground leading-relaxed">{f.texto}</p>
             <a href={f.url} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all">{f.botao || "🔗 Acessar"}</a>
