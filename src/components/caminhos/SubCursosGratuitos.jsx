@@ -71,6 +71,10 @@ export default function SubCursosGratuitos({ onBack }) {
           <p className="text-sm text-muted-foreground leading-relaxed">Biblioteca digital gratuita do governo federal com livros didáticos e de literatura.</p>
           <a href="https://meclivros.mec.gov.br" target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all">🔗 Acessar</a>
         </AccordionSection>
+        <AccordionSection titulo="🗣️ MEC Idiomas">
+          <p className="text-sm text-muted-foreground leading-relaxed">Cursos gratuitos de idiomas oferecidos pelo governo federal — inglês, espanhol e outras línguas.</p>
+          <a href="https://www.gov.br/mec/pt-br/mec-idiomas" target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all">🔗 Acessar</a>
+        </AccordionSection>
 
         {/* CATEGORIA 2 — Formação Técnica e Superior */}
         <CategoriaHeader
