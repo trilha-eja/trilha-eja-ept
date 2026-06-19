@@ -199,6 +199,25 @@ export default function Home() {
               <p className="leading-relaxed">
                 <span className="font-semibold">Vínculo institucional:</span> Mestrado Profissional em Educação Profissional e Tecnológica (ProfEPT), Instituto Federal Catarinense (IFC) — Campus Blumenau
               </p>
+              <hr className="border-border" />
+              <p className="font-semibold">Licença do aplicativo:</p>
+              <p className="leading-relaxed">
+                Este aplicativo (código-fonte) está licenciado sob Creative Commons Atribuição-NãoComercial-SemDerivações 4.0 Internacional (CC BY-NC-ND 4.0).
+              </p>
+              <div className="flex items-center gap-1.5 pt-1">
+                <img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="CC" className="w-5 h-5" />
+                <img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="BY" className="w-5 h-5" />
+                <img src="https://mirrors.creativecommons.org/presskit/icons/nc.svg" alt="NC" className="w-5 h-5" />
+                <img src="https://mirrors.creativecommons.org/presskit/icons/nd.svg" alt="ND" className="w-5 h-5" />
+              </div>
+              <a
+                href="https://creativecommons.org/licenses/by-nc-nd/4.0"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary underline break-all"
+              >
+                creativecommons.org/licenses/by-nc-nd/4.0
+              </a>
             </div>
           </AccordionSection>
         </div>
