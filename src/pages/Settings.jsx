@@ -58,6 +58,24 @@ export default function Settings() {
           <p className="text-sm text-muted-foreground leading-relaxed mt-2">
             Desenvolvido para apoiar estudantes da EJA integrada à Educação Profissional e Tecnológica (EPT).
           </p>
+
+          <hr className="border-t border-border my-4" />
+
+          <div className="flex justify-center">
+            <img
+              src="https://trilha-eja.github.io/materiais/LogoProfEPTIFC.jpeg"
+              alt="Logo ProfEPT IFC"
+              className="max-w-[200px] w-full rounded-xl"
+            />
+          </div>
+
+          <div className="text-sm text-muted-foreground leading-relaxed space-y-1 mt-3">
+            <p><span className="font-semibold">Autoria:</span> Marileia Hillesheim Netto, Mestranda</p>
+            <p><span className="font-semibold">Orientação:</span> Prof. Dr. Jorge da Cunha Dutra</p>
+            <p className="leading-relaxed">
+              <span className="font-semibold">Vínculo institucional:</span> Mestrado Profissional em Educação Profissional e Tecnológica (ProfEPT), Instituto Federal Catarinense (IFC) — Campus Blumenau
+            </p>
+          </div>
         </div>
 
       </div>
