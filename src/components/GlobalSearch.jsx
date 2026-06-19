@@ -52,10 +52,10 @@ const searchIndex = [
   { title: "FIES", module: "Caminhos de Estudo", path: "/caminhos", icon: "caminhos", keywords: "FIES financiamento estudantil empréstimo faculdade juros dívida" },
   { title: "Trilha de Continuidade", module: "Caminhos de Estudo", path: "/caminhos", icon: "caminhos", keywords: "trilha continuidade caminhos possíveis EJA EPT formação pós técnico" },
   { title: "Cursos Gratuitos", module: "Caminhos de Estudo", path: "/caminhos", icon: "caminhos", keywords: "cursos gratuitos SENAI SENAC Sebrae certificação qualificação profissionalizante MOOC" },
-  { title: "Ferramentas Digitais para Estudar", module: "Caminhos de Estudo", path: "/caminhos", icon: "caminhos", keywords: "ferramentas digitais app celular khan academy chatgpt youtube moodle IFC canva google drive documentos estudo online" },
+  { title: "Ferramentas Digitais para Estudar", module: "Caminhos de Estudo", path: "/caminhos", icon: "caminhos", keywords: "ferramentas digitais app celular khan academy chatgpt youtube moodle IFC canva google drive documentos estudo online qr code qrcode sigaa google keep google agenda notebooklm notebook lm microsoft lens whatsapp computador internet redes sociais segurança digital privacidade" },
   { title: "Dicas de Estudo", module: "Caminhos de Estudo", path: "/caminhos", icon: "caminhos", keywords: "dicas estudo pomodoro rotina organização tempo concentração trabalhar estudar método" },
   { title: "Vídeos Recomendados", module: "Caminhos de Estudo", path: "/caminhos", icon: "caminhos", keywords: "vídeos youtube aulas gratuitas recomendados assistir canais educativos" },
-  { title: "Recursos do IFC", module: "Caminhos de Estudo", path: "/caminhos", icon: "caminhos", keywords: "IFC recursos auxílio bolsa permanência SISAE portal estudante ingresso apoio estudantil" },
+  { title: "Recursos do IFC", module: "Caminhos de Estudo", path: "/caminhos", icon: "caminhos", keywords: "IFC recursos auxílio bolsa permanência SISAE portal estudante ingresso apoio estudantil sigaa manual" },
 
   // Guia Prático — guias
   { title: "Como ligar uma tomada", module: "Guia Prático", path: "/guia-pratico", icon: "guia", keywords: "tomada ligar instalar elétrica fio fase neutro terra disjuntor" },
@@ -104,6 +104,7 @@ const searchIndex = [
   { title: "Cartilha de Direitos Trabalhistas", module: "Baixar Materiais", path: "/materiais", icon: "materiais", keywords: "cartilha direitos trabalhistas PDF CLT NR-10 imprimir" },
   { title: "Checklist ENEM/SISU/PROUNI", module: "Baixar Materiais", path: "/materiais", icon: "materiais", keywords: "checklist ENEM SISU PROUNI documentos prazo imprimir" },
   { title: "Glossário do Eletricista (PDF)", module: "Baixar Materiais", path: "/materiais", icon: "materiais", keywords: "glossário eletricista PDF imprimir termos técnicos" },
+  { title: "Mapa de Navegação do Aplicativo", module: "Baixar Materiais", path: "/materiais", icon: "materiais", keywords: "mapa navegação navegacao aplicativo completo módulos funcionalidades orientar conhecer" },
 
   // Para o Educador
   { title: "Quem é o estudante da EJA-EPT?", module: "Para o Educador", path: "/educador", icon: "educador", keywords: "estudante EJA trabalhador adulto trajetória interrompida identidade" },
@@ -112,6 +113,9 @@ const searchIndex = [
   { title: "Como mediar o Mapa da Vida", module: "Para o Educador", path: "/educador", icon: "educador", keywords: "mediar mapa vida meritocracia projeto coletivo esperança Freire" },
   { title: "O educador como ponte", module: "Para o Educador", path: "/educador", icon: "educador", keywords: "educador ponte apagão informacional mediação tecnológica" },
   { title: "Roteiro de Encontros", module: "Para o Educador", path: "/educador", icon: "educador", keywords: "roteiro encontros sala aula planejamento pedagógico" },
+  { title: "Arco de Maguerez", module: "Para o Educador", path: "/educador", icon: "educador", keywords: "maguerez arco maguerez metodologia problematização estudo caso" },
+  { title: "Plano de Aula — Arco de Maguerez", module: "Para o Educador", path: "/educador", icon: "educador", keywords: "plano aula maguerez roteiro prático sala" },
+  { title: "Guia Completo do Educador", module: "Para o Educador", path: "/educador", icon: "educador", keywords: "guia educador completo materiais aprofundar imprimir" },
 ];
 
 function normalize(str) {
