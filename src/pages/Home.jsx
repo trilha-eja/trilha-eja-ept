@@ -1,4 +1,4 @@
-import { Briefcase, Zap, BookOpen, Map, GraduationCap, Sparkles, BookMarked, Settings, Star, Download } from "lucide-react";
+import { Briefcase, Zap, BookOpen, Map, GraduationCap, Route, BookMarked, Settings, Sparkles, Star, Download } from "lucide-react";
 import { Link } from "react-router-dom";
 import ModuleCard from "../components/ModuleCard";
 import GlobalSearch from "../components/GlobalSearch";
@@ -83,7 +83,7 @@ export default function Home() {
       {/* Hero */}
       <div className="bg-gradient-to-br from-primary to-primary/80 rounded-3xl p-6 mb-6 text-white relative overflow-hidden">
         <div className="absolute top-2 right-2 opacity-20">
-          <Sparkles className="w-24 h-24" />
+          <Route className="w-24 h-24" />
         </div>
         <div className="relative z-10">
           <p className="text-sm font-semibold opacity-90 mb-1">👋 Bem-vindo(a)!</p>
