@@ -2,6 +2,7 @@ import { Briefcase, Zap, BookOpen, Map, GraduationCap, Sparkles, BookMarked, Set
 import { Link } from "react-router-dom";
 import ModuleCard from "../components/ModuleCard";
 import GlobalSearch from "../components/GlobalSearch";
+import AccordionSection from "../components/AccordionSection";
 
 const modules = [
   {
@@ -135,6 +136,33 @@ export default function Home() {
         <p className="text-xs text-muted-foreground mt-1.5">
           📧 marileia.hillesheim@ifc.edu.br
         </p>
+      </div>
+
+      {/* Instalar o App */}
+      <div className="mt-4 bg-primary/5 border border-primary/30 rounded-2xl p-3">
+        <p className="text-xs font-semibold mb-1">📲 Instale o app no seu celular</p>
+        <p className="text-xs text-muted-foreground leading-relaxed mb-3">
+          Deixe o Trilha EJA-EPT com um ícone na tela do seu celular, igual a qualquer outro aplicativo.
+        </p>
+        <div className="space-y-2">
+          <AccordionSection titulo="▶ Celular Android (Chrome)">
+            <p className="text-xs text-muted-foreground leading-relaxed">
+              1. Abra o Chrome e acesse o aplicativo.<br />
+              2. Toque nos 3 pontinhos no canto superior direito da tela (na barra do navegador, não dentro do app).<br />
+              3. Toque em 'Adicionar à tela inicial' ou 'Instalar app'.<br />
+              4. Confirme tocando em 'Adicionar' ou 'Instalar'.<br />
+              5. Um ícone do Trilha EJA-EPT vai aparecer na tela inicial do celular.
+            </p>
+          </AccordionSection>
+          <AccordionSection titulo="▶ iPhone (Safari)">
+            <p className="text-xs text-muted-foreground leading-relaxed">
+              1. Abra o Safari e acesse o aplicativo.<br />
+              2. Toque no ícone de compartilhar (quadrado com seta para cima), na parte de baixo da tela.<br />
+              3. Toque em 'Adicionar à Tela de Início'.<br />
+              4. Confirme tocando em 'Adicionar'.
+            </p>
+          </AccordionSection>
+        </div>
       </div>
 
       {/* Mapa de Navegação */}
