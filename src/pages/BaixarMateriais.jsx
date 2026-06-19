@@ -68,6 +68,13 @@ export default function BaixarMateriais() {
       descricao: "Primeiros passos para usar o computador, celular, e-mail, Moodle e QR Code — passo a passo e sem pressa.",
       link: "https://trilha-eja.github.io/materiais/InformaticaBasica.pdf",
     },
+    {
+      id: "navegacao",
+      emoji: "🗺️",
+      titulo: "Mapa de Navegação do Aplicativo",
+      descricao: "Veja todos os módulos e funcionalidades do Trilha EJA-EPT organizados em um só lugar — ótimo para se orientar e conhecer o app por completo.",
+      link: "https://trilha-eja.github.io/materiais/MapaNavegacao.pdf",
+    },
   ];
 
   return (

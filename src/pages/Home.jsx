@@ -136,6 +136,18 @@ export default function Home() {
           📧 marileia.hillesheim@ifc.edu.br
         </p>
       </div>
+
+      {/* Mapa de Navegação */}
+      <a
+        href="https://trilha-eja.github.io/materiais/MapaNavegacao.pdf"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="mt-3 block bg-muted/40 border border-border/50 rounded-2xl p-3 text-center hover:bg-muted/60 transition-colors"
+      >
+        <p className="text-xs text-muted-foreground leading-relaxed">
+          📍 Não sabe por onde começar? Veja o mapa completo do aplicativo
+        </p>
+      </a>
     </div>
   );
 }
