@@ -82,8 +82,12 @@ export default function Home() {
     <div className="max-w-lg mx-auto px-4 py-6">
       {/* Hero */}
       <div className="bg-gradient-to-br from-primary to-primary/80 rounded-3xl p-6 mb-6 text-white relative overflow-hidden">
-        <div className="absolute top-2 right-2 opacity-20">
-          <Sparkles className="w-24 h-24" />
+        <div className="absolute top-2 right-2 opacity-25">
+          <img
+            src="https://trilha-eja.github.io/materiais/LogoProfEPTIFC.jpeg"
+            alt="Logo ProfEPT IFC"
+            className="w-20 h-20 object-contain rounded-lg"
+          />
         </div>
         <div className="relative z-10">
           <p className="text-sm font-semibold opacity-90 mb-1">👋 Bem-vindo(a)!</p>
@@ -93,6 +97,7 @@ export default function Home() {
           <p className="text-sm opacity-90 leading-relaxed">
             Um guia para fortalecer seu projeto de vida — no seu tempo, do seu jeito.
           </p>
+          <p className="text-xs opacity-70 mt-1">Produto Educacional do ProfEPT/IFC</p>
         </div>
       </div>
 
@@ -181,6 +186,15 @@ export default function Home() {
             >
               📧 Enviar e-mail
             </a>
+          </AccordionSection>
+          <AccordionSection titulo="📘 Sobre o Produto Educacional / Autoria">
+            <div className="text-xs text-muted-foreground leading-relaxed space-y-1">
+              <p><span className="font-semibold">Autoria:</span> Marileia Hillesheim Netto, Mestranda</p>
+              <p><span className="font-semibold">Orientação:</span> Prof. Dr. Jorge da Cunha Dutra</p>
+              <p className="leading-relaxed">
+                <span className="font-semibold">Vínculo institucional:</span> Mestrado Profissional em Educação Profissional e Tecnológica (ProfEPT), Instituto Federal Catarinense (IFC) — Campus Blumenau
+              </p>
+            </div>
           </AccordionSection>
         </div>
       </AccordionSection>
