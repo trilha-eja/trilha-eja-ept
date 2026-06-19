@@ -192,6 +192,8 @@ export default function Home() {
               />
             </div>
             <div className="text-xs text-muted-foreground leading-relaxed space-y-1">
+              <p className="font-semibold">Produto Educacional da Dissertação:</p>
+              <p className="italic">'Projeto de vida na EJA-EPT: perspectivas de continuidade dos estudos e inserção no mundo do trabalho'</p>
               <p><span className="font-semibold">Autoria:</span> Marileia Hillesheim Netto, Mestranda</p>
               <p><span className="font-semibold">Orientação:</span> Prof. Dr. Jorge da Cunha Dutra</p>
               <p className="leading-relaxed">
