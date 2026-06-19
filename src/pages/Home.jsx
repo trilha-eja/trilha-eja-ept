@@ -127,17 +127,6 @@ export default function Home() {
         </Link>
       </div>
 
-      {/* Fale Conosco */}
-      <div className="mt-4 bg-muted/40 border border-border/50 rounded-2xl p-3 text-center">
-        <p className="text-xs font-semibold mb-1">🔧 Encontrou algum problema?</p>
-        <p className="text-xs text-muted-foreground leading-relaxed">
-          Se encontrar um link que não abre, um conteúdo desatualizado ou qualquer erro no aplicativo, nos avise — sua mensagem ajuda a melhorar o Trilha EJA-EPT.
-        </p>
-        <p className="text-xs text-muted-foreground mt-1.5">
-          📧 marileia.hillesheim@ifc.edu.br
-        </p>
-      </div>
-
       {/* Instalar o App */}
       <div className="mt-4 bg-primary/5 border border-primary/30 rounded-2xl p-3">
         <p className="text-xs font-semibold mb-1">📲 Instale o app no seu celular</p>
@@ -165,17 +154,35 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Mapa de Navegação */}
-      <a
-        href="https://trilha-eja.github.io/materiais/MapaNavegacao.pdf"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="mt-3 block bg-muted/40 border border-border/50 rounded-2xl p-3 text-center hover:bg-muted/60 transition-colors"
-      >
-        <p className="text-xs text-muted-foreground leading-relaxed">
-          📍 Não sabe por onde começar? Veja o mapa completo do aplicativo
-        </p>
-      </a>
+      {/* Informações e Suporte */}
+      <AccordionSection titulo="ℹ️ Informações e Suporte">
+        <div className="space-y-2">
+          <AccordionSection titulo="📍 Mapa de Navegação do App">
+            <p className="text-xs text-muted-foreground leading-relaxed">
+              Veja todos os módulos e funcionalidades do Trilha EJA-EPT organizados em um só lugar.
+            </p>
+            <a
+              href="https://trilha-eja.github.io/materiais/MapaNavegacao.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all"
+            >
+              📄 Ver Mapa Completo
+            </a>
+          </AccordionSection>
+          <AccordionSection titulo="🔧 Encontrou algum problema?">
+            <p className="text-xs text-muted-foreground leading-relaxed">
+              Se encontrar um link que não abre, um conteúdo desatualizado ou qualquer erro no aplicativo, nos avise — sua mensagem ajuda a melhorar o Trilha EJA-EPT.
+            </p>
+            <a
+              href="mailto:marileia.hillesheim@ifc.edu.br?subject=Trilha%20EJA-EPT%20-%20Problema%20encontrado"
+              className="inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all"
+            >
+              📧 Enviar e-mail
+            </a>
+          </AccordionSection>
+        </div>
+      </AccordionSection>
     </div>
   );
 }

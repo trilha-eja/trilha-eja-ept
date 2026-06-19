@@ -310,7 +310,12 @@ export default function ParaOEducador() {
 
           <div className="bg-primary/10 border border-primary/20 rounded-2xl p-4 text-sm leading-relaxed">
             <p>Este espaço é destinado a educadores(as) da EJA-EPT. Para receber a senha de acesso, entre em contato pelo e-mail:</p>
-            <p className="font-semibold mt-2">📧 marileia.hillesheim@ifc.edu.br</p>
+            <a
+              href="mailto:marileia.hillesheim@ifc.edu.br?subject=Trilha%20EJA-EPT%20-%20Contato%20Educador"
+              className="inline-flex items-center gap-1.5 text-sm font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all mt-2"
+            >
+              📧 Enviar e-mail
+            </a>
             <p className="text-muted-foreground mt-1">A senha será enviada em até 48 horas.</p>
           </div>
 
