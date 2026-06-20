@@ -19,14 +19,14 @@ const searchIndex = [
   // Módulos principais
   { title: "Mundo do Trabalho", module: "Mundo do Trabalho", path: "/empregabilidade", icon: "empregabilidade", keywords: "trabalho emprego direitos currículo carteira assinada salário CLT habilidades profissional" },
   { title: "Guia Prático", module: "Guia Prático", path: "/guia-pratico", icon: "guia", keywords: "prático instalação tomada fio eletricidade passo a passo multímetro diagrama elétrico" },
-  { title: "Microlearning", module: "Microlearning", path: "/microlearning", icon: "microlearning", keywords: "aprender rápido NR-10 segurança norma regulamentadora EPI alicate contator motor elétrico periculosidade LOTO bloqueio etiquetagem emenda" },
+  { title: "Microlearning", module: "Microlearning", path: "/microlearning", icon: "microlearning", keywords: "aprender rápido NR-10 segurança norma regulamentadora EPI alicate contator motor elétrico periculosidade LOTO bloqueio etiquetagem emenda circuito série paralelo plaqueta" },
   { title: "Mapa da Vida", module: "Mapa da Vida", path: "/mapa-da-vida", icon: "mapa", keywords: "mapa vida projeto sonho meta futuro planejamento pessoal profissional" },
   { title: "Caminhos de Estudo", module: "Caminhos de Estudo", path: "/caminhos", icon: "caminhos", keywords: "ENEM SISU PROUNI FIES estudo faculdade universidade vestibular cursos gratuitos SENAI SENAC Sebrae moodle IFC recursos auxílio bolsa" },
   { title: "Glossário do Eletricista", module: "Glossário", path: "/glossario", icon: "glossario", keywords: "glossário termos técnicos elétrica vocabulário fase neutro terra aterramento disjuntor DR multímetro contator motor inversor frequência SEC SEP" },
-  { title: "Vozes da Trilha", module: "Vozes da Trilha", path: "/vozes", icon: "vozes", keywords: "histórias depoimentos relatos egressos compartilhar experiência inspiração" },
+  { title: "Vozes da Trilha", module: "Vozes da Trilha", path: "/vozes", icon: "vozes", keywords: "histórias depoimentos relatos egressos compartilhar experiência inspiração enviar portal ifc" },
   { title: "Para o Educador", module: "Para o Educador", path: "/educador", icon: "educador", keywords: "educador professor pedagógico EJA sala aula orientação didática roteiro encontros" },
   { title: "Sua Opinião Importa", module: "Sua Opinião Importa", path: "/opiniao", icon: "opiniao", keywords: "opinião avaliação feedback estrelas sugestão formulário pesquisa" },
-  { title: "Baixar Materiais", module: "Baixar Materiais", path: "/materiais", icon: "materiais", keywords: "PDF download material impresso imprimir apostila mapa direitos checklist ENEM glossário cartilha" },
+  { title: "Baixar Materiais", module: "Baixar Materiais", path: "/materiais", icon: "materiais", keywords: "PDF download material impresso imprimir apostila mapa direitos checklist ENEM glossário cartilha eletricista currículo microlearning precarizado informática" },
 
   // Mundo do Trabalho — subpáginas
   { title: "O que faz um Eletricista Industrial?", module: "Mundo do Trabalho", path: "/empregabilidade", icon: "empregabilidade", keywords: "eletricista industrial profissão carreira atuação instalação manutenção painel motor elétrico indústria" },
@@ -51,11 +51,11 @@ const searchIndex = [
   { title: "PROUNI", module: "Caminhos de Estudo", path: "/caminhos", icon: "caminhos", keywords: "PROUNI bolsa particular faculdade gratuita renda documentação" },
   { title: "FIES", module: "Caminhos de Estudo", path: "/caminhos", icon: "caminhos", keywords: "FIES financiamento estudantil empréstimo faculdade juros dívida" },
   { title: "Trilha de Continuidade", module: "Caminhos de Estudo", path: "/caminhos", icon: "caminhos", keywords: "trilha continuidade caminhos possíveis EJA EPT formação pós técnico" },
-  { title: "Cursos Gratuitos", module: "Caminhos de Estudo", path: "/caminhos", icon: "caminhos", keywords: "cursos gratuitos SENAI SENAC Sebrae certificação qualificação profissionalizante MOOC" },
+  { title: "Cursos Gratuitos", module: "Caminhos de Estudo", path: "/caminhos", icon: "caminhos", keywords: "cursos gratuitos SENAI SENAC Sebrae certificação qualificação profissionalizante MOOC ENCCEJA UAB ENAP Fundação Bradesco SEST SENAT EVG MEC IFSC" },
   { title: "Ferramentas Digitais para Estudar", module: "Caminhos de Estudo", path: "/caminhos", icon: "caminhos", keywords: "ferramentas digitais app celular khan academy chatgpt youtube moodle IFC canva google drive documentos estudo online qr code qrcode sigaa google keep google agenda notebooklm notebook lm microsoft lens whatsapp computador internet redes sociais segurança digital privacidade" },
   { title: "Dicas de Estudo", module: "Caminhos de Estudo", path: "/caminhos", icon: "caminhos", keywords: "dicas estudo pomodoro rotina organização tempo concentração trabalhar estudar método" },
   { title: "Vídeos Recomendados", module: "Caminhos de Estudo", path: "/caminhos", icon: "caminhos", keywords: "vídeos youtube aulas gratuitas recomendados assistir canais educativos" },
-  { title: "Recursos do IFC", module: "Caminhos de Estudo", path: "/caminhos", icon: "caminhos", keywords: "IFC recursos auxílio bolsa permanência SISAE portal estudante ingresso apoio estudantil sigaa manual" },
+  { title: "Recursos do IFC", module: "Caminhos de Estudo", path: "/caminhos", icon: "caminhos", keywords: "IFC recursos auxílio bolsa permanência SISAE portal estudante ingresso apoio estudantil sigaa manual estudante ifc edu br ingresso ifc edu br" },
 
   // Guia Prático — guias
   { title: "Como ligar uma tomada", module: "Guia Prático", path: "/guia-pratico", icon: "guia", keywords: "tomada ligar instalar elétrica fio fase neutro terra disjuntor" },
@@ -116,6 +116,49 @@ const searchIndex = [
   { title: "Arco de Maguerez", module: "Para o Educador", path: "/educador", icon: "educador", keywords: "maguerez arco maguerez metodologia problematização estudo caso" },
   { title: "Plano de Aula — Arco de Maguerez", module: "Para o Educador", path: "/educador", icon: "educador", keywords: "plano aula maguerez roteiro prático sala" },
   { title: "Guia Completo do Educador", module: "Para o Educador", path: "/educador", icon: "educador", keywords: "guia educador completo materiais aprofundar imprimir" },
+
+  // Glossário — termos complementares
+  { title: "Resistência elétrica", module: "Glossário", path: "/glossario", icon: "glossario", keywords: "resistência elétrica oposição corrente calor aquecimento fio fino carga" },
+  { title: "Relé", module: "Glossário", path: "/glossario", icon: "glossario", keywords: "relé interruptor automático comando circuito controle sinal automação proteção motor" },
+
+  // Microlearning — cards complementares
+  { title: "Emendas Elétricas", module: "Microlearning", path: "/microlearning", icon: "microlearning", keywords: "emenda elétrica conexão fio incêndio falha instalação norma técnica procedimento" },
+  { title: "Circuito Série x Paralelo", module: "Microlearning", path: "/microlearning", icon: "microlearning", keywords: "circuito série paralelo lâmpada fila caminho elétrico diferença" },
+  { title: "O que é um Contator?", module: "Microlearning", path: "/microlearning", icon: "microlearning", keywords: "contator dispositivo interruptor motor equipamento industrial painel elétrico comando contatos" },
+  { title: "Leitura de Plaqueta do Motor", module: "Microlearning", path: "/microlearning", icon: "microlearning", keywords: "plaqueta motor leitura dados tensão corrente nominal potência rotação fator serviço" },
+
+  // Baixar Materiais — PDFs complementares
+  { title: "Eletricista e Experiência (PDF)", module: "Baixar Materiais", path: "/materiais", icon: "materiais", keywords: "eletricista experiência profissão PDF imprimir download trajetória" },
+  { title: "Guia para Criar Currículo (PDF)", module: "Baixar Materiais", path: "/materiais", icon: "materiais", keywords: "guia currículo PDF passo a passo montar imprimir download" },
+  { title: "Microlearning EJA-EPT (PDF)", module: "Baixar Materiais", path: "/materiais", icon: "materiais", keywords: "microlearning PDF imprimir download conteúdos rápidos elétrica" },
+  { title: "Trabalho Precarizado (PDF)", module: "Baixar Materiais", path: "/materiais", icon: "materiais", keywords: "trabalho precarizado PDF precarização riscos direitos imprimir download" },
+  { title: "Informática Básica (PDF)", module: "Baixar Materiais", path: "/materiais", icon: "materiais", keywords: "informática básica PDF computador celular email moodle QR code passo a passo imprimir download" },
+
+  // Vozes da Trilha — itens complementares
+  { title: "Portal de Egressos do IFC", module: "Vozes da Trilha", path: "/vozes", icon: "vozes", keywords: "portal egressos IFC egresso ifc edu br acompanhamento trajetória" },
+  { title: "Compartilhar minha história", module: "Vozes da Trilha", path: "/vozes", icon: "vozes", keywords: "compartilhar história enviar depoimento depor relato testemunho escrever" },
+
+  // Home — seções da tela inicial
+  { title: "Instale o app no seu celular", module: "Início", path: "/", icon: "empregabilidade", keywords: "instalar app celular android iPhone Chrome Safari adicionar tela inicial PWA ícone instalação" },
+  { title: "Informações e Suporte", module: "Início", path: "/", icon: "empregabilidade", keywords: "informações suporte ajuda contato email mapa navegação sobre autoria licença" },
+  { title: "Sobre o Produto Educacional", module: "Início", path: "/", icon: "empregabilidade", keywords: "produto educacional dissertação ProfEPT IFC Blumenau Marileia Hillesheim Jorge Dutra autoria mestrado" },
+  { title: "Licença Creative Commons", module: "Início", path: "/", icon: "empregabilidade", keywords: "licença creative commons CC BY-NC-ND código fonte atribuição não comercial sem derivações" },
+  { title: "Encontrou algum problema?", module: "Início", path: "/", icon: "empregabilidade", keywords: "problema erro suporte email contato relatar reportar link quebrado conteúdo desatualizado" },
+
+  // Configurações
+  { title: "Configurações", module: "Configurações", path: "/settings", icon: "empregabilidade", keywords: "configurações settings tema aparência claro escuro sistema sobre versão" },
+  { title: "Aparência e Tema", module: "Configurações", path: "/settings", icon: "empregabilidade", keywords: "aparência tema claro escuro sistema visual modo noturno diurno" },
+
+  // Para o Educador — materiais complementares
+  { title: "Cartilha de Segurança CERT.br", module: "Para o Educador", path: "/educador", icon: "educador", keywords: "cartilha segurança internet CERT br fascículos slides senhas golpes privacidade redes sociais digital" },
+
+  // Caminhos de Estudo — recursos e plataformas complementares
+  { title: "Portal do Estudante IFC", module: "Caminhos de Estudo", path: "/caminhos", icon: "caminhos", keywords: "portal estudante IFC estudante ifc edu br auxílio bolsa permanência SISAE" },
+  { title: "Portal de Ingresso IFC", module: "Caminhos de Estudo", path: "/caminhos", icon: "caminhos", keywords: "portal ingresso IFC ingresso ifc edu br processo seletivo edital" },
+  { title: "Manual do SIGAA", module: "Caminhos de Estudo", path: "/caminhos", icon: "caminhos", keywords: "manual SIGAA sistema acadêmico notas faltas histórico documento orientações iniciais" },
+  { title: "SISAE — Apoio Estudantil", module: "Caminhos de Estudo", path: "/caminhos", icon: "caminhos", keywords: "SISAE serviço integrado suporte acompanhamento educacional auxílio financeiro bolsa permanência" },
+  { title: "ENCCEJA", module: "Caminhos de Estudo", path: "/caminhos", icon: "caminhos", keywords: "ENCCEJA exame certificação ensino fundamental médio conclusão certificado INEP" },
+  { title: "UAB — Universidade Aberta do Brasil", module: "Caminhos de Estudo", path: "/caminhos", icon: "caminhos", keywords: "UAB universidade aberta Brasil graduação distância gratuita CAPES polo" },
 ];
 
 function normalize(str) {
