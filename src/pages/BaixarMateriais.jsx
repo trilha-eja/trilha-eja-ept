@@ -31,7 +31,7 @@ export default function BaixarMateriais() {
       emoji: "📖",
       titulo: "Glossário do Eletricista",
       descricao: "25 termos técnicos organizados em 4 categorias — para consulta rápida e estudo.",
-      link: "https://trilha-eja.github.io/materiais/GlossariodoEletricista.pdf",
+      link: "https://trilha-eja.github.io/materiais/GlossariodoEletricista.pdf?v=2",
     },
     {
       id: "microlearning",
@@ -52,7 +52,7 @@ export default function BaixarMateriais() {
       emoji: "⚖️",
       titulo: "Cartilha de Direitos Trabalhistas",
       descricao: "Conheça seus direitos desde o primeiro dia de trabalho.",
-      link: "https://trilha-eja.github.io/materiais/ConhecerMeusDireitos.pdf",
+      link: "https://trilha-eja.github.io/materiais/ConhecerMeusDireitos.pdf?v=2",
     },
     {
       id: "checklist",
