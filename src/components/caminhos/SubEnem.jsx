@@ -32,7 +32,7 @@ const sites = [
   },
   {
     nome: "Cria — Redação Online",
-    descricao: "Plataforma de escrita criativa e redação com recursos gratuitos para estudantes.",
+    descricao: "Plataforma de escrita criativa e redação. Possui recursos gratuitos para estudantes — atenção: também tem versão paga, explore primeiro a parte gratuita.",
     url: "https://cria.net.br/",
   },
 ];
