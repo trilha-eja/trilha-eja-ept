@@ -46,7 +46,7 @@ const searchIndex = [
   { title: "Direitos Coletivos", module: "Mundo do Trabalho → Direitos", path: "/empregabilidade", icon: "empregabilidade", keywords: "sindicato greve negociação coletiva associação trabalhadores unidos categoria" },
 
   // Caminhos de Estudo — subpáginas
-  { title: "ENEM", module: "Caminhos de Estudo", path: "/caminhos", icon: "caminhos", keywords: "ENEM exame nacional ensino médio inscrição nota redação prova isenção" },
+  { title: "ENEM", module: "Caminhos de Estudo", path: "/caminhos", icon: "caminhos", keywords: "ENEM exame nacional ensino médio inscrição nota redação prova isenção MEC ENEM simulado enem prepara enem enem 2026 redação enem corrigir redação cora redação brasil escola cria redação aplicativos enem sites enem praticar redação play store enem" },
   { title: "SISU", module: "Caminhos de Estudo", path: "/caminhos", icon: "caminhos", keywords: "SISU universidade federal cotas vagas ingresso matrícula nota corte" },
   { title: "PROUNI", module: "Caminhos de Estudo", path: "/caminhos", icon: "caminhos", keywords: "PROUNI bolsa particular faculdade gratuita renda documentação" },
   { title: "FIES", module: "Caminhos de Estudo", path: "/caminhos", icon: "caminhos", keywords: "FIES financiamento estudantil empréstimo faculdade juros dívida" },

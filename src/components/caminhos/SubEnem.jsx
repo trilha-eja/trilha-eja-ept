@@ -3,14 +3,37 @@ import AccordionSection from "../AccordionSection";
 
 const apps = [
   {
-    nome: "Descomplica",
-    descricao: "Tem conteúdo gratuito limitado. A versão completa é paga. Use o gratuito para revisões rápidas.",
-    url: "https://play.google.com/store/apps/details?id=com.descomplica.app",
+    nome: "MEC ENEM",
+    descricao: "App oficial do Ministério da Educação com questões anteriores do ENEM, simulados e gabarito.",
+    url: "https://play.google.com/store/search?q=mec%20enem&c=apps",
   },
   {
-    nome: "Me Salva",
-    descricao: "Tem aulas gratuitas e pagas. O conteúdo gratuito já é muito útil para revisar para o ENEM.",
-    url: "https://play.google.com/store/apps/details?id=br.com.mesalva.app",
+    nome: "Prepara: Simulado ENEM 2026",
+    descricao: "Simulados completos no formato do ENEM com gabarito e desempenho por área do conhecimento.",
+    url: "https://play.google.com/store/search?q=prepara%20enem&c=apps",
+  },
+  {
+    nome: "ENEM 2026",
+    descricao: "Questões organizadas por ano e disciplina, com gabarito comentado para estudar no celular.",
+    url: "https://play.google.com/store/apps/details?id=dev.mdxco.enem",
+  },
+];
+
+const sites = [
+  {
+    nome: "Cora Redação",
+    descricao: "Plataforma gratuita com dicas, temas e correção de redação no estilo ENEM.",
+    url: "https://coredacao.com/conteudo/",
+  },
+  {
+    nome: "Corrige Aqui — Brasil Escola",
+    descricao: "Ferramenta gratuita do Brasil Escola para praticar e receber dicas de redação para o ENEM.",
+    url: "https://vestibular.brasilescola.uol.com.br/corrige-aqui",
+  },
+  {
+    nome: "Cria — Redação Online",
+    descricao: "Plataforma de escrita criativa e redação com recursos gratuitos para estudantes.",
+    url: "https://cria.net.br/",
   },
 ];
 
@@ -105,19 +128,23 @@ export default function SubEnem({ onBack, onNavigate }) {
           </a>
         </AccordionSection>
 
-        {/* Card 7 — Aplicativos */}
-        <AccordionSection titulo="📱 Aplicativos para estudar">
-          {apps.map((a, idx) => (
-            <div key={a.nome} className={`space-y-2 pb-3 ${idx < apps.length - 1 ? "border-b border-border" : ""}`}>
-              <p className="font-bold text-sm">{a.nome}</p>
-              <p className="text-xs text-muted-foreground leading-relaxed">{a.descricao}</p>
-              <a href={a.url} target="_blank" rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all">
-                📱 Baixar {a.nome}
-              </a>
-            </div>
-          ))}
-          <div className="pt-1">
+        {/* Card 7 — Aplicativos para baixar e estudar */}
+        <AccordionSection titulo="📱 Aplicativos para baixar e estudar">
+          <p className="text-xs text-muted-foreground leading-relaxed mb-2">
+            Para baixar no celular: abra a Play Store, toque na lupa e pesquise pelo nome do app.
+          </p>
+          <div className="space-y-2">
+            {apps.map((a) => (
+              <AccordionSection key={a.nome} titulo={a.nome}>
+                <p className="text-xs text-muted-foreground leading-relaxed">{a.descricao}</p>
+                <a href={a.url} target="_blank" rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all mt-2">
+                  🔗 Ver na Play Store
+                </a>
+              </AccordionSection>
+            ))}
+          </div>
+          <div className="pt-3">
             <p className="text-xs text-muted-foreground leading-relaxed mb-3">
               Para conhecer mais aplicativos e ferramentas gratuitas de estudo, acesse a seção Ferramentas Digitais neste módulo.
             </p>
@@ -127,6 +154,24 @@ export default function SubEnem({ onBack, onNavigate }) {
             >
               📱 Ver Ferramentas Digitais
             </button>
+          </div>
+        </AccordionSection>
+
+        {/* Card 8 — Sites para estudar e praticar redação */}
+        <AccordionSection titulo="🌐 Sites para estudar e praticar redação">
+          <p className="text-xs text-muted-foreground leading-relaxed mb-2">
+            Acesse pelo navegador, sem precisar instalar nada
+          </p>
+          <div className="space-y-2">
+            {sites.map((s) => (
+              <AccordionSection key={s.nome} titulo={s.nome}>
+                <p className="text-xs text-muted-foreground leading-relaxed">{s.descricao}</p>
+                <a href={s.url} target="_blank" rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all mt-2">
+                  🔗 Acessar site
+                </a>
+              </AccordionSection>
+            ))}
           </div>
         </AccordionSection>
 
