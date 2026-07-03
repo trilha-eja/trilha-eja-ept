@@ -67,13 +67,13 @@ export default function SubCursosGratuitos({ onBack }) {
           <p className="text-sm text-muted-foreground leading-relaxed">Portal oficial do MEC com recursos educacionais gratuitos para estudantes e professores.</p>
           <a href="https://aprendamais.mec.gov.br" target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all">🔗 Acessar</a>
         </AccordionSection>
-        <AccordionSection titulo="📚 MEC Livros">
-          <p className="text-sm text-muted-foreground leading-relaxed">Biblioteca digital gratuita do governo federal com livros didáticos e de literatura.</p>
-          <a href="https://meclivros.mec.gov.br" target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all">🔗 Acessar</a>
-        </AccordionSection>
         <AccordionSection titulo="🗣️ MEC Idiomas">
           <p className="text-sm text-muted-foreground leading-relaxed">Cursos gratuitos de idiomas oferecidos pelo governo federal — inglês, espanhol e outras línguas.</p>
           <a href="https://www.gov.br/mec/pt-br/mec-idiomas" target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all">🔗 Acessar</a>
+        </AccordionSection>
+        <AccordionSection titulo="🎓 AVAMEC">
+          <p className="text-sm text-muted-foreground leading-relaxed">Plataforma oficial do MEC com cursos gratuitos em módulos, materiais multimídia, atividades interativas e avaliações. Muitos cursos oferecem certificado de conclusão.</p>
+          <a href="https://avamec.mec.gov.br/v2/#/" target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all">🔗 Acessar AVAMEC</a>
         </AccordionSection>
 
         {/* CATEGORIA 2 — Formação Técnica e Superior */}

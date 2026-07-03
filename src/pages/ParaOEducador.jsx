@@ -578,25 +578,44 @@ A mediação tecnológica não é apenas ensinar a usar um app. É ampliar horiz
             </p>
           </div>
 
-          {/* Card 4 — Cartilha de Segurança */}
-          <div className="bg-card border border-border rounded-2xl p-4 mb-3 space-y-3">
-            <div className="flex items-center gap-3">
-              <span className="text-2xl">🔒</span>
-              <div>
-                <h3 className="font-bold text-sm">Cartilha de Segurança para Internet — CERT.br</h3>
-                <p className="text-xs text-muted-foreground leading-relaxed">Fascículos gratuitos sobre segurança digital com slides prontos para usar em aula — senhas, golpes, privacidade e redes sociais.</p>
-              </div>
-            </div>
+        </div>
+
+        {/* Seção: Recursos e Referências Externas */}
+        <div className="mt-6 pt-4 border-t border-border">
+          <h2 className="font-extrabold text-base mb-2">🔗 Recursos e Referências Externas</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed mb-4">
+            Materiais externos de leitura e referência para aprofundar sua prática pedagógica na EJA-EPT.
+          </p>
+          <AccordionSection titulo="🔒 Cartilha de Segurança para Internet — CERT.br">
+            <p className="text-sm text-muted-foreground leading-relaxed">Fascículos gratuitos sobre segurança digital com slides prontos para usar em aula — senhas, golpes, privacidade e redes sociais.</p>
             <a
               href="https://cartilha.cert.br/fasciculos/"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all"
+              className="mt-3 inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all"
             >
               🔗 Acessar Fascículos
             </a>
-          </div>
+          </AccordionSection>
+        </div>
 
+        {/* Seção: Saiba Mais — Cursos e Formação Continuada */}
+        <div className="mt-6 pt-4 border-t border-border">
+          <h2 className="font-extrabold text-base mb-2">🎓 Saiba Mais — Cursos e Formação Continuada</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed mb-4">
+            Cursos gratuitos online para aprofundar sua formação como educador(a) da EJA-EPT.
+          </p>
+          <AccordionSection titulo="🎓 AVAMEC">
+            <p className="text-sm text-muted-foreground leading-relaxed">Plataforma oficial do MEC com cursos gratuitos organizados em módulos, materiais multimídia e atividades interativas. Muitos cursos oferecem certificado de conclusão — ótimo para formação continuada.</p>
+            <a
+              href="https://avamec.mec.gov.br/v2/#/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-3 inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all"
+            >
+              🔗 Acessar AVAMEC
+            </a>
+          </AccordionSection>
         </div>
 
       </div>

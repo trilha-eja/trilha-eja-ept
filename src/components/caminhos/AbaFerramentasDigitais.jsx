@@ -43,6 +43,13 @@ const categoria1 = [
     url: "https://scholar.google.com",
     botao: "🔗 Acessar",
   },
+  {
+    emoji: "📚",
+    titulo: "MEC Livros",
+    texto: "Acervo gratuito de livros digitais do Ministério da Educação — literatura, didáticos e obras de referência para estudar e se aprofundar.",
+    url: "https://livros.mec.gov.br/",
+    botao: "🔗 Acessar MEC Livros",
+  },
 ];
 
 const categoria2 = [
