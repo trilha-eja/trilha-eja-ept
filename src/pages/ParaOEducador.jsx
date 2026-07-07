@@ -515,14 +515,8 @@ A mediação tecnológica não é apenas ensinar a usar um app. É ampliar horiz
           </p>
 
           {/* Card 1 — Guia Completo */}
-          <div className="bg-card border border-border rounded-2xl p-4 mb-3 space-y-3">
-            <div className="flex items-center gap-3">
-              <span className="text-2xl">📘</span>
-              <div>
-                <h3 className="font-bold text-sm">Guia Completo do Educador</h3>
-                <p className="text-xs text-muted-foreground leading-relaxed">Versão para impressão com todos os fundamentos teóricos e o roteiro de 6 encontros.</p>
-              </div>
-            </div>
+          <AccordionSection titulo="📘 Guia Completo do Educador">
+            <p className="text-xs text-muted-foreground leading-relaxed">Versão para impressão com todos os fundamentos teóricos e o roteiro de 6 encontros.</p>
             <a
               href="https://trilha-eja.github.io/materiais/OrientacoesPedagogicas.pdf"
               target="_blank"
@@ -531,44 +525,36 @@ A mediação tecnológica não é apenas ensinar a usar um app. É ampliar horiz
             >
               ⬇️ Baixar e Imprimir
             </a>
-          </div>
+          </AccordionSection>
 
           {/* Card 2 — Arco de Maguerez */}
-          <div className="bg-card border border-border rounded-2xl p-4 mb-3 space-y-3">
-            <div className="flex items-center gap-3">
-              <span className="text-2xl">🔄</span>
-              <div>
-                <h3 className="font-bold text-sm">Arco de Maguerez — Projeto de Vida</h3>
-                <p className="text-xs text-muted-foreground leading-relaxed">Estudo de caso aplicando a metodologia da problematização à realidade da EJA-EPT.</p>
-              </div>
-            </div>
-            <a
-              href="https://trilha-eja.github.io/materiais/ArcodeMaguerez.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all"
-            >
-              ⬇️ Baixar e Imprimir
-            </a>
+          <div className="mt-3">
+            <AccordionSection titulo="🔄 Arco de Maguerez — Projeto de Vida">
+              <p className="text-xs text-muted-foreground leading-relaxed">Estudo de caso aplicando a metodologia da problematização à realidade da EJA-EPT.</p>
+              <a
+                href="https://trilha-eja.github.io/materiais/ArcodeMaguerez.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all"
+              >
+                ⬇️ Baixar e Imprimir
+              </a>
+            </AccordionSection>
           </div>
 
           {/* Card 3 — Plano de Aula */}
-          <div className="bg-card border border-border rounded-2xl p-4 mb-3 space-y-3">
-            <div className="flex items-center gap-3">
-              <span className="text-2xl">📋</span>
-              <div>
-                <h3 className="font-bold text-sm">Plano de Aula — Arco de Maguerez</h3>
-                <p className="text-xs text-muted-foreground leading-relaxed">Roteiro prático para aplicar o Arco de Maguerez em sala, complementar ao estudo de caso acima.</p>
-              </div>
-            </div>
-            <a
-              href="https://trilha-eja.github.io/materiais/PlanodeAulaMaguerez.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all"
-            >
-              ⬇️ Baixar e Imprimir
-            </a>
+          <div className="mt-3">
+            <AccordionSection titulo="📋 Plano de Aula — Arco de Maguerez">
+              <p className="text-xs text-muted-foreground leading-relaxed">Roteiro prático para aplicar o Arco de Maguerez em sala, complementar ao estudo de caso acima.</p>
+              <a
+                href="https://trilha-eja.github.io/materiais/PlanodeAulaMaguerez.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all"
+              >
+                ⬇️ Baixar e Imprimir
+              </a>
+            </AccordionSection>
           </div>
 
           {/* Nota de uso conjunto */}
