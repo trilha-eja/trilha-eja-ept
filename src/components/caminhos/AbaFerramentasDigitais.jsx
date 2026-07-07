@@ -47,7 +47,7 @@ const categoria1 = [
     emoji: "📚",
     titulo: "MEC Livros",
     texto: "Acervo gratuito de livros digitais do Ministério da Educação — literatura, didáticos e obras de referência para estudar e se aprofundar.",
-    url: "https://livros.mec.gov.br/",
+    url: "https://meclivros.mec.gov.br/",
     botao: "🔗 Acessar MEC Livros",
   },
 ];
