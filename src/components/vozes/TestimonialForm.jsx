@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
-const MAX = 300;
+const MAX = 800;
 
 const APOS_SUGGESTIONS = [
   "Continuei estudando",
