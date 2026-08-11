@@ -45,29 +45,29 @@ export default function TestimonialCard({ depoimento: d }) {
           {/* 1. Contribuição para projetos de vida */}
           {d.contribuicao_projetos && (
             <div>
-              <p className="text-xs font-semibold text-muted-foreground mb-0.5">🌱 Contribuição para projetos de vida:</p>
-              <p className="text-sm text-foreground leading-relaxed">{d.contribuicao_projetos}</p>
+              <p className="text-sm font-bold text-foreground">🌱 Contribuição para projetos de vida:</p>
+              <p className="text-sm italic text-muted-foreground leading-relaxed">{d.contribuicao_projetos}</p>
             </div>
           )}
 
           {/* 2. Após o curso */}
           {d.situacao_atual && d.situacao_atual.length > 0 && (
             <div>
-              <p className="text-xs font-semibold text-muted-foreground mb-0.5">📌 Após o curso:</p>
-              <p className="text-sm text-foreground leading-relaxed">{d.situacao_atual.join(", ")}</p>
+              <p className="text-sm font-bold text-foreground">📌 Após o curso:</p>
+              <p className="text-sm italic text-muted-foreground leading-relaxed">{d.situacao_atual.join(", ")}</p>
             </div>
           )}
 
           {/* 3, 4, 5 — Campos de texto */}
           {campos.map(({ key, emoji, label }) => (
-            <div key={key}>
-              <p className="text-xs font-semibold text-muted-foreground mb-0.5">{emoji} {label}</p>
-              <p className="text-sm text-muted-foreground leading-relaxed">"{d[key]}"</p>
+            <div key={key} className="space-y-0.5">
+              <p className="text-sm font-bold text-foreground">{emoji} {label}</p>
+              <p className="text-sm italic text-muted-foreground leading-relaxed">{d[key]}</p>
             </div>
           ))}
 
           {/* 6. Publicado com autorização */}
-          <p className="text-[11px] text-accent font-semibold pt-1">✓ Publicado com autorização</p>
+          <p className="text-sm font-bold text-accent pt-1">✓ Publicado com autorização</p>
         </div>
       )}
     </div>
