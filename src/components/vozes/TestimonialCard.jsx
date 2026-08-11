@@ -6,16 +6,18 @@ function primeiroNome(nomeCompleto) {
   return nomeCompleto.trim().split(" ")[0];
 }
 
+const CAMPOS_TEXTO = [
+  { key: "texto_conciliar", emoji: "📖", label: "Como foi conciliar trabalho, família e estudos?" },
+  { key: "texto_apos", emoji: "🎓", label: "O que aconteceu após o curso?" },
+  { key: "mensagem", emoji: "💬", label: "Mensagem para quem está estudando hoje" },
+  // campo legado
+  { key: "texto", emoji: "📝", label: "Depoimento" },
+];
+
 export default function TestimonialCard({ depoimento: d }) {
   const [open, setOpen] = useState(false);
 
-  const campos = [
-    { key: "texto_conciliar", label: "Como foi conciliar trabalho, família e estudos" },
-    { key: "texto_apos", label: "O que aconteceu após o curso" },
-    { key: "mensagem", label: "Mensagem para quem está estudando hoje" },
-    // campo legado
-    { key: "texto", label: "Depoimento" },
-  ].filter(({ key }) => d[key] && String(d[key]).trim());
+  const campos = CAMPOS_TEXTO.filter(({ key }) => d[key] && String(d[key]).trim());
 
   return (
     <div className="bg-card border border-border rounded-2xl overflow-hidden">
@@ -28,7 +30,7 @@ export default function TestimonialCard({ depoimento: d }) {
           <p className="font-bold text-sm">
             {primeiroNome(d.nome)}{d.idade && Number(d.idade) >= 1 && Number(d.idade) <= 120 ? `, ${d.idade} anos` : ""}
           </p>
-          <p className="text-xs text-muted-foreground">{d.curso} • {d.ano_conclusao}</p>
+          <p className="text-xs text-muted-foreground mt-0.5">{d.curso} • {d.ano_conclusao}</p>
           {d.cidade_estado && (
             <p className="text-xs text-muted-foreground">{d.cidade_estado}</p>
           )}
@@ -40,25 +42,32 @@ export default function TestimonialCard({ depoimento: d }) {
 
       {open && (
         <div className="px-4 pb-4 space-y-3">
+          {/* 1. Contribuição para projetos de vida */}
           {d.contribuicao_projetos && (
-            <p className="text-xs text-muted-foreground">
-              Contribuição para projetos de vida: <span className="font-semibold">{d.contribuicao_projetos}</span>
-            </p>
-          )}
-          {d.situacao_atual && d.situacao_atual.length > 0 && (
-            <p className="text-xs text-muted-foreground">
-              Após o curso: <span className="font-semibold">{d.situacao_atual.join(", ")}</span>
-            </p>
+            <div>
+              <p className="text-xs font-semibold text-muted-foreground mb-0.5">🌱 Contribuição para projetos de vida:</p>
+              <p className="text-sm text-foreground leading-relaxed">{d.contribuicao_projetos}</p>
+            </div>
           )}
 
-          {campos.map(({ key, label }) => (
+          {/* 2. Após o curso */}
+          {d.situacao_atual && d.situacao_atual.length > 0 && (
+            <div>
+              <p className="text-xs font-semibold text-muted-foreground mb-0.5">📌 Após o curso:</p>
+              <p className="text-sm text-foreground leading-relaxed">{d.situacao_atual.join(", ")}</p>
+            </div>
+          )}
+
+          {/* 3, 4, 5 — Campos de texto */}
+          {campos.map(({ key, emoji, label }) => (
             <div key={key}>
-              <p className="text-[11px] font-semibold text-muted-foreground uppercase tracking-wide mb-1">{label}</p>
+              <p className="text-xs font-semibold text-muted-foreground mb-0.5">{emoji} {label}</p>
               <p className="text-sm text-muted-foreground leading-relaxed">"{d[key]}"</p>
             </div>
           ))}
 
-          <p className="text-[10px] text-accent font-semibold">✓ Publicado com autorização</p>
+          {/* 6. Publicado com autorização */}
+          <p className="text-[11px] text-accent font-semibold pt-1">✓ Publicado com autorização</p>
         </div>
       )}
     </div>
