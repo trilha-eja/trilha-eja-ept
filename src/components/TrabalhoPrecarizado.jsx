@@ -35,43 +35,41 @@ export default function TrabalhoPrecarizado({ onBack }) {
           </p>
         </AccordionSection>
 
-        {/* Card 2 — Acordeão */}
+        {/* Card 2 — Acordeão (com subitens aninhados) */}
         <AccordionSection titulo="🛡️ Proteja-se na prática!">
           <p className="text-sm text-muted-foreground leading-relaxed">
             A precarização é um problema estrutural do mundo do trabalho, mas você tem ferramentas para não ficar desamparado:
           </p>
-        </AccordionSection>
-
-        {/* Card 3 — Acordeão */}
-        <AccordionSection titulo="📋 Formalize-se como MEI">
-          <p className="text-sm text-muted-foreground leading-relaxed">
-            Vai atuar por conta própria? O MEI é rápido, barato e garante direitos fundamentais:
-          </p>
-          <ul className="text-sm text-muted-foreground mt-2 space-y-1 list-disc list-inside">
-            <li>Contagem de tempo para aposentadoria</li>
-            <li>Auxílio-doença — essencial se sofrer acidente ou precisar de afastamento e ficar sem renda</li>
-          </ul>
-          <p className="text-sm text-muted-foreground leading-relaxed mt-2">
-            ⚠️ Atenção: evite sites que cobram taxas para abrir o MEI — use sempre o portal oficial do Governo Federal.
-          </p>
-          <a
-            href="https://www.gov.br/mei"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all mt-3"
-          >
-            🔗 Abrir MEI gratuitamente
-          </a>
-        </AccordionSection>
-
-        {/* Card 4 — Acordeão */}
-        <AccordionSection titulo="🤝 Conheça seus Direitos Coletivos">
-          <p className="text-sm text-muted-foreground leading-relaxed">
-            Você não está sozinho! O sindicato da sua categoria é um aliado importante na luta contra a precarização.
-          </p>
-          <p className="text-sm text-muted-foreground leading-relaxed mt-2">
-            💡 Consulte a seção <strong>Direitos Coletivos</strong> neste aplicativo para saber como encontrar seu sindicato e o que ele pode fazer por você.
-          </p>
+          <div className="space-y-3 pt-1">
+            <AccordionSection titulo="📋 Formalize-se como MEI">
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                Vai atuar por conta própria? O MEI é rápido, barato e garante direitos fundamentais:
+              </p>
+              <ul className="text-sm text-muted-foreground mt-2 space-y-1 list-disc list-inside">
+                <li>Contagem de tempo para aposentadoria</li>
+                <li>Auxílio-doença — essencial se sofrer acidente ou precisar de afastamento e ficar sem renda</li>
+              </ul>
+              <p className="text-sm text-muted-foreground leading-relaxed mt-2">
+                ⚠️ Atenção: evite sites que cobram taxas para abrir o MEI — use sempre o portal oficial do Governo Federal.
+              </p>
+              <a
+                href="https://www.gov.br/mei"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all mt-3"
+              >
+                🔗 Abrir MEI gratuitamente
+              </a>
+            </AccordionSection>
+            <AccordionSection titulo="🤝 Conheça seus Direitos Coletivos">
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                Você não está sozinho! O sindicato da sua categoria é um aliado importante na luta contra a precarização.
+              </p>
+              <p className="text-sm text-muted-foreground leading-relaxed mt-2">
+                💡 Consulte a seção <strong>Direitos Coletivos</strong> neste aplicativo para saber como encontrar seu sindicato e o que ele pode fazer por você.
+              </p>
+            </AccordionSection>
+          </div>
         </AccordionSection>
 
         {/* Final box */}
