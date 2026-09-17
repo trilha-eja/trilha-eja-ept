@@ -34,7 +34,7 @@ export default function VozesDaTrilha() {
   if (showForm) {
     return (
       <div>
-        <PageHeader title="Compartilhar minha história" backTo="/vozes" />
+        <PageHeader title="Compartilhar minha história" onBack={() => setShowForm(false)} />
         <TestimonialForm onSubmit={handleSubmit} onCancel={() => setShowForm(false)} />
       </div>
     );
