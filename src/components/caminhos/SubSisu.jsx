@@ -72,7 +72,7 @@ export default function SubSisu({ onBack }) {
         <div className="border border-border rounded-2xl p-4 bg-card space-y-2">
           <p className="font-bold text-sm">Site oficial do SISU</p>
           <a href="https://sisu.mec.gov.br" target="_blank" rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-xl bg-accent text-accent-foreground hover:bg-accent/90 active:scale-95 transition-all">
+            className="inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-all">
             🔗 Acessar site oficial do SISU
           </a>
         </div>
