@@ -205,7 +205,7 @@ export default function Home() {
           <AccordionSection titulo="⚖️ Licença e Condições de Uso">
             <div className="text-xs text-muted-foreground leading-relaxed space-y-3">
               <p>
-                Aplicativo desenvolvido na plataforma Base44, com recursos de Inteligência Artificial Generativa e React/Tailwind CSS.
+                Aplicativo desenvolvido na plataforma Base44 (Backend-as-a-Service), utilizando React 18, Vite 6 e Tailwind CSS, com recursos de Inteligência Artificial Generativa (Claude API — Anthropic).
               </p>
               <p>
                 Este aplicativo não coleta dados pessoais identificáveis. O Mapa da Vida utiliza Inteligência Artificial (Claude API — Anthropic) para gerar textos reflexivos, sujeito à política de privacidade da Anthropic:
