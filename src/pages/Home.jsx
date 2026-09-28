@@ -199,29 +199,62 @@ export default function Home() {
               <p className="leading-relaxed">
                 <span className="font-semibold">Vínculo institucional:</span> Mestrado Profissional em Educação Profissional e Tecnológica (ProfEPT), Instituto Federal Catarinense (IFC) — Campus Blumenau
               </p>
-              <hr className="border-border" />
-              <p className="font-semibold">Licença do aplicativo:</p>
-              <p className="leading-relaxed">
-                Este aplicativo (código-fonte) está licenciado sob Creative Commons Atribuição-NãoComercial-SemDerivações 4.0 Internacional (CC BY-NC-ND 4.0).
+
+            </div>
+          </AccordionSection>
+          <AccordionSection titulo="⚖️ Licença e Condições de Uso">
+            <div className="text-xs text-muted-foreground leading-relaxed space-y-3">
+              <p>
+                Aplicativo desenvolvido na plataforma Base44, com recursos de Inteligência Artificial Generativa e React/Tailwind CSS.
               </p>
-              <div className="flex items-center gap-1.5 pt-1">
-                <img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="CC" className="w-5 h-5" />
-                <img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="BY" className="w-5 h-5" />
-                <img src="https://mirrors.creativecommons.org/presskit/icons/nc.svg" alt="NC" className="w-5 h-5" />
-                <img src="https://mirrors.creativecommons.org/presskit/icons/nd.svg" alt="ND" className="w-5 h-5" />
-              </div>
+              <p>
+                Este aplicativo não coleta dados pessoais identificáveis. O Mapa da Vida utiliza Inteligência Artificial (Claude API — Anthropic) para gerar textos reflexivos, sujeito à política de privacidade da Anthropic:
+              </p>
               <a
-                href="https://creativecommons.org/licenses/by-nc-nd/4.0"
+                href="https://www.anthropic.com/privacy"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-primary underline break-all"
               >
-                creativecommons.org/licenses/by-nc-nd/4.0
+                anthropic.com/privacy
               </a>
+              <p>
+                A agência e inteligência humana estão presentes em todas as intencionalidades e definições teórico-metodológicas, da concepção à construção deste produto educacional.
+              </p>
+              <hr className="border-border" />
+              <p>
+                Este trabalho está licenciado sob Creative Commons Atribuição-NãoComercial-CompartilhaIgual 4.0 Internacional (CC BY-NC-SA 4.0).
+              </p>
+              <p>Você tem o direito de:</p>
+              <ul className="list-disc pl-4 space-y-1">
+                <li>
+                  <span className="font-semibold">Compartilhar:</span> copiar e redistribuir o material em qualquer suporte ou formato.
+                </li>
+                <li>
+                  <span className="font-semibold">Adaptar:</span> remixar, transformar e criar a partir do material para qualquer fim não comercial.
+                </li>
+              </ul>
+              <p>
+                Desde que atribua o devido crédito à autora original, não utilize para fins comerciais e distribua suas contribuições sob a mesma licença.
+              </p>
+              <a
+                href="https://creativecommons.org/licenses/by-nc-sa/4.0"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary underline break-all"
+              >
+                creativecommons.org/licenses/by-nc-sa/4.0
+              </a>
+              <div className="flex items-center gap-1.5 pt-1">
+                <img src="https://mirrors.creativecommons.org/presskit/icons/cc.png" alt="CC" className="w-5 h-5" />
+                <img src="https://mirrors.creativecommons.org/presskit/icons/by.png" alt="BY" className="w-5 h-5" />
+                <img src="https://mirrors.creativecommons.org/presskit/icons/nc.png" alt="NC" className="w-5 h-5" />
+                <img src="https://mirrors.creativecommons.org/presskit/icons/sa.png" alt="SA" className="w-5 h-5" />
+              </div>
             </div>
           </AccordionSection>
-        </div>
-      </AccordionSection>
-    </div>
-  );
-}
+          </div>
+          </AccordionSection>
+          </div>
+          );
+          }
