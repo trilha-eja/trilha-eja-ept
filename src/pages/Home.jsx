@@ -208,7 +208,10 @@ export default function Home() {
                 Aplicativo desenvolvido na plataforma Base44 (Backend-as-a-Service), utilizando React 18, Vite 6 e Tailwind CSS, com recursos de Inteligência Artificial Generativa (Claude API — Anthropic).
               </p>
               <p>
-                Este aplicativo não coleta dados pessoais identificáveis. O Mapa da Vida utiliza Inteligência Artificial (Claude API — Anthropic) para gerar textos reflexivos, sujeito à política de privacidade da Anthropic:
+                Este aplicativo não exige cadastro ou login. A maioria dos dados inseridos (Mapa da Vida e Currículo) fica armazenada apenas no seu dispositivo e não é enviada a servidores.
+              </p>
+              <p>
+                O Mapa da Vida utiliza Inteligência Artificial (Claude API — Anthropic) para gerar textos reflexivos — nome e respostas são processados pela Anthropic, sujeitos à sua política de privacidade:
               </p>
               <a
                 href="https://www.anthropic.com/privacy"
@@ -216,8 +219,14 @@ export default function Home() {
                 rel="noopener noreferrer"
                 className="text-primary underline break-all"
               >
-                anthropic.com/privacy
+                anthropic.com/privacy → https://www.anthropic.com/privacy
               </a>
+              <p>
+                O módulo Vozes da Trilha armazena depoimentos com consentimento explícito do usuário, exibindo publicamente apenas o primeiro nome.
+              </p>
+              <p>
+                O módulo Sua Opinião Importa coleta avaliações anônimas, sem dados identificáveis.
+              </p>
               <p>
                 A agência e inteligência humana estão presentes em todas as intencionalidades e definições teórico-metodológicas, da concepção à construção deste produto educacional.
               </p>
