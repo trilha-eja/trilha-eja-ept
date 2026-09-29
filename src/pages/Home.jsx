@@ -208,7 +208,7 @@ export default function Home() {
                 Aplicativo desenvolvido na plataforma Base44 (Backend-as-a-Service), utilizando React 18, Vite 6 e Tailwind CSS, com recursos de Inteligência Artificial Generativa (Claude API — Anthropic).
               </p>
               <p>
-                Este aplicativo não exige cadastro ou login. A maioria dos dados inseridos (Mapa da Vida e Currículo) fica armazenada apenas no seu dispositivo e não é enviada a servidores.
+                Este aplicativo não exige cadastro ou login. As informações inseridas no Mapa da Vida e no Currículo são armazenadas localmente no dispositivo. No caso do Mapa da Vida, o nome ou apelido informado e determinadas respostas reflexivas são enviados à Anthropic, por meio da integração de Inteligência Artificial, para a geração do texto reflexivo.
               </p>
               <p>
                 O Mapa da Vida utiliza Inteligência Artificial (Claude API — Anthropic) para gerar textos reflexivos — nome e respostas são processados pela Anthropic, sujeitos à sua política de privacidade:
