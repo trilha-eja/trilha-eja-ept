@@ -140,8 +140,12 @@ export default function Home() {
                 1. Abra o Chrome e acesse o aplicativo.<br />
                 2. Toque nos 3 pontinhos no canto superior direito da tela (na barra do navegador, não dentro do app).<br />
                 3. Toque em 'Adicionar à tela inicial' ou 'Instalar app'.<br />
-                4. Confirme tocando em 'Adicionar' ou 'Instalar'.<br />
-                5. Um ícone do Trilha EJA-EPT vai aparecer na tela inicial do celular.
+                4. Vão aparecer duas opções:<br />
+                &nbsp;&nbsp;• 'Instalar' — recomendada! Instala o app com ícone próprio e abre sem a barra do navegador, igual a um aplicativo de loja.<br />
+                &nbsp;&nbsp;• 'Criar atalho' — cria apenas um atalho no Chrome, sem ícone personalizado.<br />
+                &nbsp;&nbsp;Escolha 'Instalar' para ter a melhor experiência.<br />
+                5. Confirme tocando em 'Instalar'.<br />
+                6. Um ícone do Trilha EJA-EPT vai aparecer na tela inicial do celular.
               </p>
             </AccordionSection>
             <AccordionSection titulo="▶ iPhone (Safari)">
