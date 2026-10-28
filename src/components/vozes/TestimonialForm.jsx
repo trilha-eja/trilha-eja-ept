@@ -245,7 +245,7 @@ export default function TestimonialForm({ onSubmit, onCancel }) {
           onChange={(e) => set("autorizado", e.target.checked)}
           className="mt-1 w-5 h-5 accent-primary shrink-0" />
         <span className="text-xs text-muted-foreground leading-relaxed">
-          Autorizo a publicação do meu depoimento no aplicativo Trilha EJA-EPT. Estou ciente de que apenas meu primeiro nome, idade (se autorizada), ano de conclusão e cidade (se informada) serão exibidos publicamente. Meus dados completos não serão compartilhados com terceiros. Posso solicitar a remoção a qualquer momento.
+          Autorizo a publicação do meu depoimento no aplicativo Trilha EJA-EPT. Estou ciente de que apenas meu primeiro nome, idade (se autorizada), curso, ano de conclusão e cidade (se informada) serão exibidos publicamente. Meus dados completos não serão compartilhados com terceiros. Posso solicitar a remoção a qualquer momento.
         </span>
       </label>
 
