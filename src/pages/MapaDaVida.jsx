@@ -7,6 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import MapaVisual from "../components/mapa/MapaVisual";
 import BlocoIntro from "../components/mapa/BlocoIntro";
+import ConsentModal from "../components/mapa/ConsentModal";
 
 const STORAGE_KEY = "mapa_vida_rascunho";
 const NOME_KEY = "mapa_vida_nome";
@@ -245,6 +246,8 @@ export default function MapaDaVida() {
   const [data, setData] = useState({});
   const [nome, setNome] = useState(() => loadNome());
   const [toast, setToast] = useState(null);
+  const [showConsent, setShowConsent] = useState(false);
+  const [comReflexao, setComReflexao] = useState(true);
 
   const draft = loadDraft();
   const hasDraft = !!draft && Object.keys(draft).some((k) => !k.startsWith("_") && draft[k]);
@@ -312,6 +315,7 @@ export default function MapaDaVida() {
       <MapaVisual
         data={data}
         nome={nome}
+        comReflexao={comReflexao}
         onEdit={() => { setBloco(0); setScreen("form"); }}
       />
     );
@@ -412,7 +416,7 @@ export default function MapaDaVida() {
         {/* Botão Gerar — apenas no último bloco */}
         {blocoAtual.isFinal && (
           <Button
-            onClick={() => setScreen("mapa")}
+            onClick={() => setShowConsent(true)}
             className="w-full h-14 rounded-2xl text-base font-bold gap-2 mt-2"
           >
             <Sparkles className="w-5 h-5" /> Gerar meu Mapa da Vida
@@ -430,6 +434,12 @@ export default function MapaDaVida() {
           )}
         </div>
       </div>
+
+      <ConsentModal
+        open={showConsent}
+        onConcordo={() => { setComReflexao(true); setShowConsent(false); setScreen("mapa"); }}
+        onNaoConcordo={() => { setComReflexao(false); setShowConsent(false); setScreen("mapa"); }}
+      />
     </div>
   );
 }

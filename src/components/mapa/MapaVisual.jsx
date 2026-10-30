@@ -201,11 +201,11 @@ function Legenda() {
 }
 
 // ── Componente principal ──────────────────────────────────────────────────────
-export default function MapaVisual({ data, nome, onEdit }) {
+export default function MapaVisual({ data, nome, onEdit, comReflexao = true }) {
   const svgRef = useRef(null);
   const [loadingPdf, setLoadingPdf] = useState(false);
   const [reflexao, setReflexao] = useState("");
-  const [loadingReflexao, setLoadingReflexao] = useState(true);
+  const [loadingReflexao, setLoadingReflexao] = useState(comReflexao);
   const [erroReflexao, setErroReflexao] = useState(false);
 
   const nomeDisplay = nome || "Estudante";
@@ -261,7 +261,10 @@ Seus sonhos:
     }
   }
 
-  useEffect(() => { gerarReflexao(); }, []);
+  useEffect(() => {
+    if (comReflexao) gerarReflexao();
+    else setLoadingReflexao(false);
+  }, []);
 
   // ── PDF via serialização SVG ──────────────────────────────────────────────
   async function handlePDF() {
@@ -430,6 +433,7 @@ Seus sonhos:
         </div>
 
         {/* Texto Reflexivo */}
+        {comReflexao && (
         <div className="max-w-2xl mx-auto px-4 pb-6">
           <div style={{ background: "#FFF8F0", border: "2px solid #E86826", borderRadius: 16, padding: 20 }}>
             <h3 style={{ color: "#E86826", fontWeight: 800, fontSize: 16, marginBottom: 12 }}>
@@ -453,11 +457,12 @@ Seus sonhos:
             )}
           </div>
         </div>
+        )}
       </div>
 
       {/* Botões */}
       <div className="max-w-lg mx-auto px-4 py-4 w-full space-y-3 pb-10">
-        <Button onClick={handlePDF} disabled={loadingPdf || loadingReflexao} className="w-full h-12 rounded-2xl font-bold gap-2">
+        <Button onClick={handlePDF} disabled={loadingPdf || (comReflexao && loadingReflexao)} className="w-full h-12 rounded-2xl font-bold gap-2">
           <Download className="w-4 h-4" />
           {loadingPdf ? "Gerando PDF…" : "⬇️ Baixar meu Mapa em PDF"}
         </Button>
